@@ -6,6 +6,7 @@ const URI = `${process.env.DATABASE}_${process.env.NODE_ENV}`;
 
 export const startDatabase = async () => {
 	try {
+		mongoose.set('strictQuery', false);
 		await mongoose.connect(URI);
 		console.log('DB connected');
 	} catch (error: any) {
