@@ -8,7 +8,9 @@ export const startDatabase = async () => {
 	try {
 		mongoose.set('strictQuery', false);
 		await mongoose.connect(URI);
-		console.log('DB connected');
+
+		const testEnvironment = process.env.NODE_ENV === 'test';
+		testEnvironment || console.log('DB connected');
 	} catch (error: any) {
 		console.log(error.message);
 	}
