@@ -52,4 +52,17 @@ export class ServicesUser {
 			throw new GraphQLError(error.message);
 		}
 	}
+
+	async deleteUser(email: string) {
+		try {
+			if (!email) throw new Error('Failure: Email was not provided');
+
+			const deleted = await ModelUser.findOneAndDelete({ email });
+			if (!deleted) throw new Error('Failure: User not found');
+
+			return { message: 'Success: User deleted' };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
 }
