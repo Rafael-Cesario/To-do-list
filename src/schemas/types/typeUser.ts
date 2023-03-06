@@ -15,6 +15,10 @@ export const UserTypeDefs = `#graphql
         password: String!
     }
 
+    type Query {
+        readUser(email:String!):User!
+    }
+
     type Mutation {
         createUser(user:InputUser!): TypeMessage!
     }
