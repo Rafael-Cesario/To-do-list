@@ -33,3 +33,12 @@ export const DELETE_USER = gql`
 		}
 	}
 `;
+
+export const LOGIN = gql`
+	query Login($login: InputLogin!) {
+		login(login: $login) {
+			token
+			message
+		}
+	}
+`;
