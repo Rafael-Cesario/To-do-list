@@ -47,7 +47,7 @@ export class ServicesUser {
 			});
 
 			await user.save();
-			return { message: 'Success: User was updated' };
+			return { message: 'Success: User has been updated' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}

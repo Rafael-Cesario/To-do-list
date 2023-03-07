@@ -17,3 +17,11 @@ export const READ_USER = gql`
 		}
 	}
 `;
+
+export const UPDATE_USER = gql`
+	mutation UpdateUser($updateUser: InputUpdateUser!) {
+		updateUser(updateUser: $updateUser) {
+			message
+		}
+	}
+`;
