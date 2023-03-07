@@ -10,3 +10,11 @@ export const generateToken = (email: string) => {
 
 	return token;
 };
+
+export const verifyToken = (token: string) => {
+	const secret = process.env.SECRET;
+	if (!secret) throw new Error('Server Error');
+
+	const decoded = jwt.verify(token, secret);
+	return decoded as { email: string; iat: number; exp: number };
+};

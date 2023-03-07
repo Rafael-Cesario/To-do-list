@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { comparePasswords, encryptPassword } from './encryptPassword';
+import { comparePasswords, encryptPassword } from '../encryptPassword';
 
 describe('Encrypt password', () => {
 	it('returns a hashed password', () => {
