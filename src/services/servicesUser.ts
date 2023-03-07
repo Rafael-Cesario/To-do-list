@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
-import { InputUpdateUser, InputUser } from '../interfaces/interfacesUser';
+import { InputLogin, InputUpdateUser, InputUser } from '../interfaces/interfacesUser';
 import { ModelUser } from '../models/modelUser';
+import { comparePasswords } from '../utils/encryptPassword';
+import { generateToken } from '../utils/token';
 
 export class ServicesUser {
 	async createUser(user: InputUser) {
@@ -61,6 +63,24 @@ export class ServicesUser {
 			if (!deleted) throw new Error('Failure: User not found');
 
 			return { message: 'Success: User deleted' };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
+
+	async login(login: InputLogin) {
+		try {
+			const { email, password } = login;
+			if (!email || !password) throw new Error('Failure: Invalid credentials');
+
+			const user = await ModelUser.findOne({ email });
+			if (!user) throw new Error('Failure: Invalid credentials');
+
+			const samePassword = comparePasswords(password, user.password);
+			if (!samePassword) throw new Error('Failure: Invalid credentials');
+
+			const token = generateToken(email);
+			return { message: 'Success', token };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}

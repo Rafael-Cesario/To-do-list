@@ -1,4 +1,4 @@
-import { InputUpdateUser, InputUser } from '../../interfaces/interfacesUser';
+import { InputLogin, InputUpdateUser, InputUser } from '../../interfaces/interfacesUser';
 import { ServicesUser } from '../../services/servicesUser';
 
 const servicesUser = new ServicesUser();
@@ -6,6 +6,7 @@ const servicesUser = new ServicesUser();
 export const UserResolvers = {
 	Query: {
 		readUser: (parent: never, { email }: { email: string }) => servicesUser.readUser(email),
+		login: (parent: never, { login }: { login: InputLogin }) => servicesUser.login(login),
 	},
 
 	Mutation: {

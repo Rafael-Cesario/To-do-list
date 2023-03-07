@@ -9,6 +9,10 @@ export const UserTypeDefs = `#graphql
         message: String!
     }
 
+    type LoginResponse {
+        message: String!
+        token: String!
+    }
 
     input InputUser {
         name: String!
@@ -27,8 +31,15 @@ export const UserTypeDefs = `#graphql
         update: UpdateUser!
     }
 
+    input InputLogin {
+        email: String!
+        password: String!
+    }
+
+
     type Query {
         readUser(email:String!):User!
+        login(login:InputLogin!): LoginResponse!
     }
 
     type Mutation {

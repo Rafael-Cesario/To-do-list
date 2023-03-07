@@ -12,3 +12,8 @@ export interface InputUpdateUser {
 		password?: string;
 	};
 }
+
+export interface InputLogin {
+	email: string;
+	password: string;
+}
