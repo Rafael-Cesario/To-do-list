@@ -5,5 +5,6 @@ export default defineConfig({
 		watch: false,
 		environment: 'node',
 		reporters: 'verbose',
+		singleThread: true,
 	},
 });

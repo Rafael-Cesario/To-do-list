@@ -9,9 +9,9 @@ const server = new ApolloServer({
 	formatError: (formattedError: GraphQLFormattedError) => ({ message: formattedError.message }),
 });
 
-export const startServer = async (port: number) => {
+export const startServer = async (port = 4000) => {
 	const { url } = await startStandaloneServer(server, {
-		listen: { port: port || 4000 },
+		listen: { port },
 	});
 
 	const testEnvironment = process.env.NODE_ENV === 'test';

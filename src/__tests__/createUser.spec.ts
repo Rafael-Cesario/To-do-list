@@ -1,19 +1,11 @@
 import mongoose from 'mongoose';
 import request from 'supertest-graphql';
-import gql from 'graphql-tag';
 import { startServer } from '../server';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
 import { startDatabase } from '../database';
 import { InputUser } from '../interfaces/interfacesUser';
 import { ModelUser } from '../models/modelUser';
-
-const CREATE_USER = gql`
-	mutation CreateUser($user: InputUser!) {
-		createUser(user: $user) {
-			message
-		}
-	}
-`;
+import { CREATE_USER } from './__queries__/queriesUser';
 
 describe('Create User', () => {
 	let url: string;
