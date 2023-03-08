@@ -13,6 +13,7 @@ export class ServicesUser {
 
 			return { message: 'Success: New user created' };
 		} catch (error: any) {
+			if (error.message.match(/E11000 duplicate key error/)) throw new GraphQLError('Failure: This user already exist');
 			throw new GraphQLError(error.message);
 		}
 	}
