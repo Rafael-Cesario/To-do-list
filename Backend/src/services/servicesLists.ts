@@ -3,17 +3,7 @@ import { GraphQLError } from 'graphql';
 import { InputCreateList, InputRenameList } from '../interfaces/interfacesLists';
 import { ModelList } from '../models/modelLists';
 import { ModelUser } from '../models/modelUser';
-
-const verifyValues = (values: object) => {
-	const emptyValues: string[] = [];
-	const keys = Object.keys(values);
-
-	keys.forEach((key) => {
-		values[key as keyof typeof values] || emptyValues.push(`${key} was not provided`);
-	});
-
-	return emptyValues.join(', ');
-};
+import { verifyValues } from '../utils/verifyValues';
 
 export class ServiceLists {
 	async createList(createList: InputCreateList) {
