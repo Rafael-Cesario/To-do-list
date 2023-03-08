@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import request from 'supertest-graphql';
-import { startServer } from '../server';
+import { startServer } from '../../server';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
-import { startDatabase } from '../database';
-import { InputUser } from '../interfaces/interfacesUser';
-import { ModelUser } from '../models/modelUser';
-import { CREATE_USER } from './__queries__/queriesUser';
+import { startDatabase } from '../../database';
+import { InputUser } from '../../interfaces/interfacesUser';
+import { ModelUser } from '../../models/modelUser';
+import { CREATE_USER } from '../__queries__/queriesUser';
 
 describe('Create User', () => {
 	let url: string;
@@ -56,7 +56,7 @@ describe('Create User', () => {
 			.mutate(CREATE_USER)
 			.variables({ user: { email: 'UserEmail', name: 'name', password: 'password' } });
 
-		expect(errors?.[0].message).toMatch(/duplicate key error/);
+		expect(errors?.[0].message).toMatch(/This user already exist/i);
 	});
 
 	it('Throws a error. Name is to long', async () => {

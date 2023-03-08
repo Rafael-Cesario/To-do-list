@@ -1,10 +1,10 @@
 import request from 'supertest-graphql';
 import mongoose from 'mongoose';
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { startDatabase } from '../database';
-import { startServer } from '../server';
-import { CREATE_USER, DELETE_USER } from './__queries__/queriesUser';
-import { ModelUser } from '../models/modelUser';
+import { startDatabase } from '../../database';
+import { startServer } from '../../server';
+import { CREATE_USER, DELETE_USER } from '../__queries__/queriesUser';
+import { ModelUser } from '../../models/modelUser';
 
 interface Response {
 	deleteUser: { message: string };

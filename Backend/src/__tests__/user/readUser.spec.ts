@@ -1,9 +1,9 @@
 import request from 'supertest-graphql';
 import mongoose from 'mongoose';
 import { describe, it, beforeAll, afterAll, expect } from 'vitest';
-import { startServer } from '../server';
-import { startDatabase } from '../database';
-import { CREATE_USER, READ_USER } from './__queries__/queriesUser';
+import { startServer } from '../../server';
+import { startDatabase } from '../../database';
+import { CREATE_USER, READ_USER } from '../__queries__/queriesUser';
 
 describe('Read user', () => {
 	let url: string;

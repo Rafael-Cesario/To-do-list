@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import request from 'supertest-graphql';
 import mongoose from 'mongoose';
-import { startServer } from '../server';
-import { startDatabase } from '../database';
-import { CREATE_USER, UPDATE_USER } from './__queries__/queriesUser';
+import { startServer } from '../../server';
+import { startDatabase } from '../../database';
+import { CREATE_USER, UPDATE_USER } from '../__queries__/queriesUser';
 import { describe, beforeAll, afterAll, beforeEach, afterEach, it, expect } from 'vitest';
-import { ModelUser } from '../models/modelUser';
-import { comparePasswords } from '../utils/encryptPassword';
+import { ModelUser } from '../../models/modelUser';
+import { comparePasswords } from '../../utils/encryptPassword';
 
 interface VariablesUpdateUser {
 	email?: string;

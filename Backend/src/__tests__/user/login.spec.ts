@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import request from 'supertest-graphql';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { CREATE_USER, LOGIN } from './__queries__/queriesUser';
-import { startServer } from '../server';
-import { startDatabase } from '../database';
+import { CREATE_USER, LOGIN } from '../__queries__/queriesUser';
+import { startServer } from '../../server';
+import { startDatabase } from '../../database';
 
 interface Response {
 	login: {
