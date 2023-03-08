@@ -43,7 +43,7 @@ export class ServiceLists {
 			const { email, newName, oldName } = renameList;
 
 			const hasEmptyValues = verifyValues(renameList);
-			if (hasEmptyValues) throw new Error(hasEmptyValues);
+			if (hasEmptyValues) throw new Error(`Failure: ${hasEmptyValues}`);
 
 			const user = await ModelUser.findOne({ email });
 			if (!user) throw new Error('Failure: User not found');
@@ -61,7 +61,19 @@ export class ServiceLists {
 	}
 
 	async deleteList(deleteList: InputDeleteList) {
-		console.log({ deleteList });
-		return { message: 'Success: List delete' };
+		const { email, listName } = deleteList;
+
+		const hasEmptyValues = verifyValues(deleteList);
+		if (hasEmptyValues) throw new Error(`Failure: ${hasEmptyValues}`);
+
+		const user = await ModelUser.findOne({ email });
+		if (!user) throw new Error('Failure: User not found');
+
+		const list = await ModelList.findOne({ email, listName });
+		if (!list) throw new Error('Failure: List not found');
+
+		// todo > delete all tasks from this list
+		await list.deleteOne();
+		return { message: 'Success: List deleted' };
 	}
 }
