@@ -4,6 +4,17 @@ import { InputCreateList, InputRenameList } from '../interfaces/interfacesLists'
 import { ModelList } from '../models/modelLists';
 import { ModelUser } from '../models/modelUser';
 
+const verifyValues = (values: object) => {
+	const emptyValues: string[] = [];
+	const keys = Object.keys(values);
+
+	keys.forEach((key) => {
+		values[key as keyof typeof values] || emptyValues.push(`${key} was not provided`);
+	});
+
+	return emptyValues.join(', ');
+};
+
 export class ServiceLists {
 	async createList(createList: InputCreateList) {
 		try {
@@ -39,7 +50,20 @@ export class ServiceLists {
 
 	async renameList(renameList: InputRenameList) {
 		try {
-			console.log({ renameList });
+			const { email, newName, oldName } = renameList;
+
+			const hasEmptyValues = verifyValues(renameList);
+			if (hasEmptyValues) throw new Error(hasEmptyValues);
+
+			const user = await ModelUser.findOne({ email });
+			if (!user) throw new Error('Failure: User not found');
+
+			const list = await ModelList.findOne({ email, listName: oldName });
+			if (!list) throw new Error('Failure: list not found');
+
+			list.listName = newName;
+			await list.save();
+
 			return { message: 'Success: List renamed' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
