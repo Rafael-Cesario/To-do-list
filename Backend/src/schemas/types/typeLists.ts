@@ -8,9 +8,17 @@ export const ListsTypeDefs = `#graphql
         message: String!
     }
 
+    type ResponseReadLists {
+        lists: [String]!
+    }
+
     input InputCreateList {
         email: String!
         listName: String!
+    }
+
+    type Query {
+        readLists(email:String!): ResponseReadLists!
     }
 
     type Mutation {

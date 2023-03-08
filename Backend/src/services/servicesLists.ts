@@ -21,4 +21,19 @@ export class ServiceLists {
 			throw new GraphQLError(error.message);
 		}
 	}
+
+	async readLists(email: string) {
+		try {
+			if (!email) throw new Error('Failure: Email was not provided');
+
+			const user = await ModelUser.findOne({ email });
+			if (!user) throw new Error('Failure: User not found');
+
+			const userLists = await ModelList.find({ email });
+			const lists = userLists.map(({ listName }) => listName);
+			return { lists };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
 }
