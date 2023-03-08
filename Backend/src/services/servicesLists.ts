@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
-import { InputCreateList } from '../interfaces/interfacesLists';
+import { InputCreateList, InputRenameList } from '../interfaces/interfacesLists';
 import { ModelList } from '../models/modelLists';
 import { ModelUser } from '../models/modelUser';
 
@@ -32,6 +32,15 @@ export class ServiceLists {
 			const userLists = await ModelList.find({ email });
 			const lists = userLists.map(({ listName }) => listName);
 			return { lists };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
+
+	async renameList(renameList: InputRenameList) {
+		try {
+			console.log({ renameList });
+			return { message: 'Success: List renamed' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}
