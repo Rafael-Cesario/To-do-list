@@ -23,6 +23,11 @@ export const ListsTypeDefs = `#graphql
         newName: String!
     }
 
+    input InputDeleteList {
+        listName: String!
+        email: String!
+    }
+
     type Query {
         readLists(email:String!): ResponseReadLists!
     }
@@ -30,5 +35,6 @@ export const ListsTypeDefs = `#graphql
     type Mutation {
         createList(createList: InputCreateList!): TypeMessage!
         renameList(renameList: InputRenameList!): TypeMessage!
+        deleteList(deleteList: InputDeleteList!): TypeMessage!
     }
 `;

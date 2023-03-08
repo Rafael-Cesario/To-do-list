@@ -1,4 +1,4 @@
-import { InputCreateList, InputRenameList } from '../../interfaces/interfacesLists';
+import { InputCreateList, InputDeleteList, InputRenameList } from '../../interfaces/interfacesLists';
 import { ServiceLists } from '../../services/servicesLists';
 
 const serviceLists = new ServiceLists();
@@ -11,5 +11,6 @@ export const ListsResolvers = {
 	Mutation: {
 		createList: (parent: never, { createList }: { createList: InputCreateList }) => serviceLists.createList(createList),
 		renameList: (parent: never, { renameList }: { renameList: InputRenameList }) => serviceLists.renameList(renameList),
+		deleteList: (parent: never, { deleteList }: { deleteList: InputDeleteList }) => serviceLists.deleteList(deleteList),
 	},
 };

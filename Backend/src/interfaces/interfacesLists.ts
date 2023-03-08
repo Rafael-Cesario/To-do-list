@@ -8,3 +8,8 @@ export interface InputRenameList {
 	newName: string;
 	email: string;
 }
+
+export interface InputDeleteList {
+	listName: string;
+	email: string;
+}
