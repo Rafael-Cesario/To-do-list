@@ -1,22 +1,10 @@
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import { ListsResolvers } from './resolvers/resolverLists';
 import { UserResolvers } from './resolvers/resolverUser';
+import { ListsTypeDefs } from './types/typeLists';
 import { UserTypeDefs } from './types/typeUser';
 
-// todo > temp
-const helloTypeDefs = `#graphql
-    type Query {
-        hello: String!
-    }
-`;
-
-// todo > temp
-const helloResolvers = {
-	Query: {
-		hello: () => 'Hello World',
-	},
-};
-
 export const schema = makeExecutableSchema({
-	typeDefs: [helloTypeDefs, UserTypeDefs],
-	resolvers: [helloResolvers, UserResolvers],
+	typeDefs: [UserTypeDefs, ListsTypeDefs],
+	resolvers: [UserResolvers, ListsResolvers],
 });
