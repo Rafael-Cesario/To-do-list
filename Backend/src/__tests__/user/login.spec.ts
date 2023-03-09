@@ -1,37 +1,17 @@
 import mongoose from 'mongoose';
-import request from 'supertest-graphql';
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { CREATE_USER, LOGIN } from '../__queries__/queriesUser';
 import { startServer } from '../../server';
 import { startDatabase } from '../../database';
-
-interface Response {
-	login: {
-		message: string;
-		token: string;
-	};
-}
+import { requestCreateUser, requestLogin } from '../__queries__/queriesUser';
 
 describe('Login', () => {
 	let url: string;
-	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
-
-	const requestCreateUser = async () => {
-		await request(url).mutate(CREATE_USER).variables({ createUser });
-	};
-
-	const login = async ({ email, password }: { email?: string; password?: string }) => {
-		const { data, errors } = await request<Response>(url)
-			.query(LOGIN)
-			.variables({ login: { email: email ?? createUser.email, password: password ?? createUser.password } });
-
-		return { data, errors };
-	};
+	const defaultUser = { email: 'email@user.com', name: 'userName', password: 'strongPassword' };
 
 	beforeAll(async () => {
 		url = await startServer(0);
 		await startDatabase();
-		await requestCreateUser();
+		await requestCreateUser(url, defaultUser);
 	});
 
 	afterAll(async () => {
@@ -40,24 +20,24 @@ describe('Login', () => {
 	});
 
 	it('do login', async () => {
-		const { data } = await login({});
+		const { data } = await requestLogin(url, { email: defaultUser.email, password: defaultUser.password });
 
 		expect(data?.login.token).toBeDefined();
 		expect(data?.login.message).toBe('Success');
 	});
 
 	it('throws a error. email is empty', async () => {
-		const { errors } = await login({ email: '' });
+		const { errors } = await requestLogin(url, { email: '', password: '' });
 		expect(errors?.[0].message).toBe('Failure: Invalid credentials');
 	});
 
 	it('throws a error. email is wrong', async () => {
-		const { errors } = await login({ email: 'wrong' });
+		const { errors } = await requestLogin(url, { email: 'wrong', password: defaultUser.password });
 		expect(errors?.[0].message).toBe('Failure: Invalid credentials');
 	});
 
 	it('throws a error. password is wrong', async () => {
-		const { errors } = await login({ password: 'wrong' });
+		const { errors } = await requestLogin(url, { email: defaultUser.password, password: 'wrong' });
 		expect(errors?.[0].message).toBe('Failure: Invalid credentials');
 	});
 });

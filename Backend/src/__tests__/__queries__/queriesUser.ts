@@ -1,6 +1,6 @@
 import request from 'supertest-graphql';
 import gql from 'graphql-tag';
-import { InputCreateUser, InputUpdateUser } from '../../interfaces/interfacesUser';
+import { InputCreateUser, InputLogin, InputUpdateUser } from '../../interfaces/interfacesUser';
 
 interface ResponseCreateUser {
 	createUser: { message: string };
@@ -20,6 +20,13 @@ interface ResponseUpdateUser {
 
 interface ResponseDeleteUser {
 	deleteUser: { message: string };
+}
+
+interface ResponseLogin {
+	login: {
+		message: string;
+		token: string;
+	};
 }
 
 export const CREATE_USER = gql`
@@ -87,5 +94,13 @@ export const requestUpdateUser = async (url: string, variables: InputUpdateUser)
 
 export const requestDeleteUser = async (url: string, email: string) => {
 	const { data, errors } = await request<ResponseDeleteUser>(url).mutate(DELETE_USER).variables({ email });
+	return { data, errors };
+};
+
+export const requestLogin = async (url: string, variables: InputLogin) => {
+	const { data, errors } = await request<ResponseLogin>(url).query(LOGIN).variables({
+		login: variables,
+	});
+
 	return { data, errors };
 };
