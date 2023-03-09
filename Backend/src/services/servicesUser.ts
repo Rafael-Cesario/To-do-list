@@ -4,6 +4,7 @@ import { InputLogin, InputUpdateUser, InputCreateUser } from '../interfaces/inte
 import { ModelUser } from '../models/modelUser';
 import { comparePasswords } from '../utils/encryptPassword';
 import { generateToken } from '../utils/token';
+import { verifyValues } from '../utils/verifyValues';
 
 export class ServicesUser {
 	async createUser(createUser: InputCreateUser) {
@@ -34,6 +35,9 @@ export class ServicesUser {
 	async updateUser(updateUser: InputUpdateUser) {
 		try {
 			if (!updateUser.email) throw new Error('Failure: Email was not provided');
+
+			const hasEmptyValues = verifyValues(updateUser.update);
+			if (hasEmptyValues) throw new Error(`Failure: ${hasEmptyValues}`);
 
 			const user = await ModelUser.findOne({ email: updateUser.email });
 			if (!user) throw new Error('Failure: User not found');
