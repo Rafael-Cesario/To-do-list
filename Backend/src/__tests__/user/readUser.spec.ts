@@ -1,29 +1,18 @@
-import request from 'supertest-graphql';
 import mongoose from 'mongoose';
 import { describe, it, beforeAll, afterAll, expect } from 'vitest';
 import { startServer } from '../../server';
 import { startDatabase } from '../../database';
-import { CREATE_USER, READ_USER } from '../__queries__/queriesUser';
+import { requestCreateUser, requestReadUser } from '../__queries__/queriesUser';
+
+const defaultUser = { email: 'email@user.com', name: 'userName', password: 'strongPassword' };
 
 describe('Read user', () => {
 	let url: string;
 
-	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
-
-	const requestReadUser = async (email = 'userEmail') => {
-		type Response = { readUser: { email: string; name: string; password: string } };
-		const { data, errors } = await request<Response>(url).query(READ_USER).variables({ email });
-		return { data, errors };
-	};
-
-	const requestCreateUser = async () => {
-		await request(url).mutate(CREATE_USER).variables({ createUser });
-	};
-
 	beforeAll(async () => {
 		url = await startServer(0);
 		await startDatabase();
-		await requestCreateUser();
+		await requestCreateUser(url, defaultUser);
 	});
 
 	afterAll(async () => {
@@ -32,17 +21,17 @@ describe('Read user', () => {
 	});
 
 	it('returns a user and omit the password', async () => {
-		const { data } = await requestReadUser();
-		expect(data?.readUser).toEqual({ email: createUser.email.toLowerCase(), name: createUser.name, password: '' });
+		const { data } = await requestReadUser(url, defaultUser.email);
+		expect(data?.readUser).toEqual({ email: defaultUser.email.toLowerCase(), name: defaultUser.name, password: '' });
 	});
 
 	it('throws a error. empty variables', async () => {
-		const { errors } = await requestReadUser('');
+		const { errors } = await requestReadUser(url, '');
 		expect(errors?.[0].message).toBe('Failure: Email was not provided');
 	});
 
 	it(`Didn't find the user`, async () => {
-		const { errors } = await requestReadUser('nonExistent');
+		const { errors } = await requestReadUser(url, 'nonExistentEmail');
 		expect(errors?.[0].message).toBe('Failure: User not found');
 	});
 });

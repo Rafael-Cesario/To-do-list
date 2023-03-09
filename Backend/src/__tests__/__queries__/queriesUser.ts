@@ -2,8 +2,16 @@ import request from 'supertest-graphql';
 import gql from 'graphql-tag';
 import { InputCreateUser } from '../../interfaces/interfacesUser';
 
-interface Response {
-	[key: string]: { message: string };
+interface ResponseCreateUser {
+	createUser: { message: string };
+}
+
+interface ResponseReadUser {
+	readUser: {
+		email: string;
+		name: string;
+		password: string;
+	};
 }
 
 export const CREATE_USER = gql`
@@ -50,6 +58,13 @@ export const LOGIN = gql`
 `;
 
 export const requestCreateUser = async (url: string, variables: InputCreateUser) => {
-	const { data, errors } = await request<Response>(url).mutate(CREATE_USER).variables({ createUser: variables });
+	const { data, errors } = await request<ResponseCreateUser>(url)
+		.mutate(CREATE_USER)
+		.variables({ createUser: variables });
+	return { data, errors };
+};
+
+export const requestReadUser = async (url: string, email: string) => {
+	const { data, errors } = await request<ResponseReadUser>(url).mutate(READ_USER).variables({ email });
 	return { data, errors };
 };
