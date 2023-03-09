@@ -61,19 +61,23 @@ export class ServiceLists {
 	}
 
 	async deleteList(deleteList: InputDeleteList) {
-		const { email, listName } = deleteList;
+		try {
+			const { email, listName } = deleteList;
 
-		const hasEmptyValues = verifyValues(deleteList);
-		if (hasEmptyValues) throw new Error(`Failure: ${hasEmptyValues}`);
+			const hasEmptyValues = verifyValues(deleteList);
+			if (hasEmptyValues) throw new Error(`Failure: ${hasEmptyValues}`);
 
-		const user = await ModelUser.findOne({ email });
-		if (!user) throw new Error('Failure: User not found');
+			const user = await ModelUser.findOne({ email });
+			if (!user) throw new Error('Failure: User not found');
 
-		const list = await ModelList.findOne({ email, listName });
-		if (!list) throw new Error('Failure: List not found');
+			const list = await ModelList.findOne({ email, listName });
+			if (!list) throw new Error('Failure: List not found');
 
-		// todo > delete all tasks from this list
-		await list.deleteOne();
-		return { message: 'Success: List deleted' };
+			// todo > delete all tasks from this list
+			await list.deleteOne();
+			return { message: 'Success: List deleted' };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
 	}
 }
