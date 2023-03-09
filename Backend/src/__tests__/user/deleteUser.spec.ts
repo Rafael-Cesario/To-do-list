@@ -1,33 +1,18 @@
-import request from 'supertest-graphql';
 import mongoose from 'mongoose';
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { startDatabase } from '../../database';
 import { startServer } from '../../server';
-import { CREATE_USER, DELETE_USER } from '../__queries__/queriesUser';
 import { ModelUser } from '../../models/modelUser';
-
-interface Response {
-	deleteUser: { message: string };
-}
+import { requestCreateUser, requestDeleteUser } from '../__queries__/queriesUser';
 
 describe('Delete user', () => {
 	let url: string;
-	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
-
-	const requestCreateUser = async () => {
-		await request(url).mutate(CREATE_USER).variables({ createUser });
-	};
-
-	const deleteUser = async (email?: string) => {
-		const { data, errors } = await request<Response>(url)
-			.mutate(DELETE_USER)
-			.variables({ email: email ?? createUser.email });
-		return { data, errors };
-	};
+	const defaultUser = { email: 'email@user.com', name: 'userName', password: 'strongPassword' };
 
 	beforeAll(async () => {
 		url = await startServer(0);
 		await startDatabase();
+		await requestCreateUser(url, defaultUser);
 	});
 
 	afterAll(async () => {
@@ -36,8 +21,7 @@ describe('Delete user', () => {
 	});
 
 	it('delete a user', async () => {
-		await requestCreateUser();
-		const { data } = await deleteUser();
+		const { data } = await requestDeleteUser(url, defaultUser.email);
 		const users = await ModelUser.find({});
 
 		expect(data?.deleteUser.message).toMatch(/Success/);
@@ -45,12 +29,12 @@ describe('Delete user', () => {
 	});
 
 	it('Throws a errors. Email not provided', async () => {
-		const { errors } = await deleteUser('');
+		const { errors } = await requestDeleteUser(url, '');
 		expect(errors?.[0].message).toBe('Failure: Email was not provided');
 	});
 
 	it('Throws a errors. User not found', async () => {
-		const { errors } = await deleteUser('notFound');
+		const { errors } = await requestDeleteUser(url, 'wrongEmail');
 		expect(errors?.[0].message).toBe('Failure: User not found');
 	});
 });

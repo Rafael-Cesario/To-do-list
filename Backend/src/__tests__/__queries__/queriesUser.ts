@@ -18,6 +18,10 @@ interface ResponseUpdateUser {
 	updateUser: { message: string };
 }
 
+interface ResponseDeleteUser {
+	deleteUser: { message: string };
+}
+
 export const CREATE_USER = gql`
 	mutation CreateUser($createUser: InputCreateUser!) {
 		createUser(createUser: $createUser) {
@@ -78,5 +82,10 @@ export const requestUpdateUser = async (url: string, variables: InputUpdateUser)
 		.mutate(UPDATE_USER)
 		.variables({ updateUser: variables });
 
+	return { data, errors };
+};
+
+export const requestDeleteUser = async (url: string, email: string) => {
+	const { data, errors } = await request<ResponseDeleteUser>(url).mutate(DELETE_USER).variables({ email });
 	return { data, errors };
 };
