@@ -1,6 +1,6 @@
 import request from 'supertest-graphql';
 import gql from 'graphql-tag';
-import { InputCreateList } from '../../interfaces/interfacesLists';
+import { InputCreateList, InputRenameList } from '../../interfaces/interfacesLists';
 
 interface ResponseCreateList {
 	createList: { message: string };
@@ -8,6 +8,10 @@ interface ResponseCreateList {
 
 interface ResponseReadLists {
 	readLists: { lists: string[] };
+}
+
+interface ResponseRenameList {
+	renameList: { message: string };
 }
 
 const CREATE_LIST = gql`
@@ -51,9 +55,13 @@ export const requestReadLists = async (url: string, email: string) => {
 	return { data, errors };
 };
 
-export const renameList = () => {
-	return;
+export const requestRenameList = async (url: string, variables: InputRenameList) => {
+	const { data, errors } = await request<ResponseRenameList>(url)
+		.mutate(RENAME_LIST)
+		.variables({ renameList: variables });
+
+	return { data, errors };
 };
-export const deleteList = () => {
+export const requestDeleteList = () => {
 	return;
 };
