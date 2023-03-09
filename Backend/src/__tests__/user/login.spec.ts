@@ -14,16 +14,16 @@ interface Response {
 
 describe('Login', () => {
 	let url: string;
-	const user = { email: 'userEmail', name: 'name', password: 'password' };
+	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
 
-	const createUser = async () => {
-		await request(url).mutate(CREATE_USER).variables({ user });
+	const requestCreateUser = async () => {
+		await request(url).mutate(CREATE_USER).variables({ createUser });
 	};
 
 	const login = async ({ email, password }: { email?: string; password?: string }) => {
 		const { data, errors } = await request<Response>(url)
 			.query(LOGIN)
-			.variables({ login: { email: email ?? user.email, password: password ?? user.password } });
+			.variables({ login: { email: email ?? createUser.email, password: password ?? createUser.password } });
 
 		return { data, errors };
 	};
@@ -31,7 +31,7 @@ describe('Login', () => {
 	beforeAll(async () => {
 		url = await startServer(0);
 		await startDatabase();
-		await createUser();
+		await requestCreateUser();
 	});
 
 	afterAll(async () => {

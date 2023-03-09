@@ -1,4 +1,4 @@
-import { InputLogin, InputUpdateUser, InputUser } from '../../interfaces/interfacesUser';
+import { InputLogin, InputUpdateUser, InputCreateUser } from '../../interfaces/interfacesUser';
 import { ServicesUser } from '../../services/servicesUser';
 
 const servicesUser = new ServicesUser();
@@ -10,7 +10,7 @@ export const UserResolvers = {
 	},
 
 	Mutation: {
-		createUser: (parent: never, { user }: { user: InputUser }) => servicesUser.createUser(user),
+		createUser: (parent: never, { createUser }: { createUser: InputCreateUser }) => servicesUser.createUser(createUser),
 		updateUser: (parent: never, { updateUser }: { updateUser: InputUpdateUser }) => servicesUser.updateUser(updateUser),
 		deleteUser: (parent: never, { email }: { email: string }) => servicesUser.deleteUser(email),
 	},

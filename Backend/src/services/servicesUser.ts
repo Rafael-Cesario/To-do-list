@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
-import { InputLogin, InputUpdateUser, InputUser } from '../interfaces/interfacesUser';
+import { InputLogin, InputUpdateUser, InputCreateUser } from '../interfaces/interfacesUser';
 import { ModelUser } from '../models/modelUser';
 import { comparePasswords } from '../utils/encryptPassword';
 import { generateToken } from '../utils/token';
 
 export class ServicesUser {
-	async createUser(user: InputUser) {
+	async createUser(createUser: InputCreateUser) {
 		try {
-			const { email, name, password } = user;
+			const { email, name, password } = createUser;
 			await ModelUser.create({ email, name, password });
 
 			return { message: 'Success: New user created' };

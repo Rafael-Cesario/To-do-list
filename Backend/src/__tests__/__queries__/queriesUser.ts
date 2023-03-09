@@ -1,8 +1,14 @@
+import request from 'supertest-graphql';
 import gql from 'graphql-tag';
+import { InputCreateUser } from '../../interfaces/interfacesUser';
+
+interface Response {
+	[key: string]: { message: string };
+}
 
 export const CREATE_USER = gql`
-	mutation CreateUser($user: InputUser!) {
-		createUser(user: $user) {
+	mutation CreateUser($createUser: InputCreateUser!) {
+		createUser(createUser: $createUser) {
 			message
 		}
 	}
@@ -42,3 +48,8 @@ export const LOGIN = gql`
 		}
 	}
 `;
+
+export const requestCreateUser = async (url: string, variables: InputCreateUser) => {
+	const { data, errors } = await request<Response>(url).mutate(CREATE_USER).variables({ createUser: variables });
+	return { data, errors };
+};

@@ -3,19 +3,21 @@ import request from 'supertest-graphql';
 import { startServer } from '../../server';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
 import { startDatabase } from '../../database';
-import { InputUser } from '../../interfaces/interfacesUser';
+import { InputCreateUser } from '../../interfaces/interfacesUser';
 import { ModelUser } from '../../models/modelUser';
 import { CREATE_USER } from '../__queries__/queriesUser';
 
 describe('Create User', () => {
 	let url: string;
 
-	const requestCreateUser = async (user?: { user: InputUser }) => {
+	const requestCreateUser = async (createUser?: { createUser: InputCreateUser }) => {
 		type Response = { createUser: { message: string } };
 
 		const { data, errors } = await request<Response>(url)
 			.mutate(CREATE_USER)
-			.variables(user || { user: { email: 'UserEmail', name: 'name', password: 'password' } });
+			.variables(
+				createUser ? { createUser } : { createUser: { email: 'UserEmail', name: 'name', password: 'password' } }
+			);
 
 		return { data, errors };
 	};
@@ -40,7 +42,7 @@ describe('Create User', () => {
 	});
 
 	it('Throws a error. empty variables', async () => {
-		const { errors } = await requestCreateUser({ user: { email: '', name: '', password: '' } });
+		const { errors } = await requestCreateUser({ createUser: { email: '', name: '', password: '' } });
 
 		expect(errors?.[0].message).toMatch(
 			/name: Name is required, email: Email is required, password: Password is required/
@@ -61,7 +63,7 @@ describe('Create User', () => {
 
 	it('Throws a error. Name is to long', async () => {
 		const { errors } = await requestCreateUser({
-			user: {
+			createUser: {
 				email: 'email',
 				name: 'this name is way to long',
 				password: 'password',
@@ -78,7 +80,7 @@ describe('Create User', () => {
 	});
 
 	it('saves email as lowerCase', async () => {
-		await requestCreateUser({ user: { email: 'USEREMAIL', name: 'name', password: 'password' } });
+		await requestCreateUser({ createUser: { email: 'USEREMAIL', name: 'name', password: 'password' } });
 		const user = await ModelUser.findOne({ email: 'useremail' });
 		expect(user?.email).toBe('useremail');
 	});

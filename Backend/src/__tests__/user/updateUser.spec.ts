@@ -21,10 +21,10 @@ interface Response {
 
 describe('Update User', () => {
 	let url: string;
-	const user = { email: 'userEmail', name: 'name', password: 'password' };
+	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
 
-	const createUser = async () => {
-		await request(url).mutate(CREATE_USER).variables({ user });
+	const requestCreateUser = async () => {
+		await request(url).mutate(CREATE_USER).variables({ createUser });
 	};
 
 	const updateUser = async ({ email, name, password, filter }: VariablesUpdateUser) => {
@@ -32,7 +32,7 @@ describe('Update User', () => {
 			.mutate(UPDATE_USER)
 			.variables({
 				updateUser: {
-					email: filter ?? user.email,
+					email: filter ?? createUser.email,
 					update: {
 						email: email ?? '',
 						name: name ?? '',
@@ -50,7 +50,7 @@ describe('Update User', () => {
 	});
 
 	beforeEach(async () => {
-		await createUser();
+		await requestCreateUser();
 	});
 
 	afterEach(async () => {

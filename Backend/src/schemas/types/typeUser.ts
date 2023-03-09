@@ -14,16 +14,16 @@ export const UserTypeDefs = `#graphql
         token: String!
     }
 
-    input InputUser {
-        name: String!
-        email: String!
-        password: String!
+    input UpdateUser {
+        name: String
+        email: String
+        password: String
     }
 
-    input UpdateUser {
-        email: String
-        name: String
-        password: String
+    input InputCreateUser {
+        email: String!
+        name: String!
+        password: String!
     }
 
     input InputUpdateUser {
@@ -43,7 +43,7 @@ export const UserTypeDefs = `#graphql
     }
 
     type Mutation {
-        createUser(user:InputUser!): TypeMessage!
+        createUser(createUser:InputCreateUser!): TypeMessage!
         updateUser(updateUser: InputUpdateUser!): TypeMessage!
         deleteUser(email:String!): TypeMessage!
     }

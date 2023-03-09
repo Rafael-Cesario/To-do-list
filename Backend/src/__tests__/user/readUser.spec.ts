@@ -8,7 +8,7 @@ import { CREATE_USER, READ_USER } from '../__queries__/queriesUser';
 describe('Read user', () => {
 	let url: string;
 
-	const user = { email: 'userEmail', name: 'name', password: 'password' };
+	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
 
 	const requestReadUser = async (email = 'userEmail') => {
 		type Response = { readUser: { email: string; name: string; password: string } };
@@ -16,16 +16,14 @@ describe('Read user', () => {
 		return { data, errors };
 	};
 
-	const createUser = async () => {
-		await request(url)
-			.mutate(CREATE_USER)
-			.variables({ user: { ...user } });
+	const requestCreateUser = async () => {
+		await request(url).mutate(CREATE_USER).variables({ createUser });
 	};
 
 	beforeAll(async () => {
 		url = await startServer(0);
 		await startDatabase();
-		await createUser();
+		await requestCreateUser();
 	});
 
 	afterAll(async () => {
@@ -35,7 +33,7 @@ describe('Read user', () => {
 
 	it('returns a user and omit the password', async () => {
 		const { data } = await requestReadUser();
-		expect(data?.readUser).toEqual({ email: user.email.toLowerCase(), name: user.name, password: '' });
+		expect(data?.readUser).toEqual({ email: createUser.email.toLowerCase(), name: createUser.name, password: '' });
 	});
 
 	it('throws a error. empty variables', async () => {

@@ -1,4 +1,4 @@
-export interface InputUser {
+export interface InputCreateUser {
 	name: string;
 	email: string;
 	password: string;

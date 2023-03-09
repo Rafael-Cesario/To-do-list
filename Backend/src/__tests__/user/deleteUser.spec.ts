@@ -12,16 +12,16 @@ interface Response {
 
 describe('Delete user', () => {
 	let url: string;
-	const user = { email: 'userEmail', name: 'name', password: 'password' };
+	const createUser = { email: 'userEmail', name: 'name', password: 'password' };
 
-	const createUser = async () => {
-		await request(url).mutate(CREATE_USER).variables({ user });
+	const requestCreateUser = async () => {
+		await request(url).mutate(CREATE_USER).variables({ createUser });
 	};
 
 	const deleteUser = async (email?: string) => {
 		const { data, errors } = await request<Response>(url)
 			.mutate(DELETE_USER)
-			.variables({ email: email ?? user.email });
+			.variables({ email: email ?? createUser.email });
 		return { data, errors };
 	};
 
@@ -36,7 +36,7 @@ describe('Delete user', () => {
 	});
 
 	it('delete a user', async () => {
-		await createUser();
+		await requestCreateUser();
 		const { data } = await deleteUser();
 		const users = await ModelUser.find({});
 
