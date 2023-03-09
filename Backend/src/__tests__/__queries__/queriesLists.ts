@@ -6,6 +6,10 @@ interface ResponseCreateList {
 	createList: { message: string };
 }
 
+interface ResponseReadLists {
+	readLists: { lists: string[] };
+}
+
 const CREATE_LIST = gql`
 	mutation CreateList($createList: InputCreateList!) {
 		createList(createList: $createList) {
@@ -42,9 +46,11 @@ export const requestCreateList = async (url: string, variables: InputCreateList)
 	return { data, errors };
 };
 
-export const readLists = () => {
-	return;
+export const requestReadLists = async (url: string, email: string) => {
+	const { data, errors } = await request<ResponseReadLists>(url).query(READ_LISTS).variables({ email });
+	return { data, errors };
 };
+
 export const renameList = () => {
 	return;
 };
