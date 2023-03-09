@@ -2,8 +2,8 @@ import request from 'supertest-graphql';
 import gql from 'graphql-tag';
 import { InputCreateList } from '../../interfaces/interfacesLists';
 
-interface Response {
-	[key: string]: { message: string };
+interface ResponseCreateList {
+	createList: { message: string };
 }
 
 const CREATE_LIST = gql`
@@ -36,7 +36,9 @@ const DELETE_LIST = gql`
 `;
 
 export const requestCreateList = async (url: string, variables: InputCreateList) => {
-	const { data, errors } = await request<Response>(url).mutate(CREATE_LIST).variables({ createList: variables });
+	const { data, errors } = await request<ResponseCreateList>(url)
+		.mutate(CREATE_LIST)
+		.variables({ createList: variables });
 	return { data, errors };
 };
 
