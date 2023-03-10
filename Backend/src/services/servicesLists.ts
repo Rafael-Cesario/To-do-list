@@ -13,12 +13,14 @@ export class ServiceLists {
 			const user = await ModelUser.findOne({ email });
 			if (!user) throw new Error('Failure: Wrong email, user not found');
 
+			const hasList = await ModelList.findOne({ email, listName });
+			if (hasList) throw new Error('Failure: This list already exist');
+
 			const list = new ModelList({ email, listName });
 			await list.save();
 
 			return { message: 'Success: New list created' };
 		} catch (error: any) {
-			if (error.message.match(/E11000 duplicate key error/)) throw new GraphQLError('Failure: This list already exist');
 			throw new GraphQLError(error.message);
 		}
 	}
