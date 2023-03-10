@@ -1,0 +1,25 @@
+[
+  {
+    "_id": "06386bc8-7274-442a-bd2a-ec0f77e1b613",
+    "colId": "916308c5-baf0-4026-8fea-b7551d94ae1e",
+    "containerId": "6bc52b6b-a43b-48eb-9019-8b6afe9275ce",
+    "name": "create list",
+    "url": "",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-03-10T17:10:59.113Z",
+    "modified": "2023-03-10T17:13:42.292Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "graphql",
+      "raw": "",
+      "form": [],
+      "graphql": {
+        "query": "mutation CreateList($createList: InputCreateList!) {\n  createList(createList: $createList) {\n    message\n  }\n}\n",
+        "variables": "{\n  \"createList\": {\n    \"email\": \"Rafael@hotmail.com\",\n    \"listName\": \"List01\"\n  }\n}"
+      }
+    },
+    "tests": []
+  }
+]
