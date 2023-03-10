@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { describe, it, expect, afterAll, afterEach, beforeAll } from 'vitest';
 import { requestCreateList, requestDeleteList } from '../__queries__/queriesLists';
 import { requestCreateUser } from '../__queries__/queriesUser';
-import { ModelList } from '../../models/modelLists';
+import { ModelList } from '../../models/modelList';
 import { startDatabase } from '../../database';
 import { startServer } from '../../server';
 

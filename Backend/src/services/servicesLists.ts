@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
 import { InputCreateList, InputDeleteList, InputRenameList } from '../interfaces/interfacesLists';
-import { ModelList } from '../models/modelLists';
+import { ModelList } from '../models/modelList';
 import { ModelUser } from '../models/modelUser';
 import { verifyValues } from '../utils/verifyValues';
 

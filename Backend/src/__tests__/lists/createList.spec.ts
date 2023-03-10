@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
 import { startDatabase } from '../../database';
-import { ModelList } from '../../models/modelLists';
+import { ModelList } from '../../models/modelList';
 import { startServer } from '../../server';
 import { requestCreateList } from '../__queries__/queriesLists';
 import { requestCreateUser } from '../__queries__/queriesUser';
