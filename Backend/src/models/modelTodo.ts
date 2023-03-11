@@ -1,22 +1,22 @@
 import { prop, getModelForClass, PropType } from '@typegoose/typegoose';
 
 class Todo {
-	@prop({ type: String })
+	@prop({ type: String, required: true })
 	public email!: string;
 
-	@prop({ type: String })
+	@prop({ type: String, required: true })
 	public listName!: string;
 
-	@prop({ type: String })
+	@prop({ type: String, required: true })
 	public id!: string;
 
-	@prop({ type: String })
+	@prop({ type: String, required: true })
 	public task!: string;
 
-	@prop({ type: String })
+	@prop({ type: String, required: true })
 	public state!: string;
 
-	@prop({ type: String }, PropType.ARRAY)
+	@prop({ type: String, required: true }, PropType.ARRAY)
 	public tags!: string[];
 }
 
