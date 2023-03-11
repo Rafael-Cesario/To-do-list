@@ -4,3 +4,8 @@ export interface InputCreateTodo {
 	id: string;
 	task: string;
 }
+
+export interface InputReadTodos {
+	email: string;
+	listName: string;
+}
