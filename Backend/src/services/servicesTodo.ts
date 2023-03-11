@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
-import { InputCreateTodo, InputReadTodos } from '../interfaces/interfacesTodo';
+import { InputCreateTodo, InputReadTodos, InputRenameTodo } from '../interfaces/interfacesTodo';
 import { ModelList } from '../models/modelList';
 import { ModelTodo } from '../models/modelTodo';
 import { ModelUser } from '../models/modelUser';
@@ -44,6 +44,24 @@ export class ServicesTodo {
 
 			const todos = await ModelTodo.find({ email, listName });
 			return todos;
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
+
+	async renameTodo(renameTodo: InputRenameTodo) {
+		try {
+			const { email, id, listName, newTask } = renameTodo;
+
+			await this.validateValues(renameTodo, email, listName);
+
+			const todo = await ModelTodo.findOne({ email, listName, id });
+			if (!todo) throw new Error('Failure: Todo not found');
+
+			todo.task = newTask;
+			await todo.save();
+
+			return { message: 'Success: Task renamed' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}

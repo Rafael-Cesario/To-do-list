@@ -9,3 +9,10 @@ export interface InputReadTodos {
 	email: string;
 	listName: string;
 }
+
+export interface InputRenameTodo {
+	email: string;
+	listName: string;
+	id: string;
+	newTask: string;
+}
