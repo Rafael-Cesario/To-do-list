@@ -34,7 +34,7 @@ export class ServicesTodo {
 			const sameId = await ModelTodo.findOne({ email, listName, id });
 			if (sameId) throw new Error('Failure: Todo with same ID');
 
-			const todo = new ModelTodo({ email, listName, id, task, state: 'next', tags: [] });
+			const todo = new ModelTodo({ email, listName, id, task, status: 'next', tags: [] });
 			await todo.save();
 
 			return { message: 'Success: New task created' };
