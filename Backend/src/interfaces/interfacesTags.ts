@@ -4,3 +4,11 @@ export interface InputCreateTag {
 	id: string;
 	tag: string;
 }
+
+export interface InputUpdateTag {
+	email: string;
+	listName: string;
+	id: string;
+	oldTag: string;
+	newTag: string;
+}
