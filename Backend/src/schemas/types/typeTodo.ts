@@ -39,9 +39,5 @@ export const TodoTypeDef = `#graphql
         createTodo(createTodo: InputCreateTodo!): TypeMessage!
         renameTodo(renameTodo: InputRenameTodo!): TypeMessage!
         deleteTodo(deleteTodo: InputDeleteTodo!): TypeMessage!
-
-        # create Tag
-        # rename Tag
-        # delete Tag
     }
 `;
