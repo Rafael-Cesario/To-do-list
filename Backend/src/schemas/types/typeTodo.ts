@@ -25,6 +25,12 @@ export const TodoTypeDef = `#graphql
         newTask: String!
     }
 
+    input InputDeleteTodo {
+        email: String!
+        listName: String!
+        id: String!
+    }
+
     type Query {
         readTodos(readTodos: InputReadTodos!): [Todo]!
     }
@@ -32,8 +38,7 @@ export const TodoTypeDef = `#graphql
     type Mutation {
         createTodo(createTodo: InputCreateTodo!): TypeMessage!
         renameTodo(renameTodo: InputRenameTodo!): TypeMessage!
-
-        # delete Todo
+        deleteTodo(deleteTodo: InputDeleteTodo!): TypeMessage!
 
         # create Tag
         # rename Tag

@@ -16,3 +16,9 @@ export interface InputRenameTodo {
 	id: string;
 	newTask: string;
 }
+
+export interface InputDeleteTodo {
+	email: string;
+	listName: string;
+	id: string;
+}
