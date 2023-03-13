@@ -9,20 +9,21 @@ import { verifyValues } from '../utils/verifyValues';
 export class ServicesTodo {
 	private async validateValues(userInput: object, email: string, listName: string) {
 		const hasEmptyValues = verifyValues(userInput);
-		if (hasEmptyValues) throw new Error(`Failure: ${hasEmptyValues}`);
+		if (hasEmptyValues) return `Failure: ${hasEmptyValues}`;
 
 		const user = await ModelUser.findOne({ email });
-		if (!user) throw new Error('Failure: User not found');
+		if (!user) return 'Failure: User not found';
 
 		const list = await ModelList.findOne({ email, listName });
-		if (!list) throw new Error('Failure: List not found');
+		if (!list) return 'Failure: List not found';
 	}
 
 	async createTodo(createTodo: InputCreateTodo) {
 		try {
 			const { email, id, listName, task } = createTodo;
 
-			await this.validateValues(createTodo, email, listName);
+			const error = await this.validateValues(createTodo, email, listName);
+			if (error) throw new Error(error);
 
 			const sameId = await ModelTodo.findOne({ email, listName, id });
 			if (sameId) throw new Error('Failure: Todo with same ID');
@@ -40,7 +41,8 @@ export class ServicesTodo {
 		try {
 			const { email, listName } = readTodos;
 
-			await this.validateValues(readTodos, email, listName);
+			const error = await this.validateValues(readTodos, email, listName);
+			if (error) throw new Error(error);
 
 			const todos = await ModelTodo.find({ email, listName });
 			return todos;
@@ -53,7 +55,8 @@ export class ServicesTodo {
 		try {
 			const { email, id, listName, newTask } = renameTodo;
 
-			await this.validateValues(renameTodo, email, listName);
+			const error = await this.validateValues(renameTodo, email, listName);
+			if (error) throw new Error(error);
 
 			const todo = await ModelTodo.findOne({ email, listName, id });
 			if (!todo) throw new Error('Failure: Todo not found');
@@ -69,7 +72,15 @@ export class ServicesTodo {
 
 	async deleteTodo(deleteTodo: InputDeleteTodo) {
 		try {
-			console.log({ deleteTodo });
+			const { email, id, listName } = deleteTodo;
+
+			const error = await this.validateValues(deleteTodo, email, listName);
+			if (error) throw new Error(error);
+
+			const todo = await ModelTodo.findOne({ id });
+			if (!todo) throw new Error('Failure: Todo not found');
+
+			await todo.deleteOne();
 			return { message: 'Todo deleted' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
