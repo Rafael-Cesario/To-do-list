@@ -2,7 +2,7 @@ export const TodoTypeDef = `#graphql
     type Todo {
         id: String!
         task: String!
-        state: String!
+        status: String!
         tags: [String]!
     }
 
