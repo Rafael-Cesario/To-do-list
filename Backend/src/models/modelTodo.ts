@@ -16,7 +16,7 @@ class Todo {
 	@prop({ type: String, required: true })
 	public state!: string;
 
-	@prop({ type: String, required: true }, PropType.ARRAY)
+	@prop({ type: String, required: true, lowercase: true }, PropType.ARRAY)
 	public tags!: string[];
 }
 
