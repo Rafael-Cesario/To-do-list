@@ -87,7 +87,7 @@ export class ServicesTodo {
 			if (!todo) throw new Error('Failure: Todo not found');
 
 			await todo.deleteOne();
-			return { message: 'Todo deleted' };
+			return { message: 'Success: Todo deleted' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}
