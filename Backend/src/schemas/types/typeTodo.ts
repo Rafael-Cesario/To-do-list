@@ -30,6 +30,13 @@ export const TodoTypeDef = `#graphql
         listName: String!
         id: String!
     }
+    
+    input InputUpdateStatus {
+        email: String!
+        listName: String!
+        id: String!
+        newStatus: String!
+    }
 
     type Query {
         readTodos(readTodos: InputReadTodos!): [Todo]!
@@ -39,5 +46,6 @@ export const TodoTypeDef = `#graphql
         createTodo(createTodo: InputCreateTodo!): TypeMessage!
         renameTodo(renameTodo: InputRenameTodo!): TypeMessage!
         deleteTodo(deleteTodo: InputDeleteTodo!): TypeMessage!
+        updateStatus(updateStatus: InputUpdateStatus!): TypeMessage!
     }
 `;

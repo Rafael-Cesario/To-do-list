@@ -22,3 +22,10 @@ export interface InputDeleteTodo {
 	listName: string;
 	id: string;
 }
+
+export interface InputUpdateStatus {
+	email: string;
+	listName: string;
+	id: string;
+	newStatus: string;
+}

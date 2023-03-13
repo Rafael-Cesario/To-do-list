@@ -14,7 +14,7 @@ class Todo {
 	public task!: string;
 
 	@prop({ type: String, required: true })
-	public state!: string;
+	public status!: string;
 
 	@prop({ type: String, required: true, lowercase: true }, PropType.ARRAY)
 	public tags!: string[];
