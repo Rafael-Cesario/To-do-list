@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
-import { InputCreateTag, InputUpdateTag } from '../interfaces/interfacesTags';
+import { InputCreateTag, InputDeleteTag, InputUpdateTag } from '../interfaces/interfacesTags';
 import { ModelList } from '../models/modelList';
 import { ModelTodo } from '../models/modelTodo';
 import { ModelUser } from '../models/modelUser';
@@ -57,6 +57,28 @@ export class ServiceTag {
 			await todo.save();
 
 			return { message: 'Success: Tag updated' };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
+
+	async deleteTag(deleteTag: InputDeleteTag) {
+		try {
+			const { email, id, listName, tag } = deleteTag;
+
+			const error = await this.validateValues(deleteTag, email, listName);
+			if (error) throw new Error(error);
+
+			const todo = await ModelTodo.findOne({ email, listName, id });
+			if (!todo) throw new Error(`Failure: Todo not found`);
+
+			const tagIndex = todo.tags.indexOf(tag.toLowerCase());
+			if (tagIndex < 0) throw new Error('Failure: Tag not found');
+
+			todo.tags.splice(tagIndex, 1);
+			await todo.save();
+
+			return { message: 'Success: Tag deleted' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}

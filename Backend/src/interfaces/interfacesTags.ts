@@ -12,3 +12,10 @@ export interface InputUpdateTag {
 	oldTag: string;
 	newTag: string;
 }
+
+export interface InputDeleteTag {
+	email: string;
+	listName: string;
+	id: string;
+	tag: string;
+}
