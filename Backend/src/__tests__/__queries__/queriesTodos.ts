@@ -16,5 +16,5 @@ const CREATE_TODO = gql`
 
 export const requestCreateTodo = async (url: string, createTodo: InputCreateTodo) => {
 	const { data, errors } = await request<ResponseCreateTodo>(url).mutate(CREATE_TODO).variables({ createTodo });
-	return { data, errors };
+	return { data, error: errors?.[0].message };
 };

@@ -18,6 +18,9 @@ describe('Create Todo', () => {
 	beforeAll(async () => {
 		url = await startServer(0);
 		await startDatabase();
+
+		await requestCreateUser(url, defaultUser);
+		await requestCreateList(url, defaultList);
 	});
 
 	afterEach(async () => {
@@ -29,10 +32,60 @@ describe('Create Todo', () => {
 		await mongoose.connection.close();
 	});
 
-	it('Creates a new todo', async () => {
-		await requestCreateUser(url, defaultUser);
-		await requestCreateList(url, defaultList);
+	it(`Can't create without values`, async () => {
+		const { error } = await requestCreateTodo(url, {
+			email: '',
+			id: '',
+			listName: '',
+			task: '',
+		});
 
+		expect(error).toBe(
+			'Failure: Email was not provided, ListName was not provided, Id was not provided, Task was not provided'
+		);
+	});
+
+	it(`can't create a todo without a user`, async () => {
+		const { error } = await requestCreateTodo(url, {
+			email: 'wrong',
+			id: '123',
+			listName: 'list01',
+			task: 'new task',
+		});
+
+		expect(error).toBe('Failure: User not found');
+	});
+
+	it(`Can't create without a list`, async () => {
+		const { error } = await requestCreateTodo(url, {
+			email: defaultUser.email,
+			listName: 'wrong',
+			id: '123',
+			task: 'new task',
+		});
+
+		expect(error).toBe('Failure: List not found');
+	});
+
+	it(`Can't create with same id`, async () => {
+		await requestCreateTodo(url, {
+			email: defaultUser.email,
+			listName: defaultList.listName,
+			id: '123',
+			task: 'newTask',
+		});
+
+		const { error } = await requestCreateTodo(url, {
+			email: defaultUser.email,
+			listName: defaultList.listName,
+			id: '123',
+			task: 'newTask',
+		});
+
+		expect(error).toBe('Failure: Todo with same ID');
+	});
+
+	it('Creates a new todo', async () => {
 		const { data } = await requestCreateTodo(url, {
 			email: defaultUser.email,
 			listName: defaultList.listName,
@@ -44,5 +97,10 @@ describe('Create Todo', () => {
 
 		const todos = await ModelTodo.find({});
 		expect(todos.length).toBe(1);
+
+		const properties = ['status', 'tags', 'email', 'listName', 'id', 'task'];
+		properties.forEach((property) => {
+			expect(todos[0]).toHaveProperty(property);
+		});
 	});
 });
