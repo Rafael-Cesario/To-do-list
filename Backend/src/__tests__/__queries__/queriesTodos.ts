@@ -1,6 +1,12 @@
 import gql from 'graphql-tag';
 import request from 'supertest-graphql';
-import { InputCreateTodo, InputDeleteTodo, InputReadTodos, InputRenameTodo } from '../../interfaces/interfacesTodo';
+import {
+	InputCreateTodo,
+	InputDeleteTodo,
+	InputReadTodos,
+	InputRenameTodo,
+	InputUpdateStatus,
+} from '../../interfaces/interfacesTodo';
 
 interface ResponseCreateTodo {
 	createTodo: { message: string };
@@ -16,6 +22,10 @@ interface ResponseRenameTodo {
 
 interface ResponseDeleteTodo {
 	deleteTodo: { message: string };
+}
+
+interface ResponseUpdateStatus {
+	updateStatus: { message: string };
 }
 
 const CREATE_TODO = gql`
@@ -53,6 +63,14 @@ const DELETE_TODO = gql`
 	}
 `;
 
+const UPDATE_STATUS = gql`
+	mutation UpdateStatus($updateStatus: InputUpdateStatus!) {
+		updateStatus(updateStatus: $updateStatus) {
+			message
+		}
+	}
+`;
+
 export const requestCreateTodo = async (url: string, createTodo: InputCreateTodo) => {
 	const { data, errors } = await request<ResponseCreateTodo>(url).mutate(CREATE_TODO).variables({ createTodo });
 	return { data, error: errors?.[0].message };
@@ -70,5 +88,10 @@ export const requestRenameTodo = async (url: string, renameTodo: InputRenameTodo
 
 export const requestDeleteTodo = async (url: string, deleteTodo: InputDeleteTodo) => {
 	const { data, errors } = await request<ResponseDeleteTodo>(url).mutate(DELETE_TODO).variables({ deleteTodo });
+	return { data, error: errors?.[0].message };
+};
+
+export const requestUpdateStatus = async (url: string, updateStatus: InputUpdateStatus) => {
+	const { data, errors } = await request<ResponseUpdateStatus>(url).mutate(UPDATE_STATUS).variables({ updateStatus });
 	return { data, error: errors?.[0].message };
 };
