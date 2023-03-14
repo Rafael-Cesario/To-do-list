@@ -53,6 +53,9 @@ export class ServiceTag {
 			const oldTagIndex = todo.tags.indexOf(oldTag.toLowerCase());
 			if (oldTagIndex < 0) throw new Error('Failure: Tag not found');
 
+			const hasTag = todo.tags.includes(newTag.toLowerCase());
+			if (hasTag) throw new Error('Failure: Duplicated tag');
+
 			todo.tags.splice(oldTagIndex, 1, newTag);
 			await todo.save();
 
