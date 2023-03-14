@@ -34,7 +34,7 @@ export class ServiceTag {
 			todo.tags.push(tag);
 			await todo.save();
 
-			return { message: 'Success: New tag Created' };
+			return { message: 'Success: New tag created' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}
