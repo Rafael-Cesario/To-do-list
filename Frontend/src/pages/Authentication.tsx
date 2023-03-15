@@ -1,4 +1,5 @@
 import { Header } from '../components/authentication/Header';
+import { Title } from '../components/authentication/Title';
 import { GlobalStyle } from '../styles/GlobalStyle';
 
 const Authentication = () => {
@@ -6,6 +7,7 @@ const Authentication = () => {
     <>
       <GlobalStyle />
       <Header />
+      <Title />
     </>
   );
 };
