@@ -30,32 +30,37 @@ export const StyledForm = styled.div`
     font-size: 1rem;
   }
 
-  .inputs {
-    margin: 5rem 0;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    div {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin: 2rem 0;
+    .inputs {
+      margin: 5rem 0;
 
-      label {
-        font-size: 0.8rem;
-        margin-bottom: 0.5rem;
-      }
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 2rem 0;
 
-      input {
-        background-color: ${colors.backgroundBlue};
-        outline: none;
-        border: none;
-        padding: 0.2rem 1rem;
-        width: 30vw;
-        max-width: 300px;
-        color: #ddd;
+        label {
+          font-size: 0.8rem;
+          margin-bottom: 0.5rem;
+        }
+
+        input {
+          background-color: ${colors.backgroundBlue};
+          outline: none;
+          border: none;
+          padding: 0.2rem 1rem;
+          width: 30vw;
+          max-width: 300px;
+          color: #ddd;
+        }
       }
     }
   }
-
   .submit {
     background-color: ${colors.backgroundBlue};
   }
