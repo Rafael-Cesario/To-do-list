@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { searchEmptyValues } from '../../utils/searchEmptyValues';
+import { sendError } from '../../utils/sendError';
 import { StyledForm } from './styles/StyledForm';
 
 export const CreateAccount = () => {
@@ -13,13 +14,14 @@ export const CreateAccount = () => {
   const createAccount = (e: FormEvent) => {
     e.preventDefault();
 
-    // todo >
     const emptyValues = searchEmptyValues(values);
     if (emptyValues) return sendError(emptyValues);
 
     // todo >
     // const invalidValues = validateValues();
     // if (invalidValues) return sendError(invalidValues);
+
+    // todo > resetErrors
 
     return;
   };
@@ -30,25 +32,27 @@ export const CreateAccount = () => {
 
       <form onSubmit={(e) => createAccount(e)}>
         <div className="inputs">
-          <div className="email">
-            <label htmlFor="email">Email</label>
-            <input id="email" type="text" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
+          <div id="email">
+            <label htmlFor="email-input" data-text="Email">
+              Email
+            </label>
+            <input id="email-input" type="text" value={values.email} onChange={(e) => setValues({ ...values, email: e.target.value })} />
           </div>
 
-          <div className="name">
-            <label htmlFor="name">Nome</label>
-            <input id="name" type="text" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} />
+          <div id="name">
+            <label htmlFor="name-input">Nome</label>
+            <input id="name-input" type="text" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} />
           </div>
 
-          <div className="password">
-            <label htmlFor="password">Senha</label>
-            <input id="password" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
+          <div id="password">
+            <label htmlFor="password-input">Senha</label>
+            <input id="password-input" type="password" value={values.password} onChange={(e) => setValues({ ...values, password: e.target.value })} />
           </div>
 
-          <div className="confirm-password">
-            <label htmlFor="confirm-password">Confirme sua senha</label>
+          <div id="confirmPassword">
+            <label htmlFor="confirm-password-input">Confirme sua senha</label>
             <input
-              id="confirm-password"
+              id="confirm-password-input"
               type="password"
               value={values.confirmPassword}
               onChange={(e) => setValues({ ...values, confirmPassword: e.target.value })}

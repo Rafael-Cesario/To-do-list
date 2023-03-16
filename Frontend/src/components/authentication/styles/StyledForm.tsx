@@ -64,4 +64,9 @@ export const StyledForm = styled.div`
   .submit {
     background-color: ${colors.backgroundBlue};
   }
+
+  .error {
+    color: #eb2727;
+    font-weight: bold;
+  }
 `;
