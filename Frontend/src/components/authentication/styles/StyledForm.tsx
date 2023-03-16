@@ -9,6 +9,18 @@ export const StyledForm = styled.div`
   margin: 4rem 2rem;
   padding: 2rem;
   background-color: ${colors.backgroundBlack};
+  animation: showForm 0.3s ease-in both;
+
+  @keyframes showForm {
+    from {
+      opacity: 0;
+      transform: translate(5rem, 0);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 
   .title {
     position: absolute;

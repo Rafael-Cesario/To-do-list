@@ -4,7 +4,7 @@ import { Login } from './Login';
 import { StyledHeader } from './styles/StyledHeader';
 
 export const Header = () => {
-  const [activeForm, setActiveForm] = useState('login');
+  const [activeForm, setActiveForm] = useState('');
 
   return (
     <StyledHeader>
@@ -20,11 +20,9 @@ export const Header = () => {
       </div>
 
       <div className="forms">
-        {/* <Login /> */}
-        <CreateAccount />
+        {activeForm === 'login' && <Login />}
+        {activeForm === 'createAccount' && <CreateAccount />}
       </div>
     </StyledHeader>
   );
 };
-
-// Todo > show and hide forms
