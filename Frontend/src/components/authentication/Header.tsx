@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CreateAccount } from './CreateAccount';
 import { Login } from './Login';
 import { StyledHeader } from './styles/StyledHeader';
 
@@ -19,8 +20,11 @@ export const Header = () => {
       </div>
 
       <div className="forms">
-        <Login />
+        {/* <Login /> */}
+        <CreateAccount />
       </div>
     </StyledHeader>
   );
 };
+
+// Todo > show and hide forms

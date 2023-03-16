@@ -1,8 +1,8 @@
-import { StyledLogin } from './styles/StyledLogin';
+import { StyledForm } from './styles/StyledForm';
 
 export const Login = () => {
   return (
-    <StyledLogin>
+    <StyledForm>
       <h1 className="title">Login</h1>
 
       <div className="inputs">
@@ -18,6 +18,8 @@ export const Login = () => {
       </div>
 
       <button className="submit">Entrar</button>
-    </StyledLogin>
+    </StyledForm>
   );
 };
+
+// todo > show and hide password

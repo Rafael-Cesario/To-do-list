@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
-export const StyledLogin = styled.div`
+export const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
