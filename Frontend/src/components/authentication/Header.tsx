@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Login } from './Login';
 import { StyledHeader } from './styles/StyledHeader';
 
 export const Header = () => {
@@ -6,15 +7,20 @@ export const Header = () => {
 
   return (
     <StyledHeader>
-      <button className={activeForm === 'login' ? 'active' : ''} onClick={() => setActiveForm(activeForm === 'login' ? '' : 'login')}>
-        Login
-      </button>
+      <div className="buttons">
+        <button className={activeForm === 'login' ? 'active' : ''} onClick={() => setActiveForm(activeForm === 'login' ? '' : 'login')}>
+          Login
+        </button>
+        <button
+          className={activeForm === 'createAccount' ? 'active' : ''}
+          onClick={() => setActiveForm(activeForm === 'createAccount' ? '' : 'createAccount')}>
+          Criar uma conta
+        </button>
+      </div>
 
-      <button
-        className={activeForm === 'createAccount' ? 'active' : ''}
-        onClick={() => setActiveForm(activeForm === 'createAccount' ? '' : 'createAccount')}>
-        Criar uma conta
-      </button>
+      <div className="forms">
+        <Login />
+      </div>
     </StyledHeader>
   );
 };

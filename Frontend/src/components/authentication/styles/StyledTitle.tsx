@@ -8,6 +8,7 @@ export const StyledTitle = styled.main`
   top: 45vh;
   left: 50vw;
   transform: translate(-50%, -50%);
+  z-index: -1;
 
   .title {
     p {

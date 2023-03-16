@@ -3,7 +3,8 @@ import { colors } from '../../../styles/palette';
 
 export const StyledHeader = styled.header`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
   margin: 2rem;
 
   button {
