@@ -8,7 +8,7 @@ export const StyledHeader = styled.header`
   margin: 2rem;
 
   button {
-    padding: 0.3rem 2rem;
+    padding: 0.3rem 1rem;
     cursor: pointer;
     background-color: transparent;
     outline: none;
