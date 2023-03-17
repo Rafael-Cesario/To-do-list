@@ -19,9 +19,9 @@ export const CreateAccount = () => {
 
     const isValueValid = {
       email: validations.email(valuesToValidate.email),
-      // name: validations.name(valuesToValidate.name)
-      // password: validations.password(valuesToValidate.password)
-      // confirmPassword: validations.confirmPassword(valuesToValidate.confirmPassword, valuesToValidate.password)
+      name: validations.name(valuesToValidate.name),
+      password: validations.password(valuesToValidate.password),
+      confirmPassword: validations.confirmPassword(valuesToValidate.confirmPassword, valuesToValidate.password),
     };
 
     Object.entries(isValueValid).forEach(([key, value]) => {
