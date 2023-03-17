@@ -34,6 +34,7 @@ export const StyledForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 
     .inputs {
       margin: 5rem 0;
@@ -45,6 +46,7 @@ export const StyledForm = styled.div`
         margin: 2rem 0;
 
         label {
+          max-width: 300px;
           font-size: 0.8rem;
           margin-bottom: 0.5rem;
         }
