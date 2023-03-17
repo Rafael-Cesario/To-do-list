@@ -9,5 +9,6 @@ export default defineConfig({
     watch: false,
     environment: 'jsdom',
     reporters: 'verbose',
+    globals: true,
   },
 });
