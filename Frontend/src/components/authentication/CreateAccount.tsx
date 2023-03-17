@@ -1,7 +1,8 @@
 import { FormEvent, useState } from 'react';
+import { resetTextFromLabels } from '../../utils/resetTextFromLabels';
 import { searchEmptyValues } from '../../utils/searchEmptyValues';
 import { sendError } from '../../utils/sendError';
-import { Validations } from '../../utils/validations';
+import { validateValues } from '../../utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 
 export const CreateAccount = () => {
@@ -12,36 +13,6 @@ export const CreateAccount = () => {
     confirmPassword: '',
   });
 
-  const validateValues = (valuesToValidate: typeof values) => {
-    type Key = keyof typeof valuesToValidate;
-    const validations = new Validations();
-    const invalidValues: { [key: string]: string } = {};
-
-    const isValueValid = {
-      email: validations.email(valuesToValidate.email),
-      name: validations.name(valuesToValidate.name),
-      password: validations.password(valuesToValidate.password),
-      confirmPassword: validations.confirmPassword(valuesToValidate.confirmPassword, valuesToValidate.password),
-    };
-
-    Object.entries(isValueValid).forEach(([key, value]) => {
-      const valueNotValid = value !== undefined;
-      if (valueNotValid) invalidValues[key as Key] = value;
-    });
-
-    const hasInvalidValues = Object.keys(invalidValues).length > 0;
-    return hasInvalidValues && invalidValues;
-  };
-
-  const resetTextFromLabels = (divIds: string[]) => {
-    divIds.forEach((id) => {
-      const div = document.querySelector('#' + id) as HTMLDivElement;
-      const label = div.firstChild as HTMLLabelElement;
-      label.classList.remove('error');
-      label.textContent = label.getAttribute('data-text');
-    });
-  };
-
   const createAccount = (e: FormEvent) => {
     e.preventDefault();
 
@@ -50,7 +21,6 @@ export const CreateAccount = () => {
     const emptyValues = searchEmptyValues(values);
     if (emptyValues) return sendError(emptyValues);
 
-    // todo >
     const invalidValues = validateValues(values);
     if (invalidValues) return sendError(invalidValues);
 
