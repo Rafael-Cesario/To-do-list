@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
-import { resetTextFromLabels } from '../../utils/resetTextFromLabels';
-import { searchEmptyValues } from '../../utils/searchEmptyValues';
-import { sendError } from '../../utils/sendError';
-import { validateValues } from '../../utils/validateValues';
+import { resetTextFromLabels } from './utils/resetTextFromLabels';
+import { searchEmptyValues } from './utils/searchEmptyValues';
+import { sendError } from './utils/sendError';
+import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 
 export const CreateAccount = () => {

@@ -1,5 +1,5 @@
-import { Header } from '../components/authentication/Header';
-import { Title } from '../components/authentication/Title';
+import { Header } from '../features/authentication/Header';
+import { Title } from '../features/authentication/Title';
 import { GlobalStyle } from '../styles/GlobalStyle';
 
 const Authentication = () => {
