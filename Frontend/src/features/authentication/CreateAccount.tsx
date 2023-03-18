@@ -24,6 +24,9 @@ export const CreateAccount = () => {
     const invalidValues = validateValues(values);
     if (invalidValues) return sendError(invalidValues);
 
+    // todo > create a new user
+
+
     return;
   };
 

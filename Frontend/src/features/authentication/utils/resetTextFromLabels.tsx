@@ -6,3 +6,5 @@ export const resetTextFromLabels = (divIds: string[]) => {
     label.textContent = label.getAttribute('data-text');
   });
 };
+
+// todo > Tests

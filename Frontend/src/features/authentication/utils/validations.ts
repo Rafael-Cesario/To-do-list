@@ -22,3 +22,5 @@ export class Validations {
     if (confirmPassword !== password) return 'Suas senhas não são iguais';
   }
 }
+
+// todo > tests
