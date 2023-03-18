@@ -4,6 +4,7 @@ import { searchEmptyValues } from './utils/searchEmptyValues';
 import { sendError } from './utils/sendError';
 import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
+import { QueriesUser } from './utils/queriesUser';
 
 export const CreateAccount = () => {
   const [values, setValues] = useState({
@@ -13,8 +14,10 @@ export const CreateAccount = () => {
     confirmPassword: '',
   });
 
-  const createAccount = (e: FormEvent) => {
+  const createAccount = async (e: FormEvent) => {
     e.preventDefault();
+
+    const queriesUser = new QueriesUser();
 
     resetTextFromLabels(Object.keys(values));
 
@@ -24,10 +27,13 @@ export const CreateAccount = () => {
     const invalidValues = validateValues(values);
     if (invalidValues) return sendError(invalidValues);
 
-    // todo > create a new user
+    const { email, name, password } = values;
+    const { message, error } = await queriesUser.createUser({ email, name, password });
 
+    // todo
+    // if (error) return notification('error', error.message)
 
-    return;
+    // notification('success', 'Novo usuario criado')
   };
 
   return (
