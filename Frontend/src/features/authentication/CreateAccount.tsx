@@ -33,24 +33,19 @@ export const CreateAccount = () => {
 
     setLoading(true);
 
-    // todo > simulate real environment, testing loading css
-    // remove setTimeout
-    setTimeout(async () => {
-      const { email, name, password } = values;
-      const { error } = await queriesUser.createUser({ email, name, password });
+    const { email, name, password } = values;
+    const { error } = await queriesUser.createUser({ email, name, password });
 
-      setLoading(false);
+    setLoading(false);
 
-      if (error) return sendNotification('error', error);
+    if (error) return sendNotification('error', error);
 
-      sendNotification('success', 'Novo usuario criado');
-    }, 5000);
+    sendNotification('success', 'Novo usuario criado');
   };
 
   return (
     <StyledForm>
       <h1 className="title">Criar conta</h1>
-      {loading && <p>Carregand...</p>}
 
       <form onSubmit={(e) => createAccount(e)}>
         <div className="inputs">
@@ -87,6 +82,8 @@ export const CreateAccount = () => {
             />
           </div>
         </div>
+
+        {loading && <p className="loading">......</p>}
         <button className="submit">Criar conta</button>
       </form>
     </StyledForm>

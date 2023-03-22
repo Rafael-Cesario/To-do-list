@@ -71,4 +71,33 @@ export const StyledForm = styled.div`
     color: #eb2727;
     font-weight: bold;
   }
+
+  .loading {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 5rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    ::after {
+      content: '';
+      background-color: ${colors.backgroundBlack};
+      width: 5rem;
+      height: 2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: loading 1s infinite;
+
+      @keyframes loading {
+        from {
+          transform: translate(0, 0);
+        }
+
+        to {
+          transform: translate(5rem, 0);
+        }
+      }
+    }
+  }
 `;
