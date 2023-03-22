@@ -16,6 +16,8 @@ export const CreateAccount = () => {
     confirmPassword: '',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const createAccount = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -29,17 +31,26 @@ export const CreateAccount = () => {
     const invalidValues = validateValues(values);
     if (invalidValues) return sendError(invalidValues);
 
-    const { email, name, password } = values;
-    const { error } = await queriesUser.createUser({ email, name, password });
+    setLoading(true);
 
-    if (error) return sendNotification('error', error);
+    // todo > simulate real environment, testing loading css
+    // remove setTimeout
+    setTimeout(async () => {
+      const { email, name, password } = values;
+      const { error } = await queriesUser.createUser({ email, name, password });
 
-    sendNotification('success', 'Novo usuario criado');
+      setLoading(false);
+
+      if (error) return sendNotification('error', error);
+
+      sendNotification('success', 'Novo usuario criado');
+    }, 5000);
   };
 
   return (
     <StyledForm>
       <h1 className="title">Criar conta</h1>
+      {loading && <p>Carregand...</p>}
 
       <form onSubmit={(e) => createAccount(e)}>
         <div className="inputs">
