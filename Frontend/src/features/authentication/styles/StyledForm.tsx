@@ -10,31 +10,39 @@ export const StyledForm = styled.div`
   padding: 2rem 10rem;
   background-color: ${colors.backgroundBlack};
   animation: showForm 0.3s ease-in both;
+  box-shadow: 5px 5px 2px #111;
+  border-radius: 3px;
 
   @keyframes showForm {
     from {
       opacity: 0;
-      transform: translate(5rem, 0);
     }
-
     to {
       opacity: 1;
     }
   }
 
-  .title {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     position: absolute;
-    transform: translate(0, -3rem);
-    background-color: ${colors.backgroundBlue};
-    padding: 0.5rem 4rem;
-    font-size: 1rem;
+    transform: translate(0, -5rem);
+
+    .title {
+      border-radius: 3px;
+      background-color: ${colors.backgroundBlue};
+      padding: 0.5rem 4rem;
+      font-size: 1rem;
+    }
   }
 
   form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
 
     .inputs {
       margin: 5rem 0;
@@ -49,16 +57,19 @@ export const StyledForm = styled.div`
           max-width: 300px;
           font-size: 0.8rem;
           margin-bottom: 0.5rem;
+          font-weight: bold;
+          color: #ddd;
         }
 
         input {
-          background-color: ${colors.backgroundBlue};
-          outline: none;
           border: none;
-          padding: 0.2rem 1rem;
+          outline: none;
+          background-color: transparent;
+          border-bottom: 2px solid ${colors.backgroundBlue};
           width: 30vw;
           max-width: 300px;
           color: #ddd;
+          font-size: 0.9rem;
         }
 
         .password-field {
@@ -66,27 +77,34 @@ export const StyledForm = styled.div`
           display: flex;
           flex-flow: row-reverse;
           align-items: center;
-          background-color: ${colors.backgroundBlue};
+          position: relative;
 
           input {
             padding-right: 3rem;
           }
 
           .icon {
-            margin: 0 1rem;
             position: absolute;
+            top: -5px;
             cursor: pointer;
           }
+        }
+
+        .error {
+          color: red;
+          font-weight: bold;
         }
       }
     }
   }
+
   .submit {
     background-color: ${colors.backgroundBlue};
-  }
+    border-radius: 3px;
+    width: 100%;
 
-  .error {
-    color: red;
-    font-weight: bold;
+    :active {
+      transform: scale(0.95);
+    }
   }
 `;

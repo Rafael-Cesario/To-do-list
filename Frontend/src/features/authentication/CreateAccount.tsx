@@ -44,7 +44,13 @@ export const CreateAccount = () => {
 
   return (
     <StyledForm>
-      <h1 className="title">Criar conta</h1>
+      <div className="header">
+        <a href="https://www.flaticon.com/br/icones-gratis/mago" title="Mago ícones criados por Freepik - Flaticon ">
+          <img src="/icons/mage.png" alt="mage icon" height={'100rem'} />
+        </a>
+
+        <h1 className="title">Criar conta</h1>
+      </div>
 
       <form onSubmit={(e) => createAccount(e)}>
         <div className="inputs">

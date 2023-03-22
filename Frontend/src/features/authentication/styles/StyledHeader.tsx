@@ -16,6 +16,8 @@ export const StyledHeader = styled.header`
     color: #ddd;
     font-weight: bold;
     transition: 0.2s;
+    border-radius: 3px;
+    box-shadow: 5px 5px 2px #111;
 
     :hover {
       background-color: ${colors.backgroundBlue};
