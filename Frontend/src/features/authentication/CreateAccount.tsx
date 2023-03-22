@@ -5,6 +5,8 @@ import { sendError } from './utils/sendError';
 import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 import { QueriesUser } from './utils/queriesUser';
+import { useDispatch } from 'react-redux';
+import { notificationSlice } from './utils/notificationSlice';
 
 export const CreateAccount = () => {
   const [values, setValues] = useState({
@@ -14,21 +16,31 @@ export const CreateAccount = () => {
     confirmPassword: '',
   });
 
+  const dispatch = useDispatch();
+
   const createAccount = async (e: FormEvent) => {
     e.preventDefault();
 
-    const queriesUser = new QueriesUser();
+    dispatch(
+      notificationSlice.actions.sendNotification({
+        isOpen: true,
+        type: 'error',
+        text: 'New user create',
+      })
+    );
 
-    resetTextFromLabels(Object.keys(values));
+    // const queriesUser = new QueriesUser();
 
-    const emptyValues = searchEmptyValues(values);
-    if (emptyValues) return sendError(emptyValues);
+    // resetTextFromLabels(Object.keys(values));
 
-    const invalidValues = validateValues(values);
-    if (invalidValues) return sendError(invalidValues);
+    // const emptyValues = searchEmptyValues(values);
+    // if (emptyValues) return sendError(emptyValues);
 
-    const { email, name, password } = values;
-    const { message, error } = await queriesUser.createUser({ email, name, password });
+    // const invalidValues = validateValues(values);
+    // if (invalidValues) return sendError(invalidValues);
+
+    // const { email, name, password } = values;
+    // const { message, error } = await queriesUser.createUser({ email, name, password });
 
     // todo
     // if (error) return notification('error', error.message)
