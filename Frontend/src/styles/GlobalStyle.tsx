@@ -12,5 +12,14 @@ export const GlobalStyle = createGlobalStyle`
     background-color: #101010;
     color: #ddd;
     margin: 1rem;
+    
+    ::-webkit-scrollbar {
+      background-color: #101010;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #202020;
+      border-radius: 3px;
+    }
   }
 `;
