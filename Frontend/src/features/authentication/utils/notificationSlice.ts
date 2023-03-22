@@ -1,8 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface INotification {
+  type: 'error' | 'success';
+  text: string;
+  isOpen: boolean;
+}
+
+const initialState: INotification = {
+  type: 'error',
+  text: '',
+  isOpen: false,
+};
+
 export const notificationSlice = createSlice({
   name: 'notification',
-  initialState: { type: '', text: '', isOpen: false },
+  initialState,
+
   reducers: {
     sendNotification: (state, action: { payload: typeof state }) => {
       state.isOpen = action.payload.isOpen;
