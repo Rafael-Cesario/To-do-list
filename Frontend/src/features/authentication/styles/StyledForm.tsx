@@ -7,7 +7,7 @@ export const StyledForm = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 4rem 2rem;
-  padding: 2rem;
+  padding: 2rem 10rem;
   background-color: ${colors.backgroundBlack};
   animation: showForm 0.3s ease-in both;
 
@@ -39,7 +39,7 @@ export const StyledForm = styled.div`
     .inputs {
       margin: 5rem 0;
 
-      div {
+      .field {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -59,6 +59,24 @@ export const StyledForm = styled.div`
           width: 30vw;
           max-width: 300px;
           color: #ddd;
+        }
+
+        .password-field {
+          margin: 0;
+          display: flex;
+          flex-flow: row-reverse;
+          align-items: center;
+          background-color: ${colors.backgroundBlue};
+
+          input {
+            padding-right: 3rem;
+          }
+
+          .icon {
+            margin: 0 1rem;
+            position: absolute;
+            cursor: pointer;
+          }
         }
       }
     }
