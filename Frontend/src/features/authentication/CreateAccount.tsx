@@ -1,7 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { resetTextFromLabels } from './utils/resetTextFromLabels';
 import { searchEmptyValues } from './utils/searchEmptyValues';
-import { sendError } from './utils/sendError';
 import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 import { QueriesUser } from './utils/queriesUser';
@@ -10,9 +8,13 @@ import { Loading } from './Loading';
 import { Field, FieldPassword } from './Field';
 
 export const CreateAccount = () => {
-  const initialStateValues = { email: '', name: '', password: '', confirmPassword: '' };
+  const defaultValues = { email: '', name: '', password: '', confirmPassword: '' };
+  const defaultLabelError = { email: '', name: '', password: '', confirmPassword: '' };
+
+  const [values, setValues] = useState(defaultValues);
+  const [labelError, setLabelError] = useState(defaultLabelError);
   const [isLoading, setIsLoading] = useState(false);
-  const [values, setValues] = useState(initialStateValues);
+
   const { sendNotification } = useNotification();
 
   // todo > tests
@@ -21,13 +23,11 @@ export const CreateAccount = () => {
 
     const queriesUser = new QueriesUser();
 
-    resetTextFromLabels(Object.keys(values));
-
     const emptyValues = searchEmptyValues(values);
-    if (emptyValues) return sendError(emptyValues);
+    if (emptyValues) return setLabelError({ ...defaultLabelError, ...emptyValues });
 
     const invalidValues = validateValues(values);
-    if (invalidValues) return sendError(invalidValues);
+    if (invalidValues) return setLabelError({ ...defaultLabelError, ...invalidValues });
 
     setIsLoading(true);
 
@@ -39,7 +39,7 @@ export const CreateAccount = () => {
     if (error) return sendNotification('error', error);
 
     sendNotification('success', 'Novo usuario criado, você já pode fazer login. Boas vindas!');
-    setValues(initialStateValues);
+    setValues(defaultValues);
   };
 
   return (
@@ -48,10 +48,10 @@ export const CreateAccount = () => {
 
       <form onSubmit={(e) => createAccount(e)}>
         <div className="inputs">
-          <Field props={{ id: 'email', label: 'Email', values, setValues }} />
-          <Field props={{ id: 'name', label: 'Nome', values, setValues }} />
-          <FieldPassword props={{ id: 'password', label: 'Senha', values, setValues }} />
-          <FieldPassword props={{ id: 'confirmPassword', label: 'Confirme sua senha', values, setValues }} />
+          <Field props={{ id: 'email', label: 'Email', values, setValues, error: labelError.email }} />
+          <Field props={{ id: 'name', label: 'Nome', values, setValues, error: labelError.name }} />
+          <FieldPassword props={{ id: 'password', label: 'Senha', values, setValues, error: labelError.password }} />
+          <FieldPassword props={{ id: 'confirmPassword', label: 'Confirme sua senha', values, setValues, error: labelError.confirmPassword }} />
         </div>
 
         <Loading isLoading={isLoading} />

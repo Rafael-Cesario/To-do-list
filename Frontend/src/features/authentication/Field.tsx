@@ -8,27 +8,29 @@ interface Props {
     label: string;
     values: Values;
     setValues: (newValues: Values) => void;
+    error: string;
   };
 }
 
-export const Field = ({ props: { id, label, values, setValues } }: Props) => {
+export const Field = ({ props: { id, label, values, setValues, error } }: Props) => {
   return (
     <div id={id} className="field">
-      <label htmlFor={`${id}-input`} data-text={label}>
-        {label}
+      <label className={error && 'error'} htmlFor={`${id}-input`} data-text={label}>
+        {error || label}
       </label>
+
       <input id={`${id}-input`} type="text" value={values[id as keyof Values]} onChange={(e) => setValues({ ...values, [id]: e.target.value })} />
     </div>
   );
 };
 
-export const FieldPassword = ({ props: { id, label, values, setValues } }: Props) => {
+export const FieldPassword = ({ props: { id, label, values, setValues, error } }: Props) => {
   const [passwordInputType, setPasswordInputType] = useState('password');
 
   return (
     <div id={id} className="field">
-      <label htmlFor={id} data-text={label}>
-        {label}
+      <label className={error && 'error'} htmlFor={id} data-text={label}>
+        {error || label}
       </label>
 
       <div className="password-field">

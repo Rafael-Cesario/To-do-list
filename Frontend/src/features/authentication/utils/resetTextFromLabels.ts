@@ -7,4 +7,4 @@ export const resetTextFromLabels = (divIds: string[]) => {
   });
 };
 
-// todo > Tests
+// todo > delete file

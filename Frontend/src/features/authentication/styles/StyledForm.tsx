@@ -86,8 +86,7 @@ export const StyledForm = styled.div`
   }
 
   .error {
-    color: #eb2727;
+    color: red;
     font-weight: bold;
   }
-
 `;

@@ -6,5 +6,8 @@ export const sendError = (errors: { [elementId: string]: string }) => {
     const label = div.firstChild as HTMLLabelElement;
     label.textContent = errors[key];
     label.classList.add('error');
+
   });
 };
+
+// todo > Delete file
