@@ -6,21 +6,13 @@ import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 import { QueriesUser } from './utils/queriesUser';
 import { useNotification } from './hooks/useNotification';
+import { Loading } from './Loading';
 
 export const CreateAccount = () => {
-  const { sendNotification } = useNotification();
-
-  const initialStateValues = {
-    email: '',
-    name: '',
-    password: '',
-    confirmPassword: '',
-  };
-
-  const [values, setValues] = useState(initialStateValues);
-
-  // todo > Loading component
+  const initialStateValues = { email: '', name: '', password: '', confirmPassword: '' };
   const [isLoading, setIsLoading] = useState(false);
+  const [values, setValues] = useState(initialStateValues);
+  const { sendNotification } = useNotification();
 
   // todo > tests
   const createAccount = async (e: FormEvent) => {
@@ -45,7 +37,7 @@ export const CreateAccount = () => {
 
     if (error) return sendNotification('error', error);
 
-    sendNotification('success', 'Novo usuario criado');
+    sendNotification('success', 'Novo usuario criado, você já pode fazer login. Boas vindas!');
     setValues(initialStateValues);
   };
 
@@ -59,7 +51,6 @@ export const CreateAccount = () => {
 
       <form onSubmit={(e) => createAccount(e)}>
         <div className="inputs">
-
           <div id="email" className="field">
             <label htmlFor="email-input" data-text="Email">
               Email
@@ -120,7 +111,7 @@ export const CreateAccount = () => {
           </div>
         </div>
 
-        {isLoading && <p className="loading">......</p>}
+        <Loading isLoading={isLoading} />
         <button className="submit">Criar conta</button>
       </form>
     </StyledForm>
