@@ -22,6 +22,7 @@ export const CreateAccount = () => {
   // todo > Loading component
   const [isLoading, setIsLoading] = useState(false);
 
+  // todo > tests
   const createAccount = async (e: FormEvent) => {
     e.preventDefault();
 

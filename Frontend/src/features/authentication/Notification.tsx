@@ -24,3 +24,5 @@ export const Notification = () => {
     </StyledNotification>
   );
 };
+
+// todo > Tests

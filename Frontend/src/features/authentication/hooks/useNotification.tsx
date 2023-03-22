@@ -24,3 +24,5 @@ export const useNotification = () => {
 
   return { notification, sendNotification, closeNotification };
 };
+
+// todo > tests
