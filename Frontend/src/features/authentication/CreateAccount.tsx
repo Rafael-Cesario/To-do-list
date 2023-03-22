@@ -8,15 +8,17 @@ import { QueriesUser } from './utils/queriesUser';
 import { useNotification } from './hooks/useNotification';
 
 export const CreateAccount = () => {
-  const { sendNotification } = useNotification();
-  const [values, setValues] = useState({
+  const initialStateValues = {
     email: '',
     name: '',
     password: '',
     confirmPassword: '',
-  });
+  };
 
-  const [loading, setLoading] = useState(false);
+  const { sendNotification } = useNotification();
+  const [values, setValues] = useState(initialStateValues);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const createAccount = async (e: FormEvent) => {
     e.preventDefault();
@@ -31,16 +33,17 @@ export const CreateAccount = () => {
     const invalidValues = validateValues(values);
     if (invalidValues) return sendError(invalidValues);
 
-    setLoading(true);
+    setIsLoading(true);
 
     const { email, name, password } = values;
     const { error } = await queriesUser.createUser({ email, name, password });
 
-    setLoading(false);
+    setIsLoading(false);
 
     if (error) return sendNotification('error', error);
 
     sendNotification('success', 'Novo usuario criado');
+    setValues(initialStateValues);
   };
 
   return (
@@ -83,7 +86,7 @@ export const CreateAccount = () => {
           </div>
         </div>
 
-        {loading && <p className="loading">......</p>}
+        {isLoading && <p className="loading">......</p>}
         <button className="submit">Criar conta</button>
       </form>
     </StyledForm>
