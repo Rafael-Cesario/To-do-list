@@ -1,13 +1,11 @@
 import { useState } from 'react';
 
-type Values = { email: string; name: string; password: string; confirmPassword: string };
-
 interface Props {
   props: {
-    id: keyof Values;
+    id: string;
     label: string;
-    values: Values;
-    setValues: (newValues: Values) => void;
+    values: { [key: string]: string };
+    setValues: (newValues: { [key: string]: string }) => void;
     error: string;
   };
 }
@@ -19,7 +17,12 @@ export const Field = ({ props: { id, label, values, setValues, error } }: Props)
         {error || label}
       </label>
 
-      <input id={`${id}-input`} type="text" value={values[id as keyof Values]} onChange={(e) => setValues({ ...values, [id]: e.target.value })} />
+      <input
+        id={`${id}-input`}
+        type="text"
+        value={values[id as keyof typeof values]}
+        onChange={(e) => setValues({ ...values, [id]: e.target.value })}
+      />
     </div>
   );
 };
@@ -42,7 +45,12 @@ export const FieldPassword = ({ props: { id, label, values, setValues, error } }
           <img onClick={() => setPasswordInputType('password')} className="icon" src="/icons/eye.png" height={'15rem'} alt="show password" />
         )}
 
-        <input id={id} type={passwordInputType} value={values[id as keyof Values]} onChange={(e) => setValues({ ...values, [id]: e.target.value })} />
+        <input
+          id={id}
+          type={passwordInputType}
+          value={values[id as keyof typeof values]}
+          onChange={(e) => setValues({ ...values, [id]: e.target.value })}
+        />
       </div>
     </div>
   );

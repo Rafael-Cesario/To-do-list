@@ -11,7 +11,7 @@ export const CreateAccount = () => {
   const defaultValues = { email: '', name: '', password: '', confirmPassword: '' };
   const defaultLabelError = { email: '', name: '', password: '', confirmPassword: '' };
 
-  const [values, setValues] = useState(defaultValues);
+  const [values, setValues] = useState<{ [key: string]: string }>(defaultValues);
   const [labelError, setLabelError] = useState(defaultLabelError);
   const [isLoading, setIsLoading] = useState(false);
 

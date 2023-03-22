@@ -3,10 +3,10 @@ import { colors } from '../../../styles/palette';
 
 export const StyledLoading = styled.div`
   position: absolute;
-  bottom: 0;
   margin-bottom: 5rem;
   font-weight: bold;
   font-size: 1.5rem;
+  bottom: 0;
 
   .loading::after {
     content: '';

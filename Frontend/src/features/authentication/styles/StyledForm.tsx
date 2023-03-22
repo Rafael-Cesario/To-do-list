@@ -12,6 +12,7 @@ export const StyledForm = styled.div`
   animation: showForm 0.3s ease-in both;
   box-shadow: 5px 5px 2px #111;
   border-radius: 3px;
+  position: relative;
 
   @keyframes showForm {
     from {
