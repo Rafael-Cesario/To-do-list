@@ -21,14 +21,6 @@ export const CreateAccount = () => {
   const createAccount = async (e: FormEvent) => {
     e.preventDefault();
 
-    dispatch(
-      notificationSlice.actions.sendNotification({
-        isOpen: true,
-        type: 'error',
-        text: 'New user create',
-      })
-    );
-
     // const queriesUser = new QueriesUser();
 
     // resetTextFromLabels(Object.keys(values));
@@ -44,6 +36,13 @@ export const CreateAccount = () => {
 
     // todo
     // if (error) return notification('error', error.message)
+    dispatch(
+      notificationSlice.actions.sendNotification({
+        isOpen: true,
+        type: 'error',
+        text: 'New user create',
+      })
+    );
 
     // notification('success', 'Novo usuario criado')
   };
