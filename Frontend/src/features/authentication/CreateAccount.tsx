@@ -5,10 +5,10 @@ import { sendError } from './utils/sendError';
 import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 import { QueriesUser } from './utils/queriesUser';
-import { useDispatch } from 'react-redux';
-import { notificationSlice } from './utils/notificationSlice';
+import { useNotification } from './hooks/useNotification';
 
 export const CreateAccount = () => {
+  const { sendNotification } = useNotification();
   const [values, setValues] = useState({
     email: '',
     name: '',
@@ -16,35 +16,25 @@ export const CreateAccount = () => {
     confirmPassword: '',
   });
 
-  const dispatch = useDispatch();
-
   const createAccount = async (e: FormEvent) => {
     e.preventDefault();
 
-    // const queriesUser = new QueriesUser();
+    const queriesUser = new QueriesUser();
 
-    // resetTextFromLabels(Object.keys(values));
+    resetTextFromLabels(Object.keys(values));
 
-    // const emptyValues = searchEmptyValues(values);
-    // if (emptyValues) return sendError(emptyValues);
+    const emptyValues = searchEmptyValues(values);
+    if (emptyValues) return sendError(emptyValues);
 
-    // const invalidValues = validateValues(values);
-    // if (invalidValues) return sendError(invalidValues);
+    const invalidValues = validateValues(values);
+    if (invalidValues) return sendError(invalidValues);
 
-    // const { email, name, password } = values;
-    // const { message, error } = await queriesUser.createUser({ email, name, password });
+    const { email, name, password } = values;
+    const { error } = await queriesUser.createUser({ email, name, password });
 
-    // todo
-    // if (error) return notification('error', error.message)
-    dispatch(
-      notificationSlice.actions.sendNotification({
-        isOpen: true,
-        type: 'error',
-        text: 'New user create',
-      })
-    );
+    if (error) return sendNotification('error', error);
 
-    // notification('success', 'Novo usuario criado')
+    sendNotification('success', 'Novo usuario criado');
   };
 
   return (

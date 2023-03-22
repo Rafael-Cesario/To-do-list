@@ -15,6 +15,10 @@ export const StyledNotification = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     font-weight: bold;
+
+    .type {
+      text-transform: capitalize;
+    }
   }
 
   .text {
@@ -37,5 +41,9 @@ export const StyledNotification = styled.div`
 
   .error {
     color: crimson;
+  }
+
+  .success {
+    color: forestgreen;
   }
 `;

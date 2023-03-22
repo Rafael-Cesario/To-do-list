@@ -10,7 +10,7 @@ export const Notification = () => {
   return (
     <StyledNotification>
       <div className="header">
-        <span className={`type ${notification.type}`}>Erro</span>
+        <span className={`type ${notification.type}`}>{notification.type}</span>
         <button className="close" onClick={() => dispatch(notificationSlice.actions.close())}>
           x
         </button>
