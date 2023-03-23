@@ -1,7 +1,9 @@
+import { Header } from '../features/index/Header';
+
 const Index = () => {
   return (
     <>
-      <h1>Index Page</h1>
+      <Header />
     </>
   );
 };
