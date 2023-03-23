@@ -3,6 +3,7 @@ import { colors } from '../../../styles/palette';
 
 export const StyledLists = styled.div`
   grid-column: 4;
+  grid-row: 1 / span 2;
   display: flex;
   flex-direction: column;
   align-items: center;
