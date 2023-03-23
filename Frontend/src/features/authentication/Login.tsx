@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Field, FieldPassword } from './Field';
 import { useNotification } from './hooks/useNotification';
 import { Loading } from './Loading';
@@ -16,6 +17,8 @@ export const Login = () => {
 
   const { sendNotification, closeNotification } = useNotification();
 
+  const navigate = useNavigate();
+
   const login = async (e: FormEvent) => {
     e.preventDefault();
     closeNotification();
@@ -29,13 +32,21 @@ export const Login = () => {
 
     const queriesUser = new QueriesUser();
     const { email, password } = values;
-    const { error } = await queriesUser.login({ email, password });
+    const { error, token } = await queriesUser.login({ email, password });
 
     setIsloading(false);
 
     if (error) return sendNotification('error', error);
 
-    // todo > send user to index page
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        token,
+        email,
+      })
+    );
+
+    navigate('/index');
   };
 
   return (
