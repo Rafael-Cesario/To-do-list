@@ -1,7 +1,10 @@
 import { FormEvent, useState } from 'react';
 import { Field, FieldPassword } from './Field';
+import { useNotification } from './hooks/useNotification';
 import { Loading } from './Loading';
 import { StyledForm } from './styles/StyledForm';
+import { QueriesUser } from './utils/queriesUser';
+import { searchEmptyValues } from './utils/searchEmptyValues';
 
 export const Login = () => {
   const defaultValues = { email: '', password: '' };
@@ -11,9 +14,28 @@ export const Login = () => {
   const [labelError, setLabelError] = useState(defaultLabelError);
   const [isLoading, setIsloading] = useState(false);
 
-  const login = (e: FormEvent) => {
+  const { sendNotification, closeNotification } = useNotification();
+
+  const login = async (e: FormEvent) => {
     e.preventDefault();
-    console.log({ values });
+    closeNotification();
+
+    const hasEmptyValues = searchEmptyValues(values);
+    if (hasEmptyValues) return setLabelError({ ...defaultLabelError, ...hasEmptyValues });
+
+    setLabelError(defaultLabelError);
+
+    setIsloading(true);
+
+    const queriesUser = new QueriesUser();
+    const { email, password } = values;
+    const { error } = await queriesUser.login({ email, password });
+
+    setIsloading(false);
+
+    if (error) return sendNotification('error', error);
+
+    // todo > send user to index page
   };
 
   return (
@@ -38,6 +60,3 @@ export const Login = () => {
     </StyledForm>
   );
 };
-
-// todo > login function
-// todo > show and hide password
