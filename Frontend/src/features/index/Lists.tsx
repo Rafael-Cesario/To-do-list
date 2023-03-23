@@ -1,41 +1,27 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Store } from '../../utils/store';
 import { StyledLists } from './styles/StyledLists';
 
 export const Lists = () => {
+  const { filter } = useSelector((state: Store) => state.filter);
+
+  const lists: string[] = ['list01', 'list02', 'list03'];
+
+  const filtredLists = lists.filter((list) => {
+    if (!filter) return list;
+    if (list.toLowerCase().includes(filter.toLowerCase())) return list;
+  });
+
   return (
     <StyledLists>
       <h1 className="title">Listas</h1>
 
-      <Link className="list" to={'/:listName'}>
-        THis is a name for a list
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        this is another list
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        this is a list
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        hello list
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        ListName
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        ListName
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        ListName
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        ListName
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        ListName
-      </Link>
-      <Link className="list" to={'/:listName'}>
-        ListName
-      </Link>
+      {filtredLists.map((list, index) => (
+        <Link key={list + index} className="list" to={`/:${list}`}>
+          {list}
+        </Link>
+      ))}
     </StyledLists>
   );
 };
