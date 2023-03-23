@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyledHeader = styled.div`
+  grid-column: 1/span 3;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
