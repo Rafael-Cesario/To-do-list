@@ -9,6 +9,17 @@ export const StyledNotification = styled.div`
   padding: 1rem;
   background-color: ${colors.backgroundBlack};
   min-width: 30vw;
+  animation: notification 0.3s ease-out both;
+
+  @keyframes notification {
+    from {
+      transform: translate(0, -10rem);
+    }
+
+    to {
+      transform: translate(0, 0);
+    }
+  }
 
   .header {
     display: flex;
@@ -16,8 +27,8 @@ export const StyledNotification = styled.div`
     justify-content: space-between;
     font-weight: bold;
 
-    .type {
-      text-transform: capitalize;
+    .type ::first-letter {
+      text-transform: uppercase;
     }
   }
 
@@ -40,7 +51,7 @@ export const StyledNotification = styled.div`
   }
 
   .error {
-    color: crimson;
+    color: #eb2626;
   }
 
   .success {

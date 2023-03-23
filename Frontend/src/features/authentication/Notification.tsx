@@ -5,8 +5,8 @@ export const Notification = () => {
   const { notification, closeNotification } = useNotification();
 
   const types = {
-    error: 'erro',
-    success: 'Sucesso',
+    error: '\u274c Ops, algo deu errado',
+    success: `\u2713 Sucesso`,
   };
 
   const type = types[notification.type as keyof typeof types];
