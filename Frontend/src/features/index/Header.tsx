@@ -3,7 +3,14 @@ import { Store } from '../../utils/store';
 import { StyledHeader } from './styles/StyledHeader';
 import { filterSlice } from './utils/filterSlice';
 
-export const Header = () => {
+interface Props {
+  props: {
+    showCreateNewList: boolean;
+    setShowCreateNewList: (newState: boolean) => void;
+  };
+}
+
+export const Header = ({ props: { showCreateNewList, setShowCreateNewList } }: Props) => {
   const { filter } = useSelector((state: Store) => state.filter);
   const dispatch = useDispatch();
 
@@ -15,7 +22,7 @@ export const Header = () => {
     <StyledHeader>
       <div className="menu">
         <button className="perfil">Perfil</button>
-        <button>Criar nova lista</button>
+        <button onClick={() => setShowCreateNewList(!showCreateNewList)}>Criar nova lista</button>
       </div>
 
       <input onChange={(e) => setFilter(e.target.value)} className="search" type="text" placeholder="Busque por uma lista..." value={filter} />

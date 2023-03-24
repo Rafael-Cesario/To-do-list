@@ -14,6 +14,17 @@ export const StyledCreateNewList = styled.div`
   margin-top: 2rem;
   width: 100%;
   max-width: 800px;
+  animation: show 0.2s both;
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
 
   .title {
     position: absolute;
