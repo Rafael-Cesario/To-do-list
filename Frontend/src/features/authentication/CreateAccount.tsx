@@ -3,7 +3,7 @@ import { searchEmptyValues } from './utils/searchEmptyValues';
 import { validateValues } from './utils/validateValues';
 import { StyledForm } from './styles/StyledForm';
 import { QueriesUser } from './utils/queriesUser';
-import { useNotification } from './hooks/useNotification';
+import { useNotification } from '../../utils/hooks/useNotification';
 import { Loading } from './Loading';
 import { Field, FieldPassword } from './Field';
 

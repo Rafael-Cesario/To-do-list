@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Field, FieldPassword } from './Field';
-import { useNotification } from './hooks/useNotification';
+import { useNotification } from '../../utils/hooks/useNotification';
 import { Loading } from './Loading';
 import { StyledForm } from './styles/StyledForm';
 import { QueriesUser } from './utils/queriesUser';

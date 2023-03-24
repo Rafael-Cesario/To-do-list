@@ -1,5 +1,5 @@
 import { StyledNotification } from './styles/StyledNotification';
-import { useNotification } from './hooks/useNotification';
+import { useNotification } from '../../utils/hooks/useNotification';
 
 export const Notification = () => {
   const { notification, closeNotification } = useNotification();

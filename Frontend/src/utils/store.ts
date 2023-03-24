@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { notificationSlice } from '../features/authentication/utils/notificationSlice';
+import { notificationSlice } from './notificationSlice';
 import { filterSlice } from '../features/index/utils/filterSlice';
 
 export const store = configureStore({

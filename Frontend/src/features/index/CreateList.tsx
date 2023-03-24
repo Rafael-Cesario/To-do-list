@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNotification } from '../../utils/hooks/useNotification';
 import { StyleCreateList } from './styles/StyledCreateList';
 
 interface Props {
@@ -8,10 +9,11 @@ interface Props {
 }
 
 export const CreateList = ({ props: { setShowCreateNewList } }: Props) => {
+  const { sendNotification } = useNotification();
   const [listName, setListName] = useState('');
 
   const createList = () => {
-    console.log({ listName });
+    if (!listName) return sendNotification('error', 'Sua lista precisa de um nome');
   };
 
   return (
