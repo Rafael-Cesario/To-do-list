@@ -46,6 +46,7 @@ export const StyledNotification = styled.div`
     color: #ddd;
     cursor: pointer;
     transition: 0.1s ease-in;
+    font-size: 1.1rem;
 
     :hover {
       transform: scale(1.5);
