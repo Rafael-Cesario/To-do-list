@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNotification } from '../../utils/hooks/useNotification';
-import { QueriesLists } from '../../utils/queries/queriesLists';
+import { useQueriesList } from '../../utils/hooks/useQueriesList';
 import { StyleCreateList } from './styles/StyledCreateList';
 import { sliceLists } from './utils/sliceLists';
 
@@ -15,6 +15,7 @@ export const CreateList = ({ props: { setShowCreateNewList } }: Props) => {
   const dispatch = useDispatch();
   const [listName, setListName] = useState('');
   const { sendNotification } = useNotification();
+  const { requestCreateList } = useQueriesList();
 
   const createList = async () => {
     if (!listName) return sendNotification('error', 'Sua lista precisa de um nome');
@@ -22,9 +23,8 @@ export const CreateList = ({ props: { setShowCreateNewList } }: Props) => {
     // todo > create a object to hold all the keys for your localStorage.
     // todo > create a hook useStorage.
     const storage = JSON.parse(localStorage.getItem('user') || '') as { email: string; token: string };
-    const queriesList = new QueriesLists();
     const email = storage.email;
-    const { error } = await queriesList.createList({ email, listName });
+    const { error } = await requestCreateList({ email, listName });
     if (error) return sendNotification('error', error);
 
     dispatch(sliceLists.actions.createList({ listName }));

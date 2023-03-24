@@ -12,8 +12,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <ReduxProvider store={store}>
-        <GlobalStyle />
         <RouterProvider router={Router} />
+        <GlobalStyle />
       </ReduxProvider>
     </ApolloProvider>
   </React.StrictMode>
