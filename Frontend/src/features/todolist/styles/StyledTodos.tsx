@@ -3,6 +3,7 @@ import { colors } from '../../../styles/palette';
 
 export const StyledTodos = styled.div`
   margin-top: 5rem;
+  grid-column: 1 / span 2;
 
   .create-todo {
     margin-bottom: 5rem;

@@ -4,6 +4,7 @@ import { colors } from '../../../styles/palette';
 export const StyledHeader = styled.header`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-column: 1 / span 2;
 
   .title {
     font-size: 1.5rem;
@@ -21,7 +22,7 @@ export const StyledHeader = styled.header`
     border-radius: 3px;
     cursor: pointer;
     color: #ddd;
-    background-color: ${colors.backgroundBlue};
+    background-color: ${colors.backgroundBlack};
 
     :hover {
       color: #111;
