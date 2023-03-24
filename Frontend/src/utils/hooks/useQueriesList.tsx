@@ -8,11 +8,12 @@ import { useEffect, useState } from 'react';
 import { sliceLists } from '../../features/index/utils/sliceLists';
 
 export const useQueriesList = () => {
-  const dispatch = useDispatch();
-  const [mutationCreateList] = useMutation(CREATE_LIST);
   const [email, setEmail] = useState('');
-  const { lists } = useSelector((state: Store) => state.lists);
   const { data, loading, error } = useQuery(READ_LISTS, { variables: { email } });
+  const [mutationCreateList] = useMutation(CREATE_LIST);
+
+  const { lists } = useSelector((state: Store) => state.lists);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('user') || '');

@@ -30,7 +30,7 @@ export const Lists = () => {
       <Loading isLoading={loading} />
 
       {filtredLists.map((list, index) => (
-        <Link key={list + index} className="list" to={`/:${list}`}>
+        <Link key={list + index} className="list" to={`/${list}`}>
           {list}
         </Link>
       ))}

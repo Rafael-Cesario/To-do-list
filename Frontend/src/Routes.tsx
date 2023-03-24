@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from 'react-rout
 import Index from './pages';
 import Authentication from './pages/Authentication';
 import NotFound from './pages/NotFound';
+import TodoList from './pages/TodoList';
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -9,6 +10,7 @@ const Router = createBrowserRouter(
       <Route path={'*'} element={<NotFound />} />
       <Route path={'/'} element={<Authentication />} />
       <Route path={'/index'} element={<Index />} />
+      <Route path={'/:listName'} element={<TodoList />} />
     </Route>
   )
 );
