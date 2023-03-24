@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { errors } from '../../../utils/requestErrors';
 import { client } from '../../../client';
 import { InputCreateUser, CREATE_USER, InputLogin, LOGIN } from '../interfaces/interfacesQueriesUser';
 
@@ -8,12 +9,6 @@ import { InputCreateUser, CREATE_USER, InputLogin, LOGIN } from '../interfaces/i
 //   duplicatedUser: string;
 //   invalidCredentials: string;
 // }
-
-const errors = {
-  default: 'Um erro inesperado ocorreu, por favor recarregue a página e tente novamente',
-  'Failure: This user already exist': 'Este usuario já existe',
-  'Failure: Invalid credentials': 'Email ou senha incorretos, verifique e tente novamente.',
-};
 
 export class QueriesUser {
   async createUser(createUser: InputCreateUser) {

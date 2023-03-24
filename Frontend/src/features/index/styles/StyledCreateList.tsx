@@ -3,7 +3,7 @@ import { colors } from '../../../styles/palette';
 
 export const StyleCreateList = styled.div`
   justify-self: center;
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 2;
   height: fit-content;
   background-color: ${colors.backgroundBlack};
   position: relative;
