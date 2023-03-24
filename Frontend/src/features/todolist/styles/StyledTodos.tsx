@@ -8,10 +8,10 @@ export const StyledTodos = styled.div`
   max-width: 1000px;
   align-self: center;
 
-
   .todos {
     background-color: ${colors.backgroundBlack};
     padding: 2rem;
+    position: relative;
 
     .todo {
       overflow: hidden;
@@ -34,6 +34,16 @@ export const StyledTodos = styled.div`
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: #ddd;
+        text-align: start;
+        cursor: pointer;
+
+        ::first-letter {
+          text-transform: capitalize;
+        }
       }
     }
 
