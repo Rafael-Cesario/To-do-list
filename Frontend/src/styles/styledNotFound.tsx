@@ -12,12 +12,15 @@ export const StyledNotFound = styled.div`
     color: dodgerblue;
   }
 
-  a {
+  button {
     margin: 2rem 0;
+    border: none;
+    outline: none;
     background-color: dodgerblue;
     padding: 0.5rem 3rem;
     text-decoration: none;
-    font-weight: bold;
     color: #111;
+    font-weight: bold;
+    border-radius: 3px;
   }
 `;
