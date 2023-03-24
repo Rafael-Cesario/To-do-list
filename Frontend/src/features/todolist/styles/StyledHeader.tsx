@@ -14,7 +14,11 @@ export const StyledHeader = styled.header`
     color: #aaa;
   }
 
-  .configs {
+  .configs,
+  a {
+    margin-right: 1rem;
+    font-size: 0.8rem;
+    text-decoration: none;
     outline: none;
     border: none;
     padding: 5px 10px;

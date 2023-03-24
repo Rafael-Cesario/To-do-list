@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { StyledHeader } from './styles/StyledHeader';
 
 export const Header = () => {
@@ -14,9 +14,10 @@ export const Header = () => {
         <span className="total-words">{totalTodos} Tarefas</span>
       </div>
 
-      <div className='menu'>
+      <div className="menu">
+        <Link to={'/index'}>Listas</Link>
         <button className="configs">Configs</button>
-        <input className='search' type="text" placeholder="Busque por uma tag, tarefa, ou status" />
+        <input className="search" type="text" placeholder="Busque por uma tag, tarefa, ou status" />
       </div>
     </StyledHeader>
   );

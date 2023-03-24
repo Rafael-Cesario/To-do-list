@@ -1,31 +1,16 @@
+import { CreateTodo } from './createTodo';
 import { StyledTodos } from './styles/StyledTodos';
 
 export const Todos = () => {
-  const todos = [
-    {
-      task: 'lloremloremloremloremloremloremloremloremloremloremoloremloremloremloremloremloremre    loremloremloremloremloremloremlorem loremloremloremlorem loremloremloremloremloremlorem loremloremloremloremloremloremm loremloremloremloremloremloremlorem lorem lorem lorem loremlorem lorem lorem lorem lorem lorem ',
-      status: 'done',
-    },
-
-    {
-      task: 'lloremloremloremloremloremloremloremloremloremloremoloremloremloremloremloremloremre    loremloremloremloremloremloremlorem loremloremloremlorem loremloremloremloremloremlorem loremloremloremloremloremloremm loremloremloremloremloremloremlorem lorem lorem lorem loremlorem lorem lorem lorem lorem lorem ',
-      status: 'current',
-    },
-
-    {
-      task: 'lloremloremloremloremloremloremloremloremloremloremoloremloremloremloremloremloremre    loremloremloremloremloremloremlorem loremloremloremlorem loremloremloremloremloremlorem loremloremloremloremloremloremm loremloremloremloremloremloremlorem lorem lorem lorem loremlorem lorem lorem lorem lorem lorem ',
-      status: 'next',
-    },
-  ];
+  const todos: { task: string; status: string }[] = [];
 
   return (
     <StyledTodos>
-      <div className="create-todo">
-        <input type="text" className="input-todo" placeholder="..............." />
-        <button className="submit-todo">Criar tarefa</button>
-      </div>
+      <CreateTodo />
 
       <div className="todos">
+        {todos.length || <p>Suas tarefas apareceram aqui.</p>}
+
         {todos.map((todo, index) => (
           <div key={todo.task + index} className={`todo ${todo.status}`}>
             <button className={`status`} data-status={todo.status} />
