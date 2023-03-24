@@ -16,7 +16,7 @@ export const StyledLoading = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    animation: loading 1s infinite;
+    animation: loading 2s infinite;
 
     @keyframes loading {
       from {
