@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../utils/store';
 import { StyledHeader } from './styles/StyledHeader';
-import { filterSlice } from './utils/filterSlice';
+import { sliceFilter } from './utils/sliceFilter';
 
 interface Props {
   props: {
@@ -15,7 +15,7 @@ export const Header = ({ props: { showCreateNewList, setShowCreateNewList } }: P
   const dispatch = useDispatch();
 
   const setFilter = (filter: string) => {
-    dispatch(filterSlice.actions.changeFilter({ filter }));
+    dispatch(sliceFilter.actions.changeFilter({ filter }));
   };
 
   return (

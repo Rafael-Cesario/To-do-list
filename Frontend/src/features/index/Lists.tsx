@@ -6,7 +6,7 @@ import { StyledLists } from './styles/StyledLists';
 export const Lists = () => {
   const { filter } = useSelector((state: Store) => state.filter);
 
-  const lists: string[] = ['list01', 'list02', 'list03'];
+  const { lists } = useSelector((state: Store) => state.lists);
 
   const filtredLists = lists.filter((list) => {
     if (!filter) return list;

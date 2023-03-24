@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNotification } from '../../utils/hooks/useNotification';
 import { QueriesLists } from '../../utils/queries/queriesLists';
 import { StyleCreateList } from './styles/StyledCreateList';
+import { sliceLists } from './utils/sliceLists';
 
 interface Props {
   props: {
@@ -10,8 +12,9 @@ interface Props {
 }
 
 export const CreateList = ({ props: { setShowCreateNewList } }: Props) => {
-  const { sendNotification } = useNotification();
+  const dispatch = useDispatch();
   const [listName, setListName] = useState('');
+  const { sendNotification } = useNotification();
 
   const createList = async () => {
     if (!listName) return sendNotification('error', 'Sua lista precisa de um nome');
@@ -24,6 +27,7 @@ export const CreateList = ({ props: { setShowCreateNewList } }: Props) => {
     const { error } = await queriesList.createList({ email, listName });
     if (error) return sendNotification('error', error);
 
+    dispatch(sliceLists.actions.createList({ listName }));
     sendNotification('success', 'Uma nova lista foi criada');
     setListName('');
   };
