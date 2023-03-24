@@ -10,6 +10,8 @@ export const Details = () => {
   const { sendNotification } = useNotification();
 
   const addTag = () => {
+    if (!tagName) return;
+
     const hasTag = tags.filter((tag) => tag.toLowerCase() === tagName.toLowerCase()).length;
     if (hasTag) return sendNotification('error', 'Uma tag com o mesmo nome já existe.');
 
