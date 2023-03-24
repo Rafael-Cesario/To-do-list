@@ -7,9 +7,11 @@ export const StyledNotification = styled.div`
   left: 0;
   margin: 1rem;
   padding: 1rem;
+  width: 30rem;
+  max-width: 70vw;
   background-color: ${colors.backgroundBlack};
-  min-width: 30vw;
   animation: notification 0.3s ease-out both;
+  z-index: 1;
 
   @keyframes notification {
     from {
