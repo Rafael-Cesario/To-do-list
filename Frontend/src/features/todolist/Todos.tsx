@@ -3,7 +3,19 @@ import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
 import { CreateTodo } from './createTodo';
 import { StyledTodos } from './styles/StyledTodos';
 
-export const Todos = () => {
+interface Props {
+  props: {
+    showDetails: { isOpen: boolean; todoIndex: number };
+    setShowDetails: React.Dispatch<
+      React.SetStateAction<{
+        isOpen: boolean;
+        todoIndex: number;
+      }>
+    >;
+  };
+}
+
+export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
   const { todos, error } = useQueriesTodos();
   const { sendNotification } = useNotification();
 
@@ -17,7 +29,11 @@ export const Todos = () => {
         {todos.length < 1 && <p>Suas tarefas apareceram aqui.</p>}
 
         {todos.map((todo, index) => (
-          <div key={todo.task + index} className={`todo ${todo.status}`} data-id={todo.id}>
+          <div
+            key={todo.task + index}
+            className={`todo ${todo.status}`}
+            data-id={todo.id}
+            onClick={() => setShowDetails({ isOpen: !showDetails.isOpen, todoIndex: index })}>
             <div className={`status`} data-status={todo.status} />
             <button className={`task`}>{todo.task}</button>
           </div>

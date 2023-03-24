@@ -8,14 +8,14 @@ import { StyledTodoList } from '../styles/StyledTodoList';
 
 const TodoList = () => {
   const { notification } = useNotification();
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState({ isOpen: false, todoIndex: 0 });
 
   return (
     <StyledTodoList>
       <Header />
-      <Todos />
+      <Todos props={{ setShowDetails, showDetails }} />
 
-      {showDetails && <Details />}
+      {showDetails.isOpen && <Details props={{ setShowDetails, showDetails }} />}
       {notification.isOpen && <Notification />}
     </StyledTodoList>
   );

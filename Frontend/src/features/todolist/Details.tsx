@@ -1,13 +1,37 @@
 import produce from 'immer';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNotification } from '../../utils/hooks/useNotification';
+import { Store } from '../../utils/store';
 import { StyledDetails } from './styles/StyledDetails';
 
-export const Details = () => {
+interface Props {
+  props: {
+    showDetails: { isOpen: boolean; todoIndex: number };
+    setShowDetails: React.Dispatch<
+      React.SetStateAction<{
+        isOpen: boolean;
+        todoIndex: number;
+      }>
+    >;
+  };
+}
+
+export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
   const [tags, setTags] = useState<string[]>([]);
   const [tagName, setTagName] = useState('');
 
   const { sendNotification } = useNotification();
+
+  const statusMap = {
+    next: 'Próximas',
+    current: 'Em progresso',
+    done: 'Finalizada',
+  };
+
+  const { todos } = useSelector((state: Store) => state.todos);
+  const currentTodo = todos[showDetails.todoIndex];
+  const status = statusMap[currentTodo.status as keyof typeof statusMap];
 
   const addTag = () => {
     if (!tagName) return;
@@ -35,12 +59,14 @@ export const Details = () => {
   return (
     <StyledDetails>
       <div className="tab">
-        <button className="close">x</button>
+        <button onClick={() => setShowDetails({ isOpen: false, todoIndex: 0 })} className="close">
+          x
+        </button>
       </div>
 
       <div className="details">
-        <h1 className="task">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, quam?</h1>
-        <span className="status">Status: done</span>
+        <h1 className="task">{currentTodo.task}</h1>
+        <span className="status">Status: {status}</span>
 
         <div className="tags">
           <h2>Tags</h2>

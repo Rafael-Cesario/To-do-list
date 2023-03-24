@@ -56,6 +56,10 @@ export const StyledDetails = styled.div`
     h1,
     h2 {
       font-size: 1rem;
+
+      ::first-letter {
+        text-transform: capitalize;
+      }
     }
 
     textarea {
