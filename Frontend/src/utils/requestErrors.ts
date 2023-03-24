@@ -1,3 +1,5 @@
+// todo > create a interface with better key names.
+
 export const errors = {
   default: 'Um erro inesperado ocorreu, por favor recarregue a página e tente novamente',
   'Failure: This user already exist': 'Este usuario já existe',

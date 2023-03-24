@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom';
+import { Header } from '../features/todolist/Header';
+import { Todos } from '../features/todolist/Todos';
 
 const TodoList = () => {
-  const { listName } = useParams();
-
   return (
     <>
-      <h1>{listName}</h1>
+      <Header />
+      <Todos />
     </>
   );
 };
