@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
-export const StyledCreateNewList = styled.div`
+export const StyleCreateList = styled.div`
   justify-self: center;
   grid-column: 1 / span 3;
   height: fit-content;

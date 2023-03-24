@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CreateNewList } from '../features/index/CreateNewList';
+import { CreateList } from '../features/index/CreateList';
 import { Header } from '../features/index/Header';
 import { Lists } from '../features/index/Lists';
 import { StyledIndex } from '../features/index/styles/StyledIndex';
@@ -10,7 +10,7 @@ const Index = () => {
   return (
     <StyledIndex>
       <Header props={{ showCreateNewList, setShowCreateNewList }} />
-      {showCreateNewList && <CreateNewList />}
+      {showCreateNewList && <CreateList props={{ setShowCreateNewList }} />}
       <Lists />
     </StyledIndex>
   );
