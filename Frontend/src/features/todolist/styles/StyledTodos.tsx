@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyledTodos = styled.div`
+  margin: 2rem;
   margin-top: 5rem;
-  grid-column: 1 / span 2;
+  width: 90vw;
+  max-width: 1000px;
+  align-self: center;
 
   .create-todo {
     margin-bottom: 5rem;

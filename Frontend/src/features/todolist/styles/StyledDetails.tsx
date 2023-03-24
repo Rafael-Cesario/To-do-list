@@ -2,12 +2,23 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyledDetails = styled.div`
-  grid-row: 1 / span 2;
-  grid-column: 3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
   background-color: ${colors.backgroundBlack};
-  min-height: 90vh;
+  min-height: 95vh;
   border-radius: 3px;
   overflow: hidden;
+  animation: show 0.5s ease-out;
+  width: 50vw;
+  min-width: 350px;
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+  }
 
   button {
     outline: none;
@@ -40,7 +51,7 @@ export const StyledDetails = styled.div`
   }
 
   .details {
-    padding: 1rem;
+    padding: 2rem 4rem;
 
     h1,
     h2 {
@@ -78,7 +89,6 @@ export const StyledDetails = styled.div`
     }
 
     .container {
-      /* padding: 0.5rem 0; */
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -100,6 +110,7 @@ export const StyledDetails = styled.div`
 
         .remove-tag {
           width: fit-content;
+          margin-left: 0.5rem;
 
           :hover {
             color: crimson;

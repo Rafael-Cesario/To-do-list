@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyledHeader = styled.header`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column: 1 / span 2;
+  display: flex;
+  justify-content: space-between;
 
   .title {
     font-size: 1.5rem;
@@ -40,7 +39,9 @@ export const StyledHeader = styled.header`
     border: none;
     background-color: ${colors.backgroundBlack};
     padding: 5px 20px;
-    width: 100%;
+    width: 30vw;
+    min-width: 100px;
+    max-width: 500px;
     height: fit-content;
     color: #ddd;
 
