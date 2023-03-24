@@ -6,22 +6,16 @@ import { v4 as uuidV4 } from 'uuid';
 
 export const CreateTodo = () => {
   const [task, setTask] = useState('');
-  const { sendNotification, closeNotification } = useNotification();
+  const { sendNotification } = useNotification();
   const { requestCreateTodo } = useQueriesTodos();
 
   const createTodo = async () => {
     if (!task) return sendNotification('error', 'Não posso criar uma tarefa vazia');
 
-    const { error } = await requestCreateTodo({
-      id: uuidV4(),
-      task,
-    });
-
+    const { error } = await requestCreateTodo({ id: uuidV4(), task });
     if (error) return sendNotification('error', error);
 
-    // todo > dispatch new task
-
-    closeNotification();
+    sendNotification('success', 'Sua nova tarefa foi adicionada ao fim da lista');
     setTask('');
   };
 
