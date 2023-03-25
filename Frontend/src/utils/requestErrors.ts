@@ -7,5 +7,5 @@ export const errors = {
   'Failure: This list already exist': 'Uma lista com o mesmo nome já existe.',
   'Failure: Wrong email, user not found':
     'Um erro referente ao seu email ocorreu, se o erro persistir, por favor saia e entre novamente em sua conta',
-  'Failure: Task was not provided': 'Sua tarefa não pode ficar vazia',
+  'Failure: Task was not provided': 'Sua tarefa está vazia',
 };
