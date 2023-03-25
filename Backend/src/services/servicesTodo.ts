@@ -1,12 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GraphQLError } from 'graphql';
-import {
-	InputCreateTodo,
-	InputDeleteTodo,
-	InputReadTodos,
-	InputRenameTodo,
-	InputUpdateStatus,
-} from '../interfaces/interfacesTodo';
+import { InputCreateTodo, InputDeleteTodo, InputReadTodos, InputRenameTodo, InputUpdateStatus, InputUpdateTodo } from '../interfaces/interfacesTodo';
 import { ModelList } from '../models/modelList';
 import { ModelTodo } from '../models/modelTodo';
 import { ModelUser } from '../models/modelUser';
@@ -107,6 +101,25 @@ export class ServicesTodo {
 			await todo.save();
 
 			return { message: 'Success: Status updated' };
+		} catch (error: any) {
+			throw new GraphQLError(error.message);
+		}
+	}
+
+	async updateTodo(updateTodo: InputUpdateTodo) {
+		try {
+			const { email, listName, id } = updateTodo;
+
+			const error = await this.validateValues(updateTodo, email, listName);
+			if (error) throw new Error(error);
+
+			const todo = await ModelTodo.findOne({ id });
+			if (!todo) throw new Error('Failure: Todo not found');
+
+			todo.updateOne({ ...updateTodo });
+			todo.save();
+
+			await todo.save();
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}

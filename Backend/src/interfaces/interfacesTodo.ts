@@ -29,3 +29,12 @@ export interface InputUpdateStatus {
 	id: string;
 	newStatus: string;
 }
+
+export interface InputUpdateTodo {
+	email: string;
+	listName: string;
+	id: string;
+	task: string;
+	status: string;
+	tags: string[];
+}
