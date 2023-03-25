@@ -39,6 +39,15 @@ export interface InputUpdateStatus {
   newStatus: string;
 }
 
+export interface InputUpdateTodo {
+  email: string;
+  listName: string;
+  id: string;
+  task: string;
+  status: string;
+  tags: string[];
+}
+
 export const CREATE_TODO = gql`
   mutation CreateTodo($createTodo: InputCreateTodo!) {
     createTodo(createTodo: $createTodo) {
@@ -78,6 +87,17 @@ export const UPDATE_STATUS = gql`
   mutation UpdateStatus($updateStatus: InputUpdateStatus!) {
     updateStatus(updateStatus: $updateStatus) {
       message
+    }
+  }
+`;
+
+export const UPDATE_TODO = gql`
+  mutation UpdateTodo($updateTodo: InputUpdateTodo!) {
+    updateTodo(updateTodo: $updateTodo) {
+      id
+      task
+      status
+      tags
     }
   }
 `;
