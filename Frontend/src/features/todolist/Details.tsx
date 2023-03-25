@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useNotification } from '../../utils/hooks/useNotification';
 import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
+import { UserStorage } from '../../utils/localStorageKeys';
 import { Store } from '../../utils/store';
 import { StyledDetails } from './styles/StyledDetails';
 import { Tags } from './Tags';
@@ -20,6 +22,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
     done: 'Finalizada',
   };
 
+  const { listName } = useParams();
   const { todos } = useSelector((state: Store) => state.todos);
   const currentTodo = todos[showDetails.todoIndex] || { status: 'done' };
   const status = statusMap[currentTodo.status as keyof typeof statusMap];
@@ -29,7 +32,15 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
   const { sendNotification } = useNotification();
 
   const deleteTodo = async () => {
-    const { error } = await requestDeleteTodo(currentTodo.id);
+    const userStorage = new UserStorage();
+    const { email } = userStorage.readData();
+
+    const { error } = await requestDeleteTodo({
+      email,
+      id: currentTodo.id,
+      listName: listName || '',
+    });
+
     if (error) return sendNotification('error', error);
 
     sendNotification('success', 'Sua tarefa foi excluida');
