@@ -1,7 +1,15 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { client } from '../../client';
 import { useNotification } from '../../utils/hooks/useNotification';
-import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
+import { InputReadTodos, READ_TODOS } from '../../utils/interfaces/interfaceQueriesTodos';
+import { localStorageKeys } from '../../utils/localStorageKeys';
+import { errors } from '../../utils/requestErrors';
+import { Store } from '../../utils/store';
 import { CreateTodo } from './createTodo';
 import { StyledTodos } from './styles/StyledTodos';
+import { sliceTodos } from './utils/sliceTodos';
 
 interface Props {
   props: {
@@ -16,10 +24,33 @@ interface Props {
 }
 
 export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
-  const { todos, error } = useQueriesTodos();
+  const { todos } = useSelector((state: Store) => state.todos);
+  const { listName } = useParams();
   const { sendNotification } = useNotification();
+  const dispatch = useDispatch();
 
-  if (error) sendNotification('error', error.message);
+  const loadTodos = async () => {
+    try {
+      const storage = JSON.parse(localStorage.getItem(localStorageKeys.user) || '');
+      const readTodos: InputReadTodos = { email: storage.email, listName: listName || '' };
+
+      const { data } = await client.query({
+        query: READ_TODOS,
+        variables: { readTodos },
+      });
+
+      const todos = data?.readTodos || [];
+      dispatch(sliceTodos.actions.loadTodos({ todos }));
+    } catch (error: any) {
+      console.log({ error: error.message });
+      const errorMessage = errors[error.message as keyof typeof errors];
+      sendNotification('error', errorMessage || errors.default);
+    }
+  };
+
+  useEffect(() => {
+    loadTodos();
+  }, []);
 
   return (
     <StyledTodos>
