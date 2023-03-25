@@ -13,6 +13,11 @@ export const sliceTodos = createSlice({
       state.todos.push(action.payload.todo);
     },
 
+    deleteTodo: (state, action: { payload: { id: string } }) => {
+      const todoIndex = state.todos.findIndex((todo) => todo.id === action.payload.id);
+      state.todos.splice(todoIndex, 1);
+    },
+
     loadTodos: (state, action: { payload: { todos: ITodoModel[] } }) => {
       state.todos = action.payload.todos;
     },

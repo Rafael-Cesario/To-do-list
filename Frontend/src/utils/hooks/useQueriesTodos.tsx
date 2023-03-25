@@ -4,49 +4,39 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { CREATE_TODO, READ_TODOS, InputReadTodos, ITodoModel } from '../interfaces/interfaceQueriesTodos';
 import { localStorageKeys } from '../localStorageKeys';
 import { errors } from '../requestErrors';
 import { Store } from '../store';
+import {
+  CREATE_TODO,
+  READ_TODOS,
+  InputReadTodos,
+  ITodoModel,
+  InputDeleteTodo,
+  DELETE_TODO,
+} from '../interfaces/interfaceQueriesTodos';
 
 export const useQueriesTodos = () => {
-  const [email, setEmail] = useState('');
-  const { listName } = useParams();
-  const [mutationCreateTodo] = useMutation(CREATE_TODO);
-
   const { todos } = useSelector((state: Store) => state.todos);
+  const { listName } = useParams();
+  const [email, setEmail] = useState('');
+
+  const { data, error, loading } = useQuery<
+    { readTodos: ITodoModel[] },
+    { readTodos: InputReadTodos }
+  >(READ_TODOS, { variables: { readTodos: { email, listName: listName ?? '' } } });
+
   const dispatch = useDispatch();
+  const [mutationCreateTodo] = useMutation(CREATE_TODO);
+  const [mutationDeleteTodo] = useMutation(DELETE_TODO);
 
-  useEffect(() => {
-    const storage: { email: string } = JSON.parse(localStorage.getItem(localStorageKeys.user) || '');
-    setEmail(storage.email);
-  }, []);
-
-  const { data, error, loading } = useQuery<{ readTodos: ITodoModel[] }, { readTodos: InputReadTodos }>(READ_TODOS, {
-    variables: {
-      readTodos: {
-        email,
-        listName: listName ?? '',
-      },
-    },
-  });
-
-  useEffect(() => {
-    const todos = data?.readTodos || [];
-    dispatch(sliceTodos.actions.loadTodos({ todos }));
-  }, [data]);
-
-  const requestCreateTodo = async (createTodo: { id: string; task: string }) => {
+  const requestCreateTodo = async ({ id, task }: { id: string; task: string }) => {
     try {
-      const { data } = await mutationCreateTodo({
-        variables: { createTodo: { ...createTodo, email, listName } },
-      });
+      const createTodo = { id, task, email, listName };
+      const { data } = await mutationCreateTodo({ variables: { createTodo } });
 
-      dispatch(
-        sliceTodos.actions.createTodo({
-          todo: { ...createTodo, tags: [], status: 'next' },
-        })
-      );
+      const todo = { id, task, tags: [], status: 'next' };
+      dispatch(sliceTodos.actions.createTodo({ todo }));
 
       return { data };
     } catch (error: any) {
@@ -56,5 +46,39 @@ export const useQueriesTodos = () => {
     }
   };
 
-  return { requestCreateTodo, error, loading, todos };
+  const requestDeleteTodo = async (id: string) => {
+    try {
+      const deleteTodo: InputDeleteTodo = { email, listName: listName || '', id };
+      const { data } = await mutationDeleteTodo({ variables: { deleteTodo } });
+
+      dispatch(sliceTodos.actions.deleteTodo({ id }));
+
+      return { data };
+    } catch (error: any) {
+      console.log({ error: error.message });
+      const errorMessage = errors[error.message as keyof typeof errors];
+      return { error: errorMessage ?? errors.default };
+    }
+  };
+
+  useEffect(() => {
+    const storage: { email: string } = JSON.parse(
+      localStorage.getItem(localStorageKeys.user) || ''
+    );
+
+    setEmail(storage.email);
+  }, []);
+
+  useEffect(() => {
+    const todos = data?.readTodos || [];
+    dispatch(sliceTodos.actions.loadTodos({ todos }));
+  }, [data]);
+
+  return {
+    todos,
+    loading,
+    error,
+    requestCreateTodo,
+    requestDeleteTodo,
+  };
 };
