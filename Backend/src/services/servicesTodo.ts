@@ -116,10 +116,8 @@ export class ServicesTodo {
 			const todo = await ModelTodo.findOne({ id });
 			if (!todo) throw new Error('Failure: Todo not found');
 
-			todo.updateOne({ ...updateTodo });
-			todo.save();
-
-			await todo.save();
+			await todo.updateOne({ ...updateTodo });
+			return todo;
 		} catch (error: any) {
 			throw new GraphQLError(error.message);
 		}

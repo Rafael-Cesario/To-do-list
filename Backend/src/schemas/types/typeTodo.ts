@@ -1,5 +1,5 @@
 export const TodoTypeDef = `#graphql
-    type Todo {
+    type TypeTodo {
         id: String!
         task: String!
         status: String!
@@ -38,8 +38,17 @@ export const TodoTypeDef = `#graphql
         newStatus: String!
     }
 
+    input InputUpdateTodo {
+        email: String!
+        listName: String!
+        id: String!
+        task: String!
+        status: String!
+        tags: [String]!
+    }
+
     type Query {
-        readTodos(readTodos: InputReadTodos!): [Todo]!
+        readTodos(readTodos: InputReadTodos!): [TypeTodo]!
     }
 
     type Mutation {
@@ -47,5 +56,6 @@ export const TodoTypeDef = `#graphql
         renameTodo(renameTodo: InputRenameTodo!): TypeMessage!
         deleteTodo(deleteTodo: InputDeleteTodo!): TypeMessage!
         updateStatus(updateStatus: InputUpdateStatus!): TypeMessage!
+        updateTodo(updateTodo: InputUpdateTodo!): TypeTodo!
     }
 `;
