@@ -54,7 +54,8 @@ export const StyledDetails = styled.div`
     padding: 2rem 4rem;
 
     h1,
-    h2 {
+    h2,
+    input {
       font-size: 1rem;
 
       ::first-letter {
@@ -84,12 +85,27 @@ export const StyledDetails = styled.div`
 
     .task {
       margin: 1rem 0;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      color: #ddd;
+      font-weight: bold;
     }
 
     .status {
       margin: 1rem 0;
-      color: #aaa;
-      font-size: 0.8rem;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      color: #ddd;
+      cursor: pointer;
+
+      option {
+        background-color: #151515;
+        outline: none;
+        border: none;
+        color: #ddd;
+      }
     }
 
     .container {

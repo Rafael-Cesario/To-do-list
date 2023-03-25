@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNotification } from '../../utils/hooks/useNotification';
 import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
+import { ITodoModel } from '../../utils/interfaces/interfaceQueriesTodos';
 import { UserStorage } from '../../utils/localStorageKeys';
 import { Store } from '../../utils/store';
 import { StyledDetails } from './styles/StyledDetails';
@@ -16,16 +17,9 @@ interface Props {
 }
 
 export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
-  const statusMap = {
-    next: 'Próximas',
-    current: 'Em progresso',
-    done: 'Finalizada',
-  };
-
   const { listName } = useParams();
   const { todos } = useSelector((state: Store) => state.todos);
-  const currentTodo = todos[showDetails.todoIndex] || { status: 'done' };
-  const status = statusMap[currentTodo.status as keyof typeof statusMap];
+  const [todo, setTodo] = useState<ITodoModel>(todos[showDetails.todoIndex]);
 
   const [showConfirmButton, setShowConfirmButton] = useState(false);
   const { requestDeleteTodo } = useQueriesTodos();
@@ -37,7 +31,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
 
     const { error } = await requestDeleteTodo({
       email,
-      id: currentTodo.id,
+      id: todo.id,
       listName: listName || '',
     });
 
@@ -45,6 +39,10 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
 
     sendNotification('success', 'Sua tarefa foi excluida');
     setShowDetails({ isOpen: false, todoIndex: 0 });
+  };
+
+  const updateTodo = async () => {
+    console.log({ todo });
   };
 
   return (
@@ -56,8 +54,23 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
       </div>
 
       <div className="details">
-        <h1 className="task">{currentTodo.task}</h1>
-        <span className="status">Status: {status}</span>
+        <input
+          type="text"
+          className="task"
+          value={todo.task}
+          onChange={(e) => setTodo({ ...todo, task: e.target.value })}
+        />
+
+        <span>Status: </span>
+        <select
+          name="status"
+          className="status"
+          value={todo.status}
+          onChange={(e) => setTodo({ ...todo, status: e.target.value })}>
+          <option value="next">Próximas</option>
+          <option value="current">Em progresso</option>
+          <option value="done">Finalizadas</option>
+        </select>
 
         <Tags />
 
@@ -67,7 +80,8 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
         </div>
 
         <div className="actions">
-          <button>Salvar</button>
+          <button onClick={() => updateTodo()}>Salvar</button>
+
           {showConfirmButton || <button onClick={() => setShowConfirmButton(true)}>Deletar</button>}
           {showConfirmButton && (
             <button
