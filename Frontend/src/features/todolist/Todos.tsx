@@ -7,7 +7,7 @@ import { InputReadTodos, READ_TODOS } from '../../utils/interfaces/interfaceQuer
 import { localStorageKeys } from '../../utils/localStorageKeys';
 import { errors } from '../../utils/requestErrors';
 import { Store } from '../../utils/store';
-import { CreateTodo } from './createTodo';
+import { CreateTodo } from './CreateTodo';
 import { StyledTodos } from './styles/StyledTodos';
 import { sliceTodos } from './utils/sliceTodos';
 

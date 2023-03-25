@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useNotification } from '../../utils/hooks/useNotification';
+import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
 import { ITodoModel } from '../../utils/interfaces/interfaceQueriesTodos';
+import { UserStorage } from '../../utils/localStorageKeys';
 import { Store } from '../../utils/store';
 import { DeleteTodo } from './DeleteTodo';
 import { StyledDetails } from './styles/StyledDetails';
 import { Tags } from './Tags';
+import { sliceTodos } from './utils/sliceTodos';
 
 interface Props {
   props: {
@@ -17,10 +22,29 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
   const { todos } = useSelector((state: Store) => state.todos);
   const [todo, setTodo] = useState<ITodoModel>(todos[showDetails.todoIndex]);
 
-  // todo > test
-  // todo > isolate this function
+  const { requestUpdateTodo } = useQueriesTodos();
+  const { sendNotification } = useNotification();
+  const { listName } = useParams();
+  const dispatch = useDispatch();
+
   const updateTodo = async () => {
-    console.log({ todo });
+    const storage = new UserStorage();
+    const { email } = storage.readData();
+    const { id, status, tags, task } = todo;
+
+    const { error } = await requestUpdateTodo({
+      listName: listName || '',
+      email,
+      id,
+      status,
+      tags,
+      task,
+    });
+
+    if (error) return sendNotification('error', error);
+
+    dispatch(sliceTodos.actions.updateTodo({ todo: todo }));
+    sendNotification('success', 'Tarefa Salva');
   };
 
   return (

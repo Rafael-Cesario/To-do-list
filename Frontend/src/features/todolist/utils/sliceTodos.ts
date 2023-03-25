@@ -21,5 +21,10 @@ export const sliceTodos = createSlice({
     loadTodos: (state, action: { payload: { todos: ITodoModel[] } }) => {
       state.todos = action.payload.todos;
     },
+
+    updateTodo: (state, action: { payload: { todo: ITodoModel } }) => {
+      const todoIndex = state.todos.findIndex((todo) => todo.id === action.payload.todo.id);
+      state.todos[todoIndex] = action.payload.todo;
+    },
   },
 });

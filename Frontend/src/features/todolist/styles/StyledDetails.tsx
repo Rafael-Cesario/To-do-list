@@ -84,6 +84,7 @@ export const StyledDetails = styled.div`
     }
 
     .task {
+      display: block;
       margin: 1rem 0;
       outline: none;
       border: none;

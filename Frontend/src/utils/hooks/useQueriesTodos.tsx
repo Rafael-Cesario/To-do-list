@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sliceTodos } from '../../features/todolist/utils/sliceTodos';
 import { useMutation } from '@apollo/client';
 import { useDispatch } from 'react-redux';
@@ -8,12 +7,24 @@ import {
   InputDeleteTodo,
   DELETE_TODO,
   InputCreateTodo,
+  InputUpdateTodo,
+  UPDATE_TODO,
+  ITodoModel,
 } from '../interfaces/interfaceQueriesTodos';
+
+interface ResponseUpdateTodo {
+  updateTodo: ITodoModel;
+}
+
+interface VariablesUpdateTodo {
+  updateTodo: InputUpdateTodo;
+}
 
 export const useQueriesTodos = () => {
   const dispatch = useDispatch();
   const [mutationCreateTodo] = useMutation(CREATE_TODO);
   const [mutationDeleteTodo] = useMutation(DELETE_TODO);
+  const [mutationUpdateTodo] = useMutation<ResponseUpdateTodo, VariablesUpdateTodo>(UPDATE_TODO);
 
   const requestCreateTodo = async ({ email, id, listName, task }: InputCreateTodo) => {
     try {
@@ -46,7 +57,19 @@ export const useQueriesTodos = () => {
     }
   };
 
+  const requestUpdateTodo = async (updateTodo: InputUpdateTodo) => {
+    try {
+      const { data } = await mutationUpdateTodo({ variables: { updateTodo } });
+      return { data: data?.updateTodo };
+    } catch (error: any) {
+      console.log({ error: error.message });
+      const errorMessage = errors[error.message as keyof typeof errors] || errors.default;
+      return { error: errorMessage };
+    }
+  };
+
   return {
+    requestUpdateTodo,
     requestCreateTodo,
     requestDeleteTodo,
   };
