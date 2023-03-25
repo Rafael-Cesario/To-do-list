@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { useNotification } from '../../utils/hooks/useNotification';
-import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
 import { ITodoModel } from '../../utils/interfaces/interfaceQueriesTodos';
-import { UserStorage } from '../../utils/localStorageKeys';
 import { Store } from '../../utils/store';
+import { DeleteTodo } from './DeleteTodo';
 import { StyledDetails } from './styles/StyledDetails';
 import { Tags } from './Tags';
 
@@ -17,30 +14,11 @@ interface Props {
 }
 
 export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
-  const { listName } = useParams();
   const { todos } = useSelector((state: Store) => state.todos);
   const [todo, setTodo] = useState<ITodoModel>(todos[showDetails.todoIndex]);
 
-  const [showConfirmButton, setShowConfirmButton] = useState(false);
-  const { requestDeleteTodo } = useQueriesTodos();
-  const { sendNotification } = useNotification();
-
-  const deleteTodo = async () => {
-    const userStorage = new UserStorage();
-    const { email } = userStorage.readData();
-
-    const { error } = await requestDeleteTodo({
-      email,
-      id: todo.id,
-      listName: listName || '',
-    });
-
-    if (error) return sendNotification('error', error);
-
-    sendNotification('success', 'Sua tarefa foi excluida');
-    setShowDetails({ isOpen: false, todoIndex: 0 });
-  };
-
+  // todo > test
+  // todo > isolate this function
   const updateTodo = async () => {
     console.log({ todo });
   };
@@ -81,16 +59,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
 
         <div className="actions">
           <button onClick={() => updateTodo()}>Salvar</button>
-
-          {showConfirmButton || <button onClick={() => setShowConfirmButton(true)}>Deletar</button>}
-          {showConfirmButton && (
-            <button
-              autoFocus={true}
-              onBlur={() => setShowConfirmButton(false)}
-              onClick={() => deleteTodo()}>
-              Clique novamente para deletar sua tarefa, ou fora para cancelar.
-            </button>
-          )}
+          <DeleteTodo props={{ id: todo.id, setShowDetails }} />
         </div>
       </div>
     </StyledDetails>
