@@ -26,14 +26,15 @@ export const Lists = () => {
 
   return (
     <StyledLists>
-      <h1 className="title">Listas</h1>
       <Loading isLoading={loading} />
 
-      {filtredLists.map((list, index) => (
-        <Link key={list + index} className="list" to={`/${list}`}>
-          {list}
-        </Link>
-      ))}
+      <div className="lists">
+        {filtredLists.map((list, index) => (
+          <Link key={list + index} className="list" to={`/${list}`}>
+            {list}
+          </Link>
+        ))}
+      </div>
     </StyledLists>
   );
 };

@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyledHeader = styled.div`
-  grid-column: 1 / span 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-bottom: 2rem;
+  width: 100%;
+
+  .tab {
+    display: block;
+    background-color: ${colors.backgroundBlue};
+    width: 100%;
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
 
   button {
     border: none;
@@ -24,6 +28,10 @@ export const StyledHeader = styled.div`
     }
   }
 
+  .menu {
+    margin: 0 5rem;
+  }
+
   .search {
     outline: none;
     border: none;
@@ -31,6 +39,7 @@ export const StyledHeader = styled.div`
     color: white;
     padding: 5px 10px;
     min-width: 30%;
+    float: right;
 
     ::placeholder {
       color: #aaa;

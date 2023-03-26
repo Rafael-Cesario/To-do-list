@@ -11,6 +11,7 @@ export const Header = () => {
 
   return (
     <StyledHeader>
+
       <div>
         <h1 className="title">{listName}</h1>
         <span className="total-words">{totalTodos} Tarefas</span>

@@ -20,12 +20,13 @@ export const Header = ({ props: { showCreateNewList, setShowCreateNewList } }: P
 
   return (
     <StyledHeader>
+      <div className="tab" />
+
       <div className="menu">
         <button className="perfil">Perfil</button>
         <button onClick={() => setShowCreateNewList(!showCreateNewList)}>Criar nova lista</button>
+        <input onChange={(e) => setFilter(e.target.value)} className="search" type="text" placeholder="Busque por uma lista..." value={filter} />
       </div>
-
-      <input onChange={(e) => setFilter(e.target.value)} className="search" type="text" placeholder="Busque por uma lista..." value={filter} />
     </StyledHeader>
   );
 };

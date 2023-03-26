@@ -9,9 +9,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #101010;
+    background-color: #151515;
     color: #ddd;
-    margin: 1rem;
     
     ::-webkit-scrollbar {
       background-color: #101010;

@@ -2,19 +2,16 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyleCreateList = styled.div`
-  justify-self: center;
-  grid-column: 1 / span 2;
-  height: fit-content;
   background-color: ${colors.backgroundBlack};
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 3rem;
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 800px;
+  margin-top: 5rem;
   animation: show 0.2s both;
+  width: 50vw;
+  max-width: 500px;
 
   @keyframes show {
     from {

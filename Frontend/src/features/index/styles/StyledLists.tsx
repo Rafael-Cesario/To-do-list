@@ -2,33 +2,39 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/palette';
 
 export const StyledLists = styled.div`
-  grid-column: 3;
-  grid-row: 1 / span 2;
+  margin: 5rem 0;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1rem;
-  min-height: 95vh;
-  border-radius: 3px;
-  background-color: ${colors.backgroundBlack};
+  justify-content: center;
 
-  .title {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+  .lists {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
   }
 
   .list {
-    text-decoration: none;
-    color: #fff;
-    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
     padding: 5px 20px;
-    background-color: ${colors.backgroundBlue};
-    border-radius: 3px;
-    width: 100%;
-    max-width: 400px;
+    height: 3rem;
+    width: 20rem;
+    flex-grow: 1;
+
+    border-radius: 2px;
+    background-color: ${colors.backgroundBlack};
+    color: #fff;
+
+    text-transform: capitalize;
+    text-decoration: none;
+    text-align: center;
 
     :hover {
-      background-color: #202020;
+      background-color: ${colors.backgroundBlue};
     }
   }
 `;
