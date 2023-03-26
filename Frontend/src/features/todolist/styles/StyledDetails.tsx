@@ -72,9 +72,13 @@ export const StyledDetails = styled.div`
       border-radius: 3px;
       margin: 0.5rem 0;
       color: #ddd;
+    }
+
+    .notes-area {
       padding: 1rem;
-      resize: vertical;
       background-color: #151515;
+      min-height: 20rem;
+      resize: vertical;
 
       ::-webkit-scrollbar {
         background-color: #333;
@@ -86,13 +90,25 @@ export const StyledDetails = styled.div`
     }
 
     .task {
-      display: block;
       margin: 1rem 0;
       outline: none;
       border: none;
       background-color: transparent;
       color: #ddd;
       font-weight: bold;
+      width: 100%;
+      font-size: 1rem;
+      resize: none;
+      height: 5rem;
+
+      ::-webkit-scrollbar {
+        background-color: #202020;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        border-radius: 2px;
+      }
     }
 
     .status {

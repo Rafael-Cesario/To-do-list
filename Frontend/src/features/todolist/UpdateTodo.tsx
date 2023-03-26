@@ -21,10 +21,11 @@ export const UpdateTodo = ({ props: { todo } }: Props) => {
   const updateTodo = async () => {
     const storage = new UserStorage();
     const { email } = storage.readData();
-    const { id, status, tags, task } = todo;
+    const { id, status, tags, task, notes } = todo;
 
     const { error } = await requestUpdateTodo({
       listName: listName || '',
+      notes: notes || '...',
       email,
       id,
       status,

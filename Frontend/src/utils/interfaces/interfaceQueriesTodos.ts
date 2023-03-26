@@ -5,6 +5,7 @@ export interface ITodoModel {
   status: string;
   tags: string[];
   task: string;
+  notes?: string;
 }
 
 export interface InputCreateTodo {
@@ -46,6 +47,7 @@ export interface InputUpdateTodo {
   task: string;
   status: string;
   tags: string[];
+  notes: string;
 }
 
 export const CREATE_TODO = gql`
@@ -63,6 +65,7 @@ export const READ_TODOS = gql`
       task
       tags
       status
+      notes
     }
   }
 `;
@@ -98,6 +101,7 @@ export const UPDATE_TODO = gql`
       task
       status
       tags
+      notes
     }
   }
 `;
