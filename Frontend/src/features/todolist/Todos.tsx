@@ -57,7 +57,7 @@ export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
       <CreateTodo />
 
       <div className="todos">
-        {todos.length < 1 && <p>Suas tarefas apareceram aqui.</p>}
+        {todos.length < 1 && <p>Suas tarefas aparecerão aqui.</p>}
 
         {todos.map((todo, index) => (
           <div

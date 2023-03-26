@@ -2,6 +2,7 @@
 import { GraphQLError } from 'graphql';
 import { InputCreateList, InputDeleteList, InputRenameList } from '../interfaces/interfacesLists';
 import { ModelList } from '../models/modelList';
+import { ModelTodo } from '../models/modelTodo';
 import { ModelUser } from '../models/modelUser';
 import { verifyValues } from '../utils/verifyValues';
 
@@ -53,6 +54,13 @@ export class ServiceLists {
 			const list = await ModelList.findOne({ email, listName: oldName });
 			if (!list) throw new Error('Failure: list not found');
 
+			const todos = await ModelTodo.find({ email, listName: oldName });
+
+			todos.forEach(async (todo) => {
+				todo.listName = newName;
+				await todo.save();
+			});
+
 			list.listName = newName;
 			await list.save();
 
@@ -75,8 +83,9 @@ export class ServiceLists {
 			const list = await ModelList.findOne({ email, listName });
 			if (!list) throw new Error('Failure: List not found');
 
-			// todo > delete all tasks from this list
+			await ModelTodo.deleteMany({ email, listName });
 			await list.deleteOne();
+
 			return { message: 'Success: List deleted' };
 		} catch (error: any) {
 			throw new GraphQLError(error.message);

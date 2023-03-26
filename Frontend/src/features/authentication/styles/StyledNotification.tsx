@@ -49,9 +49,10 @@ export const StyledNotification = styled.div`
     cursor: pointer;
     transition: 0.1s ease-in;
     font-size: 1.1rem;
+    padding: 5px 20px;
 
     :hover {
-      transform: scale(1.5);
+      background-color: ${colors.textRed};
     }
   }
 
