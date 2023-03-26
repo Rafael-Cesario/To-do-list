@@ -22,6 +22,7 @@ export const Field = ({ props: { id, label, values, setValues, error } }: Props)
         type="text"
         value={values[id as keyof typeof values]}
         onChange={(e) => setValues({ ...values, [id]: e.target.value })}
+        autoFocus={true}
       />
     </div>
   );

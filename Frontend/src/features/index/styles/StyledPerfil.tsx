@@ -59,9 +59,29 @@ export const StyledPerfil = styled.div`
       border: none;
       background-color: #303030;
       color: #ddd;
+    }
 
-      :focus {
-        background-color: #151515;
+    .password {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+
+      img {
+        cursor: pointer;
+      }
+
+      div {
+        padding-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #303030;
+
+        input {
+          width: 100%;
+          margin: 0;
+        }
       }
     }
 

@@ -10,7 +10,7 @@ const Router = createBrowserRouter(
       <Route path={'*'} element={<NotFound />} />
       <Route path={'/'} element={<Authentication />} />
       <Route path={'/index'} element={<Index />} />
-      <Route path={'/:listName'} element={<TodoList />} />
+      <Route path={'/list/:listName'} element={<TodoList />} />
     </Route>
   )
 );

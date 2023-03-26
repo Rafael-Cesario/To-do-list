@@ -40,7 +40,12 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
 
         <div className="notes">
           <h2>Anotações</h2>
-          <textarea className="notes-area" value={todo.notes} placeholder="........." onChange={(e) => setTodo({ ...todo, notes: e.target.value })} />
+          <textarea
+            className="notes-area"
+            value={todo.notes || ''}
+            placeholder="........."
+            onChange={(e) => setTodo({ ...todo, notes: e.target.value })}
+          />
         </div>
 
         <div className="actions">

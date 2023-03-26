@@ -30,7 +30,7 @@ export const Lists = () => {
 
       <div className="lists">
         {filtredLists.map((list, index) => (
-          <Link key={list + index} className="list" to={`/${list}`}>
+          <Link key={list + index} className="list" to={`/list/${list}`}>
             {list}
           </Link>
         ))}

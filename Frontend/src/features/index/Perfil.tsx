@@ -1,8 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { localStorageKeys } from '../../utils/localStorageKeys';
 import { StyledPerfil } from './styles/StyledPerfil';
 
 export const Perfil = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const logout = () => {
+    localStorage.removeItem(localStorageKeys.user);
+    navigate('/');
+  };
 
   return (
     <StyledPerfil>
@@ -24,12 +34,28 @@ export const Perfil = () => {
           <span>Email</span>
           <input type="text" />
 
-          <span>Senha</span>
-          <input type="text" />
+          <div className="password">
+            <span>Senha atual</span>
+            <div>
+              <input type={showPassword ? 'text' : 'password'} />
+
+              {showPassword && <img onClick={() => setShowPassword(!showPassword)} src="/icons/eye.png" alt="eye icon" width={15} height={15} />}
+              {showPassword || <img onClick={() => setShowPassword(!showPassword)} src="/icons/hidden.png" alt="eye icon" width={15} height={15} />}
+            </div>
+          </div>
+
+          <div className="password">
+            <span>Nova senha</span>
+            <div>
+              <input type={showPassword ? 'text' : 'password'} />
+              {showPassword && <img onClick={() => setShowPassword(!showPassword)} src="/icons/eye.png" alt="eye icon" width={15} height={15} />}
+              {showPassword || <img onClick={() => setShowPassword(!showPassword)} src="/icons/hidden.png" alt="eye icon" width={15} height={15} />}
+            </div>
+          </div>
 
           <div className="actions">
             <button>Salvar</button>
-            <button>Sair</button>
+            <button onClick={() => logout()}>Sair</button>
           </div>
         </div>
       )}
