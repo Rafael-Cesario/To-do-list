@@ -6,17 +6,18 @@ import { UserStorage } from '../../utils/localStorageKeys';
 import { StyledConfigs } from './styles/StyledConfigs';
 
 export const Configs = () => {
+  const storage = new UserStorage();
   const { listName: paramsListName } = useParams();
   const [listName, setListName] = useState(paramsListName ?? '');
   const [isOpen, setIsOpen] = useState(false);
+  const [showConfirmButton, setShowConfirmButton] = useState(false);
 
   const navigate = useNavigate();
 
   const { sendNotification } = useNotification();
-  const { requestRenameList } = useQueriesList();
+  const { requestRenameList, requestDeleteList } = useQueriesList();
 
   const saveConfigs = async () => {
-    const storage = new UserStorage();
     const { email } = storage.readData();
 
     const { error } = await requestRenameList({
@@ -29,6 +30,15 @@ export const Configs = () => {
 
     setIsOpen(false);
     navigate(`/list/${listName}`);
+  };
+
+  const deleteList = async () => {
+    const { email } = storage.readData();
+    const { error } = await requestDeleteList({ email, listName });
+
+    if (error) return sendNotification('error', error);
+
+    navigate('/index');
   };
 
   return (
@@ -52,7 +62,16 @@ export const Configs = () => {
 
           <div className="actions">
             <button onClick={() => saveConfigs()}>Salvar</button>
-            <button>Excluir Lista</button>
+
+            {showConfirmButton || <button onClick={() => setShowConfirmButton(true)}>Excluir Lista</button>}
+
+            {showConfirmButton && (
+              <button className="confirm-delete" autoFocus={true} onBlur={() => setShowConfirmButton(false)} onClick={() => deleteList()}>
+                <p>Clique novamente para deletar sua lista.</p>
+                <p>Cancele clicando fora do botão</p>
+                <p>Deletar sua lista irá excluir todas as suas tarefas</p>
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -57,7 +57,7 @@ export class ServiceLists {
 			const todos = await ModelTodo.find({ email, listName: oldName });
 
 			todos.forEach(async (todo) => {
-				todo.listName = newName;
+				todo.listName = newName.toLowerCase();
 				await todo.save();
 			});
 

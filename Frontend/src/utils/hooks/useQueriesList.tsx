@@ -1,11 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery } from '@apollo/client';
 import { errors } from '../requestErrors';
-import { CREATE_LIST, InputCreateList, InputRenameList, READ_LISTS, RENAME_LIST } from '../interfaces/interfaceQueriesLists';
+import {
+  CREATE_LIST,
+  DELETE_LIST,
+  InputCreateList,
+  InputDeleteList,
+  InputRenameList,
+  READ_LISTS,
+  RENAME_LIST,
+} from '../interfaces/interfaceQueriesLists';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { useEffect, useState } from 'react';
 import { sliceLists } from '../../features/index/utils/sliceLists';
+import { client } from '../../client';
 
 export const useQueriesList = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +22,7 @@ export const useQueriesList = () => {
 
   const [mutationCreateList] = useMutation(CREATE_LIST);
   const [mutationRenameList] = useMutation(RENAME_LIST);
+  const [mutationDeleteList] = useMutation(DELETE_LIST);
 
   const { lists } = useSelector((state: Store) => state.lists);
   const dispatch = useDispatch();
@@ -48,5 +58,32 @@ export const useQueriesList = () => {
     }
   };
 
-  return { lists, loading, error, requestCreateList, requestRenameList };
+  const requestDeleteList = async (deleteList: InputDeleteList) => {
+    try {
+      const { data } = await mutationDeleteList({ variables: { deleteList } });
+
+      const { readLists } = client.readQuery({
+        query: READ_LISTS,
+        variables: { email: deleteList.email },
+      });
+
+      const listIndex = readLists.lists.indexOf(deleteList.listName);
+      const newLists = [...readLists.lists];
+      newLists.splice(listIndex, 1);
+
+      client.writeQuery({
+        query: READ_LISTS,
+        variables: { email: deleteList.email },
+        data: { readLists: { lists: newLists } },
+      });
+
+      return { data };
+    } catch (error: any) {
+      console.log({ error: error.message });
+      const errorMessage = errors[error.message as keyof typeof errors];
+      return { error: errorMessage ?? errors.default };
+    }
+  };
+
+  return { lists, loading, error, requestCreateList, requestRenameList, requestDeleteList };
 };

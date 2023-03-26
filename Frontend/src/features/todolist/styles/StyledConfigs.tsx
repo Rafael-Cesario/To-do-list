@@ -105,6 +105,7 @@ export const StyledConfigs = styled.div`
       background-color: #333;
       border-radius: 2px;
       color: #ddd;
+      height: fit-content;
     }
 
     button:first-child:hover {
@@ -115,6 +116,15 @@ export const StyledConfigs = styled.div`
     button:last-child {
       background-color: ${colors.textRed};
       color: #ddd;
+    }
+  }
+
+  .confirm-delete {
+    margin-left: 1rem;
+    text-align: start;
+
+    p {
+      margin: 0.5rem 0;
     }
   }
 `;
