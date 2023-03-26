@@ -4,6 +4,7 @@ export const TodoTypeDef = `#graphql
         task: String!
         status: String!
         tags: [String]!
+        notes: String
     }
 
     input InputCreateTodo {
@@ -45,6 +46,7 @@ export const TodoTypeDef = `#graphql
         task: String!
         status: String!
         tags: [String]!
+        notes: String!
     }
 
     type Query {

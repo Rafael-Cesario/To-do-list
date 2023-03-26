@@ -37,4 +37,5 @@ export interface InputUpdateTodo {
 	task: string;
 	status: string;
 	tags: string[];
+	notes: string;
 }

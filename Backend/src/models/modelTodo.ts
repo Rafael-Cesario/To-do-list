@@ -18,6 +18,9 @@ class Todo {
 
 	@prop({ type: String, required: true, lowercase: true }, PropType.ARRAY)
 	public tags!: string[];
+
+	@prop({ type: String })
+	public notes!: string;
 }
 
 export const ModelTodo = getModelForClass(Todo);
