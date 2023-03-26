@@ -11,10 +11,11 @@ export const Header = () => {
 
   return (
     <StyledHeader>
-
       <div>
         <h1 className="title">{listName}</h1>
-        <span className="total-words">{totalTodos} Tarefas</span>
+        <span className="total-words">
+          {totalTodos} {totalTodos > 1 ? 'Tarefas' : 'Tarefa'}
+        </span>
       </div>
 
       <div className="menu">

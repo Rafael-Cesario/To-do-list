@@ -4,7 +4,7 @@ export const StyledTags = styled.div`
   margin: 3rem 0;
 
   .tag {
-    background-color: #303030;
+    background-color: #151515;
     margin: 10px 10px 0 0;
     flex-grow: 1;
     border-radius: 3px;
@@ -30,7 +30,7 @@ export const StyledTags = styled.div`
     background-color: transparent;
     color: #ddd;
     font-weight: bold;
-    background-color: #303030;
+    background-color: #151515;
     padding: 5px 10px;
     margin: 10px 10px 0 0;
     border-radius: 3px;

@@ -4,8 +4,7 @@ import { colors } from '../../../styles/palette';
 export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-
-  margin: 2rem 5rem;
+  margin: 2rem 3rem;
 
   .title {
     font-size: 1.5rem;
@@ -13,7 +12,8 @@ export const StyledHeader = styled.header`
   }
 
   .total-words {
-    color: #aaa;
+    color: #555;
+    font-weight: bold;
   }
 
   .configs,
@@ -23,15 +23,16 @@ export const StyledHeader = styled.header`
     text-decoration: none;
     outline: none;
     border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
+    padding: 5px 20px;
     cursor: pointer;
+    font-weight: bold;
     color: #ddd;
     background-color: ${colors.backgroundBlack};
+    border-radius: 2px;
 
     :hover {
-      color: #111;
-      background-color: #ddd;
+      color: #ddd;
+      background-color: #005090;
     }
   }
 
@@ -50,6 +51,7 @@ export const StyledHeader = styled.header`
     max-width: 500px;
     height: fit-content;
     color: #ddd;
+    border-radius: 2px;
 
     ::placeholder {
       color: #aaa;

@@ -74,7 +74,7 @@ export const StyledDetails = styled.div`
       color: #ddd;
       padding: 1rem;
       resize: vertical;
-      background-color: #303030;
+      background-color: #151515;
 
       ::-webkit-scrollbar {
         background-color: #333;
@@ -128,6 +128,10 @@ export const StyledDetails = styled.div`
 
     button {
       width: 45%;
+      background-color: #151515;
+      padding: 10px 30px;
+      border-radius: 2px;
+      font-weight: bold;
     }
 
     button:first-child {

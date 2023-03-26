@@ -22,7 +22,6 @@ export const StyledTodos = styled.div`
       .status {
         outline: none;
         border: none;
-        background-color: white;
         width: 15px;
         height: 15px;
         margin-right: 0.5rem;
