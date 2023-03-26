@@ -36,7 +36,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
           <option value="done">Finalizadas</option>
         </select>
 
-        <Tags />
+        <Tags props={{ todo, setTodo }} />
 
         <div className="notes">
           <h2>Anotações</h2>

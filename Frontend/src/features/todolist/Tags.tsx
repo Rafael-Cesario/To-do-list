@@ -2,33 +2,40 @@ import produce from 'immer';
 import { useNotification } from '../../utils/hooks/useNotification';
 import { useState } from 'react';
 import { StyledTags } from './styles/StyledTags';
+import { ITodoModel } from '../../utils/interfaces/interfaceQueriesTodos';
 
-export const Tags = () => {
-  const [tags, setTags] = useState<string[]>([]);
+interface Props {
+  props: {
+    todo: ITodoModel;
+    setTodo: React.Dispatch<React.SetStateAction<ITodoModel>>;
+  };
+}
+
+export const Tags = ({ props: { todo, setTodo } }: Props) => {
   const [tagName, setTagName] = useState('');
   const { sendNotification } = useNotification();
 
   const addTag = () => {
     if (!tagName) return;
 
-    const hasTag = tags.filter((tag) => tag.toLowerCase() === tagName.toLowerCase()).length;
+    const hasTag = todo.tags.filter((tag) => tag.toLowerCase() === tagName.toLowerCase()).length;
     if (hasTag) return sendNotification('error', 'Uma tag com o mesmo nome já existe.');
 
-    const newTags = produce(tags, (draft) => {
-      draft.push(tagName);
+    const newStateTodo = produce(todo, (draft) => {
+      draft.tags.push(tagName);
     });
 
-    setTags(newTags);
+    setTodo(newStateTodo);
     setTagName('');
   };
 
   const removeTag = (tag: string) => {
-    const newTags = produce(tags, (draft) => {
-      const tagIndex = draft.indexOf(tag);
-      draft.splice(tagIndex, 1);
+    const newStateTodo = produce(todo, (draft) => {
+      const tagIndex = draft.tags.indexOf(tag);
+      draft.tags.splice(tagIndex, 1);
     });
 
-    setTags(newTags);
+    setTodo(newStateTodo);
   };
 
   return (
@@ -36,7 +43,7 @@ export const Tags = () => {
       <h2>Tags</h2>
 
       <div className="container">
-        {tags.map((tag, index) => (
+        {todo.tags.map((tag, index) => (
           <div className="tag" key={tag + index}>
             <span>{tag}</span>
             <button onClick={() => removeTag(tag)} className="remove-tag">

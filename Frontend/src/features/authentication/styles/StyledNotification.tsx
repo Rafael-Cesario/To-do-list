@@ -10,8 +10,10 @@ export const StyledNotification = styled.div`
   width: 30rem;
   max-width: 70vw;
   background-color: ${colors.backgroundBlack};
+  background-color: #202020;
   animation: notification 0.3s ease-out both;
   z-index: 1;
+  box-shadow: 5px 5px 2px #11111120;
 
   @keyframes notification {
     from {

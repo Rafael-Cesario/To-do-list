@@ -14,6 +14,7 @@ export const StyledDetails = styled.div`
   width: 80vw;
   min-width: 350px;
   max-width: 800px;
+  box-shadow: -5px -5px 2px #11111120;
 
   @keyframes show {
     from {
