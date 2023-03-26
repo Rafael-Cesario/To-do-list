@@ -21,7 +21,7 @@ export const Configs = () => {
             </button>
           </div>
 
-          <h1>Configs</h1>
+          <h1 className="title">Configs</h1>
 
           <span>Nome da lista</span>
           <input type="text" value={listName} onChange={(e) => setListName(e.target.value)} />
