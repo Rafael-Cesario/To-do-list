@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../utils/store';
+import { Perfil } from './Perfil';
 import { StyledHeader } from './styles/StyledHeader';
 import { sliceFilter } from './utils/sliceFilter';
 
@@ -23,8 +24,11 @@ export const Header = ({ props: { showCreateNewList, setShowCreateNewList } }: P
       <div className="tab" />
 
       <div className="menu">
-        <button className="perfil">Perfil</button>
-        <button onClick={() => setShowCreateNewList(!showCreateNewList)}>Criar nova lista</button>
+        <div className="buttons">
+          <Perfil />
+          <button onClick={() => setShowCreateNewList(!showCreateNewList)}>Criar nova lista</button>
+        </div>
+
         <input onChange={(e) => setFilter(e.target.value)} className="search" type="text" placeholder="Busque por uma lista..." value={filter} />
       </div>
     </StyledHeader>

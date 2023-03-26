@@ -29,7 +29,15 @@ export const StyledHeader = styled.div`
   }
 
   .menu {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 5rem;
+    justify-content: space-between;
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 
   .search {
@@ -39,7 +47,6 @@ export const StyledHeader = styled.div`
     color: white;
     padding: 5px 10px;
     min-width: 30%;
-    float: right;
 
     ::placeholder {
       color: #aaa;
