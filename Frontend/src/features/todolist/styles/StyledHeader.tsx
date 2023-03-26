@@ -5,6 +5,8 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
 
+  margin: 2rem 5rem;
+
   .title {
     font-size: 1.5rem;
     text-transform: capitalize;

@@ -11,8 +11,9 @@ export const StyledDetails = styled.div`
   border-radius: 3px;
   overflow: hidden;
   animation: show 0.5s ease-out;
-  width: 30vw;
+  width: 80vw;
   min-width: 350px;
+  max-width: 800px;
 
   @keyframes show {
     from {
@@ -67,15 +68,15 @@ export const StyledDetails = styled.div`
       width: 100%;
       outline: none;
       border: none;
-      background-color: #222;
       border-radius: 3px;
       margin: 0.5rem 0;
       color: #ddd;
       padding: 1rem;
       resize: vertical;
+      background-color: #303030;
 
       ::-webkit-scrollbar {
-        background-color: #222;
+        background-color: #333;
       }
 
       ::-webkit-scrollbar-thumb {
