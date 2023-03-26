@@ -27,14 +27,14 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
       </div>
 
       <div className="details">
+        <textarea className="task" value={todo.task} onChange={(e) => setTodo({ ...todo, task: e.target.value })} />
+
         <span>Status: </span>
         <select name="status" className="status" value={todo.status} onChange={(e) => setTodo({ ...todo, status: e.target.value })}>
           <option value="next">Próximas</option>
           <option value="current">Em progresso</option>
           <option value="done">Finalizadas</option>
         </select>
-
-        <textarea className="task" value={todo.task} onChange={(e) => setTodo({ ...todo, task: e.target.value })} />
 
         <Tags props={{ todo, setTodo }} />
 

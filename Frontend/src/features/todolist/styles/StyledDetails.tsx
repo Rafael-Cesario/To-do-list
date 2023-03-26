@@ -3,19 +3,17 @@ import { colors } from '../../../styles/palette';
 
 export const StyledDetails = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
-  margin: 1rem;
-  background-color: ${colors.backgroundBlack};
-  min-height: 95vh;
-  border-radius: 3px;
-  overflow: hidden;
-  animation: show 0.5s ease-out;
-  width: 80vw;
-  min-width: 350px;
-  max-width: 800px;
-  box-shadow: -5px -5px 2px #11111120;
+  top: 10vh;
+  left: 50vw;
+  transform: translate(-50%, 0);
 
+  background-color: ${colors.backgroundBlack};
+  width: 90vw;
+  max-width: 1000px;
+  border-radius: 2px;
+  overflow: hidden;
+
+  animation: show 0.5s ease-out;
   @keyframes show {
     from {
       opacity: 0;
@@ -25,29 +23,27 @@ export const StyledDetails = styled.div`
   button {
     outline: none;
     border: none;
-    background-color: transparent;
-    color: #ddd;
     font-weight: bold;
     cursor: pointer;
+    background-color: transparent;
+    color: #ddd;
   }
 
   .tab {
-    background-color: ${colors.backgroundBlue};
     display: flex;
     justify-content: flex-end;
-    padding: 5px 10px;
+    background-color: ${colors.backgroundBlue};
 
     .close {
-      border: none;
-      outline: none;
-      background-color: transparent;
-      font-size: 1.5rem;
+      padding: 5px 20px;
+      font-size: 1rem;
       font-weight: bold;
       color: #ddd;
       cursor: pointer;
 
       :hover {
-        color: #aa0050;
+        background-color: ${colors.textRed};
+        color: #ddd;
       }
     }
   }
@@ -59,10 +55,6 @@ export const StyledDetails = styled.div`
     h2,
     input {
       font-size: 1rem;
-
-      ::first-letter {
-        text-transform: capitalize;
-      }
     }
 
     textarea {
@@ -90,16 +82,19 @@ export const StyledDetails = styled.div`
     }
 
     .task {
-      margin: 1rem 0;
-      outline: none;
-      border: none;
-      background-color: transparent;
       color: #ddd;
+      background-color: transparent;
       font-weight: bold;
+      margin: 1rem 0;
       width: 100%;
       font-size: 1rem;
       resize: none;
-      height: 5rem;
+      padding: 5px 20px;
+      text-align: center;
+
+      :focus {
+        background-color: #151515;
+      }
 
       ::-webkit-scrollbar {
         background-color: #202020;
@@ -144,18 +139,20 @@ export const StyledDetails = styled.div`
 
     button {
       width: 45%;
-      background-color: #151515;
-      padding: 10px 30px;
+      padding: 10px 20px;
       border-radius: 2px;
       font-weight: bold;
+      background-color: #151515;
     }
 
-    button:first-child {
-      color: ${colors.textBlue};
+    button:first-child:hover {
+      background-color: #ddd;
+      color: #111;
     }
 
-    button:last-child {
-      color: ${colors.textRed};
+    button:last-child:hover {
+      background-color: ${colors.textRed};
+      color: #ddd;
     }
   }
 `;
