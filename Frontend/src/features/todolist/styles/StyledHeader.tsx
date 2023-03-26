@@ -16,7 +16,6 @@ export const StyledHeader = styled.header`
     font-weight: bold;
   }
 
-  .configs,
   a {
     margin-right: 1rem;
     font-size: 0.8rem;

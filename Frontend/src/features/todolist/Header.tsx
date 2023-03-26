@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { StyledHeader } from './styles/StyledHeader';
 import { Store } from '../../utils/store';
+import { Configs } from './configs';
 
 export const Header = () => {
   const { listName } = useParams();
@@ -20,7 +21,7 @@ export const Header = () => {
 
       <div className="menu">
         <Link to={'/index'}>Listas</Link>
-        <button className="configs">Configs</button>
+        <Configs />
         <input className="search" type="text" placeholder="Busque por uma tag, tarefa, ou status" />
       </div>
     </StyledHeader>
