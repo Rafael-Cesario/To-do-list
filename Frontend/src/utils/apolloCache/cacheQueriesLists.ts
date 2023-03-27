@@ -1,5 +1,5 @@
 import { client } from '../../client';
-import { InputCreateList, InputRenameList, READ_LISTS } from '../interfaces/interfaceQueriesLists';
+import { InputCreateList, InputDeleteList, InputRenameList, READ_LISTS } from '../interfaces/interfaceQueriesLists';
 
 export class UpdateCacheLists {
   private readCachedLists(email: string) {
@@ -31,6 +31,15 @@ export class UpdateCacheLists {
 
     const listIndex = lists.indexOf(oldName);
     lists.splice(listIndex, 1, newName);
+
+    this.writeCachedLists(email, lists);
+  }
+
+  onDeleteList({ email, listName }: InputDeleteList) {
+    const lists = this.readCachedLists(email);
+
+    const listIndex = lists.indexOf(listName);
+    lists.splice(listIndex, 1);
 
     this.writeCachedLists(email, lists);
   }

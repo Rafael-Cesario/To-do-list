@@ -66,22 +66,7 @@ export const useQueriesList = () => {
   const requestDeleteList = async (deleteList: InputDeleteList) => {
     try {
       const { data } = await mutationDeleteList({ variables: { deleteList } });
-
-      const { readLists } = client.readQuery({
-        query: READ_LISTS,
-        variables: { email: deleteList.email },
-      });
-
-      const listIndex = readLists.lists.indexOf(deleteList.listName);
-      const newLists = [...readLists.lists];
-      newLists.splice(listIndex, 1);
-
-      client.writeQuery({
-        query: READ_LISTS,
-        variables: { email: deleteList.email },
-        data: { readLists: { lists: newLists } },
-      });
-
+      updateCache.onDeleteList(deleteList);
       return { data };
     } catch (error: any) {
       console.log({ error: error.message });
