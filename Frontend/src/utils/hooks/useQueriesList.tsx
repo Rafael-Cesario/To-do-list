@@ -15,8 +15,10 @@ import { Store } from '../store';
 import { useEffect, useState } from 'react';
 import { sliceLists } from '../../features/index/utils/sliceLists';
 import { client } from '../../client';
+import { UpdateCacheLists } from '../apolloCache/cacheQueriesLists';
 
 export const useQueriesList = () => {
+  const updateCache = new UpdateCacheLists();
   const [email, setEmail] = useState('');
   const { data, loading, error } = useQuery(READ_LISTS, { variables: { email } });
 
@@ -40,6 +42,7 @@ export const useQueriesList = () => {
   const requestCreateList = async (createList: InputCreateList) => {
     try {
       const { data } = await mutationCreateList({ variables: { createList } });
+      updateCache.onCreateList(createList);
       return { message: data?.createList.message };
     } catch (error: any) {
       console.log({ error: error.message });
@@ -47,6 +50,7 @@ export const useQueriesList = () => {
       return { error: errorMessage ?? errors.default };
     }
   };
+
   const requestRenameList = async (renameList: InputRenameList) => {
     try {
       const { data } = await mutationRenameList({ variables: { renameList } });
