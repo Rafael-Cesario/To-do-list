@@ -11,6 +11,7 @@ import {
   UPDATE_TODO,
   ITodoModel,
 } from '../interfaces/interfaceQueriesTodos';
+import { UpdateCacheTodos } from '../apolloCache/cacheTodos';
 
 interface ResponseUpdateTodo {
   updateTodo: ITodoModel;
@@ -21,6 +22,8 @@ interface VariablesUpdateTodo {
 }
 
 export const useQueriesTodos = () => {
+  const updateCache = new UpdateCacheTodos();
+
   const dispatch = useDispatch();
   const [mutationCreateTodo] = useMutation(CREATE_TODO);
   const [mutationDeleteTodo] = useMutation(DELETE_TODO);
@@ -30,6 +33,8 @@ export const useQueriesTodos = () => {
     try {
       const createTodo = { email, id, listName, task };
       const { data } = await mutationCreateTodo({ variables: { createTodo } });
+
+      await updateCache.onCreateTodo({ email, id, listName, task });
 
       const todo = { id, task, tags: [], status: 'next' };
       dispatch(sliceTodos.actions.createTodo({ todo }));

@@ -15,7 +15,7 @@ import { Store } from '../store';
 import { useEffect, useState } from 'react';
 import { sliceLists } from '../../features/index/utils/sliceLists';
 import { client } from '../../client';
-import { UpdateCacheLists } from '../apolloCache/cacheQueriesLists';
+import { UpdateCacheLists } from '../apolloCache/cacheLists';
 
 export const useQueriesList = () => {
   const updateCache = new UpdateCacheLists();
@@ -42,7 +42,7 @@ export const useQueriesList = () => {
   const requestCreateList = async (createList: InputCreateList) => {
     try {
       const { data } = await mutationCreateList({ variables: { createList } });
-      updateCache.onCreateList(createList);
+      await updateCache.onCreateList(createList);
       return { message: data?.createList.message };
     } catch (error: any) {
       console.log({ error: error.message });
@@ -54,7 +54,7 @@ export const useQueriesList = () => {
   const requestRenameList = async (renameList: InputRenameList) => {
     try {
       const { data } = await mutationRenameList({ variables: { renameList } });
-      updateCache.onRenameList(renameList);
+      await updateCache.onRenameList(renameList);
       return { data };
     } catch (error: any) {
       console.log({ error: error.message });
@@ -66,7 +66,7 @@ export const useQueriesList = () => {
   const requestDeleteList = async (deleteList: InputDeleteList) => {
     try {
       const { data } = await mutationDeleteList({ variables: { deleteList } });
-      updateCache.onDeleteList(deleteList);
+      await updateCache.onDeleteList(deleteList);
       return { data };
     } catch (error: any) {
       console.log({ error: error.message });

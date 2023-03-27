@@ -2,8 +2,8 @@ import { client } from '../../client';
 import { InputCreateList, InputDeleteList, InputRenameList, READ_LISTS } from '../interfaces/interfaceQueriesLists';
 
 export class UpdateCacheLists {
-  private readCachedLists(email: string) {
-    const { readLists } = client.readQuery({
+  private async readCachedLists(email: string) {
+    const { readLists } = await client.readQuery({
       query: READ_LISTS,
       variables: { email },
     });
@@ -20,14 +20,14 @@ export class UpdateCacheLists {
     });
   }
 
-  onCreateList({ email, listName }: InputCreateList) {
-    const lists = this.readCachedLists(email);
+  async onCreateList({ email, listName }: InputCreateList) {
+    const lists = await this.readCachedLists(email);
     lists.push(listName);
     this.writeCachedLists(email, lists);
   }
 
-  onRenameList({ email, newName, oldName }: InputRenameList) {
-    const lists = this.readCachedLists(email);
+  async onRenameList({ email, newName, oldName }: InputRenameList) {
+    const lists = await this.readCachedLists(email);
 
     const listIndex = lists.indexOf(oldName);
     lists.splice(listIndex, 1, newName);
@@ -35,8 +35,8 @@ export class UpdateCacheLists {
     this.writeCachedLists(email, lists);
   }
 
-  onDeleteList({ email, listName }: InputDeleteList) {
-    const lists = this.readCachedLists(email);
+  async onDeleteList({ email, listName }: InputDeleteList) {
+    const lists = await this.readCachedLists(email);
 
     const listIndex = lists.indexOf(listName);
     lists.splice(listIndex, 1);

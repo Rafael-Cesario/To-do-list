@@ -31,11 +31,13 @@
 		"@apollo/server": "^4.4.1",
 		"@graphql-tools/schema": "^9.0.16",
 		"@typegoose/typegoose": "^10.3.0",
+		"@types/lodash": "^4.14.192",
 		"@types/mongoose": "^5.11.97",
 		"bcrypt": "^5.1.0",
 		"dotenv": "^16.0.3",
 		"graphql": "^16.6.0",
 		"jsonwebtoken": "^9.0.0",
+		"lodash": "^4.17.21",
 		"mongoose": "^6.10.1",
 		"tsup": "^6.6.3",
 		"tsx": "^3.12.3"

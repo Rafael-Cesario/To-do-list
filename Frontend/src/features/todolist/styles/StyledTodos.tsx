@@ -19,8 +19,13 @@ export const StyledTodos = styled.div`
       align-items: center;
       margin-bottom: 1rem;
 
-      padding-bottom: 0.3rem;
+      padding: 5px 10px;
       border-bottom: 2px solid #333;
+      transition: 0.1s;
+
+      :hover {
+        background-color: #191919;
+      }
 
       .status {
         outline: none;
