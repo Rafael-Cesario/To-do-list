@@ -17,7 +17,10 @@ export const StyledTodos = styled.div`
       overflow: hidden;
       display: flex;
       align-items: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
+
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid #333;
 
       .status {
         outline: none;
@@ -48,7 +51,7 @@ export const StyledTodos = styled.div`
 
     .next {
       .status {
-        background-color: #222;
+        background-color: #444;
       }
 
       .task {
