@@ -83,7 +83,7 @@ export const StyledDetails = styled.div`
 
     .task {
       color: #ddd;
-      background-color: transparent;
+      background-color: #151515;
       font-weight: bold;
       margin: 1rem 0;
       width: 100%;

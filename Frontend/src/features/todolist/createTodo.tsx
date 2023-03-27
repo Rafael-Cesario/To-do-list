@@ -32,7 +32,7 @@ export const CreateTodo = () => {
       <input
         type="text"
         value={task}
-        placeholder="..............."
+        placeholder={'...'}
         className="input-todo"
         onChange={(e) => setTask(e.target.value)}
         onKeyUp={(e) => e.key === 'Enter' && createTodo()}
