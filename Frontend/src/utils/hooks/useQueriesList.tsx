@@ -54,6 +54,7 @@ export const useQueriesList = () => {
   const requestRenameList = async (renameList: InputRenameList) => {
     try {
       const { data } = await mutationRenameList({ variables: { renameList } });
+      updateCache.onRenameList(renameList);
       return { data };
     } catch (error: any) {
       console.log({ error: error.message });
