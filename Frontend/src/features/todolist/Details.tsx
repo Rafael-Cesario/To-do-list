@@ -49,7 +49,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
         </div>
 
         <div className="actions">
-          <UpdateTodo props={{ todo }} />
+          <UpdateTodo props={{ todo, setShowDetails }} />
           <DeleteTodo props={{ id: todo.id, setShowDetails }} />
         </div>
       </div>

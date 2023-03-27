@@ -9,10 +9,11 @@ import { sliceTodos } from './utils/sliceTodos';
 interface Props {
   props: {
     todo: ITodoModel;
+    setShowDetails: (newState: { isOpen: boolean; todoIndex: number }) => void;
   };
 }
 
-export const UpdateTodo = ({ props: { todo } }: Props) => {
+export const UpdateTodo = ({ props: { todo, setShowDetails } }: Props) => {
   const { requestUpdateTodo } = useQueriesTodos();
   const { sendNotification } = useNotification();
   const { listName } = useParams();
@@ -36,6 +37,7 @@ export const UpdateTodo = ({ props: { todo } }: Props) => {
     if (error) return sendNotification('error', error);
 
     dispatch(sliceTodos.actions.updateTodo({ todo: todo }));
+    setShowDetails({ isOpen: false, todoIndex: 0 });
     sendNotification('success', 'Tarefa Salva');
   };
 
