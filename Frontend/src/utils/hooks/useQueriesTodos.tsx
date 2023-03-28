@@ -68,6 +68,8 @@ export const useQueriesTodos = () => {
     try {
       const { data } = await mutationUpdateTodo({ variables: { updateTodo } });
 
+      await updateCache.onUpdateTodo(updateTodo);
+
       const { id, task, tags, status, notes } = updateTodo;
       dispatch(sliceTodos.actions.updateTodo({ todo: { id, task, tags, status, notes } }));
 

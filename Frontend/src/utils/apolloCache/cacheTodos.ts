@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { client } from '../../client';
-import { InputCreateTodo, InputDeleteTodo, ITodoModel, READ_TODOS } from '../interfaces/interfaceQueriesTodos';
+import { InputCreateTodo, InputDeleteTodo, InputUpdateTodo, ITodoModel, READ_TODOS } from '../interfaces/interfaceQueriesTodos';
 
 export class UpdateCacheTodos {
   private async readCachedTodos(email: string, listName: string) {
@@ -32,6 +32,13 @@ export class UpdateCacheTodos {
     const todos = await this.readCachedTodos(email, listName);
     const todoIndex = todos.findIndex((todo) => todo.id === id);
     todos.splice(todoIndex, 1);
+    this.writeCachedTodos(email, listName, todos);
+  }
+
+  async onUpdateTodo({ email, id, listName, notes, status, tags, task }: InputUpdateTodo) {
+    const todos = await this.readCachedTodos(email, listName);
+    const todoIndex = todos.findIndex((todo) => todo.id === id);
+    todos.splice(todoIndex, 1, { id, task, tags, status, notes });
     this.writeCachedTodos(email, listName, todos);
   }
 }
