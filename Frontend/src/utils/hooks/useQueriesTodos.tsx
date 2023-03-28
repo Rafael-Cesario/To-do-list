@@ -52,6 +52,8 @@ export const useQueriesTodos = () => {
       const deleteTodo = { email, listName, id };
       const { data } = await mutationDeleteTodo({ variables: { deleteTodo } });
 
+      await updateCache.onDeleteTodo({ email, listName, id });
+
       dispatch(sliceTodos.actions.deleteTodo({ id }));
 
       return { data };
