@@ -69,7 +69,7 @@ export const StyledDetails = styled.div`
     .notes-area {
       padding: 1rem;
       background-color: #151515;
-      min-height: 20rem;
+      min-height: 20vh;
       resize: vertical;
 
       ::-webkit-scrollbar {
