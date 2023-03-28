@@ -1,10 +1,8 @@
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNotification } from '../../utils/hooks/useNotification';
 import { useQueriesTodos } from '../../utils/hooks/useQueriesTodos';
 import { ITodoModel } from '../../utils/interfaces/interfaceQueriesTodos';
 import { UserStorage } from '../../utils/localStorageKeys';
-import { sliceTodos } from './utils/sliceTodos';
 
 interface Props {
   props: {
@@ -17,7 +15,6 @@ export const UpdateTodo = ({ props: { todo, setShowDetails } }: Props) => {
   const { requestUpdateTodo } = useQueriesTodos();
   const { sendNotification } = useNotification();
   const { listName } = useParams();
-  const dispatch = useDispatch();
 
   const updateTodo = async () => {
     const storage = new UserStorage();
@@ -36,7 +33,6 @@ export const UpdateTodo = ({ props: { todo, setShowDetails } }: Props) => {
 
     if (error) return sendNotification('error', error);
 
-    dispatch(sliceTodos.actions.updateTodo({ todo: todo }));
     setShowDetails({ isOpen: false, todoIndex: 0 });
     sendNotification('success', 'Tarefa Salva');
   };

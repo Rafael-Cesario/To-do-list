@@ -67,6 +67,10 @@ export const useQueriesTodos = () => {
   const requestUpdateTodo = async (updateTodo: InputUpdateTodo) => {
     try {
       const { data } = await mutationUpdateTodo({ variables: { updateTodo } });
+
+      const { id, task, tags, status, notes } = updateTodo;
+      dispatch(sliceTodos.actions.updateTodo({ todo: { id, task, tags, status, notes } }));
+
       return { data: data?.updateTodo };
     } catch (error: any) {
       console.log({ error: error.message });
