@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import { TypeThemeProps } from './themes';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ theme: TypeThemeProps }>`
   * {
     margin: 0;
     padding: 0;
@@ -9,9 +10,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: #151515;
-    color: #ddd;
-    
+    background-color: ${(props) => props.theme.backgroundColor};
+    color: ${(props) => props.theme.color};
+
     ::-webkit-scrollbar {
       background-color: #101010;
     }

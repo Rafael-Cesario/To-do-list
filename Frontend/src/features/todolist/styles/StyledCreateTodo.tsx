@@ -1,4 +1,4 @@
-import { colors } from '../../../styles/palette';
+import { colors } from '../../../styles/themes';
 import styled from 'styled-components';
 
 export const StyledCreateTodo = styled.div`

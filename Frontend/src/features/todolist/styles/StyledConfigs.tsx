@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/palette';
+import { colors } from '../../../styles/themes';
 
 export const StyledConfigs = styled.div`
   button,

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { notificationSlice } from '../notificationSlice';
+import { notificationSlice } from '../slices/sliceNotification';
 import { Store } from '../store';
 
 type NotificationType = 'error' | 'success';
