@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyleCreateList = styled.div`
-  background-color: ${colors.backgroundBlack};
+  background-color: ${(p: Theme) => p.theme.container};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,8 +12,9 @@ export const StyleCreateList = styled.div`
   padding: 3rem;
   margin-top: 5rem;
   animation: show 0.2s both;
-  width: 50vw;
-  max-width: 500px;
+  width: 90vw;
+  height: 50vh;
+  min-height: 150px;
 
   @keyframes show {
     from {
@@ -26,25 +29,25 @@ export const StyleCreateList = styled.div`
   .title {
     position: absolute;
     transform: translate(0, -4rem);
-    background-color: ${colors.backgroundBlue};
+    background-color: ${(p: Theme) => p.theme.primary};
     font-size: 1.1rem;
-    padding: 5px 10px;
+    padding: 5px 20px;
     border-radius: 3px;
   }
 
   .list-name {
     outline: none;
     border: none;
-    border-bottom: 2px solid ${colors.backgroundBlue};
+    border-bottom: 2px solid ${(p: Theme) => p.theme.textPrimary};
+    color: ${(p: Theme) => p.theme.color};
     background-color: transparent;
-    padding: 2px 10px;
-    margin-bottom: 2rem;
-    color: #ddd;
+    padding: 5px 20px;
+    margin: 5rem;
     font-weight: bold;
     width: 50%;
 
     ::placeholder {
-      color: #bbb;
+      color: ${(p: Theme) => p.theme.faded};
     }
   }
 
@@ -56,13 +59,16 @@ export const StyleCreateList = styled.div`
     button {
       border: none;
       outline: none;
-      background-color: transparent;
       cursor: pointer;
-      color: #aaa;
+      background-color: transparent;
+      color: ${(p: Theme) => p.theme.faded};
       font-weight: bold;
+      padding: 5px 20px;
+      border-radius: 2px;
 
       :hover {
-        color: #ddd;
+        color: ${(p: Theme) => p.theme.color};
+        background-color: ${(p: Theme) => p.theme.primary};
       }
     }
   }
