@@ -1,38 +1,34 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyledHeader = styled.div`
   width: 100%;
 
-  .tab {
-    display: block;
-    background-color: ${colors.backgroundBlue};
-    width: 100%;
-    height: 2rem;
-    margin-bottom: 1rem;
-  }
-
   button {
-    border: none;
     outline: none;
-    background-color: transparent;
-    color: #ddd;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin: 0 0.5rem;
+    height: fit-content;
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 3px;
+    border: none;
+    background-color: ${(p: Theme) => p.theme.primary};
+    color: ${(p: Theme) => p.theme.color};
 
     :hover {
-      background-color: ${colors.backgroundBlue};
+      background-color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.backgroundColor};
     }
   }
 
   .menu {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 5rem;
     justify-content: space-between;
+    margin: 2rem;
 
     .buttons {
       display: flex;
@@ -42,14 +38,15 @@ export const StyledHeader = styled.div`
 
   .search {
     outline: none;
-    border: none;
-    background-color: ${colors.backgroundBlack};
-    color: white;
+    color: ${(p: Theme) => p.theme.color};
     padding: 5px 10px;
     min-width: 30%;
+    border-radius: 3px;
+    border: 2px solid ${(p: Theme) => p.theme.gray};
+    background-color: ${(p: Theme) => p.theme.container};
 
     ::placeholder {
-      color: #aaa;
+      color: ${(p: Theme) => p.theme.faded};
     }
   }
 

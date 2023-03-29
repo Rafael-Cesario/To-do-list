@@ -11,18 +11,17 @@ export const StyleCreateList = styled.div`
   align-items: center;
   padding: 3rem;
   margin-top: 5rem;
-  animation: show 0.2s both;
   width: 90vw;
   height: 50vh;
   min-height: 150px;
+  position: absolute;
+  top: 10vh;
 
+  animation: show 0.5s both;
   @keyframes show {
     from {
+      top: -10vh;
       opacity: 0;
-    }
-
-    to {
-      opacity: 1;
     }
   }
 
@@ -63,8 +62,9 @@ export const StyleCreateList = styled.div`
       background-color: transparent;
       color: ${(p: Theme) => p.theme.faded};
       font-weight: bold;
-      padding: 5px 20px;
+      padding: 10px 20px;
       border-radius: 2px;
+      width: 100%;
 
       :hover {
         color: ${(p: Theme) => p.theme.color};

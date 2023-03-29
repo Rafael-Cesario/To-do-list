@@ -5,7 +5,7 @@ export type TypeThemeProps = {
   color: string;
   faded: string;
   container: string;
-  border: string;
+  gray: string;
   primary: string;
   textPrimary: string;
   textError: string;
@@ -22,7 +22,7 @@ export const theme: ITheme = {
     color: '#111',
     faded: '#444',
     container: '#ccc',
-    border: '#bbb',
+    gray: '#bbb',
     primary: '#0050aa',
     textPrimary: '#003060',
     textError: '#bb4040',
@@ -32,7 +32,7 @@ export const theme: ITheme = {
   black: {
     backgroundColor: '#111',
     container: '#151515',
-    border: '#222',
+    gray: '#202020',
     color: '#ddd',
     faded: '#aaa',
     primary: '#0050aa',

@@ -12,7 +12,7 @@ export const StyledForm = styled.div`
   padding: 2rem 10rem;
   position: relative;
   background-color: ${(props: Theme) => props.theme.container};
-  border: 3px solid ${(props: Theme) => props.theme.border};
+  border: 3px solid ${(props: Theme) => props.theme.gray};
   border-radius: 3px;
   box-shadow: 5px 5px 2px #10101020;
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyledLists = styled.div`
   margin: 5rem 0;
@@ -23,10 +25,10 @@ export const StyledLists = styled.div`
     padding: 5px 20px;
     height: 3rem;
     width: 20rem;
-    flex-grow: 1;
 
     border-radius: 2px;
-    background-color: ${colors.backgroundBlack};
+    border: 2px solid ${(p: Theme) => p.theme.gray};
+    background-color: ${(p: Theme) => p.theme.container};
     color: #fff;
 
     text-transform: capitalize;
@@ -34,7 +36,7 @@ export const StyledLists = styled.div`
     text-align: center;
 
     :hover {
-      background-color: ${colors.backgroundBlue};
+      background-color: ${(p: Theme) => p.theme.primary};
     }
   }
 `;

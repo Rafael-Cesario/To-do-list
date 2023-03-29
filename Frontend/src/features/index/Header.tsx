@@ -21,8 +21,6 @@ export const Header = ({ props: { showCreateNewList, setShowCreateNewList } }: P
 
   return (
     <StyledHeader>
-      <div className="tab" />
-
       <div className="menu">
         <div className="buttons">
           <Perfil />

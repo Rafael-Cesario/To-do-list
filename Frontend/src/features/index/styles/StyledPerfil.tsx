@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyledPerfil = styled.div`
   .container {
@@ -9,7 +11,9 @@ export const StyledPerfil = styled.div`
     transform: translate(-50%, -50%);
     width: 90vw;
     min-height: 80vh;
-    background-color: ${colors.backgroundBlack};
+    background-color: ${(p: Theme) => p.theme.container};
+    border: 10px solid ${(p: Theme) => p.theme.gray};
+    border-top: none;
     overflow: hidden;
     border-radius: 2px;
 
@@ -22,15 +26,18 @@ export const StyledPerfil = styled.div`
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      background-color: ${colors.backgroundBlue};
+      background-color: ${(p: Theme) => p.theme.primary};
 
       .perfil-close {
-        margin: 0;
         padding: 5px 20px;
+        border: none;
+        outline: none;
         border-radius: 0;
+        margin: 0;
 
         :hover {
-          background-color: ${colors.textRed};
+          background-color: ${(p: Theme) => p.theme.textError};
+          color: ${(p: Theme) => p.theme.color};
         }
       }
     }
@@ -57,8 +64,9 @@ export const StyledPerfil = styled.div`
       margin-bottom: 1rem;
       outline: none;
       border: none;
-      background-color: #303030;
-      color: #ddd;
+      border-radius: 2px;
+      background-color: ${(p: Theme) => p.theme.gray};
+      color: ${(p: Theme) => p.theme.color};
     }
 
     .password {
@@ -76,7 +84,7 @@ export const StyledPerfil = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #303030;
+        background-color: ${(p: Theme) => p.theme.gray};
 
         input {
           width: 100%;
@@ -92,18 +100,22 @@ export const StyledPerfil = styled.div`
       margin-top: 2rem;
 
       button {
-        background-color: #303030;
+        background-color: ${(p: Theme) => p.theme.gray};
         padding: 5px 20px;
         width: 45%;
+        border: none;
       }
 
       button:first-child:hover {
-        background-color: #ddd;
-        color: #111;
+        background-color: ${(p: Theme) => p.theme.color};
+        color: ${(p: Theme) => p.theme.container};
+        border: none;
       }
 
       button:last-child:hover {
-        background-color: ${colors.textRed};
+        border: none;
+        background-color: ${(p: Theme) => p.theme.textError};
+        color: ${(p: Theme) => p.theme.color};
       }
     }
   }
