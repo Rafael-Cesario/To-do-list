@@ -21,6 +21,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
   return (
     <StyledDetails>
       <div className="tab">
+        <h1 className="title">Detalhes</h1>
         <button onClick={() => setShowDetails({ isOpen: false, todoIndex: 0 })} className="close">
           x
         </button>

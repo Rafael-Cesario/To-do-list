@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { Theme } from '../../../styles/themes';
 
 export const StyledHeader = styled.header`
   display: flex;
@@ -12,8 +12,9 @@ export const StyledHeader = styled.header`
   }
 
   .total-words {
-    color: #555;
-    font-weight: bold;
+    color: ${(p: Theme) => p.theme.faded};
+    font-weight: normal;
+    font-size: 0.9rem;
   }
 
   a {
@@ -25,13 +26,13 @@ export const StyledHeader = styled.header`
     padding: 5px 20px;
     cursor: pointer;
     font-weight: bold;
-    color: #ddd;
-    background-color: ${colors.backgroundBlack};
+    color: ${(p: Theme) => p.theme.color};
+    background-color: ${(p: Theme) => p.theme.container};
     border-radius: 2px;
 
     :hover {
-      color: #ddd;
-      background-color: #005090;
+      color: ${(p: Theme) => p.theme.backgroundColor};
+      background-color: ${(p: Theme) => p.theme.color};
     }
   }
 
@@ -43,17 +44,17 @@ export const StyledHeader = styled.header`
   .search {
     outline: none;
     border: none;
-    background-color: ${colors.backgroundBlack};
+    background-color: ${(p: Theme) => p.theme.container};
     padding: 5px 20px;
     width: 30vw;
     min-width: 100px;
     max-width: 500px;
     height: fit-content;
-    color: #ddd;
+    color: ${(p: Theme) => p.theme.color};
     border-radius: 2px;
 
     ::placeholder {
-      color: #aaa;
+      color: ${(p: Theme) => p.theme.faded};
     }
   }
 `;

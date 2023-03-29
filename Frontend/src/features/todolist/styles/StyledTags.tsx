@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { Theme } from '../../../styles/themes';
 
 export const StyledTags = styled.div`
   margin: 3rem 0;
 
   .tag {
-    background-color: #151515;
+    background-color: ${(p: Theme) => p.theme.gray};
     margin: 10px 10px 0 0;
     flex-grow: 1;
     border-radius: 3px;
@@ -19,7 +20,7 @@ export const StyledTags = styled.div`
       margin-left: 0.5rem;
 
       :hover {
-        color: crimson;
+        color: ${(p: Theme) => p.theme.textError};
       }
     }
   }
@@ -27,10 +28,9 @@ export const StyledTags = styled.div`
   .new-tag {
     outline: none;
     border: none;
-    background-color: transparent;
-    color: #ddd;
+    color: ${(p: Theme) => p.theme.color};
     font-weight: bold;
-    background-color: #151515;
+    background-color: ${(p: Theme) => p.theme.gray};
     padding: 5px 10px;
     margin: 10px 10px 0 0;
     border-radius: 3px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { Theme } from '../../../styles/themes';
 
 export const StyledDetails = styled.div`
   position: absolute;
@@ -7,7 +7,7 @@ export const StyledDetails = styled.div`
   left: 50vw;
   transform: translate(-50%, 0);
 
-  background-color: ${colors.backgroundBlack};
+  background-color: ${(p: Theme) => p.theme.container};
   width: 90vw;
   max-width: 1000px;
   border-radius: 2px;
@@ -26,24 +26,30 @@ export const StyledDetails = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: transparent;
-    color: #ddd;
+    color: ${(p: Theme) => p.theme.color};
   }
 
   .tab {
     display: flex;
-    justify-content: flex-end;
-    background-color: ${colors.backgroundBlue};
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${(p: Theme) => p.theme.primary};
+
+    .title {
+      font-size: 1rem;
+      margin: 5px 10px;
+    }
 
     .close {
       padding: 5px 20px;
       font-size: 1rem;
       font-weight: bold;
-      color: #ddd;
+      color: ${(p: Theme) => p.theme.color};
       cursor: pointer;
 
       :hover {
-        background-color: ${colors.textRed};
-        color: #ddd;
+        color: ${(p: Theme) => p.theme.color};
+        background-color: ${(p: Theme) => p.theme.textError};
       }
     }
   }
@@ -63,12 +69,12 @@ export const StyledDetails = styled.div`
       border: none;
       border-radius: 3px;
       margin: 0.5rem 0;
-      color: #ddd;
+      color: ${(p: Theme) => p.theme.color};
     }
 
     .notes-area {
       padding: 1rem;
-      background-color: #151515;
+      background-color: ${(p: Theme) => p.theme.gray};
       min-height: 20vh;
       resize: vertical;
 
@@ -82,8 +88,8 @@ export const StyledDetails = styled.div`
     }
 
     .task {
-      color: #ddd;
-      background-color: #151515;
+      background-color: ${(p: Theme) => p.theme.gray};
+      color: ${(p: Theme) => p.theme.color};
       font-weight: bold;
       margin: 1rem 0;
       width: 100%;
@@ -93,15 +99,15 @@ export const StyledDetails = styled.div`
       text-align: center;
 
       :focus {
-        background-color: #151515;
+        background-color: ${(p: Theme) => p.theme.backgroundColor};
       }
 
       ::-webkit-scrollbar {
-        background-color: #202020;
+        background-color: ${(p: Theme) => p.theme.container};
       }
 
       ::-webkit-scrollbar-thumb {
-        background-color: #ddd;
+        background-color: ${(p: Theme) => p.theme.color};
         border-radius: 2px;
       }
     }
@@ -111,14 +117,14 @@ export const StyledDetails = styled.div`
       outline: none;
       border: none;
       background-color: transparent;
-      color: #ddd;
+      color: ${(p: Theme) => p.theme.color};
       cursor: pointer;
 
       option {
-        background-color: #151515;
+        background-color: ${(p: Theme) => p.theme.container};
+        color: ${(p: Theme) => p.theme.color};
         outline: none;
         border: none;
-        color: #ddd;
       }
     }
 
@@ -142,17 +148,18 @@ export const StyledDetails = styled.div`
       padding: 10px 20px;
       border-radius: 2px;
       font-weight: bold;
-      background-color: #151515;
+      background-color: ${(p: Theme) => p.theme.gray};
+      transition: 0.2s;
     }
 
     button:first-child:hover {
-      background-color: #ddd;
-      color: #111;
+      background-color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.backgroundColor};
     }
 
     button:last-child:hover {
-      background-color: ${colors.textRed};
-      color: #ddd;
+      background-color: ${(p: Theme) => p.theme.textError};
+      color: ${(p: Theme) => p.theme.color};
     }
   }
 `;

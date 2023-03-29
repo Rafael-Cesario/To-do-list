@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { Theme } from '../../../styles/themes';
 
 export const StyledTodos = styled.div`
   margin: 2rem;
@@ -9,7 +9,7 @@ export const StyledTodos = styled.div`
   align-self: center;
 
   .todos {
-    background-color: ${colors.backgroundBlack};
+    background-color: ${(p: Theme) => p.theme.container};
     padding: 2rem;
     position: relative;
 
@@ -20,11 +20,11 @@ export const StyledTodos = styled.div`
       margin-bottom: 1rem;
 
       padding: 5px 10px;
-      border-bottom: 2px solid #333;
       transition: 0.1s;
+      border-bottom: 2px solid ${(p: Theme) => p.theme.gray};
 
       :hover {
-        background-color: #191919;
+        background-color: ${(p: Theme) => p.theme.gray};
       }
 
       .status {
@@ -44,7 +44,7 @@ export const StyledTodos = styled.div`
         border: none;
         outline: none;
         background-color: transparent;
-        color: #ddd;
+        color: ${(p: Theme) => p.theme.color};
         text-align: start;
         cursor: pointer;
 
@@ -56,20 +56,16 @@ export const StyledTodos = styled.div`
 
     .next {
       .status {
-        background-color: #444;
-      }
-
-      .task {
-        color: #aaa;
+        background-color: #555;
       }
     }
 
     .current .status {
-      background-color: ${colors.backgroundBlue};
+      background-color: ${(p: Theme) => p.theme.primary};
     }
 
     .done .status {
-      background-color: #209040;
+      background-color: ${(p: Theme) => p.theme.textSuccess};
     }
   }
 `;
