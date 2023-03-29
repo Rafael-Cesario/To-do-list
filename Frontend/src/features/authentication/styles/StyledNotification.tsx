@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
 
 export const StyledNotification = styled.div`
   position: absolute;
@@ -9,11 +9,10 @@ export const StyledNotification = styled.div`
   padding: 1rem;
   width: 30rem;
   max-width: 70vw;
-  background-color: ${colors.backgroundBlack};
-  background-color: #202020;
   animation: notification 0.3s ease-out both;
   z-index: 1;
-  box-shadow: 5px 5px 2px #11111120;
+  background-color: ${(props: { theme: TypeThemeProps }) => props.theme.container};
+  box-shadow: 5px 5px 2px #11111110;
 
   @keyframes notification {
     from {
@@ -38,29 +37,29 @@ export const StyledNotification = styled.div`
 
   .text {
     margin-top: 0.5rem;
-    color: #aaa;
+    color: ${(props: { theme: TypeThemeProps }) => props.theme.color};
   }
 
   .close {
     border: none;
     outline: none;
     background-color: transparent;
-    color: #ddd;
+    color: ${(props: { theme: TypeThemeProps }) => props.theme.color};
     cursor: pointer;
     transition: 0.1s ease-in;
     font-size: 1.1rem;
     padding: 5px 20px;
 
     :hover {
-      background-color: ${colors.textRed};
+      background-color: ${(props: { theme: TypeThemeProps }) => props.theme.textError};
     }
   }
 
   .error {
-    color: #eb2626;
+    color: ${(props: { theme: TypeThemeProps }) => props.theme.textError};
   }
 
   .success {
-    color: forestgreen;
+    color: ${(props: { theme: TypeThemeProps }) => props.theme.textSuccess};
   }
 `;

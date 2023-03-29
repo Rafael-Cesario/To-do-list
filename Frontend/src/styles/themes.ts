@@ -8,6 +8,8 @@ export type TypeThemeProps = {
   border: string;
   primary: string;
   textPrimary: string;
+  textError: string;
+  textSuccess: string;
 };
 
 export type ITheme = {
@@ -23,6 +25,8 @@ export const theme: ITheme = {
     border: '#bbb',
     primary: '#0050aa',
     textPrimary: '#003060',
+    textError: '#bb4040',
+    textSuccess: '#00aa50',
   },
 
   black: {
@@ -32,13 +36,8 @@ export const theme: ITheme = {
     color: '#ddd',
     faded: '#aaa',
     primary: '#0050aa',
-    textPrimary: '#00aaff',
+    textPrimary: '#0070cc',
+    textError: '#bb4040',
+    textSuccess: '#00aa50',
   },
-};
-
-export const colors = {
-  textRed: '#bb4040',
-  textBlue: '#2060cc',
-  backgroundBlue: '#005090',
-  backgroundBlack: '#202020',
 };

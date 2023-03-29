@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
 
 export const StyledLoading = styled.div`
   position: absolute;
@@ -10,7 +10,7 @@ export const StyledLoading = styled.div`
 
   .loading::after {
     content: '';
-    background-color: ${colors.backgroundBlack};
+    background-color: ${(props: { theme: TypeThemeProps }) => props.theme.container};
     width: 5rem;
     height: 2rem;
     position: absolute;

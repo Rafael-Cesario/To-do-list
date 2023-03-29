@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, TypeThemeProps } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
 
 type Theme = { theme: TypeThemeProps };
 
@@ -36,7 +36,7 @@ export const StyledForm = styled.div`
 
     .title {
       border-radius: 3px;
-      background-color: ${colors.backgroundBlue};
+      background-color: ${(props: Theme) => props.theme.primary};
       padding: 0.5rem 4rem;
       font-size: 1rem;
     }
@@ -62,18 +62,18 @@ export const StyledForm = styled.div`
           font-size: 0.8rem;
           margin-bottom: 0.5rem;
           font-weight: bold;
-          color: #ddd;
+          color: ${(props: Theme) => props.theme.color};
         }
 
         input {
           border: none;
           outline: none;
-          background-color: transparent;
-          border-bottom: 2px solid ${colors.backgroundBlue};
           width: 30vw;
           max-width: 300px;
-          color: #ddd;
           font-size: 0.9rem;
+          background-color: transparent;
+          border-bottom: 2px solid ${(props: Theme) => props.theme.textPrimary};
+          color: ${(props: Theme) => props.theme.color};
         }
 
         .password-field {
@@ -95,7 +95,7 @@ export const StyledForm = styled.div`
         }
 
         .error {
-          color: red;
+          color: ${(props: Theme) => props.theme.textError};
           font-weight: bold;
         }
       }
@@ -103,7 +103,7 @@ export const StyledForm = styled.div`
   }
 
   .submit {
-    background-color: ${colors.backgroundBlue};
+    background-color: ${(props: Theme) => props.theme.primary};
     border-radius: 3px;
     width: 100%;
 
