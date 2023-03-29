@@ -34,7 +34,10 @@ export const CreateList = ({ props: { setShowCreateNewList } }: Props) => {
 
   return (
     <StyleCreateList>
-      <h1 className="title">Criar nova lista</h1>
+      <div className="tab">
+        <h1 className="title">Criar nova lista</h1>
+        <button onClick={() => setShowCreateNewList(false)}>x</button>
+      </div>
 
       <input
         type="text"

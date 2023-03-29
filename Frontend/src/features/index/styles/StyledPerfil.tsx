@@ -12,8 +12,6 @@ export const StyledPerfil = styled.div`
     width: 90vw;
     min-height: 80vh;
     background-color: ${(p: Theme) => p.theme.container};
-    border: 10px solid ${(p: Theme) => p.theme.gray};
-    border-top: none;
     overflow: hidden;
     border-radius: 2px;
 
@@ -21,19 +19,34 @@ export const StyledPerfil = styled.div`
     flex-direction: column;
     align-items: center;
 
+    animation: show 0.5s;
+    @keyframes show {
+      from {
+        opacity: 0;
+        top: 10vh;
+      }
+    }
+
     .perfil-tab {
       width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       align-items: center;
       background-color: ${(p: Theme) => p.theme.primary};
 
+      .title {
+        font-size: 1rem;
+        margin: 5px 20px;
+      }
+
       .perfil-close {
-        padding: 5px 20px;
         border: none;
         outline: none;
-        border-radius: 0;
         margin: 0;
+        padding: 5px 20px;
+        border-radius: 0;
+        background-color: transparent;
 
         :hover {
           background-color: ${(p: Theme) => p.theme.textError};
@@ -52,21 +65,27 @@ export const StyledPerfil = styled.div`
       padding: 5px 10px;
       font-weight: bold;
       width: 50%;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: ${(p: Theme) => p.theme.color};
     }
 
     span {
       display: block;
       margin-bottom: 0.2rem;
       font-size: 0.8rem;
+      color: ${(p: Theme) => p.theme.faded};
+      font-weight: normal;
     }
 
-    input {
+    .input-text {
       margin-bottom: 1rem;
       outline: none;
       border: none;
       border-radius: 2px;
-      background-color: ${(p: Theme) => p.theme.gray};
-      color: ${(p: Theme) => p.theme.color};
+      background-color: transparent;
+      border-bottom: 2px solid ${(p: Theme) => p.theme.textPrimary};
     }
 
     .password {
@@ -74,6 +93,7 @@ export const StyledPerfil = styled.div`
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
+      border-bottom: 2px solid ${(p: Theme) => p.theme.textPrimary};
 
       img {
         cursor: pointer;
@@ -84,7 +104,6 @@ export const StyledPerfil = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: ${(p: Theme) => p.theme.gray};
 
         input {
           width: 100%;

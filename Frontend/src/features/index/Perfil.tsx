@@ -21,6 +21,7 @@ export const Perfil = () => {
       {isOpen && (
         <div className="container">
           <div className="perfil-tab">
+            <h1 className="title">Perfil</h1>
             <button className="perfil-close" onClick={() => setIsOpen(false)}>
               x
             </button>
@@ -29,10 +30,10 @@ export const Perfil = () => {
           <h1 className="title">UserName</h1>
 
           <span>Nome</span>
-          <input type="text" />
+          <input className="input-text" type="text" />
 
           <span>Email</span>
-          <input type="text" />
+          <input className="input-text" type="text" />
 
           <div className="password">
             <span>Senha atual</span>
@@ -55,7 +56,7 @@ export const Perfil = () => {
 
           <div className="actions">
             <button>Salvar</button>
-            <button onClick={() => logout()}>Sair</button>
+            <button onClick={() => logout()}>Logout</button>
           </div>
         </div>
       )}

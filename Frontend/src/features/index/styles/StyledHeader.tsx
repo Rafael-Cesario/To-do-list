@@ -15,7 +15,7 @@ export const StyledHeader = styled.div`
     padding: 5px 10px;
     border-radius: 3px;
     border: none;
-    background-color: ${(p: Theme) => p.theme.primary};
+    background-color: ${(p: Theme) => p.theme.container};
     color: ${(p: Theme) => p.theme.color};
 
     :hover {
@@ -42,7 +42,7 @@ export const StyledHeader = styled.div`
     padding: 5px 10px;
     min-width: 30%;
     border-radius: 3px;
-    border: 2px solid ${(p: Theme) => p.theme.gray};
+    border: none;
     background-color: ${(p: Theme) => p.theme.container};
 
     ::placeholder {

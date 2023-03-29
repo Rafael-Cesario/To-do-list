@@ -9,7 +9,6 @@ export const StyleCreateList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem;
   margin-top: 5rem;
   width: 90vw;
   height: 50vh;
@@ -23,15 +22,6 @@ export const StyleCreateList = styled.div`
       top: -10vh;
       opacity: 0;
     }
-  }
-
-  .title {
-    position: absolute;
-    transform: translate(0, -4rem);
-    background-color: ${(p: Theme) => p.theme.primary};
-    font-size: 1.1rem;
-    padding: 5px 20px;
-    border-radius: 3px;
   }
 
   .list-name {
@@ -51,7 +41,7 @@ export const StyleCreateList = styled.div`
   }
 
   .buttons {
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: space-evenly;
 
@@ -69,6 +59,32 @@ export const StyleCreateList = styled.div`
       :hover {
         color: ${(p: Theme) => p.theme.color};
         background-color: ${(p: Theme) => p.theme.primary};
+      }
+    }
+  }
+
+  .tab {
+    background-color: ${(p: Theme) => p.theme.primary};
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: 1rem;
+      margin: 5px 20px;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      padding: 5px 20px;
+      background-color: transparent;
+      color: ${(p: Theme) => p.theme.color};
+      cursor: pointer;
+
+      :hover {
+        background-color: ${(p: Theme) => p.theme.textError};
       }
     }
   }
