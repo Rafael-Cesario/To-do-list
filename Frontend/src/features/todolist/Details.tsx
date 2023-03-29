@@ -30,7 +30,7 @@ export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
       <div className="details">
         <textarea className="task" value={todo.task} onChange={(e) => setTodo({ ...todo, task: e.target.value })} />
 
-        <span>Status: </span>
+        <h2>Status: </h2>
         <select name="status" className="status" value={todo.status} onChange={(e) => setTodo({ ...todo, status: e.target.value })}>
           <option value="next">Próximas</option>
           <option value="current">Em progresso</option>

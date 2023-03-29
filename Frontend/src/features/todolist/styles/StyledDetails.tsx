@@ -26,7 +26,7 @@ export const StyledDetails = styled.div`
     font-weight: bold;
     cursor: pointer;
     background-color: transparent;
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
   }
 
   .tab {
@@ -38,17 +38,18 @@ export const StyledDetails = styled.div`
     .title {
       font-size: 1rem;
       margin: 5px 10px;
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
 
     .close {
       padding: 5px 20px;
       font-size: 1rem;
       font-weight: bold;
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textPrimary};
       cursor: pointer;
 
       :hover {
-        color: ${(p: Theme) => p.theme.color};
+        color: ${(p: Theme) => p.theme.textPrimary};
         background-color: ${(p: Theme) => p.theme.textError};
       }
     }
@@ -61,6 +62,7 @@ export const StyledDetails = styled.div`
     h2,
     input {
       font-size: 1rem;
+      color: ${(p: Theme) => p.theme.textContainer};
     }
 
     textarea {
@@ -69,7 +71,7 @@ export const StyledDetails = styled.div`
       border: none;
       border-radius: 3px;
       margin: 0.5rem 0;
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textContainer};
     }
 
     .notes-area {
@@ -89,7 +91,7 @@ export const StyledDetails = styled.div`
 
     .task {
       background-color: ${(p: Theme) => p.theme.gray};
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textContainer};
       font-weight: bold;
       margin: 1rem 0;
       width: 100%;
@@ -100,6 +102,7 @@ export const StyledDetails = styled.div`
 
       :focus {
         background-color: ${(p: Theme) => p.theme.backgroundColor};
+        color: ${(p: Theme) => p.theme.text};
       }
 
       ::-webkit-scrollbar {
@@ -107,7 +110,7 @@ export const StyledDetails = styled.div`
       }
 
       ::-webkit-scrollbar-thumb {
-        background-color: ${(p: Theme) => p.theme.color};
+        background-color: ${(p: Theme) => p.theme.text};
         border-radius: 2px;
       }
     }
@@ -117,12 +120,12 @@ export const StyledDetails = styled.div`
       outline: none;
       border: none;
       background-color: transparent;
-      color: ${(p: Theme) => p.theme.color};
       cursor: pointer;
+      color: ${(p: Theme) => p.theme.textContainer};
 
       option {
         background-color: ${(p: Theme) => p.theme.container};
-        color: ${(p: Theme) => p.theme.color};
+        color: ${(p: Theme) => p.theme.textContainer};
         outline: none;
         border: none;
       }
@@ -153,13 +156,13 @@ export const StyledDetails = styled.div`
     }
 
     button:first-child:hover {
-      background-color: ${(p: Theme) => p.theme.color};
-      color: ${(p: Theme) => p.theme.backgroundColor};
+      background-color: ${(p: Theme) => p.theme.primary};
+      color: ${(p: Theme) => p.theme.textContainer};
     }
 
     button:last-child:hover {
       background-color: ${(p: Theme) => p.theme.textError};
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.text};
     }
   }
 `;

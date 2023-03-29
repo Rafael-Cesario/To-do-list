@@ -26,13 +26,13 @@ export const StyledHeader = styled.header`
     padding: 5px 20px;
     cursor: pointer;
     font-weight: bold;
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
     background-color: ${(p: Theme) => p.theme.container};
     border-radius: 2px;
 
     :hover {
-      color: ${(p: Theme) => p.theme.backgroundColor};
-      background-color: ${(p: Theme) => p.theme.color};
+      background-color: ${(p: Theme) => p.theme.primary};
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
   }
 
@@ -50,11 +50,11 @@ export const StyledHeader = styled.header`
     min-width: 100px;
     max-width: 500px;
     height: fit-content;
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
     border-radius: 2px;
 
     ::placeholder {
-      color: ${(p: Theme) => p.theme.faded};
+      color: ${(p: Theme) => p.theme.fadedContainer};
     }
   }
 `;

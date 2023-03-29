@@ -1,18 +1,24 @@
-export type TypeThemeNames = 'white' | 'black';
-
 export type TypeThemeProps = {
   backgroundColor: string;
-  color: string;
+  text: string;
   faded: string;
+
   container: string;
+  textContainer: string;
+  fadedContainer: string;
   gray: string;
+
   primary: string;
   textPrimary: string;
+  fadedPrimary: string;
+
   textError: string;
   textSuccess: string;
 };
 
 export type Theme = { theme: TypeThemeProps };
+
+export type TypeThemeNames = 'white' | 'black';
 
 export type ITheme = {
   [key in TypeThemeNames]: TypeThemeProps;
@@ -21,32 +27,37 @@ export type ITheme = {
 export const theme: ITheme = {
   white: {
     backgroundColor: '#ddd',
-    color: '#111',
+    text: '#111',
     faded: '#444',
-    container: '#ccc',
-    gray: '#bbb',
-    primary: '#0050aa',
-    textPrimary: '#003060',
+
+    container: '#222',
+    textContainer: '#DDD',
+    fadedContainer: '#AAA',
+    gray: '#333',
+
+    primary: '#0070cc',
+    textPrimary: '#eee',
+    fadedPrimary: '#ccc',
+
     textError: '#bb4040',
     textSuccess: '#00aa50',
   },
 
   black: {
     backgroundColor: '#111',
-    container: '#151515',
-    gray: '#202020',
-    color: '#ddd',
+    text: '#ddd',
     faded: '#aaa',
+
+    container: '#151515',
+    textContainer: '#DDD',
+    fadedContainer: '#AAA',
+    gray: '#202020',
+
     primary: '#0050aa',
-    textPrimary: '#0070cc',
+    textPrimary: '#eee',
+    fadedPrimary: '#aaa',
+
     textError: '#bb4040',
     textSuccess: '#00aa50',
   },
-};
-
-export const colors = {
-  textRed: '#bb4040',
-  textBlue: '#2060cc',
-  backgroundBlue: '#005090',
-  backgroundBlack: '#202020',
 };

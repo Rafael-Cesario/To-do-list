@@ -13,15 +13,15 @@ export const StyledConfigs = styled.div`
 
   .open-close {
     background-color: ${(p: Theme) => p.theme.container};
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
     margin-right: 1rem;
     font-weight: bold;
     border-radius: 2px;
     cursor: pointer;
 
     :hover {
-      background-color: ${(p: Theme) => p.theme.color};
-      color: ${(p: Theme) => p.theme.backgroundColor};
+      background-color: ${(p: Theme) => p.theme.primary};
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
   }
 
@@ -51,21 +51,22 @@ export const StyledConfigs = styled.div`
 
       .close {
         background-color: transparent;
-        color: ${(p: Theme) => p.theme.color};
+        color: ${(p: Theme) => p.theme.textPrimary};
         font-size: 1rem;
         cursor: pointer;
 
         :hover {
           background-color: ${(p: Theme) => p.theme.textError};
-          color: ${(p: Theme) => p.theme.color};
+          color: ${(p: Theme) => p.theme.textPrimary};
         }
       }
     }
 
     .title {
       text-align: center;
-      font-size: 1.1rem;
+      font-size: 1rem;
       margin: 5px 20px;
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
 
     span,
@@ -75,7 +76,7 @@ export const StyledConfigs = styled.div`
     }
 
     span {
-      color: ${(p: Theme) => p.theme.faded};
+      color: ${(p: Theme) => p.theme.fadedContainer};
       font-weight: normal;
       font-size: 0.8rem;
       display: block;
@@ -85,7 +86,7 @@ export const StyledConfigs = styled.div`
     }
 
     input {
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textContainer};
       margin-bottom: 2rem;
       border-radius: 2px;
       font-size: 1rem;
@@ -110,18 +111,18 @@ export const StyledConfigs = styled.div`
     button {
       background-color: ${(p: Theme) => p.theme.gray};
       border-radius: 2px;
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textContainer};
       height: fit-content;
     }
 
     button:first-child:hover {
-      background-color: ${(p: Theme) => p.theme.color};
-      color: ${(p: Theme) => p.theme.backgroundColor};
+      background-color: ${(p: Theme) => p.theme.primary};
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
 
     button:last-child {
-      color: ${(p: Theme) => p.theme.color};
       background-color: ${(p: Theme) => p.theme.textError};
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
   }
 

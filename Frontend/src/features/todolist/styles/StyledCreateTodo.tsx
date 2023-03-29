@@ -9,20 +9,20 @@ export const StyledCreateTodo = styled.div`
     outline: none;
     border: none;
     background-color: ${(p: Theme) => p.theme.container};
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
     width: 80%;
     margin-right: 1rem;
     padding: 5px 20px;
 
     ::placeholder {
-      color: ${(p: Theme) => p.theme.faded};
+      color: ${(p: Theme) => p.theme.fadedContainer};
     }
   }
 
   .submit-todo {
     width: 20%;
     background-color: ${(p: Theme) => p.theme.primary};
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textPrimary};
     outline: none;
     border: none;
     border-radius: 2px;
@@ -30,8 +30,8 @@ export const StyledCreateTodo = styled.div`
     cursor: pointer;
 
     :hover {
-      background-color: ${(p: Theme) => p.theme.color};
-      color: ${(p: Theme) => p.theme.backgroundColor};
+      background-color: ${(p: Theme) => p.theme.container};
+      color: ${(p: Theme) => p.theme.textContainer};
     }
   }
 `;

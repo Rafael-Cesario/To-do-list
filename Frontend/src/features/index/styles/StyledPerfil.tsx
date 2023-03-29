@@ -38,6 +38,7 @@ export const StyledPerfil = styled.div`
       .title {
         font-size: 1rem;
         margin: 5px 20px;
+        color: ${(p: Theme) => p.theme.textPrimary};
       }
 
       .perfil-close {
@@ -50,7 +51,7 @@ export const StyledPerfil = styled.div`
 
         :hover {
           background-color: ${(p: Theme) => p.theme.textError};
-          color: ${(p: Theme) => p.theme.color};
+          color: ${(p: Theme) => p.theme.textPrimary};
         }
       }
     }
@@ -58,6 +59,7 @@ export const StyledPerfil = styled.div`
     .title {
       margin: 2rem 0;
       font-size: 1.2rem;
+      color: ${(p: Theme) => p.theme.textContainer};
     }
 
     span,
@@ -68,14 +70,14 @@ export const StyledPerfil = styled.div`
       background-color: transparent;
       border: none;
       outline: none;
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textContainer};
     }
 
     span {
       display: block;
       margin-bottom: 0.2rem;
       font-size: 0.8rem;
-      color: ${(p: Theme) => p.theme.faded};
+      color: ${(p: Theme) => p.theme.fadedContainer};
       font-weight: normal;
     }
 
@@ -85,7 +87,7 @@ export const StyledPerfil = styled.div`
       border: none;
       border-radius: 2px;
       background-color: transparent;
-      border-bottom: 2px solid ${(p: Theme) => p.theme.textPrimary};
+      border-bottom: 2px solid ${(p: Theme) => p.theme.textContainer};
     }
 
     .password {
@@ -93,7 +95,7 @@ export const StyledPerfil = styled.div`
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
-      border-bottom: 2px solid ${(p: Theme) => p.theme.textPrimary};
+      border-bottom: 2px solid ${(p: Theme) => p.theme.textContainer};
 
       img {
         cursor: pointer;
@@ -126,15 +128,15 @@ export const StyledPerfil = styled.div`
       }
 
       button:first-child:hover {
-        background-color: ${(p: Theme) => p.theme.color};
-        color: ${(p: Theme) => p.theme.container};
+        background-color: ${(p: Theme) => p.theme.primary};
+        color: ${(p: Theme) => p.theme.textPrimary};
         border: none;
       }
 
       button:last-child:hover {
         border: none;
         background-color: ${(p: Theme) => p.theme.textError};
-        color: ${(p: Theme) => p.theme.color};
+        color: ${(p: Theme) => p.theme.textPrimary};
       }
     }
   }
