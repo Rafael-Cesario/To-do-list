@@ -50,15 +50,16 @@ export const Configs = () => {
       {isOpen && (
         <div className="configs">
           <div className="tab">
+            <h1 className="title">Configs</h1>
             <button className="close" onClick={() => setIsOpen(false)}>
               x
             </button>
           </div>
 
-          <h1 className="title">Configs</h1>
-
-          <span>Nome da lista</span>
-          <input type="text" value={listName} onChange={(e) => setListName(e.target.value)} />
+          <div className="config">
+            <span>Nome da lista</span>
+            <input type="text" value={listName} onChange={(e) => setListName(e.target.value)} />
+          </div>
 
           <div className="actions">
             <button onClick={() => saveConfigs()}>Salvar</button>

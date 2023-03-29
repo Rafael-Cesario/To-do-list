@@ -12,6 +12,8 @@ export type TypeThemeProps = {
   textSuccess: string;
 };
 
+export type Theme = { theme: TypeThemeProps };
+
 export type ITheme = {
   [key in TypeThemeNames]: TypeThemeProps;
 };

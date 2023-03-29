@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { Theme } from '../../../styles/themes';
 
 export const StyledConfigs = styled.div`
   button,
@@ -12,16 +12,16 @@ export const StyledConfigs = styled.div`
   }
 
   .open-close {
-    background-color: ${colors.backgroundBlack};
+    background-color: ${(p: Theme) => p.theme.container};
+    color: ${(p: Theme) => p.theme.color};
     margin-right: 1rem;
     font-weight: bold;
     border-radius: 2px;
-    color: #ddd;
     cursor: pointer;
 
     :hover {
-      background-color: #ddd;
-      color: #222;
+      background-color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.backgroundColor};
     }
   }
 
@@ -38,33 +38,34 @@ export const StyledConfigs = styled.div`
     flex-direction: column;
     align-items: center;
 
-    background-color: ${colors.backgroundBlack};
+    background-color: ${(p: Theme) => p.theme.container};
     border-radius: 2px;
     overflow: hidden;
 
     .tab {
-      background-color: ${colors.backgroundBlue};
+      background-color: ${(p: Theme) => p.theme.primary};
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
 
       .close {
         background-color: transparent;
-        color: #ddd;
+        color: ${(p: Theme) => p.theme.color};
         font-size: 1rem;
         cursor: pointer;
 
         :hover {
-          background-color: ${colors.textRed};
-          color: #ddd;
+          background-color: ${(p: Theme) => p.theme.textError};
+          color: ${(p: Theme) => p.theme.color};
         }
       }
     }
 
     .title {
       text-align: center;
-      font-size: 1.2rem;
-      margin: 2rem 0 5rem 0;
+      font-size: 1.1rem;
+      margin: 5px 20px;
     }
 
     span,
@@ -74,8 +75,8 @@ export const StyledConfigs = styled.div`
     }
 
     span {
-      color: #aaa;
-      font-weight: bold;
+      color: ${(p: Theme) => p.theme.faded};
+      font-weight: normal;
       font-size: 0.8rem;
       display: block;
       text-align: start;
@@ -84,16 +85,21 @@ export const StyledConfigs = styled.div`
     }
 
     input {
-      color: #ddd;
-      background-color: transparent;
+      color: ${(p: Theme) => p.theme.color};
       margin-bottom: 2rem;
       border-radius: 2px;
       font-size: 1rem;
-
-      :focus {
-        background-color: #333;
-      }
+      font-weight: normal;
+      background-color: ${(p: Theme) => p.theme.gray};
     }
+  }
+
+  .config {
+    margin: 5rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .actions {
@@ -102,20 +108,20 @@ export const StyledConfigs = styled.div`
     justify-content: space-between;
 
     button {
-      background-color: #333;
+      background-color: ${(p: Theme) => p.theme.gray};
       border-radius: 2px;
-      color: #ddd;
+      color: ${(p: Theme) => p.theme.color};
       height: fit-content;
     }
 
     button:first-child:hover {
-      background-color: #ddd;
-      color: #111;
+      background-color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.backgroundColor};
     }
 
     button:last-child {
-      background-color: ${colors.textRed};
-      color: #ddd;
+      color: ${(p: Theme) => p.theme.color};
+      background-color: ${(p: Theme) => p.theme.textError};
     }
   }
 
