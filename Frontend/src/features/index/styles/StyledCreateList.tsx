@@ -11,7 +11,6 @@ export const StyleCreateList = styled.div`
   align-items: center;
   margin-top: 5rem;
   width: 90vw;
-  height: 50vh;
   min-height: 150px;
   position: absolute;
   top: 10vh;
@@ -28,7 +27,7 @@ export const StyleCreateList = styled.div`
     outline: none;
     border: none;
     border-bottom: 2px solid ${(p: Theme) => p.theme.textPrimary};
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textPrimary};
     background-color: transparent;
     padding: 5px 20px;
     margin: 5rem;
@@ -36,7 +35,7 @@ export const StyleCreateList = styled.div`
     width: 50%;
 
     ::placeholder {
-      color: ${(p: Theme) => p.theme.faded};
+      color: ${(p: Theme) => p.theme.fadedContainer};
     }
   }
 
@@ -49,16 +48,18 @@ export const StyleCreateList = styled.div`
       border: none;
       outline: none;
       cursor: pointer;
-      background-color: transparent;
-      color: ${(p: Theme) => p.theme.faded};
+      background-color: ${(p: Theme) => p.theme.gray};
+      color: ${(p: Theme) => p.theme.textContainer};
       font-weight: bold;
       padding: 10px 20px;
       border-radius: 2px;
       width: 100%;
+      margin: 0.2rem;
+      margin-bottom: 5rem;
 
       :hover {
-        color: ${(p: Theme) => p.theme.color};
         background-color: ${(p: Theme) => p.theme.primary};
+        color: ${(p: Theme) => p.theme.textPrimary};
       }
     }
   }
@@ -73,6 +74,7 @@ export const StyleCreateList = styled.div`
     .title {
       font-size: 1rem;
       margin: 5px 20px;
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
 
     button {
@@ -80,7 +82,7 @@ export const StyleCreateList = styled.div`
       outline: none;
       padding: 5px 20px;
       background-color: transparent;
-      color: ${(p: Theme) => p.theme.color};
+      color: ${(p: Theme) => p.theme.textPrimary};
       cursor: pointer;
 
       :hover {

@@ -15,6 +15,10 @@ export const StyledTags = styled.div`
     display: flex;
     justify-content: space-between;
 
+    span {
+      color: ${(p: Theme) => p.theme.textContainer};
+    }
+
     .remove-tag {
       width: fit-content;
       margin-left: 0.5rem;
@@ -28,7 +32,7 @@ export const StyledTags = styled.div`
   .new-tag {
     outline: none;
     border: none;
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
     font-weight: bold;
     background-color: ${(p: Theme) => p.theme.gray};
     padding: 5px 10px;

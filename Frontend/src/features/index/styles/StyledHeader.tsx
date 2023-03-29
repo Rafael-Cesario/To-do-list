@@ -16,11 +16,11 @@ export const StyledHeader = styled.div`
     border-radius: 3px;
     border: none;
     background-color: ${(p: Theme) => p.theme.container};
-    color: ${(p: Theme) => p.theme.color};
+    color: ${(p: Theme) => p.theme.textContainer};
 
     :hover {
-      background-color: ${(p: Theme) => p.theme.color};
-      color: ${(p: Theme) => p.theme.backgroundColor};
+      background-color: ${(p: Theme) => p.theme.primary};
+      color: ${(p: Theme) => p.theme.textPrimary};
     }
   }
 
@@ -38,15 +38,16 @@ export const StyledHeader = styled.div`
 
   .search {
     outline: none;
-    color: ${(p: Theme) => p.theme.color};
     padding: 5px 10px;
     min-width: 30%;
     border-radius: 3px;
     border: none;
     background-color: ${(p: Theme) => p.theme.container};
+    color: ${(p: Theme) => p.theme.textContainer};
+    font-weight: bold;
 
     ::placeholder {
-      color: ${(p: Theme) => p.theme.faded};
+      color: ${(p: Theme) => p.theme.fadedContainer};
     }
   }
 

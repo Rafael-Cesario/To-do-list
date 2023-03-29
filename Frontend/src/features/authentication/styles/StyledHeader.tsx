@@ -18,15 +18,14 @@ export const StyledHeader = styled.header`
     border-radius: 3px;
     margin: 0 0.2rem;
 
-    color: ${(props: Theme) => props.theme.color};
+    color: ${(props: Theme) => props.theme.textPrimary};
     background-color: ${(props: Theme) => props.theme.primary};
     border: 2px solid transparent;
     box-shadow: 5px 5px 2px #10101010;
 
     :hover {
-      background-color: transparent;
-      border: 2px solid ${(props: Theme) => props.theme.primary};
-      color: ${(props: Theme) => props.theme.textPrimary};
+      color: ${(props: Theme) => props.theme.textContainer};
+      background-color: ${(p: Theme) => p.theme.container};
     }
 
     :active {
@@ -35,8 +34,7 @@ export const StyledHeader = styled.header`
   }
 
   .active {
-    background-color: transparent;
-    border: 2px solid ${(props: Theme) => props.theme.primary};
-    color: ${(props: Theme) => props.theme.textPrimary};
+    background-color: ${(p: Theme) => p.theme.container};
+    color: ${(props: Theme) => props.theme.textContainer};
   }
 `;

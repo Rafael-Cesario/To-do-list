@@ -37,6 +37,7 @@ export const StyledForm = styled.div`
     .title {
       border-radius: 3px;
       background-color: ${(props: Theme) => props.theme.primary};
+      color: ${(p: Theme) => p.theme.textPrimary};
       padding: 0.5rem 4rem;
       font-size: 1rem;
     }
@@ -62,7 +63,7 @@ export const StyledForm = styled.div`
           font-size: 0.8rem;
           margin-bottom: 0.5rem;
           font-weight: bold;
-          color: ${(props: Theme) => props.theme.color};
+          color: ${(props: Theme) => props.theme.fadedContainer};
         }
 
         input {
@@ -72,8 +73,8 @@ export const StyledForm = styled.div`
           max-width: 300px;
           font-size: 0.9rem;
           background-color: transparent;
-          border-bottom: 2px solid ${(props: Theme) => props.theme.textPrimary};
-          color: ${(props: Theme) => props.theme.color};
+          border-bottom: 2px solid ${(props: Theme) => props.theme.primary};
+          color: ${(props: Theme) => props.theme.textContainer};
         }
 
         .password-field {

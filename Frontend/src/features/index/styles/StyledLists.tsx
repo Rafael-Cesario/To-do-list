@@ -15,6 +15,7 @@ export const StyledLists = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 90vw;
+    justify-content: center;
   }
 
   .list {
@@ -27,7 +28,7 @@ export const StyledLists = styled.div`
     width: 20rem;
 
     border-radius: 2px;
-    border: 2px solid ${(p: Theme) => p.theme.gray};
+    box-shadow: 5px 5px 2px #10101010;
     background-color: ${(p: Theme) => p.theme.container};
     color: #fff;
 

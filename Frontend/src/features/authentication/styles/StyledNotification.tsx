@@ -37,14 +37,14 @@ export const StyledNotification = styled.div`
 
   .text {
     margin-top: 0.5rem;
-    color: ${(props: { theme: TypeThemeProps }) => props.theme.color};
+    color: ${(props: { theme: TypeThemeProps }) => props.theme.text};
   }
 
   .close {
     border: none;
     outline: none;
     background-color: transparent;
-    color: ${(props: { theme: TypeThemeProps }) => props.theme.color};
+    color: ${(props: { theme: TypeThemeProps }) => props.theme.text};
     cursor: pointer;
     transition: 0.1s ease-in;
     font-size: 1.1rem;

@@ -44,7 +44,7 @@ export const StyledTodos = styled.div`
         border: none;
         outline: none;
         background-color: transparent;
-        color: ${(p: Theme) => p.theme.color};
+        color: ${(p: Theme) => p.theme.textContainer};
         text-align: start;
         cursor: pointer;
 

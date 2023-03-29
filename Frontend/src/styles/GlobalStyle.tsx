@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: TypeThemeProps }>`
 
   body {
     background-color: ${(props) => props.theme.backgroundColor};
-    color: ${(props) => props.theme.color};
+    color: ${(props) => props.theme.text};
 
     ::-webkit-scrollbar {
       background-color: ${(props) => props.theme.backgroundColor};
