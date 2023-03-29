@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyledTitle = styled.main`
   display: flex;
@@ -12,7 +15,7 @@ export const StyledTitle = styled.main`
 
   .title {
     p {
-      color: #888;
+      color: ${(props: Theme) => props.theme.faded};
       font-weight: bold;
       font-size: 0.8rem;
       margin-top: 0.5rem;

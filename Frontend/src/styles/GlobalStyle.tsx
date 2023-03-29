@@ -14,11 +14,11 @@ export const GlobalStyle = createGlobalStyle<{ theme: TypeThemeProps }>`
     color: ${(props) => props.theme.color};
 
     ::-webkit-scrollbar {
-      background-color: #101010;
+      background-color: ${(props) => props.theme.backgroundColor};
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: #202020;
+      background-color: ${(props) => props.theme.backgroundColor};
       border-radius: 3px;
     }
   }

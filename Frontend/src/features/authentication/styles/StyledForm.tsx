@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { colors, TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyledForm = styled.div`
   display: flex;
@@ -8,12 +10,13 @@ export const StyledForm = styled.div`
   justify-content: space-between;
   margin: 4rem 2rem;
   padding: 2rem 10rem;
-  background-color: ${colors.backgroundBlack};
-  animation: showForm 0.3s ease-in both;
-  box-shadow: 5px 5px 2px #111;
-  border-radius: 3px;
   position: relative;
+  background-color: ${(props: Theme) => props.theme.container};
+  border: 3px solid ${(props: Theme) => props.theme.border};
+  border-radius: 3px;
+  box-shadow: 5px 5px 2px #10101020;
 
+  animation: showForm 0.3s ease-in both;
   @keyframes showForm {
     from {
       opacity: 0;

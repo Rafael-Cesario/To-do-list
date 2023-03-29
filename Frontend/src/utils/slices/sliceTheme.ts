@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TypeThemeNames } from '../../styles/themes';
 
 const initialState: { theme: TypeThemeNames } = {
-  theme: 'white',
+  theme: 'black',
 };
 
 export const sliceTheme = createSlice({

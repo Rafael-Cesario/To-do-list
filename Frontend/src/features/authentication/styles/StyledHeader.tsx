@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { colors } from '../../../styles/themes';
+import { TypeThemeProps } from '../../../styles/themes';
+
+type Theme = { theme: TypeThemeProps };
 
 export const StyledHeader = styled.header`
   display: flex;
@@ -10,17 +12,21 @@ export const StyledHeader = styled.header`
   button {
     padding: 0.3rem 1rem;
     cursor: pointer;
-    background-color: transparent;
     outline: none;
-    border: none;
-    color: #ddd;
     font-weight: bold;
     transition: 0.2s;
     border-radius: 3px;
-    box-shadow: 5px 5px 2px #111;
+    margin: 0 0.2rem;
+
+    color: ${(props: Theme) => props.theme.color};
+    background-color: ${(props: Theme) => props.theme.primary};
+    border: 2px solid transparent;
+    box-shadow: 5px 5px 2px #10101010;
 
     :hover {
-      background-color: ${colors.backgroundBlue};
+      background-color: transparent;
+      border: 2px solid ${(props: Theme) => props.theme.primary};
+      color: ${(props: Theme) => props.theme.textPrimary};
     }
 
     :active {
@@ -29,6 +35,8 @@ export const StyledHeader = styled.header`
   }
 
   .active {
-    background-color: ${colors.backgroundBlue};
+    background-color: transparent;
+    border: 2px solid ${(props: Theme) => props.theme.primary};
+    color: ${(props: Theme) => props.theme.textPrimary};
   }
 `;
