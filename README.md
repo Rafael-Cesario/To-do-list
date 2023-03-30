@@ -15,8 +15,6 @@
 ## Features
 
 - Create lists, todos, tags and notes.
-- Notification for events in the app.
-- Filters.
 - Dark and white Theme.
 
 
