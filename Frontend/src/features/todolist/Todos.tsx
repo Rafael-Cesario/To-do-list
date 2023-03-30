@@ -23,11 +23,31 @@ interface Props {
   };
 }
 
+const statusMap = {
+  next: 'próximas',
+  current: 'em progresso',
+  done: 'finalizadas',
+};
+
 export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
   const { todos } = useSelector((state: Store) => state.todos);
   const { listName } = useParams();
   const { sendNotification } = useNotification();
   const dispatch = useDispatch();
+
+  const { filter } = useSelector((state: Store) => state.filter);
+
+  const todosFiltred = todos.filter((todo) => {
+    const sameTask = todo.task.toLowerCase().includes(filter.toLowerCase());
+    if (sameTask) return todo;
+
+    const status = statusMap[todo.status as keyof typeof statusMap];
+    const sameStatus = status.includes(filter.toLowerCase());
+    if (sameStatus) return todo;
+
+    const hasTag = todo.tags.find((tag) => tag.match(new RegExp(filter, 'i')));
+    if (hasTag) return todo;
+  });
 
   const loadTodos = async () => {
     try {
@@ -59,7 +79,7 @@ export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
       <div className="todos">
         {todos.length < 1 && <p>Suas tarefas aparecerão aqui.</p>}
 
-        {todos.map((todo, index) => (
+        {todosFiltred.map((todo, index) => (
           <div
             key={todo.task + index}
             className={`todo ${todo.status}`}
