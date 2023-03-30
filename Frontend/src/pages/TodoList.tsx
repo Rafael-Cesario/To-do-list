@@ -9,7 +9,7 @@ import { useTheme } from '../utils/hooks/useTheme';
 
 const TodoList = () => {
   const { notification } = useNotification();
-  const [showDetails, setShowDetails] = useState({ isOpen: false, todoIndex: 0 });
+  const [showDetails, setShowDetails] = useState({ isOpen: false, todoId: '' });
 
   const { loadTheme } = useTheme();
 

@@ -7,7 +7,7 @@ import { UserStorage } from '../../utils/localStorageKeys';
 interface Props {
   props: {
     todo: ITodoModel;
-    setShowDetails: (newState: { isOpen: boolean; todoIndex: number }) => void;
+    setShowDetails: (newState: { isOpen: boolean; todoId: string }) => void;
   };
 }
 
@@ -33,7 +33,7 @@ export const UpdateTodo = ({ props: { todo, setShowDetails } }: Props) => {
 
     if (error) return sendNotification('error', error);
 
-    setShowDetails({ isOpen: false, todoIndex: 0 });
+    setShowDetails({ isOpen: false, todoId: '' });
     sendNotification('success', 'Tarefa Salva');
   };
 

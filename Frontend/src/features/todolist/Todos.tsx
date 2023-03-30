@@ -13,11 +13,11 @@ import { sliceTodos } from './utils/sliceTodos';
 
 interface Props {
   props: {
-    showDetails: { isOpen: boolean; todoIndex: number };
+    showDetails: { isOpen: boolean; todoId: string };
     setShowDetails: React.Dispatch<
       React.SetStateAction<{
         isOpen: boolean;
-        todoIndex: number;
+        todoId: string;
       }>
     >;
   };
@@ -84,7 +84,7 @@ export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
             key={todo.task + index}
             className={`todo ${todo.status}`}
             data-id={todo.id}
-            onClick={() => setShowDetails({ isOpen: !showDetails.isOpen, todoIndex: index })}>
+            onClick={() => setShowDetails({ isOpen: !showDetails.isOpen, todoId: todo.id })}>
             <div className={`status`} data-status={todo.status} />
             <button className={`task`}>{todo.task}</button>
           </div>

@@ -7,7 +7,7 @@ import { UserStorage } from '../../utils/localStorageKeys';
 interface Props {
   props: {
     id: string;
-    setShowDetails: (newState: { isOpen: boolean; todoIndex: number }) => void;
+    setShowDetails: (newState: { isOpen: boolean; todoId: string }) => void;
   };
 }
 
@@ -31,17 +31,14 @@ export const DeleteTodo = ({ props: { id, setShowDetails } }: Props) => {
     if (error) return sendNotification('error', error);
 
     sendNotification('success', 'Sua tarefa foi excluida');
-    setShowDetails({ isOpen: false, todoIndex: 0 });
+    setShowDetails({ isOpen: false, todoId: '' });
   };
 
   return (
     <>
       {showConfirmButton || <button onClick={() => setShowConfirmButton(true)}>Deletar</button>}
       {showConfirmButton && (
-        <button
-          autoFocus={true}
-          onBlur={() => setShowConfirmButton(false)}
-          onClick={() => deleteTodo()}>
+        <button autoFocus={true} onBlur={() => setShowConfirmButton(false)} onClick={() => deleteTodo()}>
           Clique novamente para deletar sua tarefa, ou fora para cancelar.
         </button>
       )}

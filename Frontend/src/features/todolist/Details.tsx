@@ -9,20 +9,20 @@ import { UpdateTodo } from './UpdateTodo';
 
 interface Props {
   props: {
-    showDetails: { isOpen: boolean; todoIndex: number };
-    setShowDetails: React.Dispatch<React.SetStateAction<{ isOpen: boolean; todoIndex: number }>>;
+    showDetails: { isOpen: boolean; todoId: string };
+    setShowDetails: React.Dispatch<React.SetStateAction<{ isOpen: boolean; todoId: string }>>;
   };
 }
 
 export const Details = ({ props: { showDetails, setShowDetails } }: Props) => {
   const { todos } = useSelector((state: Store) => state.todos);
-  const [todo, setTodo] = useState<ITodoModel>(todos[showDetails.todoIndex]);
+  const [todo, setTodo] = useState<ITodoModel>(todos.filter((todo) => todo.id === showDetails.todoId)[0]);
 
   return (
     <StyledDetails>
       <div className="tab">
         <h1 className="title">Detalhes</h1>
-        <button onClick={() => setShowDetails({ isOpen: false, todoIndex: 0 })} className="close">
+        <button onClick={() => setShowDetails({ isOpen: false, todoId: '' })} className="close">
           x
         </button>
       </div>
