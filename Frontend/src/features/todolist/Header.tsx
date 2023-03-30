@@ -1,18 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { StyledHeader } from './styles/StyledHeader';
 import { Store } from '../../utils/store';
 import { Configs } from './configs';
-import { sliceFilter } from '../index/utils/sliceFilter';
 
-export const Header = () => {
+interface Props {
+  props: {
+    filter: string;
+    setFilter: (state: string) => void;
+  };
+}
+
+export const Header = ({ props: { filter, setFilter } }: Props) => {
   const { listName } = useParams();
 
   const { todos } = useSelector((state: Store) => state.todos);
   const totalTodos = todos.length;
-
-  const { filter } = useSelector((state: Store) => state.filter);
-  const dispatch = useDispatch();
 
   return (
     <StyledHeader>
@@ -28,7 +31,7 @@ export const Header = () => {
         <Configs />
         <input
           value={filter}
-          onChange={(e) => dispatch(sliceFilter.actions.changeFilter({ filter: e.target.value }))}
+          onChange={(e) => setFilter(e.target.value)}
           className="search"
           type="text"
           placeholder="Busque por uma tag, tarefa, ou status"

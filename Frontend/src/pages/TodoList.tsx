@@ -10,7 +10,7 @@ import { useTheme } from '../utils/hooks/useTheme';
 const TodoList = () => {
   const { notification } = useNotification();
   const [showDetails, setShowDetails] = useState({ isOpen: false, todoId: '' });
-
+  const [filter, setFilter] = useState('');
   const { loadTheme } = useTheme();
 
   useEffect(() => {
@@ -19,8 +19,8 @@ const TodoList = () => {
 
   return (
     <StyledTodoList>
-      <Header />
-      <Todos props={{ setShowDetails, showDetails }} />
+      <Header props={{ filter, setFilter }} />
+      <Todos props={{ setShowDetails, showDetails, filter }} />
 
       {showDetails.isOpen && <Details props={{ setShowDetails, showDetails }} />}
       {notification.isOpen && <Notification />}

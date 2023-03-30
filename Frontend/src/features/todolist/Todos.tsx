@@ -13,13 +13,9 @@ import { sliceTodos } from './utils/sliceTodos';
 
 interface Props {
   props: {
+    filter: string;
     showDetails: { isOpen: boolean; todoId: string };
-    setShowDetails: React.Dispatch<
-      React.SetStateAction<{
-        isOpen: boolean;
-        todoId: string;
-      }>
-    >;
+    setShowDetails: React.Dispatch<React.SetStateAction<{ isOpen: boolean; todoId: string }>>;
   };
 }
 
@@ -29,13 +25,11 @@ const statusMap = {
   done: 'finalizadas',
 };
 
-export const Todos = ({ props: { showDetails, setShowDetails } }: Props) => {
+export const Todos = ({ props: { showDetails, setShowDetails, filter } }: Props) => {
   const { todos } = useSelector((state: Store) => state.todos);
   const { listName } = useParams();
   const { sendNotification } = useNotification();
   const dispatch = useDispatch();
-
-  const { filter } = useSelector((state: Store) => state.filter);
 
   const todosFiltred = todos.filter((todo) => {
     const sameTask = todo.task.toLowerCase().includes(filter.toLowerCase());
