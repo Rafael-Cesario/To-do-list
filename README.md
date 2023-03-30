@@ -45,10 +45,10 @@ BackEnd:
 
 ## Screenshots
 <div display="flex">
-  <img src="https://user-images.githubusercontent.com/88716893/228775105-36fdf6dc-beaf-4c86-b8cf-8ce5c4eee030.png" alt="project's image" width="300px"/>
-  <img src="https://user-images.githubusercontent.com/88716893/228775457-db88dc70-614b-4a2f-a8eb-cf099f43dd07.png" alt="project's image" width="300px"/>
-  <img src="https://user-images.githubusercontent.com/88716893/228775606-c7fd0cbd-7c12-46f9-a436-4915fb86cadc.png" alt="project's image" width="300px"/>
-  <img src="https://user-images.githubusercontent.com/88716893/228775621-e278a294-0c85-42f4-ae25-30924647e809.png" alt="project's image" width="300px"/>
-  <img src="https://user-images.githubusercontent.com/88716893/228775136-a21ea497-15b8-443c-bc03-454867a9dc51.png" alt="project's image" width="300px"/>
-  <img src="https://user-images.githubusercontent.com/88716893/228775164-05b3ac88-3d78-4b64-bd3d-732114edcfa4.png" alt="project's image" width="300px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775105-36fdf6dc-beaf-4c86-b8cf-8ce5c4eee030.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775457-db88dc70-614b-4a2f-a8eb-cf099f43dd07.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775606-c7fd0cbd-7c12-46f9-a436-4915fb86cadc.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775621-e278a294-0c85-42f4-ae25-30924647e809.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775136-a21ea497-15b8-443c-bc03-454867a9dc51.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775164-05b3ac88-3d78-4b64-bd3d-732114edcfa4.png" alt="project's image" width="350px"/>
 </div>
