@@ -15,8 +15,6 @@
 ## Features
 
 - Create lists, todos, tags and notes.
-- Notification for events in the app.
-- Filters.
 - Dark and white Theme.
 
 
@@ -37,6 +35,8 @@ FrontEnd:
 - ✅ Notification component, hook useNotification.
 - ✅ Form show errors and invalid fields.
 - ✅ Pages: Authentication, lists, todos.
+- ✅ Graphql Queries and cache update.
+- ✅ Redux slices: lists, todos, notification, filter, theme.
 - ✅ Dark and white theme with styled-components and localStorage.
 - ❌ Tests.
 
