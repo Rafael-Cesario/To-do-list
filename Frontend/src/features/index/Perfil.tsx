@@ -1,62 +1,29 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { localStorageKeys } from '../../utils/localStorageKeys';
+import { Side } from './Side';
 import { StyledPerfil } from './styles/StyledPerfil';
+import { Tab } from './Tab';
+import { TabTheme } from './TabTheme';
+import { TabUser } from './TabUser';
 
 export const Perfil = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const logout = () => {
-    localStorage.removeItem(localStorageKeys.user);
-    navigate('/');
-  };
+  const [tab, setTab] = useState('theme');
 
   return (
     <StyledPerfil>
-      <button onClick={() => setIsOpen(!isOpen)}>Perfil</button>
+      <button className="perfil-button" onClick={() => setIsOpen(!isOpen)}>
+        Perfil
+      </button>
 
       {isOpen && (
         <div className="container">
-          <div className="perfil-tab">
-            <h1 className="title">Perfil</h1>
-            <button className="perfil-close" onClick={() => setIsOpen(false)}>
-              x
-            </button>
-          </div>
+          <Tab props={{ title: 'Perfil', setIsOpen }} />
 
-          <h1 className="title">UserName</h1>
+          <div className="content">
+            <Side props={{ tab, setTab }} />
 
-          <span>Nome</span>
-          <input className="input-text" type="text" />
-
-          <span>Email</span>
-          <input className="input-text" type="text" />
-
-          <div className="password">
-            <span>Senha atual</span>
-            <div>
-              <input type={showPassword ? 'text' : 'password'} />
-
-              {showPassword && <img onClick={() => setShowPassword(!showPassword)} src="/icons/eye.png" alt="eye icon" width={15} height={15} />}
-              {showPassword || <img onClick={() => setShowPassword(!showPassword)} src="/icons/hidden.png" alt="eye icon" width={15} height={15} />}
-            </div>
-          </div>
-
-          <div className="password">
-            <span>Nova senha</span>
-            <div>
-              <input type={showPassword ? 'text' : 'password'} />
-              {showPassword && <img onClick={() => setShowPassword(!showPassword)} src="/icons/eye.png" alt="eye icon" width={15} height={15} />}
-              {showPassword || <img onClick={() => setShowPassword(!showPassword)} src="/icons/hidden.png" alt="eye icon" width={15} height={15} />}
-            </div>
-          </div>
-
-          <div className="actions">
-            <button>Salvar</button>
-            <button onClick={() => logout()}>Logout</button>
+            {tab === 'theme' && <TabTheme />}
+            {tab === 'user' && <TabUser />}
           </div>
         </div>
       )}
