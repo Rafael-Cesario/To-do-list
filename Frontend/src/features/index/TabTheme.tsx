@@ -1,16 +1,8 @@
-import { useDispatch } from 'react-redux';
-import { TypeThemeNames } from '../../styles/themes';
-import { localStorageKeys } from '../../utils/localStorageKeys';
-import { sliceTheme } from '../../utils/slices/sliceTheme';
+import { useTheme } from '../../utils/hooks/useTheme';
 import { StyledTheme } from './styles/StyledTheme';
 
 export const TabTheme = () => {
-  const dispatch = useDispatch();
-
-  const setTheme = (newTheme: TypeThemeNames) => {
-    dispatch(sliceTheme.actions.changeTheme({ newTheme }));
-    localStorage.setItem(localStorageKeys.theme, newTheme);
-  };
+  const { setTheme } = useTheme();
 
   return (
     <StyledTheme>
