@@ -6,6 +6,7 @@ export const StyledTheme = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+  color: ${(p: Theme) => p.theme.textContainer};
 
   .faded {
     margin: 5px 10px;

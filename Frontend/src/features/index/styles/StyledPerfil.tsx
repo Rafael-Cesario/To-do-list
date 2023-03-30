@@ -8,7 +8,7 @@ export const StyledPerfil = styled.div`
     font-weight: bold;
     padding: 5px 20px;
     background-color: ${(p: Theme) => p.theme.container};
-    color: ${(p: Theme) => p.theme.text};
+    color: ${(p: Theme) => p.theme.textContainer};
     cursor: pointer;
 
     :hover {

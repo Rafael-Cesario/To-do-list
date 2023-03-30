@@ -1,5 +1,6 @@
 export const localStorageKeys = {
   user: 'user',
+  theme: 'theme',
 };
 
 export class UserStorage {

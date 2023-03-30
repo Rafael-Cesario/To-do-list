@@ -11,6 +11,7 @@ export const StyledTab = styled.div`
   .title {
     font-size: 1rem;
     margin: 5px 20px;
+    color: ${(p: Theme) => p.theme.textPrimary};
   }
 
   .perfil-close {
