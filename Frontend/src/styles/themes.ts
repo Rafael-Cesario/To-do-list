@@ -50,7 +50,7 @@ export const theme: ITheme = {
 
     container: '#151515',
     textContainer: '#DDD',
-    fadedContainer: '#AAA',
+    fadedContainer: '#777',
     gray: '#202020',
 
     primary: '#0050aa',
