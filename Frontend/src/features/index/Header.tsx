@@ -24,7 +24,9 @@ export const Header = ({ props: { showCreateNewList, setShowCreateNewList } }: P
       <div className="menu">
         <div className="buttons">
           <Perfil />
-          <button onClick={() => setShowCreateNewList(!showCreateNewList)}>Criar nova lista</button>
+          <button className="create-list" onClick={() => setShowCreateNewList(!showCreateNewList)}>
+            Criar nova lista
+          </button>
         </div>
 
         <input onChange={(e) => setFilter(e.target.value)} className="search" type="text" placeholder="Busque por uma lista..." value={filter} />
