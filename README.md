@@ -2,31 +2,25 @@
 # To Do List Full Stack
 
 #### Create lists, todos and tags to keep yourself organized while working or studying something.
-###### Current project, still in progress...
 
-
-## Screenshots
-<img width="400px" alt="project print" src="https://user-images.githubusercontent.com/88716893/227110783-74ca5d2c-74f6-4114-86f3-43435f8c555d.png"/>
-
-
-
-
+</br>
 
 ## Features
 
 - Create lists, todos, tags and notes.
 - Dark and white Theme.
 
+</br>
 
-## Project's stack
+## Stack
 
 **FrontEnd:**
-apollo-client, styled-components, graphql, react, react-router, redux, react-testing-library, typescript, eslint, prettier, vite, vitest
-
+apollo-client, styled-components, graphql, react, react-router, typescript, eslint, vite, vitest.
 
 **BackEnd:**
-bcrypt, JWT, node, eslint, graphql, prettier, typescript, vitest, apollo-server, typegoose, mongoose, mongoDB, tsup, tsx
+bcrypt, jsonwebtoken, eslint, graphql, prettier, supertest-graphql, typescript, vitest, apollo-server, typegoose, mongoose.
 
+</br>
 
 ## Roadmap
 
@@ -37,10 +31,24 @@ FrontEnd:
 - ✅ Pages: Authentication, lists, todos.
 - ✅ Graphql Queries and cache update.
 - ✅ Redux slices: lists, todos, notification, filter, theme.
-- ✅ Dark and white theme with styled-components and localStorage.
+- ✅ Dark and white theme with styled-components and local Storage.
+- ✅ Filter: lists, todos, tags, status.
 - ❌ Tests.
 
 BackEnd:
-- ✅ CRUDs: User, lists, tasks, tags.
+- ✅ TypeDefs and Resolvers: User, lists, todos.
+- ✅ Services: User, lists, todos
 - ✅ Password with Bcrypt and authentication with JWT.
 - ✅ Tests.
+
+</br>
+
+## Screenshots
+<div display="flex">
+  <img src="https://user-images.githubusercontent.com/88716893/228775105-36fdf6dc-beaf-4c86-b8cf-8ce5c4eee030.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775457-db88dc70-614b-4a2f-a8eb-cf099f43dd07.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775606-c7fd0cbd-7c12-46f9-a436-4915fb86cadc.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775621-e278a294-0c85-42f4-ae25-30924647e809.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775136-a21ea497-15b8-443c-bc03-454867a9dc51.png" alt="project's image" width="350px"/>
+  <img src="https://user-images.githubusercontent.com/88716893/228775164-05b3ac88-3d78-4b64-bd3d-732114edcfa4.png" alt="project's image" width="350px"/>
+</div>
