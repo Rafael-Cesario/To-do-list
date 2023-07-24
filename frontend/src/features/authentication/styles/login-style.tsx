@@ -1,3 +1,4 @@
+import { Palette } from "@/styles/palette";
 import { styled } from "styled-components";
 
 export const StyledLogin = styled.div`
@@ -12,5 +13,22 @@ export const StyledLogin = styled.div`
 	.fields {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.submit {
+		background-color: ${Palette.primary};
+		border: none;
+
+		&:hover {
+			background-color: ${Palette.text};
+		}
+	}
+
+	.change-form {
+		background-color: transparent;
+		border: none;
+		color: ${Palette.fadedText};
+		font-weight: normal;
+		margin: 0;
 	}
 `;

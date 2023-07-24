@@ -16,6 +16,7 @@ export const Login = ({ setFormName }: ILogin) => {
 				<PasswordField name={"password"} label="Senha" placeholder="Senha" />
 
 				<button className="submit">Entrar</button>
+
 				<button type="button" className="change-form">
 					Não tem uma conta? Clique aqui para criar sua conta
 				</button>
