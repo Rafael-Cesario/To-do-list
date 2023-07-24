@@ -1,8 +1,8 @@
+import { produce } from "immer";
+import { useState } from "react";
 import { StyledForm } from "./styles/form-style";
 import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
-import { useState } from "react";
-import { produce } from "immer";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -10,10 +10,12 @@ interface IForm {
 
 const defaultValues = {
 	email: "",
+	name: "",
 	password: "",
+	passwordConfirmation: "",
 };
 
-export const Login = ({ setFormName }: IForm) => {
+export const CreateAccount = ({ setFormName }: IForm) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
 
@@ -25,36 +27,23 @@ export const Login = ({ setFormName }: IForm) => {
 		setValues(newState);
 	};
 
-	const validateFields = () => {
-		const errors: { [key: string]: string } = {};
-
-		if (!values.email) errors.email = "Este campo não pode ficar vazio";
-		if (!values.password) errors.password = "Este campo não pode ficar vazio";
-
-		setErrors({ ...defaultValues, ...errors });
-
-		const hasErrors = !!Object.keys(errors).length;
-		return hasErrors;
-	};
-
 	const submitForm = (e: React.FormEvent) => {
 		e.preventDefault();
-
-		const hasErrors = validateFields();
-		if (hasErrors) return;
 
 		console.log({ values });
 
 		// TODO:
-		// Send request to log in
+		// validate fields
+
+		// TODO:
+		// Send request to create account
 		// catch response errors
-		// save email and token on cookies.
-		// send user to home page.
+		// send user to login page.
 	};
 
 	return (
 		<StyledForm>
-			<h1 className="title">Login</h1>
+			<h1 className="title">Criar conta</h1>
 
 			<form className="fields" onSubmit={(e) => submitForm(e)}>
 				<TextField
@@ -63,6 +52,15 @@ export const Login = ({ setFormName }: IForm) => {
 					placeholder="nome@exemplo.com"
 					error={errors.email}
 					customClass={errors.email ? "error" : values.email ? "success" : ""}
+					updateValue={updateValue}
+				/>
+
+				<TextField
+					name={"name"}
+					label="Nome"
+					placeholder="Nome"
+					error={errors.name}
+					customClass={errors.name ? "error" : values.name ? "success" : ""}
 					updateValue={updateValue}
 				/>
 
@@ -75,10 +73,19 @@ export const Login = ({ setFormName }: IForm) => {
 					placeholder="Senha"
 				/>
 
-				<button className="submit">Entrar</button>
+				<PasswordField
+					error={errors.passwordConfirmation}
+					customClass={errors.passwordConfirmation ? "error" : values.passwordConfirmation ? "success" : ""}
+					updateValue={updateValue}
+					name={"passwordConfirmation"}
+					label="Digite novamente sua senha"
+					placeholder="Senha"
+				/>
 
-				<button type="button" className="change-form" onClick={() => setFormName("create")}>
-					Não tem uma conta? Clique aqui para criar sua conta
+				<button className="submit">Criar minha conta</button>
+
+				<button type="button" className="change-form" onClick={() => setFormName("login")}>
+					Já tem uma conta? Clique aqui para fazer login
 				</button>
 			</form>
 		</StyledForm>

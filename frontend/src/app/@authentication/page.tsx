@@ -1,5 +1,6 @@
 "use client";
 
+import { CreateAccount } from "@/features/authentication/create-account";
 import { Login } from "@/features/authentication/login";
 import { StyledAuthentication } from "@/styles/authentication-style";
 import { useState } from "react";
@@ -10,9 +11,8 @@ const Authentication = () => {
 	return (
 		<StyledAuthentication>
 			<div className="line" />
-
 			{formName === "login" && <Login setFormName={setFormName} />}
-			{/* {formName === "create" && <CreateAccount setFormName={setFormName} />} */}
+			{formName === "create" && <CreateAccount setFormName={setFormName} />}
 		</StyledAuthentication>
 	);
 };
