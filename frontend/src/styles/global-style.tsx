@@ -24,6 +24,10 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0.5rem 0;
     }
 
+    input {
+        width: 100%;
+    }
+
 
     button {
         cursor: pointer;
