@@ -1,8 +1,9 @@
 import { produce } from "immer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyledForm } from "./styles/form-style";
 import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
+import { validations } from "@/utils/validations";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -20,6 +21,9 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 	const [errors, setErrors] = useState(defaultValues);
 
 	const updateValue = (newValue: string, name: string) => {
+		const fieldError = validations[name as keyof typeof validations](newValue);
+		setErrors({ ...errors, [name]: fieldError });
+
 		const newState = produce(values, (draft) => {
 			draft[name as keyof typeof defaultValues] = newValue;
 		});
@@ -27,13 +31,30 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 		setValues(newState);
 	};
 
+	const validateFields = () => {
+		const errors = defaultValues;
+
+		errors.email = validations.email(values.email);
+		errors.password = validations.password(values.password);
+		// TODO
+		// errors.name
+		// errors.passwordConfirmation
+
+		setErrors(errors);
+
+		const hasErrors = !!Object.values(errors).filter((value) => value.length > 0).length;
+		return hasErrors;
+	};
+
 	const submitForm = (e: React.FormEvent) => {
 		e.preventDefault();
 
 		console.log({ values });
 
-		// TODO:
-		// validate fields
+		const hasErrors = validateFields();
+		if (hasErrors) return;
+
+		console.log("Hello");
 
 		// TODO:
 		// Send request to create account
