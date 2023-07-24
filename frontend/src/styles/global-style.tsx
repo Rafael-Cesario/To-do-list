@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${Palette.container};
         color: ${Palette.text};
         padding: 10px 20px;
-        margin: 0.5rem;
+        margin: 0.5rem 0;
     }
 
 

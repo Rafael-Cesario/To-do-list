@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { StyledLogin } from "./styles/login-style";
+import { TextField } from "./components/text-field";
 
 interface ILogin {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -8,13 +9,10 @@ interface ILogin {
 export const Login = ({ setFormName }: ILogin) => {
 	return (
 		<StyledLogin>
-			<h1>Login</h1>
+			<h1 className="title">Login</h1>
 
 			<form className="fields">
-				<div className="email">
-					<label htmlFor="email">Email</label>
-					<input type="text" id="email" autoComplete="false" placeholder="nomeUsuario@dominio.com" />
-				</div>
+				<TextField name={"email"} label="Email" placeholder="nome@exemplo.com" />
 
 				<div className="password">
 					<label htmlFor="password">Senha</label>
