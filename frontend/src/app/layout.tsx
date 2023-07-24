@@ -1,7 +1,8 @@
+import { cookies } from "next/headers";
 import StyledComponentsRegistry from "@/lib/registry";
 import { GlobalStyle } from "@/styles/global-style";
-import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
+import type { Metadata } from "next";
 
 const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
 
@@ -15,14 +16,24 @@ interface IRootLayout {
 	authentication: React.ReactNode;
 }
 
+const CookieKeys = {
+	user: "user",
+};
+
+const getUserCookies = () => {
+	const cookieStore = cookies();
+	return cookieStore.get(CookieKeys.user);
+};
+
 export default function RootLayout(props: IRootLayout) {
+	const hasUser = getUserCookies();
+
 	return (
 		<html lang="pt-br">
 			<body className={roboto_slab.className}>
 				<StyledComponentsRegistry>
 					<GlobalStyle />
-					{props.children}
-					{props.authentication}
+					{hasUser ? props.children : props.authentication}
 				</StyledComponentsRegistry>
 			</body>
 		</html>
