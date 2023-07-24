@@ -6,17 +6,20 @@ interface IPasswordField {
 	name: string;
 	label: string;
 	placeholder: string;
+	customClass: string;
+	error: string;
+	updateValue: (newState: string, name: string) => void;
 }
 
-export const PasswordField = ({ name, label, placeholder }: IPasswordField) => {
+export const PasswordField = ({ name, label, placeholder, customClass, error, updateValue }: IPasswordField) => {
 	const [showPassword, setShowPassword] = useState(false);
 
 	return (
 		<StyledField>
 			<label htmlFor={name}>{label}</label>
 
-			<div className="input-password">
-				<input type={showPassword ? "text" : "password"} id={name} placeholder={placeholder} />
+			<div className={"input-password " + customClass}>
+				<input id={name} placeholder={placeholder} type={showPassword ? "text" : "password"} onChange={(e) => updateValue(e.target.value, name)} />
 
 				{showPassword || (
 					<Image
@@ -40,6 +43,8 @@ export const PasswordField = ({ name, label, placeholder }: IPasswordField) => {
 					/>
 				)}
 			</div>
+
+			<span className="error-message">{error}</span>
 		</StyledField>
 	);
 };

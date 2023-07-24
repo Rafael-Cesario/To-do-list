@@ -24,7 +24,7 @@ export const StyledField = styled.div`
 		border: 2px solid ${Palette.borderContainer};
 		border-radius: ${Palette.borderRadius};
 		margin: 0.5rem 0;
-		padding: 10px 20px;
+		padding: 0 20px;
 
 		&:focus-within {
 			outline: 1px solid white;
@@ -32,7 +32,7 @@ export const StyledField = styled.div`
 
 		input {
 			border: none;
-			padding: 0;
+			padding: 10px 0;
 			margin: 0;
 			margin-right: 24px;
 			outline: none;

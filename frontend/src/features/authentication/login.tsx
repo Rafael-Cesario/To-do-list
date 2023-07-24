@@ -25,9 +25,23 @@ export const Login = ({ setFormName }: ILogin) => {
 		setValues(newState);
 	};
 
+	const validateFields = () => {
+		const errors: { [key: string]: string } = {};
+
+		if (!values.email) errors.email = "Este campo não pode ficar vazio";
+		if (!values.password) errors.password = "Este campo não pode ficar vazio";
+
+		setErrors({ ...defaultValues, ...errors });
+
+		const hasErrors = !!Object.keys(errors).length;
+		return hasErrors;
+	};
+
 	const submitForm = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log({ values, errors });
+
+		const hasErrors = validateFields();
+		if (hasErrors) return;
 	};
 
 	return (
@@ -44,7 +58,14 @@ export const Login = ({ setFormName }: ILogin) => {
 					updateValue={updateValue}
 				/>
 
-				<PasswordField name={"password"} label="Senha" placeholder="Senha" />
+				<PasswordField
+					error={errors.password}
+					customClass={errors.password ? "error" : values.password ? "success" : ""}
+					updateValue={updateValue}
+					name={"password"}
+					label="Senha"
+					placeholder="Senha"
+				/>
 
 				<button className="submit">Entrar</button>
 
