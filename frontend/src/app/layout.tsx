@@ -1,5 +1,5 @@
-import { cookies } from "next/headers";
 import StyledComponentsRegistry from "@/lib/registry";
+import { cookies } from "next/headers";
 import { GlobalStyle } from "@/styles/global-style";
 import { Roboto_Slab } from "next/font/google";
 import type { Metadata } from "next";
