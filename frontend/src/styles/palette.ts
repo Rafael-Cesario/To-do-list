@@ -6,4 +6,6 @@ export const Palette = {
 	container: "#151515",
 	borderContainer: "#181818",
 	borderRadius: "4px",
+	errorText: "#a94444",
+	successText: "#409649"
 };

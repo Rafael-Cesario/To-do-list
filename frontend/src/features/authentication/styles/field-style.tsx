@@ -12,6 +12,11 @@ export const StyledField = styled.div`
 		font-size: 0.8rem;
 	}
 
+	.error-message {
+		font-size: 0.8rem;
+		color: ${Palette.errorText};
+	}
+
 	.input-password {
 		display: flex;
 		align-items: center;
@@ -41,5 +46,13 @@ export const StyledField = styled.div`
 				opacity: 1;
 			}
 		}
+	}
+
+	.error {
+		border-left: 5px solid ${Palette.errorText};
+	}
+
+	.success {
+		border-left: 5px solid ${Palette.successText};
 	}
 `;
