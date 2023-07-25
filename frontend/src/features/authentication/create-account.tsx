@@ -48,12 +48,8 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 	const submitForm = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		console.log({ values });
-
 		const hasErrors = validateFields();
 		if (hasErrors) return;
-
-		console.log("Hello");
 
 		// TODO:
 		// Send request to create account
