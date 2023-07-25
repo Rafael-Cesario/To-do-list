@@ -4,6 +4,9 @@ import { StyledForm } from "./styles/form-style";
 import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
 import { validations } from "@/utils/validations";
+import { useMutation } from "@apollo/client";
+import { userQueries } from "@/services/queries/user";
+import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -19,6 +22,8 @@ const defaultValues = {
 export const CreateAccount = ({ setFormName }: IForm) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
+
+	const [createUserMutation] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
 
 	const updateValue = (newValue: string, name: string) => {
 		const fieldError = validations[name as keyof typeof validations](newValue, values.password);
@@ -45,16 +50,28 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 		return hasErrors;
 	};
 
-	const submitForm = (e: React.FormEvent) => {
+	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
 
 		const hasErrors = validateFields();
 		if (hasErrors) return;
 
-		// TODO:
-		// Send request to create account
-		// catch response errors
-		// send user to login page.
+		// TODO
+		try {
+			const { email, name, password } = values;
+			const newUser = { email, name, password };
+			const { data } = await createUserMutation({ variables: { newUser } });
+			const message = data?.createUser.message;
+			console.log({ message });
+
+			// send notification
+			// send user to login page.
+		} catch (e: any) {
+			const error = e.message;
+			console.log(error);
+
+			// send a notification
+		}
 	};
 
 	return (
