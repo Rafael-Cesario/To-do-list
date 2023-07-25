@@ -2,7 +2,10 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { ApolloServer } from "@apollo/server";
 import { schema } from "./schema/schema";
 
-const server = new ApolloServer({ schema });
+const server = new ApolloServer({
+	schema,
+	formatError: (error) => ({ message: error.message }),
+});
 
 export const startServer = async (port = 4000) => {
 	const { url } = await startStandaloneServer(server, { listen: { port } });
