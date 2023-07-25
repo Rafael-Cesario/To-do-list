@@ -3,6 +3,9 @@ import { cookies } from "next/headers";
 import { GlobalStyle } from "@/styles/global-style";
 import { Roboto_Slab } from "next/font/google";
 import type { Metadata } from "next";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "@/services/client";
+import { AllProviders } from "@/lib/all-providers";
 
 const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
 
@@ -31,10 +34,10 @@ export default function RootLayout(props: IRootLayout) {
 	return (
 		<html lang="pt-br">
 			<body className={roboto_slab.className}>
-				<StyledComponentsRegistry>
+				<AllProviders>
 					<GlobalStyle />
 					{hasUser ? props.children : props.authentication}
-				</StyledComponentsRegistry>
+				</AllProviders>
 			</body>
 		</html>
 	);
