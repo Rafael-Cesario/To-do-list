@@ -1,3 +1,9 @@
+import { prisma } from "./database";
 import { startServer } from "./server";
 
-startServer();
+const main = () => {
+	startServer();
+	prisma.$connect();
+};
+
+main();
