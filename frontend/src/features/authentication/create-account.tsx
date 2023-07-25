@@ -21,7 +21,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 	const [errors, setErrors] = useState(defaultValues);
 
 	const updateValue = (newValue: string, name: string) => {
-		const fieldError = validations[name as keyof typeof validations](newValue);
+		const fieldError = validations[name as keyof typeof validations](newValue, values.password);
 		setErrors({ ...errors, [name]: fieldError });
 
 		const newState = produce(values, (draft) => {
@@ -36,9 +36,8 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 
 		errors.email = validations.email(values.email);
 		errors.password = validations.password(values.password);
-		// TODO
-		// errors.name
-		// errors.passwordConfirmation
+		errors.name = validations.name(values.name);
+		errors.passwordConfirmation = validations.passwordConfirmation(values.password, values.passwordConfirmation);
 
 		setErrors(errors);
 

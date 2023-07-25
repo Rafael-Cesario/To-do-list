@@ -1,0 +1,6 @@
+Authentication
+    login and create account queries
+
+    Create account
+        Name validation
+        password confirmation validations
