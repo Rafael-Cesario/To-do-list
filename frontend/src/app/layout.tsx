@@ -1,11 +1,8 @@
-import StyledComponentsRegistry from "@/lib/registry";
 import { cookies } from "next/headers";
 import { GlobalStyle } from "@/styles/global-style";
 import { Roboto_Slab } from "next/font/google";
-import type { Metadata } from "next";
-import { ApolloProvider } from "@apollo/client";
-import { client } from "@/services/client";
 import { AllProviders } from "@/lib/all-providers";
+import type { Metadata } from "next";
 
 const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
 
