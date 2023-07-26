@@ -3,6 +3,7 @@ import { GlobalStyle } from "@/styles/global-style";
 import { Roboto_Slab } from "next/font/google";
 import { AllProviders } from "@/lib/all-providers";
 import type { Metadata } from "next";
+import { Notification } from "@/components/notification";
 
 const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout(props: IRootLayout) {
 			<body className={roboto_slab.className}>
 				<AllProviders>
 					<GlobalStyle />
+					<Notification />
 					{hasUser ? props.children : props.authentication}
 				</AllProviders>
 			</body>
