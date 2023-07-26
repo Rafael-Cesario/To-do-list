@@ -1,6 +1,4 @@
-Authentication
-    login and create account queries
+TODO
 
-    Create account
-        Name validation
-        password confirmation validations
+- Loading component to show while create account request is running.
+

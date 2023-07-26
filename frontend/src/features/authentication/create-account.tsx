@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StyledForm } from "./styles/form-style";
 import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
@@ -7,6 +7,7 @@ import { validations } from "@/utils/validations";
 import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
 import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
+import { ButtonLoading } from "@/components/button-loading";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -22,6 +23,7 @@ const defaultValues = {
 export const CreateAccount = ({ setFormName }: IForm) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
+	const [loading, setLoading] = useState(false);
 
 	const [createUserMutation] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
 
@@ -52,6 +54,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 
 	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setLoading(true);
 
 		const hasErrors = validateFields();
 		if (hasErrors) return;
@@ -72,6 +75,8 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 
 			// send a notification
 		}
+
+		setLoading(false);
 	};
 
 	return (
@@ -115,7 +120,8 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 					placeholder="Senha"
 				/>
 
-				<button className="submit">Criar minha conta</button>
+				{loading || <button className="submit">Criar minha conta</button>}
+				{loading && <ButtonLoading />}
 
 				<button type="button" className="change-form" onClick={() => setFormName("login")}>
 					Já tem uma conta? Clique aqui para fazer login
