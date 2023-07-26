@@ -13,14 +13,14 @@ interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
 }
 
-const defaultValues = {
-	email: "",
-	name: "",
-	password: "",
-	passwordConfirmation: "",
-};
-
 export const CreateAccount = ({ setFormName }: IForm) => {
+	const defaultValues = {
+		email: "",
+		name: "",
+		password: "",
+		passwordConfirmation: "",
+	};
+
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
 	const [loading, setLoading] = useState(false);
@@ -39,25 +39,24 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 	};
 
 	const validateFields = () => {
-		const errors = defaultValues;
+		const newErrors = produce(errors, (draft) => {
+			draft.email = validations.email(values.email);
+			draft.password = validations.password(values.password);
+			draft.name = validations.name(values.name);
+			draft.passwordConfirmation = validations.passwordConfirmation(values.password, values.passwordConfirmation);
+		});
 
-		errors.email = validations.email(values.email);
-		errors.password = validations.password(values.password);
-		errors.name = validations.name(values.name);
-		errors.passwordConfirmation = validations.passwordConfirmation(values.password, values.passwordConfirmation);
-
-		setErrors(errors);
-
-		const hasErrors = !!Object.values(errors).filter((value) => value.length > 0).length;
-		return hasErrors;
+		return newErrors;
 	};
 
 	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
-		setLoading(true);
 
-		const hasErrors = validateFields();
-		if (hasErrors) return;
+		const errors = validateFields();
+		const hasErrors = !!Object.values(errors).filter((value) => value.length > 0).length;
+		if (hasErrors) return setErrors(errors);
+
+		setLoading(true);
 
 		// TODO
 		try {
