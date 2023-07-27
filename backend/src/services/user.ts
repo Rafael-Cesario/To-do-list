@@ -14,6 +14,7 @@ class UserServices {
 		if (isDuplicatedUser) throw new GraphQLError(errorsMap.user.duplicated + "A user with the same email already exist");
 
 		newUser.password = encryptPassword(newUser.password);
+		newUser.email = newUser.email.toLowerCase();
 		await prisma.user.create({ data: newUser });
 
 		return { message: "Success: A new user was created" };
