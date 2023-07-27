@@ -1,3 +1,5 @@
+import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 import { cleanup, render, screen } from "@testing-library/react";
 import { CreateAccount } from "../create-account";
 import { Notification } from "@/components/notification";
@@ -11,6 +13,8 @@ const Component = () => (
 );
 
 describe("Create account component", () => {
+	const user = userEvent.setup();
+
 	beforeEach(() => {
 		render(<Component />);
 	});
@@ -18,8 +22,8 @@ describe("Create account component", () => {
 	afterEach(() => cleanup());
 
 	it("Show error on input change", async () => {
-		const title = screen.getByText("Criar conta");
-		console.log({ title });
+		await user.type(screen.getByRole("email"), "not-a-valid-email");
+		expect(screen.getByRole("email-error")).toHaveTextContent("Email invalido. Ex: nome@exemplo.com");
 	});
 
 	it.todo("Show errors on submit form");

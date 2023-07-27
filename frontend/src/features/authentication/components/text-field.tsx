@@ -20,8 +20,11 @@ export const TextField = ({ name, label, placeholder, customClass, error, update
 				id={name}
 				autoComplete="false"
 				placeholder={placeholder}
+				role={name}
 			/>
-			<span className="error-message">{error}</span>
+			<span role={name + "-error"} className="error-message">
+				{error}
+			</span>
 		</StyledField>
 	);
 };
