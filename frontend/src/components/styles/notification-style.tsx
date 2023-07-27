@@ -3,7 +3,7 @@ import { Palette } from "@/styles/palette";
 
 export const StyledNotification = styled.div<{ type: string }>`
 	position: absolute;
-	min-width: 20rem;
+	min-width: 25rem;
 	min-height: 5rem;
 	max-width: 30rem;
 	margin: 0.5rem;
@@ -14,10 +14,13 @@ export const StyledNotification = styled.div<{ type: string }>`
 	border-left: 10px solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
 
 	.title {
-		font-size: 1.1rem;
+		color: ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
+		font-size: 1rem;
 	}
 
 	.message {
+		margin: 4px 0;
+		font-size: 0.9rem;
 		color: ${Palette.fadedText};
 	}
 

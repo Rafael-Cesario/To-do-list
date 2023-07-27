@@ -2,7 +2,7 @@
 import { Store } from "@/context/store";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledNotification } from "./styles/notification-style";
-import { SliceNotification } from "@/context/slice-notification";
+import { setNotification } from "@/context/slice-notification";
 
 export const Notification = () => {
 	const { title, message, type, isOpen } = useSelector((state: Store) => state.notification);
@@ -10,7 +10,7 @@ export const Notification = () => {
 
 	const closeNotification = () => {
 		dispatch(
-			SliceNotification.actions.setNotification({
+			setNotification({
 				isOpen: false,
 				title: "",
 				message: "",

@@ -21,3 +21,5 @@ export const SliceNotification = createSlice({
 		setNotification: (state, action: { payload: INotification }) => (state = action.payload),
 	},
 });
+
+export const { setNotification } = SliceNotification.actions;
