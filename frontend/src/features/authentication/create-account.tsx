@@ -10,7 +10,7 @@ import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
 import { ButtonLoading } from "@/components/button-loading";
 import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/slice-notification";
-import { errorsMap } from "@/services/errors-map";
+import { showError } from "@/utils/show-error";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -61,11 +61,9 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 			const newUser = { email, name, password };
 			await createUserMutation({ variables: { newUser } });
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Novo usuário criado", message: "Boas vindas, você já pode fazer login." }));
-			// send user to login page.
-		} catch (e: any) {
-			const [errorCode] = e.message.split(": ");
-			const error = errorsMap.user[errorCode as keyof typeof errorsMap.user] ?? "Um erro inesperado ocorreu. Por favor tente recarregar a página";
-			dispatch(setNotification({ isOpen: true, type: "error", title: "Ops, algo deu errado", message: error }));
+			setFormName("login");
+		} catch (error: any) {
+			showError(error, dispatch);
 		}
 
 		setLoading(false);
