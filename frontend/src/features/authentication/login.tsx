@@ -8,6 +8,8 @@ import { userQueries } from "@/services/queries/user";
 import { ILogin, RLogin } from "@/services/interfaces/user";
 import { showError } from "@/utils/show-error";
 import { useDispatch } from "react-redux";
+import { cookies } from "@/services/cookies";
+import { useRouter } from "next/navigation";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -21,6 +23,7 @@ const defaultValues = {
 export const Login = ({ setFormName }: IForm) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
+	const router = useRouter();
 
 	const [loginMutation] = useMutation<RLogin, ILogin>(userQueries.LOGIN);
 	const dispatch = useDispatch();
@@ -51,18 +54,18 @@ export const Login = ({ setFormName }: IForm) => {
 		const hasErrors = validateFields();
 		if (hasErrors) return;
 
-		console.log({ values });
-
-		// TODO:
-		// Send request to log in
-		// catch response errors
-		// save email and token on cookies.
-		// send user to home page.
-
 		try {
 			const user = { email: values.email, password: values.password };
 			const { data } = await loginMutation({ variables: { user } });
 			const token = data?.login.token;
+
+			await cookies.set({
+				key: cookies.keys.user,
+				maxAge: 60 * 60 * 24 * 7, // 1 week
+				value: JSON.stringify({ email: values.email, token }),
+			});
+
+			router.refresh();
 		} catch (error: any) {
 			showError(error, dispatch);
 		}
