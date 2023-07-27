@@ -1,4 +1,1 @@
 TODO
-
-- Loading component to show while create account request is running.
-

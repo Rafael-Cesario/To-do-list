@@ -1,9 +1,10 @@
-import { INewUser } from "../interfaces/user";
+import { INewUser, IUser } from "../interfaces/user";
 import { GraphQLError } from "graphql";
 import { searchEmptyValues } from "../utils/search-empty-values";
-import { encryptPassword } from "../utils/crypt";
+import { decryptPassword, encryptPassword } from "../utils/crypt";
 import { prisma } from "../database";
 import { errorsMap } from "../utils/errors-map";
+import { generateToken } from "../utils/token";
 
 class UserServices {
 	async createUser({ newUser }: INewUser) {
@@ -18,6 +19,20 @@ class UserServices {
 		await prisma.user.create({ data: newUser });
 
 		return { message: "Success: A new user was created" };
+	}
+
+	async login({ user }: IUser) {
+		const hasEmptyValues = searchEmptyValues(user);
+		if (hasEmptyValues) throw new GraphQLError(hasEmptyValues);
+
+		const userDB = await prisma.user.findUnique({ where: { email: user.email.toLowerCase() } });
+		if (!userDB) throw new GraphQLError("invalidCredentials: Wrong email or password");
+
+		const samePassword = decryptPassword(user.password, userDB.password);
+		if (!samePassword) throw new GraphQLError("invalidCredentials: Wrong email or password");
+
+		const token = generateToken(user.email);
+		return { token };
 	}
 }
 

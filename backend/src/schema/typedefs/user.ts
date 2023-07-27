@@ -12,6 +12,10 @@ export const userTypeDefs = gql`
 		message: String!
 	}
 
+	type ResponseLogin {
+		token: String!
+	}
+
     input INewUser {
 		id: String
 		email: String!
@@ -19,7 +23,14 @@ export const userTypeDefs = gql`
 		password: String!
     }
 
+	input IUser {
+		email: String!
+		password: String!
+	}
+
+
     type Mutation {
         createUser(newUser: INewUser!): Message!
+		login(user: IUser!): ResponseLogin!
     }
 `;

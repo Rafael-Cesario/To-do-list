@@ -8,3 +8,10 @@ export interface IUser {
 export interface INewUser {
 	newUser: IUser;
 }
+
+export interface IUser {
+	user: {
+		email: string;
+		password: string;
+	};
+}
