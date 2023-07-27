@@ -12,3 +12,14 @@ export interface ICreateUser {
 export interface RCreateUser {
 	createUser: { message: string };
 }
+
+export interface ILogin {
+	user: {
+		email: string;
+		password: string;
+	};
+}
+
+export interface RLogin {
+	login: { token: string };
+}

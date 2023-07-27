@@ -3,6 +3,11 @@ import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
 import { useState } from "react";
 import { produce } from "immer";
+import { useMutation } from "@apollo/client";
+import { userQueries } from "@/services/queries/user";
+import { ILogin, RLogin } from "@/services/interfaces/user";
+import { showError } from "@/utils/show-error";
+import { useDispatch } from "react-redux";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -16,6 +21,9 @@ const defaultValues = {
 export const Login = ({ setFormName }: IForm) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
+
+	const [loginMutation] = useMutation<RLogin, ILogin>(userQueries.LOGIN);
+	const dispatch = useDispatch();
 
 	const updateValue = (newValue: string, name: string) => {
 		const newState = produce(values, (draft) => {
@@ -37,7 +45,7 @@ export const Login = ({ setFormName }: IForm) => {
 		return hasErrors;
 	};
 
-	const submitForm = (e: React.FormEvent) => {
+	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
 
 		const hasErrors = validateFields();
@@ -50,6 +58,14 @@ export const Login = ({ setFormName }: IForm) => {
 		// catch response errors
 		// save email and token on cookies.
 		// send user to home page.
+
+		try {
+			const user = { email: values.email, password: values.password };
+			const { data } = await loginMutation({ variables: { user } });
+			const token = data?.login.token;
+		} catch (error: any) {
+			showError(error, dispatch);
+		}
 	};
 
 	return (
