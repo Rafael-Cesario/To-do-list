@@ -18,7 +18,6 @@ const Component = () => (
 
 describe("Create account component", () => {
 	const user = userEvent.setup();
-
 	let error = "";
 
 	mockMutationsUser.useMutationsUser = () => ({

@@ -3,13 +3,11 @@ import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
 import { useState } from "react";
 import { produce } from "immer";
-import { useMutation } from "@apollo/client";
-import { userQueries } from "@/services/queries/user";
-import { ILogin, RLogin } from "@/services/interfaces/user";
 import { showError } from "@/utils/show-error";
 import { useDispatch } from "react-redux";
 import { cookies } from "@/services/cookies";
 import { useRouter } from "next/navigation";
+import { useMutationsUser } from "@/utils/hooks/use-mutations-user";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -25,7 +23,7 @@ export const Login = ({ setFormName }: IForm) => {
 	const [errors, setErrors] = useState(defaultValues);
 	const router = useRouter();
 
-	const [loginMutation] = useMutation<RLogin, ILogin>(userQueries.LOGIN);
+	const { loginRequest } = useMutationsUser();
 	const dispatch = useDispatch();
 
 	const updateValue = (newValue: string, name: string) => {
@@ -56,7 +54,7 @@ export const Login = ({ setFormName }: IForm) => {
 
 		try {
 			const user = { email: values.email, password: values.password };
-			const { data } = await loginMutation({ variables: { user } });
+			const { data } = await loginRequest({ user });
 			const token = data?.login.token;
 
 			await cookies.set({
