@@ -5,6 +5,9 @@ import { CreateAccount } from "../create-account";
 import { Notification } from "@/components/notification";
 import { AllProviders } from "@/lib/all-providers";
 
+import * as MutationsUser from "@/utils/hooks/use-mutations-user";
+const mockMutationsUser = MutationsUser as { useMutationsUser: object };
+
 const Component = () => (
 	<AllProviders>
 		<Notification />
@@ -14,6 +17,10 @@ const Component = () => (
 
 describe("Create account component", () => {
 	const user = userEvent.setup();
+
+	mockMutationsUser.useMutationsUser = () => ({
+		createUserRequest: vi.fn(),
+	});
 
 	beforeEach(() => {
 		render(<Component />);
@@ -37,8 +44,10 @@ describe("Create account component", () => {
 		await user.type(screen.getByRole("password"), "myPassword123");
 		await user.type(screen.getByRole("passwordConfirmation"), "myPassword123");
 		await user.click(screen.getByRole("submit-form"));
-		expect(screen.getByRole("notification").querySelector(".title")).toHaveTextContent("...");
+		expect(screen.getByRole("notification").querySelector(".title")).toHaveTextContent("Novo usuário criado");
 	});
 
 	it.todo("Catch a response error and show a notification");
 });
+
+vi.mock("@/utils/hooks/use-mutations-user");
