@@ -22,7 +22,7 @@ export const Notification = () => {
 	if (!isOpen) return <></>;
 
 	return (
-		<StyledNotification type={type}>
+		<StyledNotification type={type} role="notification">
 			<button className="close" onClick={() => closeNotification()}>
 				x
 			</button>

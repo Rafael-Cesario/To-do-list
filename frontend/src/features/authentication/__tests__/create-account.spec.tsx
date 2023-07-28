@@ -26,7 +26,10 @@ describe("Create account component", () => {
 		expect(screen.getByRole("email-error")).toHaveTextContent("Email invalido. Ex: nome@exemplo.com");
 	});
 
-	it.todo("Show errors on submit form");
+	it.only("Show errors on submit form", async () => {
+		await user.click(screen.getByRole("submit-form"));
+		expect(screen.getByRole("email-error")).toHaveTextContent("Este campo não pode ficar vazio");
+	});
 
 	it.todo("Send notification after creating user");
 

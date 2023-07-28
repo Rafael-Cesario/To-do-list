@@ -110,7 +110,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 					placeholder="Senha"
 				/>
 
-				{loading || <button className="submit">Criar minha conta</button>}
+				{loading || <button role="submit-form" className="submit">Criar minha conta</button>}
 				{loading && <ButtonLoading />}
 
 				<button type="button" className="change-form" onClick={() => setFormName("login")}>
