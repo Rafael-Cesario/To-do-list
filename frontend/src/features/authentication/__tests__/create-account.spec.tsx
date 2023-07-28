@@ -6,6 +6,7 @@ import { Notification } from "@/components/notification";
 import { AllProviders } from "@/lib/all-providers";
 
 import * as MutationsUser from "@/utils/hooks/use-mutations-user";
+import { errorsMap } from "@/services/errors-map";
 const mockMutationsUser = MutationsUser as { useMutationsUser: object };
 
 const Component = () => (
@@ -18,8 +19,12 @@ const Component = () => (
 describe("Create account component", () => {
 	const user = userEvent.setup();
 
+	let error = "";
+
 	mockMutationsUser.useMutationsUser = () => ({
-		createUserRequest: vi.fn(),
+		createUserRequest: () => {
+			if (error) throw new Error(error);
+		},
 	});
 
 	beforeEach(() => {
@@ -38,7 +43,7 @@ describe("Create account component", () => {
 		expect(screen.getByRole("email-error")).toHaveTextContent("Este campo não pode ficar vazio");
 	});
 
-	it.only("Send notification after creating user", async () => {
+	it("Send notification after creating user", async () => {
 		await user.type(screen.getByRole("email"), "my@email.com");
 		await user.type(screen.getByRole("name"), "myName");
 		await user.type(screen.getByRole("password"), "myPassword123");
@@ -47,7 +52,15 @@ describe("Create account component", () => {
 		expect(screen.getByRole("notification").querySelector(".title")).toHaveTextContent("Novo usuário criado");
 	});
 
-	it.todo("Catch a response error and show a notification");
+	it("Catch a response error and show a notification", async () => {
+		error = "duplicated: ";
+		await user.type(screen.getByRole("email"), "my@email.com");
+		await user.type(screen.getByRole("name"), "myName");
+		await user.type(screen.getByRole("password"), "myPassword123");
+		await user.type(screen.getByRole("passwordConfirmation"), "myPassword123");
+		await user.click(screen.getByRole("submit-form"));
+		expect(screen.getByRole("notification").querySelector(".message")).toHaveTextContent(errorsMap.user.duplicated);
+	});
 });
 
 vi.mock("@/utils/hooks/use-mutations-user");
