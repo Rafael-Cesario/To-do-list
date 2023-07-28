@@ -19,7 +19,7 @@ export const PasswordField = ({ name, label, placeholder, customClass, error, up
 			<label htmlFor={name}>{label}</label>
 
 			<div className={"input-password " + customClass}>
-				<input id={name} placeholder={placeholder} type={showPassword ? "text" : "password"} onChange={(e) => updateValue(e.target.value, name)} />
+				<input role={name} id={name} placeholder={placeholder} type={showPassword ? "text" : "password"} onChange={(e) => updateValue(e.target.value, name)} />
 
 				{showPassword || (
 					<Image

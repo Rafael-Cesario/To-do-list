@@ -26,12 +26,19 @@ describe("Create account component", () => {
 		expect(screen.getByRole("email-error")).toHaveTextContent("Email invalido. Ex: nome@exemplo.com");
 	});
 
-	it.only("Show errors on submit form", async () => {
+	it("Show errors on submit form", async () => {
 		await user.click(screen.getByRole("submit-form"));
 		expect(screen.getByRole("email-error")).toHaveTextContent("Este campo não pode ficar vazio");
 	});
 
-	it.todo("Send notification after creating user");
+	it.only("Send notification after creating user", async () => {
+		await user.type(screen.getByRole("email"), "my@email.com");
+		await user.type(screen.getByRole("name"), "myName");
+		await user.type(screen.getByRole("password"), "myPassword123");
+		await user.type(screen.getByRole("passwordConfirmation"), "myPassword123");
+		await user.click(screen.getByRole("submit-form"));
+		expect(screen.getByRole("notification").querySelector(".title")).toHaveTextContent("...");
+	});
 
 	it.todo("Catch a response error and show a notification");
 });

@@ -4,13 +4,11 @@ import { StyledForm } from "./styles/form-style";
 import { TextField } from "./components/text-field";
 import { PasswordField } from "./components/password-field";
 import { validations } from "@/utils/validations";
-import { useMutation } from "@apollo/client";
-import { userQueries } from "@/services/queries/user";
-import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
 import { ButtonLoading } from "@/components/button-loading";
 import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/slice-notification";
 import { showError } from "@/utils/show-error";
+import { useMutationsUser } from "@/utils/hooks/use-mutations-user";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -23,7 +21,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 	const [loading, setLoading] = useState(false);
 
 	const dispatch = useDispatch();
-	const [createUserMutation] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
+	const { createUserRequest } = useMutationsUser();
 
 	const updateValue = (newValue: string, name: string) => {
 		const fieldError = validations[name as keyof typeof validations](newValue, values.password);
@@ -59,7 +57,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 		try {
 			const { email, name, password } = values;
 			const newUser = { email, name, password };
-			await createUserMutation({ variables: { newUser } });
+			await createUserRequest({ newUser });
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Novo usuário criado", message: "Boas vindas, você já pode fazer login." }));
 			setFormName("login");
 		} catch (error: any) {
@@ -110,7 +108,11 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 					placeholder="Senha"
 				/>
 
-				{loading || <button role="submit-form" className="submit">Criar minha conta</button>}
+				{loading || (
+					<button role="submit-form" className="submit">
+						Criar minha conta
+					</button>
+				)}
 				{loading && <ButtonLoading />}
 
 				<button type="button" className="change-form" onClick={() => setFormName("login")}>
