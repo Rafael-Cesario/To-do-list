@@ -8,6 +8,7 @@ interface IPasswordField {
 	placeholder: string;
 	customClass: string;
 	error: string;
+	// eslint-disable-next-line no-unused-vars
 	updateValue: (newState: string, name: string) => void;
 }
 

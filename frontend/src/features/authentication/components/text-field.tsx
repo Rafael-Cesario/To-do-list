@@ -6,6 +6,7 @@ interface ITextField {
 	placeholder: string;
 	customClass: string;
 	error: string;
+	// eslint-disable-next-line no-unused-vars
 	updateValue: (newValue: string, name: string) => void;
 }
 
