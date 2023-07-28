@@ -4,9 +4,9 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { CreateAccount } from "../create-account";
 import { Notification } from "@/components/notification";
 import { AllProviders } from "@/lib/all-providers";
+import { errorsMap } from "@/services/errors-map";
 
 import * as MutationsUser from "@/utils/hooks/use-mutations-user";
-import { errorsMap } from "@/services/errors-map";
 const mockMutationsUser = MutationsUser as { useMutationsUser: object };
 
 const Component = () => (

@@ -92,7 +92,7 @@ export const Login = ({ setFormName }: IForm) => {
 					placeholder="Senha"
 				/>
 
-				<button className="submit">Entrar</button>
+				<button role="submit-form" className="submit">Entrar</button>
 
 				<button type="button" className="change-form" onClick={() => setFormName("create")}>
 					Não tem uma conta? Clique aqui para criar sua conta
