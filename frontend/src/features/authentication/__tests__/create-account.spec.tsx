@@ -32,9 +32,12 @@ describe("Create account component", () => {
 
 	afterEach(() => cleanup());
 
-	it("Show error on input change", async () => {
+	it("Show and remove error on input change", async () => {
 		await user.type(screen.getByRole("email"), "not-a-valid-email");
 		expect(screen.getByRole("email-error")).toHaveTextContent("Email invalido. Ex: nome@exemplo.com");
+		await user.clear(screen.getByRole("email"));
+		await user.type(screen.getByRole("email"), "email@valid.com");
+		expect(screen.getByRole("email-error")).toHaveTextContent("");
 	});
 
 	it("Show errors on submit form", async () => {
