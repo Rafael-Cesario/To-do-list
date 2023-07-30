@@ -19,15 +19,20 @@ describe("User - create user", () => {
 		await prisma.$disconnect();
 	});
 
-	it.only("Throw a error due to empty values", async () => {
+	it("Throw a error due to empty values", async () => {
 		const newUser = { email: "", name: "", password: "" };
 		const { errors } = await request(url).mutate(userQueries.CREATE_USER).variables({ newUser });
 		expect(errors![0].message).toBe("email has no value, name has no value, password has no value");
 	});
 
-	it.todo("Throw a error due to duplicated user");
+	it("Throw a error due to duplicated user", async () => {
+		const newUser = { email: "user@test.com", name: "user", password: "123" };
+		await request(url).mutate(userQueries.CREATE_USER).variables({ newUser });
+		const { errors } = await request(url).mutate(userQueries.CREATE_USER).variables({ newUser });
+        expect(errors![0].message).toBe("duplicated: A user with the same email already exist");
+	});
 
-	it.todo("Create a new user with and return a message");
+	it.only("Create a new user with and return a message");
 
 	it.todo("Crypt the user password");
 
