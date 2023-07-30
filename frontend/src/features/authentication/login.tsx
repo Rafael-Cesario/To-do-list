@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { cookies } from "@/services/cookies";
 import { useRouter } from "next/navigation";
 import { useMutationsUser } from "@/utils/hooks/use-mutations-user";
+import { ButtonLoading } from "@/components/button-loading";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -21,6 +22,7 @@ const defaultValues = {
 export const Login = ({ setFormName }: IForm) => {
 	const [values, setValues] = useState(defaultValues);
 	const [errors, setErrors] = useState(defaultValues);
+	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	const { loginRequest } = useMutationsUser();
@@ -48,9 +50,11 @@ export const Login = ({ setFormName }: IForm) => {
 
 	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
-
+		
 		const hasErrors = validateFields();
 		if (hasErrors) return;
+
+		setLoading(true);
 
 		try {
 			const user = { email: values.email, password: values.password };
@@ -67,6 +71,8 @@ export const Login = ({ setFormName }: IForm) => {
 		} catch (error: any) {
 			showError(error, dispatch);
 		}
+
+		setLoading(false);
 	};
 
 	return (
@@ -92,7 +98,13 @@ export const Login = ({ setFormName }: IForm) => {
 					placeholder="Senha"
 				/>
 
-				<button role="submit-form" className="submit">Entrar</button>
+				{loading || (
+					<button role="submit-form" className="submit">
+						Entrar
+					</button>
+				)}
+
+				{loading && <ButtonLoading />}
 
 				<button type="button" className="change-form" onClick={() => setFormName("create")}>
 					Não tem uma conta? Clique aqui para criar sua conta
