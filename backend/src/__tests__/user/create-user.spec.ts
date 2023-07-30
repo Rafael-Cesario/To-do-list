@@ -4,11 +4,13 @@ import { prisma } from "../../database";
 import { userQueries } from "../queries/user";
 
 describe("User - create user", () => {
+	const defaultUser = { email: "USER@test.com", name: "user", password: "123" };
 	let url = "";
 
 	beforeAll(async () => {
 		url = await startServer(0);
 		await prisma.$connect();
+		await prisma.user.deleteMany();
 	});
 
 	afterEach(async () => {
@@ -26,15 +28,17 @@ describe("User - create user", () => {
 	});
 
 	it("Throw a error due to duplicated user", async () => {
-		const newUser = { email: "user@test.com", name: "user", password: "123" };
-		await request(url).mutate(userQueries.CREATE_USER).variables({ newUser });
-		const { errors } = await request(url).mutate(userQueries.CREATE_USER).variables({ newUser });
-        expect(errors![0].message).toBe("duplicated: A user with the same email already exist");
+		await request(url).mutate(userQueries.CREATE_USER).variables({ newUser: defaultUser });
+		const { errors } = await request(url).mutate(userQueries.CREATE_USER).variables({ newUser: defaultUser });
+		expect(errors![0].message).toBe("duplicated: A user with the same email already exist");
 	});
 
-	it.only("Create a new user with and return a message");
+	it("Create a new user, with lowercase email and encrypted password", async () => {
+		const { data } = await request<{ createUser: { message: string } }>(url).mutate(userQueries.CREATE_USER).variables({ newUser: defaultUser });
+		expect(data?.createUser.message).toBe("Success: A new user was created");
 
-	it.todo("Crypt the user password");
-
-	it.todo("Transform the user email to lowercase");
+		const user = await prisma.user.findFirst({ where: { email: defaultUser.email.toLowerCase() } });
+		expect(user?.email).toBe(defaultUser.email.toLowerCase());
+		expect(user?.password).not.toBe(defaultUser.password);
+	});
 });
