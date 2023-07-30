@@ -8,6 +8,14 @@ class UserQueries {
 			}
 		}
 	`;
+
+	LOGIN = gql`
+		mutation Login($user: IUser!) {
+			login (user: $user) {
+				token
+			}
+		}
+	`;
 }
 
 export const userQueries = new UserQueries();
