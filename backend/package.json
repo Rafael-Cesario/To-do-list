@@ -5,9 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "tsx watch ./src/index.ts",
-		"test": "dotenv -e .env.test -- vitest",
-		"migrate-postgres-dev": "dotenv -e .env -- npx prisma migrate dev",
-		"migrate-postgres-test": "dotenv -e .env.test -- npx prisma migrate dev"
+		"test": "dotenv -e .env.test -- vitest"
 	},
 	"keywords": [],
 	"author": "",

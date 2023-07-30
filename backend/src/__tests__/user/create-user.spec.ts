@@ -10,7 +10,6 @@ describe("User - create user", () => {
 	beforeAll(async () => {
 		url = await startServer(0);
 		await prisma.$connect();
-		await prisma.user.deleteMany();
 	});
 
 	afterEach(async () => {
