@@ -26,9 +26,22 @@ describe("User - Login", () => {
 		expect(errors![0].message).toBe("email has no value, password has no value");
 	});
 
-	it.todo("Throw error due to invalid email");
+	it("Throw error due to invalid email", async () => {
+		const { errors } = await request(url)
+			.mutate(userQueries.LOGIN)
+			.variables({ user: { email: "wrongEmail", password: defaultUser.password } });
 
-	it.todo("Throw error due to invalid password");
+		expect(errors![0].message).toBe("invalidCredentials: Wrong email or password");
+	});
+
+	it("Throw error due to invalid password", async () => {
+		const { errors } = await request(url)
+			.mutate(userQueries.LOGIN)
+			.variables({ user: { email: defaultUser.email, password: "wrong" } });
+
+		expect(errors![0].message).toBe("invalidCredentials: Wrong email or password");
+
+    });
 
 	it.todo("Returns a token");
 });
