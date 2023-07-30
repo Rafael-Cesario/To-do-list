@@ -9,5 +9,6 @@ const server = new ApolloServer({
 
 export const startServer = async (port = 4000) => {
 	const { url } = await startStandaloneServer(server, { listen: { port } });
-	console.log(`Server is open at:\x1b[32m ${url}\x1b[0m`);
+	process.env.NODE_ENV !== "test" && console.log(`Server is open at:\x1b[32m ${url}\x1b[0m`);
+	return url;
 };
