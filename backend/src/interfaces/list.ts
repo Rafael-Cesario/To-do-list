@@ -1,6 +1,14 @@
 export interface ICreateList {
-    input: {
-        userID: string;
-        name: string;
-    }
+	input: {
+		userID: string;
+		name: string;
+	};
+}
+
+export interface IRenameList {
+	input: {
+		userID: string;
+		listID: string;
+		newName: string;
+	};
 }
