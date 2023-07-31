@@ -19,7 +19,7 @@ model User {
 
 model List {
   listID String @id @default(uuid())
-  name   String @unique
+  name   String
 
   user   User   @relation(fields: [userID], references: [id])
   userID String
