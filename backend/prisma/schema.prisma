@@ -12,6 +12,26 @@ model User {
   email    String @unique
   name     String
   password String
+  lists    List[]
 
   @@map("users")
+}
+
+model List {
+  user    User      @relation(fields: [userID], references: [id])
+  listID  String    @id @default(uuid())
+  userID  String
+  name    String    @unique
+  Subject Subject[]
+
+  @@map("lists")
+}
+
+model Subject {
+  list      List   @relation(fields: [listID], references: [listID])
+  listID    String
+  subjectID String @id @default(uuid())
+  name      String @unique
+
+  @@map("subjects")
 }
