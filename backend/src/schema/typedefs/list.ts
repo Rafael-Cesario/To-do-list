@@ -7,7 +7,8 @@ export const listTypeDefs = gql`
 
 	type Mutation {
 		createList(input: ICreateList!): List!
-        renameList(input: IRenameList!): List!
+		renameList(input: IRenameList!): List!
+		deleteList(input: IDeleteList!): String!
 	}
 
 	type List {
@@ -21,9 +22,13 @@ export const listTypeDefs = gql`
 		name: String!
 	}
 
-    input IRenameList {
-        userID: String!
-        listID: String!
-        newName: String!
-    }
+	input IRenameList {
+		userID: String!
+		listID: String!
+		newName: String!
+	}
+
+	input IDeleteList {
+		listID: String!
+	}
 `;

@@ -1,7 +1,7 @@
 import { searchEmptyValues } from "../utils/search-empty-values";
 import { GraphQLError } from "graphql";
 import { prisma } from "../database";
-import { ICreateList, IRenameList } from "../interfaces/list";
+import { ICreateList, IDeleteList, IRenameList } from "../interfaces/list";
 
 class ListServices {
 	async getLists({ userID }: { userID: string }) {
@@ -54,6 +54,14 @@ class ListServices {
 		});
 
 		return newList;
+	}
+
+	async deleteList({ input }: IDeleteList) {
+		const list = await prisma.list.findUnique({ where: { listID: input.listID } });
+		if (!list) throw new GraphQLError("notFound: List not found");
+
+		await prisma.list.delete({ where: { listID: input.listID } });
+		return "List deleted";
 	}
 }
 

@@ -12,3 +12,9 @@ export interface IRenameList {
 		newName: string;
 	};
 }
+
+export interface IDeleteList {
+	input: {
+		listID: string;
+	};
+}
