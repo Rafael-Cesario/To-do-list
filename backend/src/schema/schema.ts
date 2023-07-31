@@ -2,6 +2,8 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import gql from "graphql-tag";
 import { userTypeDefs } from "./typedefs/user";
 import { userResolver } from "./resolvers/user";
+import { listTypeDefs } from "./typedefs/list";
+import { listResolver } from "./resolvers/list";
 
 const placeholderTypeDef = gql`
 	type Query {
@@ -16,6 +18,6 @@ const placeholderResolver = {
 };
 
 export const schema = makeExecutableSchema({
-	typeDefs: [placeholderTypeDef, userTypeDefs],
-	resolvers: [placeholderResolver, userResolver],
+	typeDefs: [placeholderTypeDef, userTypeDefs, listTypeDefs],
+	resolvers: [placeholderResolver, userResolver, listResolver],
 });
