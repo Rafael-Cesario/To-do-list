@@ -1,6 +1,18 @@
+import { GraphQLError } from "graphql";
+import { prisma } from "../database";
+
 class ListServices {
-	getLists({ userID }: { userID: string }) {
-		console.log({ userID });
+	async getLists({ userID }: { userID: string }) {
+		if (!userID) throw new GraphQLError("missingFields: userId is required");
+
+		const user = await prisma.user.findUnique({
+			where: { id: userID },
+			select: { lists: true },
+		});
+
+		if (!user) throw new GraphQLError("notFound: User not found");
+
+		return user.lists;
 	}
 }
 
