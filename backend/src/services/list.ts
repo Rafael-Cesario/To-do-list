@@ -1,5 +1,6 @@
 import { GraphQLError } from "graphql";
 import { prisma } from "../database";
+import { ICreateList } from "../interfaces/list";
 
 class ListServices {
 	async getLists({ userID }: { userID: string }) {
@@ -13,6 +14,10 @@ class ListServices {
 		if (!user) throw new GraphQLError("notFound: User not found");
 
 		return user.lists;
+	}
+
+	async createList({ input }: ICreateList) {
+		console.log({ input });
 	}
 }
 
