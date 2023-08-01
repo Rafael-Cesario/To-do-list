@@ -1,7 +1,7 @@
 import request from "supertest-graphql";
 import { prisma } from "../../database";
 import { startServer } from "../../server";
-import { userQueries } from "../__queries__/user";
+import { userQueries } from "../__utils__/queries/user";
 
 describe("User - Login", () => {
 	const defaultUser = { email: "user@test.com", password: "123" };

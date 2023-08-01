@@ -2,7 +2,7 @@ import request from "supertest-graphql";
 import { prisma } from "../../database";
 import { InterfaceUser } from "../../interfaces/user";
 import { startServer } from "../../server";
-import { listQueries } from "../__queries__/list";
+import { listQueries } from "../__utils__/queries/list";
 
 describe("List - Get lists", () => {
 	let user: InterfaceUser;

@@ -1,7 +1,7 @@
 import request from "supertest-graphql";
 import { prisma } from "../../database";
 import { startServer } from "../../server";
-import { listQueries } from "../__queries__/list";
+import { listQueries } from "../__utils__/queries/list";
 
 describe("List - Create list", () => {
 	let user: { id: string };
