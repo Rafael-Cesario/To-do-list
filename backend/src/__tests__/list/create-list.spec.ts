@@ -28,7 +28,13 @@ describe("List - Create list", () => {
 		expect(errors![0].message).toBe("missingFields: userID has no value, name has no value");
 	});
 
-	it.todo("Throw error due to user not found");
+	it("Throw error due to user not found", async () => {
+		const { errors } = await request(url)
+			.mutate(listQueries.CREATE_LIST)
+			.variables({ input: { userID: "wrong", name: "user" } });
+
+		expect(errors![0].message).toBe("notFound: User not found");
+	});
 
 	it.todo("Throw error due to a duplicated name");
 
