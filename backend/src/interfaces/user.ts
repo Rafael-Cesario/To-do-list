@@ -1,4 +1,4 @@
-export interface IUser {
+export interface InterfaceUser {
 	id: string;
 	email: string;
 	name: string;
@@ -6,10 +6,10 @@ export interface IUser {
 }
 
 export interface INewUser {
-	newUser: IUser;
+	newUser: InterfaceUser;
 }
 
-export interface IUser {
+export interface ILogin {
 	user: {
 		email: string;
 		password: string;

@@ -10,6 +10,32 @@ class ListQueries {
 			}
 		}
 	`;
+
+	GET_LISTS = gql`
+		query GetLists($userID: String!) {
+			getLists(userID: $userID) {
+				listID
+				userID
+				name
+			}
+		}
+	`;
+
+	RENAME_LIST = gql`
+		mutation RenameList($input: IRenameList!) {
+			renameList(input: $input) {
+				name
+				listID
+				userID
+			}
+		}
+	`;
+
+	DELETE_LIST = gql`
+		mutation DeleteList($input: IDeleteList!) {
+			deleteList(input: $input)
+		}
+	`;
 }
 
 export const listQueries = new ListQueries();

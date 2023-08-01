@@ -1,4 +1,4 @@
-import { INewUser, IUser } from "../interfaces/user";
+import { ILogin, INewUser } from "../interfaces/user";
 import { GraphQLError } from "graphql";
 import { searchEmptyValues } from "../utils/search-empty-values";
 import { decryptPassword, encryptPassword } from "../utils/crypt";
@@ -22,7 +22,7 @@ class UserServices {
 		return { message: "Success: A new user was created" };
 	}
 
-	async login({ user }: IUser) {
+	async login({ user }: ILogin) {
 		const hasEmptyValues = searchEmptyValues(user);
 		if (hasEmptyValues) throw new GraphQLError(hasEmptyValues);
 
