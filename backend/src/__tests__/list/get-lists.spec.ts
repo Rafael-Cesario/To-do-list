@@ -38,7 +38,10 @@ describe("List - Get lists", () => {
 		expect(errors![0].message).toBe("missingFields: userId is required");
 	});
 
-	it.todo("Throw a errro if user was not found");
+	it("Throw a errro if user was not found", async () => {
+		const { errors } = await request(url).mutate(listQueries.GET_LISTS).variables({ userID: "wrong" });
+		expect(errors![0].message).toBe("notFound: User not found");
+	});
 
 	it.todo("Returns all the lists of a user");
 });
