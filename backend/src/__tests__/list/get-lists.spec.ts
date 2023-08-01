@@ -43,5 +43,8 @@ describe("List - Get lists", () => {
 		expect(errors![0].message).toBe("notFound: User not found");
 	});
 
-	it.todo("Returns all the lists of a user");
+	it("Returns all the lists of a user", async () => {
+		const { data } = await request<{ getLists: [] }>(url).mutate(listQueries.GET_LISTS).variables({ userID: user.id });
+		expect(data?.getLists).toHaveLength(3);
+	});
 });
