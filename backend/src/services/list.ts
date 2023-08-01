@@ -61,7 +61,7 @@ class ListServices {
 		if (!list) throw new GraphQLError("notFound: List not found");
 
 		await prisma.list.delete({ where: { listID: input.listID } });
-		return "List deleted";
+		return "success: List deleted";
 	}
 }
 
