@@ -36,7 +36,17 @@ describe("List - Create list", () => {
 		expect(errors![0].message).toBe("notFound: User not found");
 	});
 
-	it.todo("Throw error due to a duplicated name");
+	it("Throw error due to a duplicated name", async () => {
+		await request(url)
+			.mutate(listQueries.CREATE_LIST)
+			.variables({ input: { userID: user.id, name: "list01" } });
+
+		const { errors } = await request(url)
+			.mutate(listQueries.CREATE_LIST)
+			.variables({ input: { userID: user.id, name: "list01" } });
+
+		expect(errors![0].message).toBe("duplicated: This list already exist");
+	});
 
 	it.todo("Create a new list");
 });
