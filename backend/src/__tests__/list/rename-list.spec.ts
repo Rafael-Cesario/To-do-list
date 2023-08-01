@@ -42,7 +42,11 @@ describe("List - Rename list", () => {
 		expect(errors![0].message).toBe("duplicated: This list already exist");
 	});
 
-	it.todo("Throw error due to list not found");
+	it("Throw error due to list not found", async () => {
+		const input = { listID: "Wrong", userID: user.id, newName: "A new name" };
+		const { errors } = await request(url).mutate(listQueries.RENAME_LIST).variables({ input });
+		expect(errors![0].message).toBe("notFound: List not found");
+	});
 
 	it.todo("Rename a list and return it");
 });
