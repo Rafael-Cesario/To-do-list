@@ -6,5 +6,7 @@ export default defineConfig({
 		reporters: "basic",
 		watch: false,
 		globals: true,
+		threads: false,
+		singleThread: true,
 	},
 });
