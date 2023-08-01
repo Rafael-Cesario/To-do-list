@@ -4,7 +4,7 @@ import { InterfaceUser } from "../../interfaces/user";
 import { startServer } from "../../server";
 import { createLists, createUser } from "../__utils__/create";
 import { listQueries } from "../__utils__/queries/list";
-import { IList, IRenameList } from "../../interfaces/list";
+import { IList } from "../../interfaces/list";
 
 describe("List - Rename list", () => {
 	let user: InterfaceUser;
@@ -48,5 +48,13 @@ describe("List - Rename list", () => {
 		expect(errors![0].message).toBe("notFound: List not found");
 	});
 
-	it.todo("Rename a list and return it");
+	it("Rename a list and return it", async () => {
+		const listName = "A NEW NAME";
+		const input = { listID: lists[0].listID, userID: user.id, newName: listName };
+		const { data } = await request<{ renameList: IList }>(url).mutate(listQueries.RENAME_LIST).variables({ input });
+
+		expect(data?.renameList.listID).toBeDefined();
+		expect(data?.renameList.userID).toBeDefined();
+		expect(data?.renameList.name).toBe(listName.toLowerCase());
+	});
 });
