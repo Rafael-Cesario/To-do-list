@@ -2,7 +2,6 @@ import request from "supertest-graphql";
 import { prisma } from "../../database";
 import { startServer } from "../../server";
 import { listQueries } from "../__queries__/list";
-import { ICreateList } from "../../interfaces/list";
 
 describe("List - Create list", () => {
 	let user: { id: string };
@@ -14,8 +13,11 @@ describe("List - Create list", () => {
 		user = await prisma.user.create({ data: { email: "user@test.com", name: "user", password: "123" } });
 	});
 
-	afterAll(async () => {
+	afterEach(async () => {
 		await prisma.list.deleteMany();
+	});
+
+	afterAll(async () => {
 		await prisma.user.deleteMany();
 		await prisma.$disconnect();
 	});
@@ -48,5 +50,15 @@ describe("List - Create list", () => {
 		expect(errors![0].message).toBe("duplicated: This list already exist");
 	});
 
-	it.todo("Create a new list");
+	it("Create a new list", async () => {
+		const listName = "LIST01";
+
+		const { data } = await request<{ createList: { listID: string; userID: string; name: string } }>(url)
+			.mutate(listQueries.CREATE_LIST)
+			.variables({ input: { userID: user.id, name: listName } });
+
+		expect(data?.createList).toHaveProperty("listID");
+		expect(data?.createList).toHaveProperty("userID");
+		expect(data?.createList).toHaveProperty("name", listName.toLowerCase());
+	});
 });
