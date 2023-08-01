@@ -36,7 +36,11 @@ describe("List - Rename list", () => {
 		expect(errors![0].message).toBe("notFound: User not found");
 	});
 
-	it.todo("Throw error due to duplicated list name");
+	it("Throw error due to duplicated list name", async () => {
+		const input = { listID: lists[0].listID, userID: user.id, newName: lists[1].name };
+		const { errors } = await request(url).mutate(listQueries.RENAME_LIST).variables({ input });
+		expect(errors![0].message).toBe("duplicated: This list already exist");
+	});
 
 	it.todo("Throw error due to list not found");
 
