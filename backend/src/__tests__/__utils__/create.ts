@@ -6,8 +6,13 @@ export const createUser = async () => {
 };
 
 export const createLists = async (amount: number, userID: string) => {
+	const lists = [];
+
 	let listNumber = 0;
 	for (listNumber; listNumber < amount; listNumber++) {
-		await prisma.list.create({ data: { userID, name: `list${listNumber}` } });
+		const list = await prisma.list.create({ data: { userID, name: `list${listNumber}` } });
+		lists.push(list);
 	}
+
+	return lists;
 };

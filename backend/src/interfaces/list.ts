@@ -1,3 +1,9 @@
+export interface IList {
+	userID: string;
+	listID: string;
+	name: string;
+}
+
 export interface ICreateList {
 	input: {
 		userID: string;
