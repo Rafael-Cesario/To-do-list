@@ -22,6 +22,10 @@ export const GlobalStyle = createGlobalStyle`
         color: ${Palette.text};
         padding: 10px 20px;
         margin: 0.5rem 0;
+
+        &:focus {
+            outline: 2px solid ${Palette.primary};
+        }
     }
 
     input {

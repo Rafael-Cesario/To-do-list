@@ -1,7 +1,10 @@
+import { Sidebar } from "@/features/home/sidebar";
+import { StyledHome } from "@/styles/home-style";
+
 export default function Home() {
-  return (
-    <main>
-      <h1>StudyList</h1>
-    </main>
-  )
+	return (
+		<StyledHome>
+			<Sidebar />
+		</StyledHome>
+	);
 }
