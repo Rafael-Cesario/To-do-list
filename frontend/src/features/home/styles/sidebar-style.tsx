@@ -3,6 +3,7 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledSidebar = styled.div`
+	min-width: 15vw;
 	min-height: 100vh;
 	background-color: ${Palette.container};
 	padding: 1rem 2rem;

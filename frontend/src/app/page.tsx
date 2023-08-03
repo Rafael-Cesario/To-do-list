@@ -1,4 +1,5 @@
 import { Loader } from "@/features/home/components/loader";
+import { Header } from "@/features/home/header";
 import { Sidebar } from "@/features/home/sidebar";
 import { client } from "@/services/client";
 import { CookieKeys, IUserCookies } from "@/services/interfaces/cookies";
@@ -31,6 +32,7 @@ export default async function Home() {
 		<StyledHome>
 			<Loader lists={lists} />
 			<Sidebar />
+			<Header />
 		</StyledHome>
 	);
 }

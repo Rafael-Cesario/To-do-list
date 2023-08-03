@@ -3,5 +3,5 @@ import styled from "styled-components";
 
 export const StyledHome = styled.div`
 	display: grid;
-	grid-template-columns: 300px auto 300px;
+	grid-template-columns: auto 3fr;
 `;
