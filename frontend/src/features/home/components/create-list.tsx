@@ -29,7 +29,6 @@ export const CreateList = () => {
 		setLoading(true);
 
 		try {
-			// todo > Set the new list as active
 			const userCookies: IUserCookies = await cookies.get("user");
 			const input = { userID: userCookies.userID, name: listName };
 

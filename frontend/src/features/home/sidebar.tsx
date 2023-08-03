@@ -1,4 +1,5 @@
 import { CreateList } from "./components/create-list";
+import { ListContainer } from "./components/list-container";
 import { StyledSidebar } from "./styles/sidebar-style";
 
 export const Sidebar = () => {
@@ -19,6 +20,8 @@ export const Sidebar = () => {
 				<li>Programação</li>
 				<li>Programação</li>
 			</ul>
+
+			<ListContainer />
 		</StyledSidebar>
 	);
 };
