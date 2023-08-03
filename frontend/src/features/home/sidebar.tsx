@@ -13,14 +13,6 @@ export const Sidebar = () => {
 				<CreateList />
 			</div>
 
-			<ul className="list-container">
-				<li className="active">Programação</li>
-				<li>Programação</li>
-				<li>Programação</li>
-				<li>Programação</li>
-				<li>Programação</li>
-			</ul>
-
 			<ListContainer />
 		</StyledSidebar>
 	);
