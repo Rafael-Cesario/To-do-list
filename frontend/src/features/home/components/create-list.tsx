@@ -40,6 +40,7 @@ export const CreateList = () => {
 			dispatch(addList({ list: data.createList }));
 			dispatch(setActive({ newActive: data.createList.listID }));
 		} catch (error: any) {
+			console.log({ error: error.message });
 			showError(error, dispatch, errorsMap.list);
 		}
 
@@ -68,6 +69,7 @@ export const CreateList = () => {
 								{hasError ? "Sua lista precisa de um nome" : "Nome"}
 							</label>
 							<input
+								role="list-name"
 								value={listName}
 								autoFocus={true}
 								type="text"
@@ -78,7 +80,11 @@ export const CreateList = () => {
 							/>
 						</div>
 
-						{loading || <button className="submit">Criar minha lista</button>}
+						{loading || (
+							<button role="submit" className="submit">
+								Criar minha lista
+							</button>
+						)}
 						{loading && <ButtonLoading />}
 					</form>
 				</StyledCreateList>
