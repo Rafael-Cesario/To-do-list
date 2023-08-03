@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/slice-notification";
 import { showError } from "@/utils/show-error";
 import { useMutationsUser } from "@/utils/hooks/use-mutations-user";
+import { errorsMap } from "@/services/errors-map";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -61,7 +62,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Novo usuário criado", message: "Boas vindas, você já pode fazer login." }));
 			setFormName("login");
 		} catch (error: any) {
-			showError(error, dispatch);
+			showError(error, dispatch, errorsMap.user);
 		}
 
 		setLoading(false);

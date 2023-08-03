@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useMutationsUser } from "@/utils/hooks/use-mutations-user";
 import { ButtonLoading } from "@/components/button-loading";
 import { IUserCookies } from "@/services/interfaces/cookies";
+import { errorsMap } from "@/services/errors-map";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -73,7 +74,7 @@ export const Login = ({ setFormName }: IForm) => {
 
 			router.refresh();
 		} catch (error: any) {
-			showError(error, dispatch);
+			showError(error, dispatch, errorsMap.user);
 		}
 
 		setLoading(false);
