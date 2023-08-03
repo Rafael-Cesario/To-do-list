@@ -4,38 +4,43 @@ import { StyledCreateList } from "../styles/create-list-style";
 import { ButtonLoading } from "@/components/button-loading";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
 import { cookies } from "@/services/cookies";
+import { IUserCookies } from "@/services/interfaces/cookies";
+import { useDispatch } from "react-redux";
+import { setNotification } from "@/context/slice-notification";
+import { showError } from "@/utils/show-error";
+import { errorsMap } from "@/services/errors-map";
 
 export const CreateList = () => {
 	const [createListContainer, setCreateListContainer] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [listName, setListName] = useState("");
 	const [loading, setLoading] = useState(false);
+
 	const { createListRequest } = useMutationsList();
+	const dispatch = useDispatch();
 
-	const createList = async () => {
+	const createList = async (e: React.FormEvent) => {
+		e.preventDefault();
+
 		if (!listName) return setHasError(true);
-		setHasError(false);
 
+		setHasError(false);
 		setLoading(true);
 
-		const userCookies = await cookies.get("user");
-		console.log({ userCookies });
+		try {
+			const userCookies: IUserCookies = await cookies.get("user");
+			const input = { userID: userCookies.userID, name: listName };
+			await createListRequest({ input });
+			dispatch(setNotification({ isOpen: true, type: "success", title: "Nova lista criada", message: "Sua nova lista foi criada com sucesso" }));
+			setListName("");
 
-		// send request
-		// send success notification
-		// catch errors
+			// TODO > Push the new list to the global state
+			// todo > Set the new list as current active
+		} catch (error: any) {
+			showError(error, dispatch, errorsMap.list);
+		}
 
-		// try {
-		// 	const input = { userID: "", name: "" };
-		// 	const response = await createListRequest({ input });
-		// 	console.log({ response });
-		// } catch (error: any) {
-		// 	console.log({ error });
-		// }
-
-		setTimeout(() => {
-			setLoading(false);
-		}, 1000);
+		setLoading(false);
 	};
 
 	return (
@@ -54,16 +59,13 @@ export const CreateList = () => {
 						</button>
 					</div>
 
-					<form
-						onSubmit={(e) => {
-							e.preventDefault();
-							createList();
-						}}>
+					<form onSubmit={(e) => createList(e)}>
 						<div className="field">
 							<label htmlFor="list-name" className={hasError ? "error" : ""}>
 								{hasError ? "Sua lista precisa de um nome" : "Nome"}
 							</label>
 							<input
+								value={listName}
 								autoFocus={true}
 								type="text"
 								placeholder="Minha nova lista"
