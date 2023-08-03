@@ -9,6 +9,7 @@ import { cookies } from "@/services/cookies";
 import { useRouter } from "next/navigation";
 import { useMutationsUser } from "@/utils/hooks/use-mutations-user";
 import { ButtonLoading } from "@/components/button-loading";
+import { IUserCookies } from "@/services/interfaces/cookies";
 
 interface IForm {
 	setFormName: React.Dispatch<React.SetStateAction<"login" | "create">>;
@@ -50,7 +51,7 @@ export const Login = ({ setFormName }: IForm) => {
 
 	const submitForm = async (e: React.FormEvent) => {
 		e.preventDefault();
-		
+
 		const hasErrors = validateFields();
 		if (hasErrors) return;
 
@@ -59,12 +60,15 @@ export const Login = ({ setFormName }: IForm) => {
 		try {
 			const user = { email: values.email, password: values.password };
 			const { data } = await loginRequest({ user });
-			const token = data?.login.token;
+			if (!data) throw new Error("Data is undefined");
+			const { token, userID } = data?.login;
+
+			const userCookies: IUserCookies = { email: values.email, token, userID };
 
 			await cookies.set({
 				key: cookies.keys.user,
 				maxAge: 60 * 60 * 24 * 7, // 1 week
-				value: JSON.stringify({ email: values.email, token }),
+				value: JSON.stringify(userCookies),
 			});
 
 			router.refresh();

@@ -21,5 +21,5 @@ export interface ILogin {
 }
 
 export interface RLogin {
-	login: { token: string };
+	login: { token: string; userID: string };
 }
