@@ -3,10 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ListSlice {
 	lists: IList[];
+	active: string;
 }
 
 const defaultValues: ListSlice = {
 	lists: [],
+	active: "",
 };
 
 export const listSlice = createSlice({
@@ -20,7 +22,11 @@ export const listSlice = createSlice({
 		addList: (state, action: { payload: { list: IList } }) => {
 			state.lists.push(action.payload.list);
 		},
+
+		setActive: (state, action: { payload: { newActive: string } }) => {
+			state.active = action.payload.newActive;
+		},
 	},
 });
 
-export const { setLists, addList } = listSlice.actions;
+export const { setLists, addList, setActive } = listSlice.actions;
