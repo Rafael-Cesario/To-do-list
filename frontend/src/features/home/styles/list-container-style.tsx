@@ -5,13 +5,14 @@ export const StyledListContainer = styled.ul`
 	list-style: none;
 
 	li {
-		color: ${Palette.fadedText};
+		color: ${Palette.fadedText + "80"};
 		position: relative;
 		padding: 8px 0 4px 1rem;
 		border-bottom: 2px solid ${Palette.fadedText + "10"};
 		font-weight: bold;
 		font-size: 0.9rem;
 		cursor: pointer;
+		text-transform: capitalize;
 
 		&:hover {
 			background-color: ${Palette.borderContainer};
@@ -24,8 +25,12 @@ export const StyledListContainer = styled.ul`
 			left: 0;
 			width: 5px;
 			height: 15px;
-			background-color: ${Palette.fadedText};
+			background-color: ${Palette.fadedText + "50"};
 		}
+	}
+
+	.active {
+		color: #ddd;
 	}
 
 	.active::before {
