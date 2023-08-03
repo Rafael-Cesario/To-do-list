@@ -7,6 +7,10 @@ export const StyledHeader = styled.header`
 	justify-content: space-between;
 	padding: 1rem 2rem;
 
+	.title h1 {
+		text-transform: capitalize;
+	}
+
 	.title p {
 		color: ${Palette.fadedText};
 		font-size: 0.8rem;
@@ -15,7 +19,6 @@ export const StyledHeader = styled.header`
 	.menu {
 		display: flex;
 		height: fit-content;
-
 
 		input {
 			width: 30vw;

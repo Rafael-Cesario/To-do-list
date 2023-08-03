@@ -9,8 +9,7 @@ export const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [renameListContainer, setRenameListContainer] = useState(false);
 	const [deleteListContainer, setDeleteListContainer] = useState(false);
-
-	const { lists, active } = useSelector((state: Store) => state.list);
+	const { active } = useSelector((state: Store) => state.list);
 
 	return (
 		<StyledMenu>

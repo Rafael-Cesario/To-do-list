@@ -1,11 +1,16 @@
+"use client";
+import { useSelector } from "react-redux";
 import { Menu } from "./components/menu";
 import { StyledHeader } from "./styles/header-style";
+import { Store } from "@/context/store";
 
 export const Header = () => {
+	const { active } = useSelector((state: Store) => state.list);
+
 	return (
 		<StyledHeader>
 			<div className="title">
-				<h1>ListName</h1>
+				<h1>{active?.name}</h1>
 				<p>12 Itens na lista</p>
 			</div>
 
@@ -16,3 +21,5 @@ export const Header = () => {
 		</StyledHeader>
 	);
 };
+
+// Todo > remove placeholder number of items on the list
