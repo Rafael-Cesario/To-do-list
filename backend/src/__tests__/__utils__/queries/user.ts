@@ -12,7 +12,7 @@ class UserQueries {
 	LOGIN = gql`
 		mutation Login($user: IUser!) {
 			login (user: $user) {
-				token
+				token, userID
 			}
 		}
 	`;

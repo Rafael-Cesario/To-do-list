@@ -14,6 +14,7 @@ export const userTypeDefs = gql`
 
 	type ResponseLogin {
 		token: String!
+		userID: String!
 	}
 
     input INewUser {
