@@ -33,7 +33,7 @@ class UserServices {
 		if (!samePassword) throw new GraphQLError("invalidCredentials: Wrong email or password");
 
 		const token = generateToken(user.email);
-		return { token, userID: userDB.email };
+		return { token, userID: userDB.id };
 	}
 }
 

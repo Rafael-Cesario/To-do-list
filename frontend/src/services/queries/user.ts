@@ -13,6 +13,7 @@ class UserQueries {
 		mutation Login($user: IUser!) {
 			login(user: $user) {
 				token
+				userID
 			}
 		}
 	`;
