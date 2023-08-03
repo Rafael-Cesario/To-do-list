@@ -1,3 +1,4 @@
+import { CreateList } from "./components/create-list";
 import { StyledSidebar } from "./styles/sidebar-style";
 
 export const Sidebar = () => {
@@ -8,7 +9,7 @@ export const Sidebar = () => {
 
 			<div className="container">
 				<h2>Listas</h2>
-				<button className="icon">+</button>
+				<CreateList />
 			</div>
 
 			<ul className="list-container">

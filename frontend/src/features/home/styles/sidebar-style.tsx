@@ -23,6 +23,7 @@ export const StyledSidebar = styled.div`
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: 12px;
+		position: relative;
 
 		.icon {
 			font-size: 1.4rem;
