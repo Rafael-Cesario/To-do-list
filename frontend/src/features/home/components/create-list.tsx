@@ -48,12 +48,12 @@ export const CreateList = () => {
 
 	return (
 		<>
-			<button onClick={() => setCreateListContainer(!createListContainer)} className="icon">
+			<button role="open-close-create-list-container" onClick={() => setCreateListContainer(!createListContainer)} className="icon">
 				+
 			</button>
 
 			{createListContainer && (
-				<StyledCreateList>
+				<StyledCreateList role="create-list-container">
 					<div className="header">
 						<h1 className="title">Criar nova lista</h1>
 

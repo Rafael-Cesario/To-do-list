@@ -1,3 +1,5 @@
+import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 import { Notification } from "@/components/notification";
 import { Sidebar } from "../sidebar";
 import { AllProviders } from "@/lib/all-providers";
@@ -14,13 +16,18 @@ const Component = () => (
 );
 
 describe("Home - Sidebar - Create list", () => {
+	const user = userEvent.setup();
+
 	beforeAll(() => {
 		render(<Component />);
 		act(() => store.dispatch(setLists({ lists: [{ listID: "unique", userID: "unique", name: "list01" }] })));
 	});
 
 	it("Open and close create list container", async () => {
-		screen.debug();
+		await user.click(screen.getByRole("open-close-create-list-container"));
+		expect(screen.getByRole("create-list-container")).toBeInTheDocument();
+		await user.click(screen.getByRole("open-close-create-list-container"));
+		expect(screen.queryByRole("create-list-container")).not.toBeInTheDocument();
 	});
 
 	it.todo("Create a new list and show on the sidebar", async () => {
