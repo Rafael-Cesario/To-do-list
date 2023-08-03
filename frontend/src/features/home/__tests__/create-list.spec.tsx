@@ -20,10 +20,14 @@ describe("Home - Sidebar - Create list", () => {
 	const mockMutationsList = MutationsList as { useMutationsList: object };
 	const user = userEvent.setup();
 	const listName = "A new list";
+	let error = "";
 	const { getByRole, queryByRole, getAllByRole } = screen;
 
 	mockMutationsList.useMutationsList = () => ({
-		createListRequest: () => ({ data: { createList: { listID: "123", userID: "123", name: listName } } }),
+		createListRequest: () => {
+			if (error) throw new Error(error);
+			return { data: { createList: { listID: "123", userID: "123", name: listName } } };
+		},
 	});
 
 	beforeEach(() => {
@@ -61,7 +65,19 @@ describe("Home - Sidebar - Create list", () => {
 		expect(getByRole("label-list-name")).toHaveTextContent("Sua lista precisa de um nome");
 	});
 
-	it.todo("Show a notification due to request error");
+	it("Show a notification due to request error", async () => {
+		error = "duplicated: Same list";
+
+		await user.click(getByRole("open-close-create-list-container"));
+		await user.type(getByRole("list-name"), listName);
+		await user.click(getByRole("submit"));
+
+		const lists = getAllByRole("list-item");
+
+		expect(getByRole("list-name")).toHaveValue(listName);
+		expect(getByRole("notification").querySelector(".message")).toHaveTextContent("Uma lista com o mesmo nome já foi criada");
+		expect(lists).toHaveLength(1);
+	});
 });
 
 vi.mock("@/services/cookies", () => {
