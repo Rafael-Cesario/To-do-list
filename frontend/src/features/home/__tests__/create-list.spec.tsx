@@ -55,7 +55,11 @@ describe("Home - Sidebar - Create list", () => {
 		expect(lists[lists.length - 1].className).toBe("active");
 	});
 
-	it.todo("Show a error if user try to create a list without a name");
+	it("Show a error if user try to create a list without a name", async () => {
+		await user.click(getByRole("open-close-create-list-container"));
+		await user.click(getByRole("submit"));
+		expect(getByRole("label-list-name")).toHaveTextContent("Sua lista precisa de um nome");
+	});
 
 	it.todo("Show a notification due to request error");
 });

@@ -40,7 +40,6 @@ export const CreateList = () => {
 			dispatch(addList({ list: data.createList }));
 			dispatch(setActive({ newActive: data.createList.listID }));
 		} catch (error: any) {
-			console.log({ error: error.message });
 			showError(error, dispatch, errorsMap.list);
 		}
 
@@ -65,7 +64,7 @@ export const CreateList = () => {
 
 					<form onSubmit={(e) => createList(e)}>
 						<div className="field">
-							<label htmlFor="list-name" className={hasError ? "error" : ""}>
+							<label role="label-list-name" htmlFor="list-name" className={hasError ? "error" : ""}>
 								{hasError ? "Sua lista precisa de um nome" : "Nome"}
 							</label>
 							<input
