@@ -5,10 +5,9 @@ export const StyledListContainer = styled.ul`
 	list-style: none;
 
 	li {
-		margin-bottom: 8px;
 		color: ${Palette.fadedText};
 		position: relative;
-		padding: 0rem 0 5px 1rem;
+		padding: 8px 0 4px 1rem;
 		border-bottom: 2px solid ${Palette.fadedText + "10"};
 		font-weight: bold;
 		font-size: 0.9rem;
@@ -21,7 +20,7 @@ export const StyledListContainer = styled.ul`
 		&::before {
 			content: "";
 			position: absolute;
-			top: 4px;
+			top: 12px;
 			left: 0;
 			width: 5px;
 			height: 15px;

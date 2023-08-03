@@ -1,16 +1,17 @@
 "use client";
-
 import { Store } from "@/context/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledListContainer } from "../styles/list-container-style";
+import { setActive } from "../context/list-slice";
 
 export const ListContainer = () => {
 	const { lists, active } = useSelector((state: Store) => state.list);
+	const dispatch = useDispatch();
 
 	return (
 		<StyledListContainer>
 			{lists.map((list) => (
-				<li className={active === list.listID ? "active" : ""} key={list.listID}>
+				<li onClick={() => dispatch(setActive({ newActive: list.listID }))} className={active === list.listID ? "active" : ""} key={list.listID}>
 					{list.name}
 				</li>
 			))}
