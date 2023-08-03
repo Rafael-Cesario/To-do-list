@@ -1,18 +1,23 @@
-import { ISetCookies } from "./interfaces/cookies";
+import { CookieKeys, ISetCookies } from "./interfaces/cookies";
 
 class Cookies {
 	readonly keys = {
 		user: "user",
 	};
 
-	async set(cookies: ISetCookies) {
-		const response = await fetch("/api/cookies", {
+	async set(key: CookieKeys, cookies: ISetCookies) {
+		const response = await fetch("/api/cookies/" + key, {
 			headers: { "Content-Type": "application/json" },
 			method: "POST",
 			body: JSON.stringify(cookies),
 		});
 
 		return response;
+	}
+
+	async get(key: CookieKeys) {
+		const response = await fetch("/api/cookies/" + key);
+		return await response.json();
 	}
 }
 

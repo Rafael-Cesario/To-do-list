@@ -1,5 +1,14 @@
 import cookie from "cookie";
 import { ISetCookies } from "@/services/interfaces/cookies";
+import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+
+export async function GET(req: Request, { params }: { params: { key: string } }) {
+	const store = cookies();
+	const data = store.get(params.key);
+	const userCookies = JSON.parse(data?.value || "");
+	return NextResponse.json({ ...userCookies });
+}
 
 export async function POST(req: Request) {
 	const { key, maxAge, value }: ISetCookies = await req.json();

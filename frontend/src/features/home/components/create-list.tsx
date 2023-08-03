@@ -3,6 +3,7 @@ import { useState } from "react";
 import { StyledCreateList } from "../styles/create-list-style";
 import { ButtonLoading } from "@/components/button-loading";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
+import { cookies } from "@/services/cookies";
 
 export const CreateList = () => {
 	const [createListContainer, setCreateListContainer] = useState(false);
@@ -17,17 +18,20 @@ export const CreateList = () => {
 
 		setLoading(true);
 
+		const userCookies = await cookies.get("user");
+		console.log({ userCookies });
+
 		// send request
 		// send success notification
 		// catch errors
 
-		try {
-			const input = { userID: "", name: "" };
-			const response = await createListRequest({ input });
-			console.log({ response });
-		} catch (error: any) {
-			console.log({ error });
-		}
+		// try {
+		// 	const input = { userID: "", name: "" };
+		// 	const response = await createListRequest({ input });
+		// 	console.log({ response });
+		// } catch (error: any) {
+		// 	console.log({ error });
+		// }
 
 		setTimeout(() => {
 			setLoading(false);

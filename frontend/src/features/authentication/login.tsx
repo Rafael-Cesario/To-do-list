@@ -65,7 +65,7 @@ export const Login = ({ setFormName }: IForm) => {
 
 			const userCookies: IUserCookies = { email: values.email, token, userID };
 
-			await cookies.set({
+			await cookies.set("user", {
 				key: cookies.keys.user,
 				maxAge: 60 * 60 * 24 * 7, // 1 week
 				value: JSON.stringify(userCookies),
