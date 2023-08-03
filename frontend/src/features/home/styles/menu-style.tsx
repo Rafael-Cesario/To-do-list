@@ -2,7 +2,7 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledMenu = styled.div`
-	position: relative;
+	/* position: relative; */
 
 	button {
 		border: none;
@@ -28,6 +28,8 @@ export const StyledMenu = styled.div`
 		margin-top: 8px;
 		position: absolute;
 		padding: 1rem;
+		display: flex;
+		flex-direction: column;
 
 		.title {
 			font-size: 1.1rem;
