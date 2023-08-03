@@ -53,6 +53,14 @@ export const StyledCreateList = styled.div`
 			background-color: ${Palette.background};
 			font-weight: bold;
 		}
+
+		label.error {
+			color: ${Palette.errorText};
+		}
+
+		input.error {
+			outline: 2px solid ${Palette.errorText};
+		}
 	}
 
 	.submit {
@@ -64,9 +72,15 @@ export const StyledCreateList = styled.div`
 		}
 	}
 
+	.loading-button {
+		width: 100%;
+		border: none;
+		background-color: ${Palette.primary};
+	}
+
 	@keyframes intro {
 		from {
-            transform: translate(25rem, -3rem);
+			transform: translate(25rem, -3rem);
 			opacity: 0;
 		}
 	}

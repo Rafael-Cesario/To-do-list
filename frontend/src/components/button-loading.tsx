@@ -2,7 +2,7 @@ import { StyledButtonLoading } from "./styles/button-loading-style";
 
 export const ButtonLoading = () => {
 	return (
-		<StyledButtonLoading type="button">
+		<StyledButtonLoading type="button" className="loading-button">
 			<span>.</span>
 			<span>.</span>
 			<span>.</span>

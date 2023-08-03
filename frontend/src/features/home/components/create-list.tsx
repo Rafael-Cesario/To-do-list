@@ -1,10 +1,38 @@
 "use client";
 import { useState } from "react";
 import { StyledCreateList } from "../styles/create-list-style";
+import { ButtonLoading } from "@/components/button-loading";
+import { useMutationsList } from "@/utils/hooks/use-mutations-list";
 
 export const CreateList = () => {
 	const [createListContainer, setCreateListContainer] = useState(false);
+	const [hasError, setHasError] = useState(false);
 	const [listName, setListName] = useState("");
+	const [loading, setLoading] = useState(false);
+	const { createListRequest } = useMutationsList();
+
+	const createList = async () => {
+		if (!listName) return setHasError(true);
+		setHasError(false);
+
+		setLoading(true);
+
+		// send request
+		// send success notification
+		// catch errors
+
+		try {
+			const input = { userID: "", name: "" };
+			const response = await createListRequest({ input });
+			console.log({ response });
+		} catch (error: any) {
+			console.log({ error });
+		}
+
+		setTimeout(() => {
+			setLoading(false);
+		}, 1000);
+	};
 
 	return (
 		<>
@@ -22,13 +50,27 @@ export const CreateList = () => {
 						</button>
 					</div>
 
-					<form>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							createList();
+						}}>
 						<div className="field">
-							<label htmlFor="list-name">Nome</label>
-							<input type="text" placeholder="Minha nova lista" id="list-name" onChange={(e) => setListName(e.target.value)} />
+							<label htmlFor="list-name" className={hasError ? "error" : ""}>
+								{hasError ? "Sua lista precisa de um nome" : "Nome"}
+							</label>
+							<input
+								autoFocus={true}
+								type="text"
+								placeholder="Minha nova lista"
+								id="list-name"
+								className={hasError ? "error" : ""}
+								onChange={(e) => setListName(e.target.value)}
+							/>
 						</div>
 
-						<button className="submit">Criar minha lista</button>
+						{loading || <button className="submit">Criar minha lista</button>}
+						{loading && <ButtonLoading />}
 					</form>
 				</StyledCreateList>
 			)}
