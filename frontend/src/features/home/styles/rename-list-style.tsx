@@ -1,7 +1,7 @@
 import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
-export const StyledRenameList = styled.div`
+export const StyledRenameList = styled.div<{ type: string }>`
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -19,10 +19,11 @@ export const StyledRenameList = styled.div`
 		display: flex;
 		flex-direction: column;
 		background-color: ${Palette.container};
-		border: 2px solid ${Palette.primary};
+		border: 2px solid ${({ type }) => (type === "rename" ? Palette.primary : Palette.errorText)};
 		padding: 4rem;
 		position: relative;
-        max-width: 500px;
+		max-width: 500px;
+		border-radius: ${Palette.borderRadius};
 
 		.close {
 			position: absolute;
@@ -38,7 +39,7 @@ export const StyledRenameList = styled.div`
 		}
 
 		.title {
-			color: ${Palette.primary};
+			color: ${({ type }) => (type === "rename" ? Palette.primary : Palette.errorText)};
 			text-align: center;
 			margin-bottom: 1rem;
 		}
@@ -51,11 +52,10 @@ export const StyledRenameList = styled.div`
 		.list-name {
 			width: 100%;
 			background-color: ${Palette.background};
-			margin: 4rem 0;
 		}
 
 		.submit {
-			background-color: ${Palette.primary};
+			background-color: ${({ type }) => (type === "rename" ? Palette.primary : Palette.errorText)};
 			margin-top: 15rem;
 		}
 	}

@@ -7,8 +7,8 @@ import { StyledRenameList } from "../styles/rename-list-style";
 
 export const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [renameListContainer, setRenameListContainer] = useState(true);
-	const [deleteListContainer, setDeleteListContainer] = useState(false);
+	const [renameListContainer, setRenameListContainer] = useState(false);
+	const [deleteListContainer, setDeleteListContainer] = useState(true);
 
 	const { lists, active } = useSelector((state: Store) => state.list);
 	const currentList = lists.find((list) => list.listID === active);
@@ -28,7 +28,7 @@ export const Menu = () => {
 			)}
 
 			{renameListContainer && (
-				<StyledRenameList>
+				<StyledRenameList type={"rename"}>
 					<div className="container">
 						<button className="close">x</button>
 
@@ -40,7 +40,21 @@ export const Menu = () => {
 					</div>
 				</StyledRenameList>
 			)}
-			{deleteListContainer && <></>}
+
+			{deleteListContainer && (
+				<StyledRenameList type={"delete"}>
+					<div className="container">
+						<button className="close">x</button>
+
+						<h1 className="title">Excluir lista</h1>
+						<p className="description">Excluir sua lista irá também excluir todos seus assuntos adicionados a ela.</p>
+						<p className="description">Digite o nome da lista atual para confirmar</p>
+
+						<input className="list-name" type="text" placeholder={currentList?.name} />
+						<button className="submit">Salvar alterações</button>
+					</div>
+				</StyledRenameList>
+			)}
 		</StyledMenu>
 	);
 };
