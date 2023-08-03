@@ -38,7 +38,7 @@ export const CreateList = () => {
 			setListName("");
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Nova lista criada", message: "Sua nova lista foi criada com sucesso" }));
 			dispatch(addList({ list: data.createList }));
-			dispatch(setActive({ newActive: data.createList.listID }));
+			dispatch(setActive({ newActive: data.createList}));
 		} catch (error: any) {
 			showError(error, dispatch, errorsMap.list);
 		}

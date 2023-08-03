@@ -6,6 +6,6 @@ import { IList } from "@/services/interfaces/list";
 export const Loader = ({ lists }: { lists: IList[] }) => {
 	const dispatch = useDispatch();
 	dispatch(setLists({ lists }));
-	dispatch(setActive({ newActive: lists[0]?.listID }));
+	dispatch(setActive({ newActive: lists[0]}));
 	return null;
 };

@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface ListSlice {
 	lists: IList[];
-	active: string;
+	active: IList | undefined;
 }
 
 const defaultValues: ListSlice = {
 	lists: [],
-	active: "",
+	active: undefined,
 };
 
 export const listSlice = createSlice({
@@ -23,7 +23,7 @@ export const listSlice = createSlice({
 			state.lists.push(action.payload.list);
 		},
 
-		setActive: (state, action: { payload: { newActive: string } }) => {
+		setActive: (state, action: { payload: { newActive: IList } }) => {
 			state.active = action.payload.newActive;
 		},
 	},

@@ -13,8 +13,8 @@ export const ListContainer = () => {
 			{lists.map((list) => (
 				<li
 					role="list-item"
-					onClick={() => dispatch(setActive({ newActive: list.listID }))}
-					className={active === list.listID ? "active" : ""}
+					onClick={() => dispatch(setActive({ newActive: list}))}
+					className={active?.listID === list.listID ? "active" : ""}
 					key={list.listID}>
 					{list.name}
 				</li>

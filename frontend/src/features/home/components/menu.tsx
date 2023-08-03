@@ -8,10 +8,9 @@ import { StyledRenameList } from "../styles/rename-list-style";
 export const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [renameListContainer, setRenameListContainer] = useState(false);
-	const [deleteListContainer, setDeleteListContainer] = useState(true);
+	const [deleteListContainer, setDeleteListContainer] = useState(false);
 
 	const { lists, active } = useSelector((state: Store) => state.list);
-	const currentList = lists.find((list) => list.listID === active);
 
 	return (
 		<StyledMenu>
@@ -22,20 +21,28 @@ export const Menu = () => {
 			{isOpen && (
 				<div className="options">
 					<h1 className="title">Menu</h1>
-					<button className="rename">Renomear lista</button>
-					<button className="delete">Excluir lista</button>
+
+					<button onClick={() => setRenameListContainer(true)} className="rename">
+						Renomear lista
+					</button>
+
+					<button onClick={() => setDeleteListContainer(true)} className="delete">
+						Excluir lista
+					</button>
 				</div>
 			)}
 
 			{renameListContainer && (
 				<StyledRenameList type={"rename"}>
 					<div className="container">
-						<button className="close">x</button>
+						<button onClick={() => setRenameListContainer(false)} className="close">
+							x
+						</button>
 
 						<h1 className="title">Renomear lista</h1>
 						<p className="description">Altere o nome da lista e clique no botão para salvar.</p>
 
-						<input className="list-name" type="text" placeholder={currentList?.name} />
+						<input className="list-name" type="text" placeholder={active?.name} />
 						<button className="submit">Salvar alterações</button>
 					</div>
 				</StyledRenameList>
@@ -44,13 +51,15 @@ export const Menu = () => {
 			{deleteListContainer && (
 				<StyledRenameList type={"delete"}>
 					<div className="container">
-						<button className="close">x</button>
+						<button onClick={() => setDeleteListContainer(false)} className="close">
+							x
+						</button>
 
 						<h1 className="title">Excluir lista</h1>
 						<p className="description">Excluir sua lista irá também excluir todos seus assuntos adicionados a ela.</p>
 						<p className="description">Digite o nome da lista atual para confirmar</p>
 
-						<input className="list-name" type="text" placeholder={currentList?.name} />
+						<input className="list-name" type="text" placeholder={active?.name} />
 						<button className="submit">Salvar alterações</button>
 					</div>
 				</StyledRenameList>
