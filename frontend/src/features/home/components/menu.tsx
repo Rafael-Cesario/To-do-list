@@ -1,15 +1,13 @@
 "use client";
-import { useSelector } from "react-redux";
 import { StyledMenu } from "../styles/menu-style";
 import { useState } from "react";
-import { Store } from "@/context/store";
-import { StyledRenameList } from "../styles/rename-list-style";
+import { RenameList } from "./rename-list";
+import { DeleteList } from "./delete-list";
 
 export const Menu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [renameListContainer, setRenameListContainer] = useState(false);
 	const [deleteListContainer, setDeleteListContainer] = useState(false);
-	const { active } = useSelector((state: Store) => state.list);
 
 	return (
 		<StyledMenu>
@@ -31,38 +29,8 @@ export const Menu = () => {
 				</div>
 			)}
 
-			{renameListContainer && (
-				<StyledRenameList type={"rename"}>
-					<div className="container">
-						<button onClick={() => setRenameListContainer(false)} className="close">
-							x
-						</button>
-
-						<h1 className="title">Renomear lista</h1>
-						<p className="description">Altere o nome da lista e clique no botão para salvar.</p>
-
-						<input className="list-name" type="text" placeholder={active?.name} />
-						<button className="submit">Salvar alterações</button>
-					</div>
-				</StyledRenameList>
-			)}
-
-			{deleteListContainer && (
-				<StyledRenameList type={"delete"}>
-					<div className="container">
-						<button onClick={() => setDeleteListContainer(false)} className="close">
-							x
-						</button>
-
-						<h1 className="title">Excluir lista</h1>
-						<p className="description">Excluir sua lista irá também excluir todos seus assuntos adicionados a ela.</p>
-						<p className="description">Digite o nome da lista atual para confirmar</p>
-
-						<input className="list-name" type="text" placeholder={active?.name} />
-						<button className="submit">Salvar alterações</button>
-					</div>
-				</StyledRenameList>
-			)}
+			{renameListContainer && <RenameList props={{ setRenameListContainer }} />}
+			{deleteListContainer && <DeleteList props={{ setDeleteListContainer }} />}
 		</StyledMenu>
 	);
 };

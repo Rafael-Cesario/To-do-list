@@ -1,7 +1,7 @@
 import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
-export const StyledRenameList = styled.div<{ type: string }>`
+export const StyledListOption = styled.div<{ type: string }>`
 	position: absolute;
 	top: 0;
 	left: 0;
