@@ -26,3 +26,9 @@ export async function POST(req: Request) {
 		},
 	});
 }
+
+export async function DELETE(req: Request, { params }: { params: { key: string } }) {
+	const store = cookies();
+	store.delete(params.key);
+	return NextResponse.json({ message: "Success" });
+}

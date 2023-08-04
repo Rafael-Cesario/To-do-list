@@ -4,8 +4,8 @@ export const Palette = {
 	fadedText: "#aaaaaa",
 	primary: "#124b80",
 	container: "#151515",
-	borderContainer: "#181818",
+	borderContainer: "#191919",
 	borderRadius: "4px",
 	errorText: "#a94444",
-	successText: "#409649"
+	successText: "#409649",
 };

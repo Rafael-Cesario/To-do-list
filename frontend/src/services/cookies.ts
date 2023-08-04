@@ -19,6 +19,15 @@ class Cookies {
 		const response = await fetch("/api/cookies/" + key);
 		return await response.json();
 	}
+
+	async delete(key: CookieKeys) {
+		const response = await fetch("/api/cookies/" + key, {
+			headers: { "Content-Type": "application/json" },
+			method: "DELETE",
+		});
+
+		return await response.json();
+	}
 }
 
 export const cookies = new Cookies();
