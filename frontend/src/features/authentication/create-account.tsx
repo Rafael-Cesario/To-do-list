@@ -61,7 +61,7 @@ export const CreateAccount = ({ setFormName }: IForm) => {
 			await createUserRequest({ newUser });
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Novo usuário criado", message: "Boas vindas, você já pode fazer login." }));
 			setFormName("login");
-		} catch (error: any) {
+		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.user);
 		}
 

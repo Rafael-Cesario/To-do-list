@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { setNotification } from "@/context/slice-notification";
 import { AnyAction, Dispatch } from "@reduxjs/toolkit";
 

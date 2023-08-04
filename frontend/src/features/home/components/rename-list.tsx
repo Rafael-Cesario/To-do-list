@@ -3,12 +3,10 @@ import { setNotification } from "@/context/slice-notification";
 import { Store } from "@/context/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledListOption } from "../styles/rename-list-style";
+import { StyledListOption } from "../styles/option-list-style";
 import { showError } from "@/utils/show-error";
 import { errorsMap } from "@/services/errors-map";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
-import { cookies } from "@/services/cookies";
-import { IUserCookies } from "@/services/interfaces/cookies";
 import { setRenameList } from "../context/list-slice";
 import { ButtonLoading } from "@/components/button-loading";
 
@@ -50,8 +48,7 @@ export const RenameList = ({ props: { setRenameListContainer, setMenuIsOpen } }:
 		setLoading(true);
 
 		try {
-			const userCookies: IUserCookies = await cookies.get("user");
-			const input = { userID: userCookies.userID, listID: active!.listID, newName: listName };
+			const input = { userID: active.userID, listID: active.listID, newName: listName };
 			const { data } = await renameListRequest({ input });
 			if (!data) throw new Error("Data is undefined");
 
@@ -60,14 +57,14 @@ export const RenameList = ({ props: { setRenameListContainer, setMenuIsOpen } }:
 					isOpen: true,
 					type: "success",
 					title: "Lista renomeada",
-					message: `"${active!.name}" foi renomedada para "${listName}"`,
+					message: `"${active.name}" foi renomedada para "${listName}"`,
 				})
 			);
 
 			dispatch(setRenameList({ list: data.renameList }));
 			setRenameListContainer(false);
 			setMenuIsOpen(false);
-		} catch (error: any) {
+		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.list);
 		}
 
@@ -85,6 +82,7 @@ export const RenameList = ({ props: { setRenameListContainer, setMenuIsOpen } }:
 				<p className="description">Altere o nome da lista e clique no botão para salvar.</p>
 
 				<input
+					onKeyUp={(e) => e.key === "Enter" && renameList()}
 					autoFocus={true}
 					value={listName}
 					onChange={(e) => setListName(e.target.value)}

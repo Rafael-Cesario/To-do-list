@@ -39,7 +39,7 @@ export const CreateList = () => {
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Nova lista criada", message: "Sua nova lista foi criada com sucesso" }));
 			dispatch(setAddList({ list: data.createList }));
 			dispatch(setActive({ newActive: data.createList }));
-		} catch (error: any) {
+		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.list);
 		}
 

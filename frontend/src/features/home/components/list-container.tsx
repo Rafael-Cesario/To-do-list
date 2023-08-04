@@ -11,14 +11,12 @@ export const ListContainer = () => {
 	return (
 		<StyledListContainer>
 			{lists.map((list) => (
-				<li
-					role="list-item"
-					onClick={() => dispatch(setActive({ newActive: list}))}
-					className={active?.listID === list.listID ? "active" : ""}
-					key={list.listID}>
+				<li role="list-item" onClick={() => dispatch(setActive({ newActive: list }))} className={active?.listID === list.listID ? "active" : ""} key={list.listID}>
 					{list.name}
 				</li>
 			))}
 		</StyledListContainer>
 	);
 };
+
+// todo > if user has no list return a primary button to create one

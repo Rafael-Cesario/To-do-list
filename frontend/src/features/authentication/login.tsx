@@ -62,7 +62,7 @@ export const Login = ({ setFormName }: IForm) => {
 			const user = { email: values.email, password: values.password };
 			const { data } = await loginRequest({ user });
 			if (!data) throw new Error("Data is undefined");
-			const { token, userID } = data?.login;
+			const { token, userID } = data.login;
 
 			const userCookies: IUserCookies = { email: values.email, token, userID };
 
@@ -73,7 +73,7 @@ export const Login = ({ setFormName }: IForm) => {
 			});
 
 			router.refresh();
-		} catch (error: any) {
+		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.user);
 		}
 
