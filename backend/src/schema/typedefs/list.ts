@@ -12,9 +12,10 @@ export const listTypeDefs = gql`
 	}
 
 	type List {
-		listID: String
-		userID: String
-		name: String
+		listID: String!
+		userID: String!
+		name: String!
+		subjectsLength: Int!
 	}
 
 	input ICreateList {

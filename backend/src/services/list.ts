@@ -9,7 +9,7 @@ class ListServices {
 
 		const user = await prisma.user.findUnique({
 			where: { id: userID },
-			select: { lists: true },
+			include: { lists: true },
 		});
 
 		if (!user) throw new GraphQLError("notFound: User not found");
