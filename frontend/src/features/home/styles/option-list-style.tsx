@@ -54,6 +54,15 @@ export const StyledListOption = styled.div<{ type: string }>`
 			background-color: ${Palette.background};
 		}
 
+		.error {
+			color: #ddd;
+			font-size: 0.9rem;
+			margin: 0 0.1rem;
+			padding: 0.2rem 1rem;
+			background-color: ${Palette.errorText};
+			border-radius: 2px;
+		}
+
 		.submit {
 			background-color: ${({ type }) => (type === "rename" ? Palette.primary : Palette.errorText)};
 			margin-top: 15rem;

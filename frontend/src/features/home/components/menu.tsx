@@ -30,7 +30,7 @@ export const Menu = () => {
 			)}
 
 			{renameListContainer && <RenameList props={{ setRenameListContainer, setMenuIsOpen }} />}
-			{deleteListContainer && <DeleteList props={{ setDeleteListContainer }} />}
+			{deleteListContainer && <DeleteList props={{ setDeleteListContainer, setMenuIsOpen }} />}
 		</StyledMenu>
 	);
 };

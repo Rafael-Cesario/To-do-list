@@ -34,3 +34,13 @@ export interface IRenameList {
 export interface RRenameList {
 	renameList: IList;
 }
+
+export interface IDeleteList {
+	input: {
+		listID: string;
+	};
+}
+
+export interface RDeleteList {
+	deleteList: string;
+}
