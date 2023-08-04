@@ -3,6 +3,7 @@ import { Palette } from "@/styles/palette";
 
 export const StyledNotification = styled.div<{ type: string }>`
 	position: absolute;
+	right: 0;
 	min-width: 25rem;
 	min-height: 5rem;
 	max-width: 30rem;
@@ -11,18 +12,18 @@ export const StyledNotification = styled.div<{ type: string }>`
 	background-color: ${Palette.container};
 	padding: 1rem 4rem 1rem 2rem;
 	border-radius: ${Palette.borderRadius};
-	border-left: 10px solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
 	box-shadow: 0 10px 5px #00000020;
+	border-left: 1rem solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
 
 	.title {
 		color: ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	.message {
 		margin: 4px 0;
 		font-size: 0.9rem;
-		color: ${Palette.fadedText};
+		color: #ddd;
 	}
 
 	.close {

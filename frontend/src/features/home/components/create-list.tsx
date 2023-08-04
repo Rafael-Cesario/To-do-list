@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/slice-notification";
 import { showError } from "@/utils/show-error";
 import { errorsMap } from "@/services/errors-map";
-import { addList, setActive } from "../context/list-slice";
+import { setAddList, setActive } from "../context/list-slice";
 
 export const CreateList = () => {
 	const [createListContainer, setCreateListContainer] = useState(false);
@@ -37,8 +37,8 @@ export const CreateList = () => {
 
 			setListName("");
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Nova lista criada", message: "Sua nova lista foi criada com sucesso" }));
-			dispatch(addList({ list: data.createList }));
-			dispatch(setActive({ newActive: data.createList}));
+			dispatch(setAddList({ list: data.createList }));
+			dispatch(setActive({ newActive: data.createList }));
 		} catch (error: any) {
 			showError(error, dispatch, errorsMap.list);
 		}

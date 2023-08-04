@@ -22,3 +22,15 @@ export interface IGetLists {
 export interface RGetLists {
 	getLists: IList[];
 }
+
+export interface IRenameList {
+	input: {
+		userID: string;
+		listID: string;
+		newName: string;
+	};
+}
+
+export interface RRenameList {
+	renameList: IList;
+}

@@ -5,17 +5,17 @@ import { RenameList } from "./rename-list";
 import { DeleteList } from "./delete-list";
 
 export const Menu = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [menuIsOpen, setMenuIsOpen] = useState(false);
 	const [renameListContainer, setRenameListContainer] = useState(false);
 	const [deleteListContainer, setDeleteListContainer] = useState(false);
 
 	return (
 		<StyledMenu>
-			<button onClick={() => setIsOpen(!isOpen)} className="main">
+			<button onClick={() => setMenuIsOpen(!menuIsOpen)} className="main">
 				Menu
 			</button>
 
-			{isOpen && (
+			{menuIsOpen && (
 				<div className="options">
 					<h1 className="title">Menu</h1>
 
@@ -29,7 +29,7 @@ export const Menu = () => {
 				</div>
 			)}
 
-			{renameListContainer && <RenameList props={{ setRenameListContainer }} />}
+			{renameListContainer && <RenameList props={{ setRenameListContainer, setMenuIsOpen }} />}
 			{deleteListContainer && <DeleteList props={{ setDeleteListContainer }} />}
 		</StyledMenu>
 	);

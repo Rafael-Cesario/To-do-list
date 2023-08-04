@@ -57,6 +57,11 @@ export const StyledListOption = styled.div<{ type: string }>`
 		.submit {
 			background-color: ${({ type }) => (type === "rename" ? Palette.primary : Palette.errorText)};
 			margin-top: 15rem;
+
+			&:hover {
+				background-color: ${Palette.background};
+				color: #ddd;
+			}
 		}
 	}
 `;

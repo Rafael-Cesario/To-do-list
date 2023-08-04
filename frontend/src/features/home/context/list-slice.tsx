@@ -19,14 +19,20 @@ export const listSlice = createSlice({
 			state.lists = action.payload.lists;
 		},
 
-		addList: (state, action: { payload: { list: IList } }) => {
+		setAddList: (state, action: { payload: { list: IList } }) => {
 			state.lists.push(action.payload.list);
 		},
 
 		setActive: (state, action: { payload: { newActive: IList } }) => {
 			state.active = action.payload.newActive;
 		},
+
+		setRenameList: (state, action: { payload: { list: IList } }) => {
+			const listIndex = state.lists.findIndex((list) => list.listID === action.payload.list.listID);
+			state.lists[listIndex] = action.payload.list;
+			state.active = action.payload.list;
+		},
 	},
 });
 
-export const { setLists, addList, setActive } = listSlice.actions;
+export const { setLists, setAddList, setActive, setRenameList } = listSlice.actions;
