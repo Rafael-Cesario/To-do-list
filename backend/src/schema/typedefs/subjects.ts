@@ -11,7 +11,16 @@ export const subjectTypeDefs = gql`
 		tags: [Tag]!
 	}
 
+	input ICreateSubject {
+		listID: String!
+		name: String!
+	}
+
 	type Query {
 		getSubjects(listID: String!): [Subject]!
+	}
+
+	type Mutation {
+		createSubject(input: ICreateSubject!): Subject!
 	}
 `;
