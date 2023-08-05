@@ -33,12 +33,12 @@ model Subject {
   subjectID String   @id @default(uuid())
   name      String
   date      DateTime @default(now())
-  amount    Int
-  notes     String
+  amount    Int      @default(0)
+  notes     String   @default("")
   tags      Tags[]
 
-  List       List?   @relation(fields: [listListID], references: [listID])
-  listListID String?
+  list   List   @relation(fields: [listID], references: [listID])
+  listID String
 
   @@map("subjects")
 }

@@ -23,9 +23,9 @@ CREATE TABLE "subjects" (
     "subjectID" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "amount" INTEGER NOT NULL,
-    "notes" TEXT NOT NULL,
-    "listListID" TEXT,
+    "amount" INTEGER NOT NULL DEFAULT 0,
+    "notes" TEXT NOT NULL DEFAULT '',
+    "listID" TEXT NOT NULL,
 
     CONSTRAINT "subjects_pkey" PRIMARY KEY ("subjectID")
 );
@@ -47,7 +47,7 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 ALTER TABLE "lists" ADD CONSTRAINT "lists_userID_fkey" FOREIGN KEY ("userID") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "subjects" ADD CONSTRAINT "subjects_listListID_fkey" FOREIGN KEY ("listListID") REFERENCES "lists"("listID") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "subjects" ADD CONSTRAINT "subjects_listID_fkey" FOREIGN KEY ("listID") REFERENCES "lists"("listID") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "tags" ADD CONSTRAINT "tags_subjectID_fkey" FOREIGN KEY ("subjectID") REFERENCES "subjects"("subjectID") ON DELETE SET NULL ON UPDATE CASCADE;
