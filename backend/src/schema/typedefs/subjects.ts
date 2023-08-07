@@ -8,7 +8,7 @@ export const subjectTypeDefs = gql`
 		date: String!
 		amount: Int!
 		notes: String!
-		tags: [Tag]!
+		tags: [String]!
 	}
 
 	input ICreateSubject {

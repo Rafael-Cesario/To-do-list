@@ -13,6 +13,7 @@ model User {
   name     String
   password String
   lists    List[]
+  Tags     Tags[]
 
   @@map("users")
 }
@@ -35,7 +36,7 @@ model Subject {
   date      DateTime @default(now())
   amount    Int      @default(0)
   notes     String   @default("")
-  tags      Tags[]
+  tags      String[]
 
   list   List   @relation(fields: [listID], references: [listID])
   listID String
@@ -48,8 +49,8 @@ model Tags {
   name  String
   color String
 
-  Subject   Subject? @relation(fields: [subjectID], references: [subjectID])
-  subjectID String?
+  user   User   @relation(fields: [userID], references: [id])
+  userID String @unique
 
   @@map("tags")
 }
