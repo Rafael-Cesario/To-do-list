@@ -20,3 +20,7 @@ export interface IUpdateTag {
 		color: string;
 	};
 }
+
+export interface IDeleteTag {
+	tagID: string;
+}

@@ -25,7 +25,8 @@ export const tagTypeDefs = gql`
 	}
 
 	type Mutation {
-		createTag(input: ICreateTag): Tag!
-		updateTag(input: IUpdateTag): Tag!
+		createTag(input: ICreateTag!): Tag!
+		updateTag(input: IUpdateTag!): Tag!
+		deleteTag(tagID: String!): String!
 	}
 `;

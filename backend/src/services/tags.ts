@@ -1,5 +1,5 @@
 import { GraphQLError } from "graphql";
-import { ICreateTag, IUpdateTag } from "../interfaces/tags";
+import { ICreateTag, IDeleteTag, IUpdateTag } from "../interfaces/tags";
 import { searchEmptyValues } from "../utils/search-empty-values";
 import { prisma } from "../database";
 
@@ -36,6 +36,16 @@ class TagService {
 
 		const newTag = prisma.tags.update({ where: { tagID: input.tagID }, data: { ...input } });
 		return newTag;
+	}
+
+	async deleteTag({ tagID }: IDeleteTag) {
+		if (!tagID) throw new GraphQLError("missingFields: tagID is missing");
+
+		const tag = await prisma.tags.findUnique({ where: { tagID } });
+		if (!tag) throw new GraphQLError("notFound: Tag was not found");
+
+		await prisma.tags.delete({ where: { tagID } });
+		return "Success: Tag deleted";
 	}
 }
 
