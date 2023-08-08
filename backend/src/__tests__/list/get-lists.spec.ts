@@ -1,11 +1,11 @@
 import request from "supertest-graphql";
 import { prisma } from "../../database";
-import { InterfaceUser } from "../../interfaces/user";
+import { IUser } from "../../interfaces/user";
 import { startServer } from "../../server";
 import { listQueries } from "../__utils__/queries/list";
 
 describe("List - Get lists", () => {
-	let user: InterfaceUser;
+	let user: IUser;
 	let url = "";
 
 	const createUser = async () => {

@@ -1,13 +1,13 @@
 import request from "supertest-graphql";
 import { prisma } from "../../database";
 import { IList } from "../../interfaces/list";
-import { InterfaceUser } from "../../interfaces/user";
+import { IUser } from "../../interfaces/user";
 import { startServer } from "../../server";
 import { createUser, createLists } from "../__utils__/create";
 import { listQueries } from "../__utils__/queries/list";
 
 describe("List - Delete", () => {
-	let user: InterfaceUser;
+	let user: IUser;
 	let lists: IList[];
 	let url = "";
 
