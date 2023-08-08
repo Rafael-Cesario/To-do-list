@@ -16,7 +16,13 @@ export interface ICreateSubject {
 }
 
 export interface IUpdateSubject {
-	input: ISubject;
+	input: {
+		subjectID: string;
+		name: string;
+		amount: number;
+		notes: string;
+		tags: string[];
+	};
 }
 
 export interface IDeleteSubject {

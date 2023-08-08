@@ -28,6 +28,12 @@ class SubjectQueries {
 			}
 		}
 	`;
+
+	UPDATE_SUBJECT = gql`
+		mutation UpdateSubject($input: IUpdateSubject!) {
+			updateSubject(input: $input)
+		}
+	`;
 }
 
 export const subjectQueries = new SubjectQueries();

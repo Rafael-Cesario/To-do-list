@@ -32,7 +32,7 @@ describe("Create subject", () => {
 		await clearDatabase();
 	});
 
-	it("Throws error due to missing fields", async () => {
+	it("Throws an error due to missing fields", async () => {
 		const { errors } = await request(url)
 			.mutate(subjectQueries.CREATE_SUBJECT)
 			.variables({ input: { listID: "", name: "" } });
@@ -40,7 +40,7 @@ describe("Create subject", () => {
 		expect(errors?.[0].message).toBe("missingFields: listID has no value, name has no value");
 	});
 
-	it("Throws a error due to duplicated name", async () => {
+	it("Throws an error due to duplicated name", async () => {
 		await request(url)
 			.mutate(subjectQueries.CREATE_SUBJECT)
 			.variables({ input: { listID: lists[0].listID, name: "subject-01" } });
