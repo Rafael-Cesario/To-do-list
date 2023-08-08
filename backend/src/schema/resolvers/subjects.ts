@@ -1,4 +1,4 @@
-import { ICreateSubject, IUpdateSubject } from "../../interfaces/subjects";
+import { ICreateSubject, IDeleteSubject, IUpdateSubject } from "../../interfaces/subjects";
 import { subjectService } from "../../services/subjects";
 
 export const subjectResolver = {
@@ -9,5 +9,6 @@ export const subjectResolver = {
 	Mutation: {
 		createSubject: (_: never, variables: ICreateSubject) => subjectService.createSubject(variables),
 		updateSubject: (_: never, variables: IUpdateSubject) => subjectService.updateSubject(variables),
+		deleteSubject: (_: never, variables: IDeleteSubject) => subjectService.deleteSubject(variables),
 	},
 };

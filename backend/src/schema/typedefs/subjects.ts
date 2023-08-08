@@ -31,5 +31,6 @@ export const subjectTypeDefs = gql`
 	type Mutation {
 		createSubject(input: ICreateSubject!): Subject!
 		updateSubject(input: IUpdateSubject!): String!
+		deleteSubject(subjectID: String!): String!
 	}
 `;

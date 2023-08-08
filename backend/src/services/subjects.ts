@@ -1,6 +1,6 @@
 import { GraphQLError } from "graphql";
 import { prisma } from "../database";
-import { ICreateSubject, IUpdateSubject } from "../interfaces/subjects";
+import { ICreateSubject, IDeleteSubject, IUpdateSubject } from "../interfaces/subjects";
 import { searchEmptyValues } from "../utils/search-empty-values";
 
 class SubjectService {
@@ -36,6 +36,19 @@ class SubjectService {
 		}
 
 		return `Success: ${input.name} was updated.`;
+	}
+
+	async deleteSubject({ subjectID }: IDeleteSubject) {
+		if (!subjectID) throw new GraphQLError("missingFields: subjectID is required");
+
+		try {
+			await prisma.subject.delete({ where: { subjectID } });
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (error: any) {
+			throw new GraphQLError(`${error.code}: ${error.meta.cause}`);
+		}
+
+		return "Success: Subject deleted";
 	}
 }
 

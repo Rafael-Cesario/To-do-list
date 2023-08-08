@@ -18,3 +18,7 @@ export interface ICreateSubject {
 export interface IUpdateSubject {
 	input: ISubject;
 }
+
+export interface IDeleteSubject {
+	subjectID: string;
+}
