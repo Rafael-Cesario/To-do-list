@@ -23,18 +23,15 @@ class SubjectService {
 	}
 
 	async updateSubject({ input }: IUpdateSubject) {
-		const { amount, name, notes, tags } = input;
+		const { amount, name, notes, tags, subjectID } = input;
 
 		const emptyValues = searchEmptyValues({ name, notes });
 		if (emptyValues) throw new GraphQLError("missingFields: " + emptyValues);
 
-		try {
-			await prisma.subject.update({ where: { subjectID: input.subjectID }, data: { amount, name, notes, tags } });
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		} catch (error: any) {
-			throw new GraphQLError(`${error.code}: ${error.meta.cause}`);
-		}
+		const hasSubject = await prisma.subject.findUnique({ where: { subjectID } });
+		if (!hasSubject) throw new GraphQLError("notFound: Subject was not found");
 
+		await prisma.subject.update({ where: { subjectID }, data: { amount, name, notes, tags } });
 		return `Success: ${input.name} was updated.`;
 	}
 
