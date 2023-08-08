@@ -25,6 +25,7 @@ CREATE TABLE "subjects" (
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "amount" INTEGER NOT NULL DEFAULT 0,
     "notes" TEXT NOT NULL DEFAULT '',
+    "tags" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "listID" TEXT NOT NULL,
 
     CONSTRAINT "subjects_pkey" PRIMARY KEY ("subjectID")
@@ -35,13 +36,16 @@ CREATE TABLE "tags" (
     "tagID" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "color" TEXT NOT NULL,
-    "subjectID" TEXT,
+    "userID" TEXT NOT NULL,
 
     CONSTRAINT "tags_pkey" PRIMARY KEY ("tagID")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "tags_userID_key" ON "tags"("userID");
 
 -- AddForeignKey
 ALTER TABLE "lists" ADD CONSTRAINT "lists_userID_fkey" FOREIGN KEY ("userID") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -50,4 +54,4 @@ ALTER TABLE "lists" ADD CONSTRAINT "lists_userID_fkey" FOREIGN KEY ("userID") RE
 ALTER TABLE "subjects" ADD CONSTRAINT "subjects_listID_fkey" FOREIGN KEY ("listID") REFERENCES "lists"("listID") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "tags" ADD CONSTRAINT "tags_subjectID_fkey" FOREIGN KEY ("subjectID") REFERENCES "subjects"("subjectID") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "tags" ADD CONSTRAINT "tags_userID_fkey" FOREIGN KEY ("userID") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

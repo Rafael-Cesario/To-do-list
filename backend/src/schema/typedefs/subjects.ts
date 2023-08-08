@@ -16,11 +16,20 @@ export const subjectTypeDefs = gql`
 		name: String!
 	}
 
+	input IUpdateSubject {
+		subjectID: String!
+		name: String!
+		amount: Int!
+		notes: String!
+		tags: [String]!
+	}
+
 	type Query {
 		getSubjects(listID: String!): [Subject]!
 	}
 
 	type Mutation {
 		createSubject(input: ICreateSubject!): Subject!
+		updateSubject(input: IUpdateSubject!): String!
 	}
 `;

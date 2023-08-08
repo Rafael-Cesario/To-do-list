@@ -13,7 +13,7 @@ model User {
   name     String
   password String
   lists    List[]
-  Tags     Tags[]
+  tags     Tags[]
 
   @@map("users")
 }
@@ -36,7 +36,7 @@ model Subject {
   date      DateTime @default(now())
   amount    Int      @default(0)
   notes     String   @default("")
-  tags      String[]
+  tags      String[] @default([])
 
   list   List   @relation(fields: [listID], references: [listID])
   listID String
