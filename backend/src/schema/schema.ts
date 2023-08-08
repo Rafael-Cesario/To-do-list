@@ -7,6 +7,7 @@ import { listResolver } from "./resolvers/list";
 import { subjectTypeDefs } from "./typedefs/subjects";
 import { tagTypeDefs } from "./typedefs/tags";
 import { subjectResolver } from "./resolvers/subjects";
+import { tagResolver } from "./resolvers/tags";
 
 const placeholderTypeDef = gql`
 	type Query {
@@ -22,5 +23,5 @@ const placeholderResolver = {
 
 export const schema = makeExecutableSchema({
 	typeDefs: [placeholderTypeDef, userTypeDefs, listTypeDefs, subjectTypeDefs, tagTypeDefs],
-	resolvers: [placeholderResolver, userResolver, listResolver, subjectResolver],
+	resolvers: [placeholderResolver, userResolver, listResolver, subjectResolver, tagResolver],
 });

@@ -46,11 +46,11 @@ model Subject {
 
 model Tags {
   tagID String @id @default(uuid())
-  name  String
+  name  String 
   color String
 
   user   User   @relation(fields: [userID], references: [id])
-  userID String @unique
+  userID String
 
   @@map("tags")
 }
