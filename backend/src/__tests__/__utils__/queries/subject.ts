@@ -14,6 +14,20 @@ class SubjectQueries {
 			}
 		}
 	`;
+
+	GET_SUBJECTS = gql`
+		query GetSubjects($listID: String!) {
+			getSubjects(listID: $listID) {
+				amount
+				date
+				listID
+				name
+				notes
+				subjectID
+				tags
+			}
+		}
+	`;
 }
 
 export const subjectQueries = new SubjectQueries();

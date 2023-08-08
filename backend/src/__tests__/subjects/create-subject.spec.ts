@@ -43,11 +43,11 @@ describe("Create subject", () => {
 	it("Throws a error due to duplicated name", async () => {
 		await request(url)
 			.mutate(subjectQueries.CREATE_SUBJECT)
-			.variables({ input: { listID: lists[0].listID, name: "tag01" } });
+			.variables({ input: { listID: lists[0].listID, name: "subject-01" } });
 
 		const { errors } = await request(url)
 			.mutate(subjectQueries.CREATE_SUBJECT)
-			.variables({ input: { listID: lists[0].listID, name: "tag01" } });
+			.variables({ input: { listID: lists[0].listID, name: "subject-01" } });
 
 		expect(errors?.[0].message).toBe("duplicated: A subject with the same name already exist.");
 	});
@@ -55,7 +55,7 @@ describe("Create subject", () => {
 	it("Create a new subject", async () => {
 		const { data } = await request<{ createSubject: ISubject }>(url)
 			.mutate(subjectQueries.CREATE_SUBJECT)
-			.variables({ input: { listID: lists[0].listID, name: "tag01" } });
+			.variables({ input: { listID: lists[0].listID, name: "subject-01" } });
 
 		expect(data?.createSubject).toBeDefined();
 	});
