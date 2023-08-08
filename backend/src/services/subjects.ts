@@ -38,13 +38,10 @@ class SubjectService {
 	async deleteSubject({ subjectID }: IDeleteSubject) {
 		if (!subjectID) throw new GraphQLError("missingFields: subjectID is required");
 
-		try {
-			await prisma.subject.delete({ where: { subjectID } });
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		} catch (error: any) {
-			throw new GraphQLError(`${error.code}: ${error.meta.cause}`);
-		}
+		const hasSubject = await prisma.subject.findUnique({ where: { subjectID } });
+		if (!hasSubject) throw new GraphQLError("notFound: Subject was not found");
 
+		await prisma.subject.delete({ where: { subjectID } });
 		return "Success: Subject deleted";
 	}
 }
