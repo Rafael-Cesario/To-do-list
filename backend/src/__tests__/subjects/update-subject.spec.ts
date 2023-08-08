@@ -47,6 +47,14 @@ describe("Update subject", () => {
 		expect(errors?.[0].message).toBe("missingFields: name has no value, notes has no value");
 	});
 
+	it("Throws a error if the subject doesn't exist", async () => {
+		const { errors } = await request(url)
+			.mutate(subjectQueries.UPDATE_SUBJECT)
+			.variables({ input: { subjectID: "wrong", name: "subject 01", amount: 0, tags: [], notes: "My notes" } });
+
+		expect(errors?.[0].message).toBe("notFound: Subject was not found");
+	});
+
 	it("Update a subjct", async () => {
 		const newSubject = {
 			subjectID: subject.subjectID,
