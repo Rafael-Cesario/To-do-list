@@ -12,3 +12,11 @@ export interface ICreateTag {
 		color: string;
 	};
 }
+
+export interface IUpdateTag {
+	input: {
+		tagID: string;
+		name: string;
+		color: string;
+	};
+}

@@ -14,11 +14,18 @@ export const tagTypeDefs = gql`
 		color: String!
 	}
 
+	input IUpdateTag {
+		tagID: String!
+		name: String!
+		color: String!
+	}
+
 	type Query {
 		getTags(userID: String!): [Tag]!
 	}
 
 	type Mutation {
 		createTag(input: ICreateTag): Tag!
+		updateTag(input: IUpdateTag): Tag!
 	}
 `;

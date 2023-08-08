@@ -1,5 +1,5 @@
 import { GraphQLError } from "graphql";
-import { ICreateTag } from "../interfaces/tags";
+import { ICreateTag, IUpdateTag } from "../interfaces/tags";
 import { searchEmptyValues } from "../utils/search-empty-values";
 import { prisma } from "../database";
 
@@ -11,7 +11,7 @@ class TagService {
 		input.name = input.name.toLowerCase();
 
 		const user = await prisma.user.findUnique({ where: { id: input.userID }, include: { tags: true } });
-		if (!user) throw new GraphQLError("notFound: User not found");
+		if (!user) throw new GraphQLError("User not found");
 
 		const isDuplicatedName = user.tags.find((tag) => tag.name === input.name);
 		if (isDuplicatedName) throw new GraphQLError("duplicated: A tag with the same name already exist");
@@ -22,9 +22,20 @@ class TagService {
 
 	async getTags({ userID }: { userID: string }) {
 		const user = await prisma.user.findUnique({ where: { id: userID }, include: { tags: true } });
-		if (!user) throw new GraphQLError("notFound: User not found");
+		if (!user) throw new GraphQLError("User not found");
 
 		return user.tags;
+	}
+
+	async updateTag({ input }: IUpdateTag) {
+		const emptyValues = searchEmptyValues(input);
+		if (emptyValues) throw new GraphQLError("missingFields: " + emptyValues);
+
+		const tag = await prisma.tags.findUnique({ where: { tagID: input.tagID } });
+		if (!tag) throw new GraphQLError("notFound: Tag was not found");
+
+		const newTag = prisma.tags.update({ where: { tagID: input.tagID }, data: { ...input } });
+		return newTag;
 	}
 }
 

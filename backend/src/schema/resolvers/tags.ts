@@ -1,4 +1,4 @@
-import { ICreateTag } from "../../interfaces/tags";
+import { ICreateTag, IUpdateTag } from "../../interfaces/tags";
 import { tagService } from "../../services/tags";
 
 export const tagResolver = {
@@ -8,5 +8,6 @@ export const tagResolver = {
 
 	Mutation: {
 		createTag: (_: never, variables: ICreateTag) => tagService.createTag(variables),
+		updateTag: (_: never, variables: IUpdateTag) => tagService.updateTag(variables),
 	},
 };
