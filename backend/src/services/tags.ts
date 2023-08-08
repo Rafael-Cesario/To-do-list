@@ -19,6 +19,13 @@ class TagService {
 		const newTag = await prisma.tags.create({ data: input });
 		return newTag;
 	}
+
+	async getTags({ userID }: { userID: string }) {
+		const user = await prisma.user.findUnique({ where: { id: userID }, include: { tags: true } });
+		if (!user) throw new GraphQLError("notFound: User not found");
+
+		return user.tags;
+	}
 }
 
 export const tagService = new TagService();
