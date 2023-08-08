@@ -34,6 +34,12 @@ class SubjectQueries {
 			updateSubject(input: $input)
 		}
 	`;
+
+	DELETE_SUBJECT = gql`
+		mutation DeleteSubject($subjectID: String!) {
+			deleteSubject(subjectID: $subjectID)
+		}
+	`;
 }
 
 export const subjectQueries = new SubjectQueries();
