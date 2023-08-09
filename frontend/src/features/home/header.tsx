@@ -1,6 +1,5 @@
 "use client";
 import { useSelector } from "react-redux";
-import { Options } from "./components/options";
 import { StyledHeader } from "./styles/header-style";
 import { Store } from "@/context/store";
 
@@ -17,7 +16,6 @@ export const Header = () => {
 			</div>
 
 			<div className="menu">
-				<Options />
 				<input type="text" placeholder="Pesquisar assunto, tag, data..." />
 			</div>
 		</StyledHeader>

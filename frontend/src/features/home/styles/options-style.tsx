@@ -3,18 +3,19 @@ import styled from "styled-components";
 
 export const StyledMenu = styled.div`
 	.main {
-		background-color: transparent;
 		border: none;
 		padding: 0;
 		margin: 0 1rem;
 		text-align: right;
-		color: ${Palette.fadedText};
 		border-radius: 2px;
 		padding: 4px 12px;
 
+		background-color: ${Palette.borderContainer};
+		color: ${Palette.fadedText};
+
 		&:hover {
-			background-color: ${Palette.primary};
-			color: #ddd;
+			background-color: ${Palette.fadedText};
+			color: #111;
 		}
 
 		&:focus {

@@ -6,18 +6,15 @@ export const StyledListContainer = styled.ul`
 
 	.container {
 		position: relative;
-		border-bottom: 2px solid ${Palette.fadedText + "10"};
-		padding: 2px 8px;
 		cursor: pointer;
-		border-radius: ${Palette.borderRadius};
-
-		&:hover {
-			background-color: ${Palette.primary};
-		}
+		padding: 4px 8px;
+		border-bottom: 2px solid ${Palette.fadedText + "10"};
+		border-left: 4px solid transparent;
+		opacity: 0.7;
 	}
 
 	li {
-		color: ${Palette.fadedText + "80"};
+		color: ${Palette.fadedText};
 		font-weight: bold;
 		font-size: 0.9rem;
 		text-transform: capitalize;
@@ -27,18 +24,32 @@ export const StyledListContainer = styled.ul`
 	.subjects-counter {
 		color: ${Palette.fadedText};
 		font-size: 0.9rem;
-		background-color: ${Palette.primary};
+		background-color: ${Palette.borderContainer};
 		padding: 0 4px;
 		border-radius: 1px;
 		color: ${Palette.fadedText};
 		margin: 0 8px;
+		font-weight: bold;
 	}
 
-	.active {
-		background-color: ${Palette.primary};
+	.active,
+	.container:hover {
+		border-left: 4px solid #005090;
+		border-radius: 0;
+		opacity: 1;
 
 		li {
 			color: #ddd;
+		}
+
+		.main {
+			background-color: ${Palette.fadedText};
+			color: #111;
+		}
+
+		.subjects-counter {
+			background-color: ${Palette.fadedText};
+			color: #111;
 		}
 	}
 `;

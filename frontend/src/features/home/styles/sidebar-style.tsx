@@ -7,7 +7,7 @@ export const StyledSidebar = styled.div`
 	min-height: 100vh;
 	background-color: ${Palette.container};
 	padding: 1rem 2rem;
-	border-right: 5px solid ${Palette.borderContainer};
+	box-shadow: 4px 0 10px #00000020;
 
 	.title {
 		margin-bottom: 5rem;
