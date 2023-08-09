@@ -71,6 +71,10 @@ describe("Tags", () => {
 	});
 
 	describe("Get tags", () => {
+		afterEach(async () => {
+			await prisma.tags.deleteMany();
+		});
+
 		it("Throws an error due to user not found", async () => {
 			const { errors } = await request(url).mutate(tagQueries.GET_TAG).variables({ userID: "" });
 			expect(errors?.[0].message).toBe("User not found");
@@ -83,6 +87,62 @@ describe("Tags", () => {
 
 			const { data } = await request<{ getTags: ITag[] }>(url).mutate(tagQueries.GET_TAG).variables({ userID: user.id });
 			expect(data?.getTags).toHaveLength(1);
+		});
+	});
+
+	describe("Update tag", () => {
+		afterEach(async () => {
+			await prisma.tags.deleteMany();
+		});
+
+		it("Throws an error due to empty values", async () => {
+			const { errors } = await request(url)
+				.mutate(tagQueries.UPDATE_TAG)
+				.variables({ input: { tagID: "", name: "", color: "" } });
+			expect(errors?.[0].message).toBe("missingFields: tagID has no value, name has no value, color has no value");
+		});
+
+		it("Throws an error, tag was not found", async () => {
+			const { errors } = await request(url)
+				.mutate(tagQueries.UPDATE_TAG)
+				.variables({ input: { tagID: "wrong", name: "tag 01", color: "222444" } });
+			expect(errors?.[0].message).toBe("notFound: Tag was not found");
+		});
+
+		it("Throws an error due to duplicated name", async () => {
+			await request<{ createTag: ITag }>(url)
+				.mutate(tagQueries.CREATE_TAG)
+				.variables({ input: { userID: user.id, name: "tag 01", color: "2050dd" } });
+
+			const createTag = await request<{ createTag: ITag }>(url)
+				.mutate(tagQueries.CREATE_TAG)
+				.variables({ input: { userID: user.id, name: "tag 02", color: "2050dd" } });
+
+			const tag = createTag.data?.createTag;
+
+			const { errors } = await request(url)
+				.mutate(tagQueries.UPDATE_TAG)
+				.variables({ input: { tagID: tag?.tagID, name: "tag 01", color: "222444" } });
+
+			expect(errors?.[0].message).toBe("duplicated: A tag with the same name already exist");
+		});
+
+		it("Update a tag", async () => {
+			const createTag = await request<{ createTag: ITag }>(url)
+				.mutate(tagQueries.CREATE_TAG)
+				.variables({ input: { userID: user.id, name: "tag 01", color: "2050dd" } });
+
+			const tag = createTag.data?.createTag;
+
+			const newTag = { name: "NEW NAME", color: "000999" };
+
+			const { data } = await request<{ updateTag: ITag }>(url)
+				.mutate(tagQueries.UPDATE_TAG)
+				.variables({ input: { tagID: tag?.tagID, ...newTag } });
+
+			expect(data?.updateTag).toBeDefined();
+			expect(data?.updateTag.name).toBe(newTag.name.toLowerCase());
+			expect(data?.updateTag.color).toBe(newTag.color);
 		});
 	});
 });

@@ -34,6 +34,11 @@ class TagService {
 		const tag = await prisma.tags.findUnique({ where: { tagID: input.tagID } });
 		if (!tag) throw new GraphQLError("notFound: Tag was not found");
 
+		input.name = input.name.toLowerCase();
+
+		const isDuplicated = await prisma.tags.findFirst({ where: { name: input.name } });
+		if (isDuplicated) throw new GraphQLError("duplicated: A tag with the same name already exist");
+
 		const newTag = prisma.tags.update({ where: { tagID: input.tagID }, data: { ...input } });
 		return newTag;
 	}
