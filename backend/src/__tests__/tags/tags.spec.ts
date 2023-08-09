@@ -145,4 +145,28 @@ describe("Tags", () => {
 			expect(data?.updateTag.color).toBe(newTag.color);
 		});
 	});
+
+	describe("Delete tag", () => {
+		it("Throws an error due to tag not found", async () => {
+			const { errors } = await request<{ deleteTag: string }>(url).mutate(tagQueries.DELETE_TAG).variables({ tagID: "wrong" });
+			expect(errors?.[0].message).toBe("notFound: Tag was not found");
+		});
+
+		it("Delete a tag", async () => {
+			const createTag = await request<{ createTag: ITag }>(url)
+				.mutate(tagQueries.CREATE_TAG)
+				.variables({ input: { userID: user.id, name: "tag 01", color: "2050dd" } });
+
+			const tag = createTag.data?.createTag;
+
+			let tags = await prisma.tags.findMany();
+			expect(tags).toHaveLength(1);
+
+			const { data } = await request<{ deleteTag: string }>(url).mutate(tagQueries.DELETE_TAG).variables({ tagID: tag?.tagID });
+			expect(data?.deleteTag).toBe("Success: Tag deleted");
+
+			tags = await prisma.tags.findMany();
+			expect(tags).toHaveLength(0);
+		});
+	});
 });
