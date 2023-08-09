@@ -17,7 +17,7 @@ export const ListContainer = () => {
 					</li>
 
 					<button className="options">Opções</button>
-					<span className="subjects-counter">12</span>
+					<span className="subjects-counter">{list.subjectsLength}</span>
 				</div>
 			))}
 		</StyledListContainer>

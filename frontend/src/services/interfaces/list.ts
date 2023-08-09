@@ -2,6 +2,7 @@ export interface IList {
 	listID: string;
 	userID: string;
 	name: string;
+	subjectsLength: number;
 }
 
 export interface ICreateList {

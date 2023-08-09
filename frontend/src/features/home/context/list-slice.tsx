@@ -7,7 +7,7 @@ interface ListSlice {
 }
 
 const defaultValues: ListSlice = {
-	active: { userID: "", listID: "", name: "" },
+	active: { userID: "", listID: "", name: "" , subjectsLength: 0},
 	lists: [],
 };
 
