@@ -69,4 +69,20 @@ describe("Tags", () => {
 			expect(data?.createTag.name).toBe(tagName.toLowerCase());
 		});
 	});
+
+	describe("Get tags", () => {
+		it("Throws an error due to user not found", async () => {
+			const { errors } = await request(url).mutate(tagQueries.GET_TAG).variables({ userID: "" });
+			expect(errors?.[0].message).toBe("User not found");
+		});
+
+		it("Returns all the tags", async () => {
+			await request<{ createTag: ITag }>(url)
+				.mutate(tagQueries.CREATE_TAG)
+				.variables({ input: { userID: user.id, name: "tag 01", color: "2050dd" } });
+
+			const { data } = await request<{ getTags: ITag[] }>(url).mutate(tagQueries.GET_TAG).variables({ userID: user.id });
+			expect(data?.getTags).toHaveLength(1);
+		});
+	});
 });
