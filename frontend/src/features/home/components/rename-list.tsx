@@ -55,9 +55,6 @@ export const RenameList = () => {
 
 			dispatch(setRenameList({ list: data.renameList }));
 			dispatch(setOpenOptions({ isOpen: "" }));
-
-			// todo
-			// setOptionsIsOpen(false);
 		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.list);
 		}

@@ -9,6 +9,9 @@ export const StyledSidebar = styled.div`
 	padding: 1rem 2rem;
 	box-shadow: 4px 0 10px #00000020;
 
+	grid-column: 1 / 1;
+	grid-row: 1 / 3;
+
 	.title {
 		margin-bottom: 5rem;
 	}

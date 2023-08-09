@@ -32,6 +32,7 @@ export const StyledListOption = styled.div<{ type: string }>`
 			right: 0;
 			margin: 0;
 			color: ${Palette.fadedText};
+			border: none;
 
 			&:hover {
 				background-color: ${Palette.errorText};
@@ -53,6 +54,7 @@ export const StyledListOption = styled.div<{ type: string }>`
 		.list-name {
 			width: 100%;
 			background-color: ${Palette.background};
+			outline: 1px solid #ddd;
 		}
 
 		.error {

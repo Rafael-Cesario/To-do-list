@@ -11,12 +11,8 @@ export const Header = () => {
 	return (
 		<StyledHeader>
 			<div className="title">
-				<h1>{active?.name || "Minha lista"}</h1>
+				<h1>{active.name || "Minha lista"}</h1>
 				<p>12 Itens na lista</p>
-			</div>
-
-			<div className="menu">
-				<input type="text" placeholder="Pesquisar assunto, tag, data..." />
 			</div>
 		</StyledHeader>
 	);

@@ -30,9 +30,6 @@ export const DeleteList = () => {
 			dispatch(setDeleteList({ listID: active.listID }));
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Lista excluida", message: `Sua lista "${active.name}" foi excluida com sucesso.` }));
 			dispatch(setOpenOptions({ isOpen: "" }));
-
-			// todo
-			// setOptionsIsOpen(false);
 		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.list);
 		}

@@ -6,6 +6,7 @@ export const StyledHeader = styled.header`
 	display: flex;
 	justify-content: space-between;
 	padding: 1rem 2rem;
+	margin-bottom: 3rem;
 
 	.title h1 {
 		text-transform: capitalize;
