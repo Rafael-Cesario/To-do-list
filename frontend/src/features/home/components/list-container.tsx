@@ -11,9 +11,14 @@ export const ListContainer = () => {
 	return (
 		<StyledListContainer>
 			{lists.map((list) => (
-				<li role="list-item" onClick={() => dispatch(setActive({ newActive: list }))} className={active?.listID === list.listID ? "active" : ""} key={list.listID}>
-					{list.name}
-				</li>
+				<div className="container" key={list.listID}>
+					<li role="list-item" onClick={() => dispatch(setActive({ newActive: list }))} className={active?.listID === list.listID ? "active" : ""}>
+						{list.name}
+					</li>
+
+					<button className="options">Opções</button>
+					<span className="subjects-counter">12</span>
+				</div>
 			))}
 		</StyledListContainer>
 	);

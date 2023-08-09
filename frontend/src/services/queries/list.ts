@@ -17,6 +17,7 @@ class ListQueries {
 				listID
 				userID
 				name
+				subjectsLength
 			}
 		}
 	`;
