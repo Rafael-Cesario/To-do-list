@@ -57,4 +57,10 @@ export const StyledCreateSubject = styled.div`
 	.success {
 		background-color: ${Palette.successText};
 	}
+
+	.loading-button {
+		padding: 10px 20px;
+		border: 2px solid #222;
+		height: 2.5rem;
+	}
 `;

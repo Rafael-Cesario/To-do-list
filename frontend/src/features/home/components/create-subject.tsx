@@ -4,6 +4,7 @@ import { StyledCreateSubject } from "../styles/create-subject-style";
 import { useMutationsSubject } from "@/utils/hooks/use-mutations-subject";
 import { useSelector } from "react-redux";
 import { Store } from "@/context/store";
+import { ButtonLoading } from "@/components/button-loading";
 
 export const CreateSubject = () => {
 	const [subjectName, setSubjectName] = useState("");
@@ -36,7 +37,7 @@ export const CreateSubject = () => {
 
 		setTimeout(() => {
 			setFeedback({ type: "", message: "" });
-		}, 2000);
+		}, 5000);
 	};
 
 	return (
@@ -59,9 +60,14 @@ export const CreateSubject = () => {
 					type="text"
 					placeholder="Digite aqui seu novo assunto de estudos"
 				/>
-				<button onClick={() => createSubject()} className="submit">
-					Adicionar
-				</button>
+
+				{loading || (
+					<button onClick={() => createSubject()} className="submit">
+						Adicionar
+					</button>
+				)}
+
+				{loading && <ButtonLoading />}
 			</div>
 		</StyledCreateSubject>
 	);
