@@ -23,6 +23,20 @@ export const StyledMenu = styled.div`
 		}
 	}
 
+	.close {
+		margin: 1rem;
+		position: absolute;
+		border: none;
+		background-color: transparent;
+		top: 0;
+		right: 0;
+
+		&:hover {
+			background-color: ${Palette.errorText};
+			color: #ddd;
+		}
+	}
+
 	.options {
 		transform: translateY(2rem);
 		position: absolute;
@@ -44,7 +58,8 @@ export const StyledMenu = styled.div`
 
 		.title {
 			font-size: 1.1rem;
-			margin-bottom: 1rem;
+			margin: 8px 0;
+			margin-bottom: 2rem;
 			text-align: left;
 		}
 

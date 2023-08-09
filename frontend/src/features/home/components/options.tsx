@@ -22,6 +22,9 @@ export const Options = () => {
 			{optionsIsOpen && (
 				<div className="options">
 					<h1 className="title">Opções</h1>
+					<button className="close" onClick={() => setOptionsIsOpen(false)}>
+						x
+					</button>
 
 					<button onClick={() => openListActions("rename")} className="rename">
 						Renomear lista
