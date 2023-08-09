@@ -8,17 +8,9 @@ import { useMutationsList } from "@/utils/hooks/use-mutations-list";
 import { setDeleteList } from "../context/list-slice";
 import { setNotification } from "@/context/slice-notification";
 import { ButtonLoading } from "@/components/button-loading";
+import { setOpenOptions } from "../context/options-slice";
 
-interface Props {
-	props: {
-		// eslint-disable-next-line no-unused-vars
-		setDeleteListContainer: (isOpen: boolean) => void;
-		// eslint-disable-next-line no-unused-vars
-		setMenuIsOpen: (isOpen: boolean) => void;
-	};
-}
-
-export const DeleteList = ({ props: { setDeleteListContainer, setMenuIsOpen } }: Props) => {
+export const DeleteList = () => {
 	const { active } = useSelector((state: Store) => state.list);
 	const [listName, setListName] = useState("");
 	const [error, setError] = useState(false);
@@ -37,8 +29,10 @@ export const DeleteList = ({ props: { setDeleteListContainer, setMenuIsOpen } }:
 			await deleteListRequest({ input: { listID: active.listID } });
 			dispatch(setDeleteList({ listID: active.listID }));
 			dispatch(setNotification({ isOpen: true, type: "success", title: "Lista excluida", message: `Sua lista "${active.name}" foi excluida com sucesso.` }));
-			setDeleteListContainer(false);
-			setMenuIsOpen(false);
+			dispatch(setOpenOptions({ isOpen: "" }));
+
+			// todo
+			// setOptionsIsOpen(false);
 		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.list);
 		}
@@ -49,7 +43,7 @@ export const DeleteList = ({ props: { setDeleteListContainer, setMenuIsOpen } }:
 	return (
 		<StyledListOption type={"delete"}>
 			<div className="container">
-				<button onClick={() => setDeleteListContainer(false)} className="close">
+				<button onClick={() => dispatch(setOpenOptions({ isOpen: "" }))} className="close">
 					x
 				</button>
 

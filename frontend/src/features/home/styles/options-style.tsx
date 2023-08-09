@@ -2,15 +2,15 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledMenu = styled.div`
-	/* position: relative; */
-
-	button {
-		border: none;
-	}
-
 	.main {
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		margin: 0 1rem;
+		text-align: right;
 		color: ${Palette.fadedText};
-		margin-right: 1rem;
+		border-radius: 2px;
+		padding: 4px 12px;
 
 		&:hover {
 			background-color: ${Palette.primary};
@@ -23,17 +23,28 @@ export const StyledMenu = styled.div`
 	}
 
 	.options {
-		background-color: ${Palette.container};
-		border-radius: ${Palette.borderRadius};
-		margin-top: 8px;
+		transform: translateY(2rem);
 		position: absolute;
+		width: 100%;
+		right: 0;
+		top: 0;
+
+		margin-top: 8px;
 		padding: 1rem;
+		z-index: 1;
+
 		display: flex;
 		flex-direction: column;
+
+		background-color: ${Palette.container};
+		border-radius: ${Palette.borderRadius};
+		border: 4px solid ${Palette.borderContainer};
+		box-shadow: 8px 8px 4px #00000020;
 
 		.title {
 			font-size: 1.1rem;
 			margin-bottom: 1rem;
+			text-align: left;
 		}
 
 		.rename {

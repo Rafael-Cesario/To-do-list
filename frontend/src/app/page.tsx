@@ -1,3 +1,4 @@
+import { ListActions } from "@/features/home/components/list-actions";
 import { Loader } from "@/features/home/components/loader";
 import { Logout } from "@/features/home/components/logout";
 import { Header } from "@/features/home/header";
@@ -53,6 +54,7 @@ export default async function Home() {
 			<Loader lists={lists} />
 			<Sidebar />
 			<Header />
+			<ListActions />
 		</StyledHome>
 	);
 }

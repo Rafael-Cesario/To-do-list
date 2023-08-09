@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const StyledListOption = styled.div<{ type: string }>`
 	position: absolute;
+	z-index: 2;
 	top: 0;
 	left: 0;
 	width: 100%;

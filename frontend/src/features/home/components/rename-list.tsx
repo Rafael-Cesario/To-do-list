@@ -9,17 +9,9 @@ import { errorsMap } from "@/services/errors-map";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
 import { setRenameList } from "../context/list-slice";
 import { ButtonLoading } from "@/components/button-loading";
+import { setOpenOptions } from "../context/options-slice";
 
-interface Props {
-	props: {
-		// eslint-disable-next-line no-unused-vars
-		setRenameListContainer: (isOpen: boolean) => void;
-		// eslint-disable-next-line no-unused-vars
-		setMenuIsOpen: (isOpen: boolean) => void;
-	};
-}
-
-export const RenameList = ({ props: { setRenameListContainer, setMenuIsOpen } }: Props) => {
+export const RenameList = () => {
 	const { active, lists } = useSelector((state: Store) => state.list);
 	const [listName, setListName] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -62,8 +54,10 @@ export const RenameList = ({ props: { setRenameListContainer, setMenuIsOpen } }:
 			);
 
 			dispatch(setRenameList({ list: data.renameList }));
-			setRenameListContainer(false);
-			setMenuIsOpen(false);
+			dispatch(setOpenOptions({ isOpen: "" }));
+
+			// todo
+			// setOptionsIsOpen(false);
 		} catch (error: unknown) {
 			showError(error, dispatch, errorsMap.list);
 		}
@@ -74,7 +68,7 @@ export const RenameList = ({ props: { setRenameListContainer, setMenuIsOpen } }:
 	return (
 		<StyledListOption type={"rename"}>
 			<div className="container">
-				<button onClick={() => setRenameListContainer(false)} className="close">
+				<button onClick={() => dispatch(setOpenOptions({ isOpen: "" }))} className="close">
 					x
 				</button>
 
