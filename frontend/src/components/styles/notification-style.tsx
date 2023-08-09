@@ -13,7 +13,7 @@ export const StyledNotification = styled.div<{ type: string }>`
 	padding: 1rem 4rem 1rem 2rem;
 	border-radius: ${Palette.borderRadius};
 	box-shadow: 0 10px 5px #00000020;
-	border-left: 1rem solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
+	border-left: 10px solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
 
 	.title {
 		color: ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
