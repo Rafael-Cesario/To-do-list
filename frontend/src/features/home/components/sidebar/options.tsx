@@ -3,12 +3,19 @@ import { useDispatch } from "react-redux";
 import { StyledMenu as StyledOptions } from "../../styles/options-style";
 import { useState } from "react";
 import { setOpenOptions } from "../../context/options-slice";
+import { IList } from "@/services/interfaces/list";
+import { setActive } from "../../context/list-slice";
 
-export const Options = () => {
+interface Props {
+	list: IList;
+}
+
+export const Options = ({ list }: Props) => {
 	const [optionsIsOpen, setOptionsIsOpen] = useState(false);
 	const dispatch = useDispatch();
 
 	const openListActions = (action: "rename" | "delete") => {
+		dispatch(setActive({ newActive: list }));
 		dispatch(setOpenOptions({ isOpen: action }));
 		setOptionsIsOpen(false);
 	};

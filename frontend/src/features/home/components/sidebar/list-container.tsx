@@ -17,7 +17,7 @@ export const ListContainer = () => {
 						{list.name}
 					</li>
 
-					<Options />
+					<Options list={list} />
 					<span className="subjects-counter">{list.subjectsLength}</span>
 				</div>
 			))}
