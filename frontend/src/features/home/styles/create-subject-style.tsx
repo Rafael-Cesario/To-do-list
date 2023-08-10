@@ -29,9 +29,11 @@ export const StyledCreateSubject = styled.div`
 		color: #ddd;
 		border-radius: ${Palette.borderRadius};
 		overflow: hidden;
+		display: flex;
 
 		.message {
 			margin: 1rem 8px;
+			font-weight: bold;
 		}
 
 		.close {

@@ -17,7 +17,16 @@ export const subjectSlice = createSlice({
 		setSubjects: (state, action: { payload: { subjects: ISubject[] } }) => {
 			state.subjects = action.payload.subjects;
 		},
+
+		setNewSubject: (state, action: { payload: { newSubject: ISubject } }) => {
+			state.subjects.push(action.payload.newSubject);
+		},
+
+		setUpdateSubject: (state, action: { payload: { subject: ISubject } }) => {
+			const index = state.subjects.findIndex((subject) => subject.subjectID === action.payload.subject.subjectID);
+			state.subjects[index] = { ...state.subjects[index], ...action.payload.subject };
+		},
 	},
 });
 
-export const { setSubjects } = subjectSlice.actions;
+export const { setSubjects, setNewSubject, setUpdateSubject } = subjectSlice.actions;

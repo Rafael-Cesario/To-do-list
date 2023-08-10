@@ -10,5 +10,5 @@ export const Palette = {
 
 	primary: "#124b80",
 	errorText: "#a94444",
-	successText: "#409649",
+	successText: "#407030",
 };
