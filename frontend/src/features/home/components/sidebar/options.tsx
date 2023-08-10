@@ -22,7 +22,7 @@ export const Options = ({ list }: Props) => {
 
 	return (
 		<StyledOptions>
-			<button onClick={() => setOptionsIsOpen(!optionsIsOpen)} className="main">
+			<button role="open-options" onClick={() => setOptionsIsOpen(!optionsIsOpen)} className="main">
 				Opções
 			</button>
 
@@ -33,11 +33,11 @@ export const Options = ({ list }: Props) => {
 						x
 					</button>
 
-					<button onClick={() => openListActions("rename")} className="rename">
+					<button role="rename" onClick={() => openListActions("rename")} className="rename">
 						Renomear lista
 					</button>
 
-					<button onClick={() => openListActions("delete")} className="delete">
+					<button role="delete" onClick={() => openListActions("delete")} className="delete">
 						Excluir lista
 					</button>
 				</div>

@@ -1,10 +1,11 @@
+import "@testing-library/jest-dom";
 import * as MutationsList from "@/utils/hooks/use-mutations-list";
 import userEvent from "@testing-library/user-event";
 import { cleanup, render, screen } from "@testing-library/react";
 import { Sidebar } from "../sidebar";
 import { AllProviders } from "@/lib/all-providers";
 import { Notification } from "@/components/notification";
-import { RCreateList } from "@/services/interfaces/list";
+import { RCreateList, RRenameList } from "@/services/interfaces/list";
 import { ListActions } from "../components/list-actions";
 
 const Component = () => (
@@ -18,13 +19,16 @@ const Component = () => (
 describe("Sidebar", () => {
 	const user = userEvent.setup();
 	const mockMutationsList = MutationsList as { useMutationsList: object };
+
 	const createListData: RCreateList = { createList: { listID: "123", name: "My new list", subjectsLength: 0, userID: "123" } };
+	const renameListData: RRenameList = { renameList: { listID: "123", name: "A new name for this list", userID: "123", subjectsLength: 2 } };
 
 	mockMutationsList.useMutationsList = () => ({
 		createListRequest: () => ({ data: createListData }),
+		renameListRequest: () => ({ data: renameListData }),
 	});
 
-	const { getByRole, getAllByRole } = screen;
+	const { getByRole, getAllByRole, queryByRole } = screen;
 
 	beforeEach(() => {
 		render(<Component />);
@@ -42,7 +46,19 @@ describe("Sidebar", () => {
 		expect(getAllByRole("list-item")[0].className).toMatch(/active/);
 	});
 
-	it.todo("Rename list");
+	it("Rename list", async () => {
+		await user.click(getByRole("open-options"));
+		await user.click(getByRole("rename"));
+
+		expect(queryByRole("rename")).not.toBeInTheDocument();
+
+		await user.type(getByRole("new-list-name"), renameListData.renameList.name);
+		await user.click(getByRole("submit"));
+
+		expect(queryByRole("rename")).not.toBeInTheDocument();
+		expect(getAllByRole("list-item")[0].querySelector("li")?.textContent).toBe(renameListData.renameList.name);
+		expect(getByRole("notification").querySelector(".title")?.textContent).toBe("Lista renomeada");
+	});
 
 	it.todo("Delete list");
 });

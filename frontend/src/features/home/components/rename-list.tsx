@@ -80,10 +80,11 @@ export const RenameList = () => {
 					className="list-name"
 					type="text"
 					placeholder={active?.name}
+					role="new-list-name"
 				/>
 
 				{loading || (
-					<button className="submit" onClick={() => renameList()}>
+					<button role="submit" className="submit" onClick={() => renameList()}>
 						Salvar alterações
 					</button>
 				)}
