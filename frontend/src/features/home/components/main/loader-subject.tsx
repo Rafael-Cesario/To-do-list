@@ -11,7 +11,7 @@ export const LoaderSubject = () => {
 	const dispatch = useDispatch();
 
 	const getSubjects = async (listID: string) => {
-		const { data } = await client.query<RGetSubjects, IGetSubjects>({ query: subjectQueries.GET_SUBJECTS, variables: { listID: listID } });
+		const { data } = await client.query<RGetSubjects, IGetSubjects>({ query: subjectQueries.GET_SUBJECTS, variables: { listID: listID }, fetchPolicy: "no-cache" });
 		dispatch(setSubjects({ subjects: data.getSubjects }));
 	};
 
