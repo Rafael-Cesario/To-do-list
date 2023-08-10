@@ -8,6 +8,14 @@ export interface ISubject {
 	tags: string[];
 }
 
+export interface IGetSubjects {
+	listID: string;
+}
+
+export interface RGetSubjects {
+	getSubjects: ISubject[];
+}
+
 export interface ICreateSubject {
 	input: {
 		listID: string;
