@@ -1,8 +1,8 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { StyledMenu as StyledOptions } from "../styles/options-style";
+import { StyledMenu as StyledOptions } from "../../styles/options-style";
 import { useState } from "react";
-import { setOpenOptions } from "../context/options-slice";
+import { setOpenOptions } from "../../context/options-slice";
 
 export const Options = () => {
 	const [optionsIsOpen, setOptionsIsOpen] = useState(false);

@@ -1,7 +1,7 @@
 "use client";
 import { Store } from "@/context/store";
 import { useSelector } from "react-redux";
-import { StyledSubjectsContainer } from "../styles/subjects-container-style";
+import { StyledSubjectsContainer } from "../../styles/subjects-container-style";
 
 export const SubjectsContainer = () => {
 	const { subjects } = useSelector((state: Store) => state.subject);

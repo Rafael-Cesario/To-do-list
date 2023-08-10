@@ -1,8 +1,8 @@
 "use client";
 import { Store } from "@/context/store";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledListContainer } from "../styles/list-container-style";
-import { setActive } from "../context/list-slice";
+import { StyledListContainer } from "../../styles/list-container-style";
+import { setActive } from "../../context/list-slice";
 import { Options } from "./options";
 
 export const ListContainer = () => {

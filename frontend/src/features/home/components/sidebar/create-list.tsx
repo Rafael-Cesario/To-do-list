@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { StyledCreateList } from "../styles/create-list-style";
+import { StyledCreateList } from "../../styles/create-list-style";
 import { ButtonLoading } from "@/components/button-loading";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
 import { cookies } from "@/services/cookies";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/slice-notification";
 import { showError } from "@/utils/show-error";
 import { errorsMap } from "@/services/errors-map";
-import { setAddList, setActive } from "../context/list-slice";
+import { setAddList, setActive } from "../../context/list-slice";
 
 export const CreateList = () => {
 	const [createListContainer, setCreateListContainer] = useState(false);

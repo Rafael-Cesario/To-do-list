@@ -1,6 +1,6 @@
-import { CreateSubject } from "./components/create-subject";
-import { LoaderSubject } from "./components/loader-subject";
-import { SubjectsContainer } from "./components/subjects-container";
+import { CreateSubject } from "./components/main/create-subject";
+import { LoaderSubject } from "./components/main/loader-subject";
+import { SubjectsContainer } from "./components/main/subjects-container";
 
 export const Main = () => {
 	return (

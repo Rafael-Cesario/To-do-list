@@ -1,5 +1,5 @@
-import { CreateList } from "./components/create-list";
-import { ListContainer } from "./components/list-container";
+import { CreateList } from "./components/sidebar/create-list";
+import { ListContainer } from "./components/sidebar/list-container";
 import { StyledSidebar } from "./styles/sidebar-style";
 
 export const Sidebar = () => {

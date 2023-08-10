@@ -4,7 +4,7 @@ import { client } from "@/services/client";
 import { IGetSubjects, RGetSubjects } from "@/services/interfaces/subjects";
 import { subjectQueries } from "@/services/queries/subjects";
 import { useDispatch, useSelector } from "react-redux";
-import { setSubjects } from "../context/subject-slice";
+import { setSubjects } from "../../context/subject-slice";
 
 export const LoaderSubject = () => {
 	const { active } = useSelector((state: Store) => state.list);

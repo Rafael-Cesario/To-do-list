@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { StyledCreateSubject } from "../styles/create-subject-style";
+import { StyledCreateSubject } from "../../styles/create-subject-style";
 import { useMutationsSubject } from "@/utils/hooks/use-mutations-subject";
 import { useDispatch, useSelector } from "react-redux";
 import { Store } from "@/context/store";
 import { ButtonLoading } from "@/components/button-loading";
 import { ISubject } from "@/services/interfaces/subjects";
-import { setNewSubject, setUpdateSubject } from "../context/subject-slice";
+import { setNewSubject, setUpdateSubject } from "../../context/subject-slice";
 
 interface Feedback {
 	type: "success" | "error" | "";
