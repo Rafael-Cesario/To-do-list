@@ -1,12 +1,13 @@
 "use client";
 import { Store } from "@/context/store";
 import { useSelector } from "react-redux";
+import { StyledSubjectsContainer } from "../styles/subjects-container-style";
 
 export const SubjectsContainer = () => {
 	const { subjects } = useSelector((state: Store) => state.subject);
 
 	return (
-		<div>
+		<StyledSubjectsContainer>
 			{subjects.map((subject) => {
 				const date = new Date(Number(subject.date));
 				const day = String(date.getDay()).padStart(2, "0");
@@ -18,12 +19,12 @@ export const SubjectsContainer = () => {
 						<h1 className="title">{subject.name}</h1>
 
 						<div className="info">
+							<span className="item">Adicionado {subject.amount}x</span>
 							<span className="item">{subjectDate}</span>
-							<span className="item">{subject.amount}</span>
 						</div>
 					</div>
 				);
 			})}
-		</div>
+		</StyledSubjectsContainer>
 	);
 };
