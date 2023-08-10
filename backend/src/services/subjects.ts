@@ -25,8 +25,7 @@ class SubjectService {
 	async updateSubject({ input }: IUpdateSubject) {
 		const { amount, name, notes, tags, subjectID } = input;
 
-		const emptyValues = searchEmptyValues({ name, notes });
-		if (emptyValues) throw new GraphQLError("missingFields: " + emptyValues);
+		if (!name) throw new GraphQLError("missingFields: name has no value");
 
 		const hasSubject = await prisma.subject.findUnique({ where: { subjectID } });
 		if (!hasSubject) throw new GraphQLError("notFound: Subject was not found");
