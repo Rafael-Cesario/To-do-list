@@ -1,5 +1,4 @@
 "use client";
-
 import { Store } from "@/context/store";
 import { useSelector } from "react-redux";
 
@@ -8,16 +7,23 @@ export const SubjectsContainer = () => {
 
 	return (
 		<div>
-			{subjects.map((subject) => (
-				<div key={subject.subjectID} className="subject">
-					<h1 className="title">{subject.name}</h1>
+			{subjects.map((subject) => {
+				const date = new Date(Number(subject.date));
+				const day = String(date.getDay()).padStart(2, "0");
+				const month = String(date.getMonth() + 1).padStart(2, "0");
+				const subjectDate = `${day}/${month}/${date.getFullYear()}`;
 
-					<div className="info">
-						<span>{subject.date}</span>
-						<span>{subject.amount}</span>
+				return (
+					<div key={subject.subjectID} className="subject">
+						<h1 className="title">{subject.name}</h1>
+
+						<div className="info">
+							<span className="item">{subjectDate}</span>
+							<span className="item">{subject.amount}</span>
+						</div>
 					</div>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 };
