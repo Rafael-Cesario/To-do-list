@@ -5,6 +5,7 @@ import styled from "styled-components";
 export const StyledCreateSubject = styled.div`
 	margin: 0 2rem;
 	box-shadow: 10px 10px 10px #00000010;
+	max-width: 1000px;
 
 	.create {
 		display: flex;
@@ -12,7 +13,6 @@ export const StyledCreateSubject = styled.div`
 
 	.name {
 		margin-right: 1rem;
-		max-width: 500px;
 	}
 
 	.submit {

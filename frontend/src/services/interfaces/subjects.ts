@@ -37,6 +37,10 @@ export interface IUpdateSubject {
 	};
 }
 
+export interface RUpdateSubject {
+	updateSubject: unknown;
+}
+
 export interface IDeleteSubject {
 	subjectID: string;
 }

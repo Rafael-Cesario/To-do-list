@@ -13,6 +13,7 @@ export const StyledSubjectsContainer = styled.div`
 		padding: 0.5rem 1rem;
 		border-bottom: 4px solid ${Palette.borderContainer};
 		border-radius: ${Palette.borderRadius};
+		margin-bottom: 1rem;
 
 		.title {
 			font-size: 1.2rem;
