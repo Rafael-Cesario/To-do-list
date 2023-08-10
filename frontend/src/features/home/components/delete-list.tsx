@@ -20,7 +20,7 @@ export const DeleteList = () => {
 	const { deleteListRequest } = useMutationsList();
 
 	const deleteList = async () => {
-		if (active.name !== listName.toLowerCase().trim()) return setError(true);
+		if (active.name.toLowerCase() !== listName.toLowerCase().trim()) return setError(true);
 
 		setError(false);
 		setLoading(true);
@@ -57,11 +57,12 @@ export const DeleteList = () => {
 					placeholder={active?.name}
 					onChange={(e) => setListName(e.target.value)}
 					value={listName}
+					role="delete-list-name"
 				/>
 				{error && <span className="error">Nome incorreto</span>}
 
 				{loading || (
-					<button className="submit" onClick={() => deleteList()}>
+					<button className="submit" role="submit" onClick={() => deleteList()}>
 						Excluir lista
 					</button>
 				)}

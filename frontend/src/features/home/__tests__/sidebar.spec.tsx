@@ -5,7 +5,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { Sidebar } from "../sidebar";
 import { AllProviders } from "@/lib/all-providers";
 import { Notification } from "@/components/notification";
-import { RCreateList, RRenameList } from "@/services/interfaces/list";
+import { RCreateList, RDeleteList, RRenameList } from "@/services/interfaces/list";
 import { ListActions } from "../components/list-actions";
 
 const Component = () => (
@@ -22,10 +22,12 @@ describe("Sidebar", () => {
 
 	const createListData: RCreateList = { createList: { listID: "123", name: "My new list", subjectsLength: 0, userID: "123" } };
 	const renameListData: RRenameList = { renameList: { listID: "123", name: "A new name for this list", userID: "123", subjectsLength: 2 } };
+	const deleteListData: RDeleteList = { deleteList: "Sua lista foi deletada" };
 
 	mockMutationsList.useMutationsList = () => ({
 		createListRequest: () => ({ data: createListData }),
 		renameListRequest: () => ({ data: renameListData }),
+		deleteListRequest: () => ({ data: deleteListData }),
 	});
 
 	const { getByRole, getAllByRole, queryByRole } = screen;
@@ -60,7 +62,17 @@ describe("Sidebar", () => {
 		expect(getByRole("notification").querySelector(".title")?.textContent).toBe("Lista renomeada");
 	});
 
-	it.todo("Delete list");
+	it("Delete list", async () => {
+		await user.click(getByRole("open-options"));
+		await user.click(getByRole("delete"));
+		expect(queryByRole("delete")).not.toBeInTheDocument();
+
+		await user.type(getByRole("delete-list-name"), renameListData.renameList.name);
+		await user.click(getByRole("submit"));
+
+		expect(getByRole("notification").querySelector(".title")?.textContent).toBe("Lista excluida");
+		expect(queryByRole("list-item")).not.toBeInTheDocument();
+	});
 });
 
 vi.mock("@/utils/hooks/use-mutations-list", () => ({
