@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { StyledSubjectsContainer } from "../../styles/subjects-container-style";
 
 export const SubjectsContainer = () => {
-	const { subjects } = useSelector((state: Store) => state.subject);
+	const { subjects, filteredSubjects } = useSelector((state: Store) => state.subject);
 
 	return (
 		<StyledSubjectsContainer>
-			{subjects.map((subject) => {
+			{(filteredSubjects.length > 0 ? filteredSubjects : subjects).map((subject) => {
 				const date = new Date(Number(subject.date));
 				const day = String(date.getDay()).padStart(2, "0");
 				const month = String(date.getMonth() + 1).padStart(2, "0");

@@ -1,10 +1,15 @@
-import { StyledFilterSubject } from "../../styles/filter-subject-style";
+"use client";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { StyledFilterSubject } from "../../styles/filter-subject-style";
+import { setSubjectFilter } from "../../context/subject-slice";
 
 export const FilterSubject = () => {
+	const dispatch = useDispatch();
+
 	return (
 		<StyledFilterSubject>
-			<input type="text" className="searchbar" placeholder="Pesquisar assunto, tag, data, vezes adicionadas" />
+			<input onChange={(e) => dispatch(setSubjectFilter({ searchValue: e.target.value }))} type="text" className="searchbar" placeholder="Pesquisar assunto ou tag" />
 
 			<div className="filters">
 				<button>Mostrar tags</button>
