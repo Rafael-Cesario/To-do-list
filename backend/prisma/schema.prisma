@@ -34,7 +34,7 @@ model Subject {
   subjectID String   @id @default(uuid())
   name      String
   date      DateTime @default(now())
-  amount    Int      @default(0)
+  amount    Int      @default(1)
   notes     String   @default("")
   tags      String[] @default([])
 
