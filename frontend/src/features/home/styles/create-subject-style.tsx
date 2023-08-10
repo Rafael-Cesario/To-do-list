@@ -3,9 +3,10 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledCreateSubject = styled.div`
-	margin: 0 2rem;
-	box-shadow: 10px 10px 10px #00000010;
+	width: 90%;
+	margin-bottom: 1rem;
 	max-width: 1000px;
+	box-shadow: 10px 10px 10px #00000010;
 
 	.create {
 		display: flex;

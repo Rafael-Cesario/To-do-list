@@ -2,8 +2,8 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledSubjectsContainer = styled.div`
+	width: 90%;
 	max-width: 1000px;
-	margin: 2rem;
 
 	.subject {
 		display: flex;
