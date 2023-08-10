@@ -7,6 +7,7 @@ class ListQueries {
 				name
 				listID
 				userID
+				subjectsLength
 			}
 		}
 	`;
@@ -28,6 +29,7 @@ class ListQueries {
 				name
 				listID
 				userID
+				subjectsLength
 			}
 		}
 	`;

@@ -12,11 +12,8 @@ export const ListContainer = () => {
 	return (
 		<StyledListContainer>
 			{lists.map((list) => (
-				<div className={`container ${active.listID === list.listID && "active"}`} key={list.listID}>
-					<li role="list-item" onClick={() => dispatch(setActive({ newActive: list }))}>
-						{list.name}
-					</li>
-
+				<div role="list-item" className={`container ${active.listID === list.listID && "active"}`} key={list.listID}>
+					<li onClick={() => dispatch(setActive({ newActive: list }))}>{list.name}</li>
 					<Options list={list} />
 					<span className="subjects-counter">{list.subjectsLength}</span>
 				</div>

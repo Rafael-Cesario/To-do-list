@@ -17,6 +17,3 @@ export const Sidebar = () => {
 		</StyledSidebar>
 	);
 };
-
-// Todo >
-// Search for lists

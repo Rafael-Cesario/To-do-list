@@ -5,7 +5,7 @@ export const StyledCreateList = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	transform: translate(18rem, -3rem);
+	transform: translate(21rem, -3rem);
 
 	background-color: ${Palette.container};
 	border: 2px solid ${Palette.borderContainer};
