@@ -14,6 +14,7 @@ export const SearchList = () => {
 			<HiSearch className="icon" />
 
 			<input
+				role="search-list"
 				type="text"
 				className="search-list"
 				placeholder="Procurar lista"

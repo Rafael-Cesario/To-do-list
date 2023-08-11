@@ -16,7 +16,7 @@ const Component = () => (
 	</AllProviders>
 );
 
-describe("Sidebar", () => {
+describe("List", () => {
 	const user = userEvent.setup();
 	const mockMutationsList = MutationsList as { useMutationsList: object };
 
