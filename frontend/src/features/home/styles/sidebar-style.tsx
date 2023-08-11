@@ -16,12 +16,6 @@ export const StyledSidebar = styled.div`
 		margin-bottom: 5rem;
 	}
 
-	.search {
-		background-color: ${Palette.background};
-		width: 100%;
-		margin-bottom: 2rem;
-	}
-
 	.container {
 		display: flex;
 		align-items: center;

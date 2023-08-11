@@ -6,12 +6,15 @@ import { setActive } from "../../context/list-slice";
 import { Options } from "./options";
 
 export const ListContainer = () => {
-	const { lists, active } = useSelector((state: Store) => state.list);
+	const { lists, active, searchValue } = useSelector((state: Store) => state.list);
 	const dispatch = useDispatch();
+
+	const filter = new RegExp(searchValue, "i");
+	const filteredLists = lists.filter((list) => list.name.match(filter));
 
 	return (
 		<StyledListContainer>
-			{lists.map((list) => (
+			{filteredLists.map((list) => (
 				<div role="list-item" className={`container ${active.listID === list.listID && "active"}`} key={list.listID}>
 					<li onClick={() => dispatch(setActive({ newActive: list }))}>{list.name}</li>
 					<Options list={list} />

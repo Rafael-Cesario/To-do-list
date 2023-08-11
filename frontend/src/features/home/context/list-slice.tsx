@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ListSlice {
 	lists: IList[];
 	active: IList;
+	searchValue: string;
 }
 
 const defaultValues: ListSlice = {
-	active: { userID: "", listID: "", name: "" , subjectsLength: 0},
 	lists: [],
+	active: { userID: "", listID: "", name: "" , subjectsLength: 0},
+	searchValue: "",
 };
 
 export const listSlice = createSlice({
@@ -38,7 +40,11 @@ export const listSlice = createSlice({
 			state.lists.splice(listIndex, 1);
 			state.active = state.lists[0];
 		},
+
+		setSearchValue: (state, action: {payload: {newSearchValue: string}}) => {
+			state.searchValue = action.payload.newSearchValue;
+		}
 	},
 });
 
-export const { setLists, setAddList, setActive, setRenameList, setDeleteList } = listSlice.actions;
+export const { setLists, setAddList, setActive, setRenameList, setDeleteList , setSearchValue} = listSlice.actions;

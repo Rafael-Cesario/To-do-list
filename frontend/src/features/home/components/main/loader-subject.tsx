@@ -19,7 +19,7 @@ export const LoaderSubject = () => {
 
 	useEffect(() => {
 		loadSubjects();
-	}, []);
+	}, [active]);
 
 	return null;
 };
