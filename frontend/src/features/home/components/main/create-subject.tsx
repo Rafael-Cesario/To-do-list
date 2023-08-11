@@ -44,7 +44,6 @@ export const CreateSubject = () => {
 		}
 
 		setLoading(false);
-		setFeedback({ type: "", message: "" });
 	};
 
 	const increaseSubjectAmount = async (subject: ISubject) => {
@@ -61,7 +60,6 @@ export const CreateSubject = () => {
 		}
 
 		setLoading(false);
-		setFeedback({ type: "", message: "" });
 	};
 
 	return (

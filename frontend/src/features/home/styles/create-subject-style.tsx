@@ -34,7 +34,7 @@ export const StyledCreateSubject = styled.div`
 
 		.message {
 			margin: 1rem 8px;
-			font-weight: bold;
+			font-weight: normal;
 		}
 
 		.close {
