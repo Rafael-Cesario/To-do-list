@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface SubjectSlice {
 	subjects: ISubject[];
-	filteredSubjects: ISubject[];
+	searchSubjectValue: string;
 }
 
 const defaultValues: SubjectSlice = {
 	subjects: [],
-	filteredSubjects: [],
+	searchSubjectValue: "",
 };
 
 export const subjectSlice = createSlice({
@@ -30,8 +30,7 @@ export const subjectSlice = createSlice({
 		},
 
 		setSubjectFilter: (state, action: { payload: { searchValue: string } }) => {
-			const searchValue = new RegExp(action.payload.searchValue, "i");
-			state.filteredSubjects = state.subjects.filter((subject) => subject.name.match(searchValue));
+			state.searchSubjectValue = action.payload.searchValue;
 		},
 	},
 });

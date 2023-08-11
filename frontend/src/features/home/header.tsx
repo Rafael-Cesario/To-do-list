@@ -18,5 +18,3 @@ export const Header = () => {
 		</StyledHeader>
 	);
 };
-
-// Todo > remove placeholder number of items on the list
