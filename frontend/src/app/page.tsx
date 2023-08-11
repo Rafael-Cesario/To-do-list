@@ -54,9 +54,13 @@ export default async function Home() {
 		<StyledHome>
 			<Loader lists={lists} />
 			<ListActions />
-			<Header />
 			<Sidebar />
-			<Main />
+
+			<main className="center">
+				<Header />
+				<Main />
+			</main>
+
 		</StyledHome>
 	);
 }

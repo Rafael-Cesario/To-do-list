@@ -3,14 +3,17 @@ import styled from "styled-components";
 
 export const StyledListContainer = styled.ul`
 	list-style: none;
+	margin-top: 1rem;
 
 	.container {
 		position: relative;
 		cursor: pointer;
-		padding: 4px 8px;
-		border-bottom: 2px solid ${Palette.fadedText + "10"};
-		border-left: 4px solid transparent;
+		border: 2px solid ${Palette.fadedText + "10"};
 		opacity: 0.7;
+		background-color: #111;
+		box-shadow: 2px 2px 2px #00000030;
+		padding: 4px 12px;
+		border-radius: ${Palette.borderRadius};
 	}
 
 	li {
@@ -34,8 +37,7 @@ export const StyledListContainer = styled.ul`
 
 	.active,
 	.container:hover {
-		border-left: 4px solid #005090;
-		border-radius: 0;
+		background-color: #20509070;
 		opacity: 1;
 
 		li {
