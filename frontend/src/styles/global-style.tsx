@@ -12,7 +12,21 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         background-color: ${Palette.background};
-        color: ${Palette.text}
+        color: ${Palette.text};
+
+       &::-webkit-scrollbar {
+            width: 10px;
+            background-color: ${Palette.background};
+       } 
+
+       &::-webkit-scrollbar-button {
+            background-color: #222;
+       }
+
+       &::-webkit-scrollbar-thumb {
+            background-color: #333;
+            border-radius: 2px;
+       }
     }
 
     input, button {
