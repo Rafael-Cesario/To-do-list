@@ -42,4 +42,34 @@ export const StyledFilterSubject = styled.div`
 			color: #333;
 		}
 	}
+
+	.dropdown {
+		position: relative;
+
+		.options {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 4rem 1rem;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 1rem;
+			background-color: ${Palette.container};
+			border: 1px solid ${Palette.borderContainer};
+			border-radius: ${Palette.borderRadius};
+
+			.filter {
+				background-color: #111;
+				margin: 4px;
+				padding: 10px 20px;
+
+				&:hover,
+				.active {
+					background-color: ${Palette.primary};
+					color: #ddd;
+				}
+			}
+		}
+	}
 `;

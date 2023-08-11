@@ -26,10 +26,19 @@ export const FilterSubject = () => {
 			<div className="filters">
 				<button>Mostrar tags</button>
 
-				<button>
-					Filtrar por: <span className="current-filter">Mais vezes adicionadas</span>
-					<Image className="icon" src="/icons/dropdown.png" width={20} height={20} alt="drop down menu icon" />
-				</button>
+				<div className="dropdown">
+					<button>
+						Filtrar por: <span className="current-filter">Mais vezes adicionadas</span>
+						<Image className="icon" src="/icons/dropdown.png" width={20} height={20} alt="drop down menu icon" />
+					</button>
+
+					<div className="options">
+						<button className="filter">Mais vezes adicionadas</button>
+						<button className="filter">Menos vezes adicionadas</button>
+						<button className="filter">Data mais recente</button>
+						<button className="filter">Data mais antiga</button>
+					</div>
+				</div>
 			</div>
 		</StyledFilterSubject>
 	);
