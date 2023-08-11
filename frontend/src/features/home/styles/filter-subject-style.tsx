@@ -13,7 +13,7 @@ export const StyledFilterSubject = styled.div`
 		margin-bottom: 1rem;
 	}
 
-	.filters {
+	.buttons {
 		display: flex;
 
 		button {
@@ -28,9 +28,10 @@ export const StyledFilterSubject = styled.div`
 			margin-right: 16px;
 		}
 
-		.current-filter {
+		.sorted {
 			margin: 0 12px;
 			color: ${Palette.fadedText + "90"};
+			width: 180px;
 		}
 
 		.icon {
@@ -38,7 +39,7 @@ export const StyledFilterSubject = styled.div`
 			padding: 4px;
 		}
 
-		button:hover .current-filter {
+		button:hover .sorted {
 			color: #333;
 		}
 	}
@@ -50,7 +51,7 @@ export const StyledFilterSubject = styled.div`
 			position: absolute;
 			top: 0;
 			right: 0;
-			margin: 4rem 1rem;
+			transform: translate(-1rem, 3.5rem);
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -58,18 +59,32 @@ export const StyledFilterSubject = styled.div`
 			background-color: ${Palette.container};
 			border: 1px solid ${Palette.borderContainer};
 			border-radius: ${Palette.borderRadius};
+			box-shadow: 10px 10px 10px #00000050;
+			width: 100%;
 
-			.filter {
-				background-color: #111;
+			animation: show 0.2s ease-out;
+
+			.sort {
+				background-color: #444;
+				color: #ddd;
 				margin: 4px;
 				padding: 10px 20px;
-
-				&:hover,
-				.active {
-					background-color: ${Palette.primary};
-					color: #ddd;
-				}
+				text-align: center;
+				justify-content: right;
 			}
+
+			.sort:hover,
+			.active {
+				background-color: ${Palette.primary};
+				color: #ddd;
+			}
+		}
+	}
+
+	@keyframes show {
+		from {
+			opacity: 0;
+			transform: translate(-1rem, 3rem);
 		}
 	}
 `;

@@ -1,5 +1,5 @@
 export const Palette = {
-	borderRadius: "2px",
+	borderRadius: "4px",
 
 	background: "#101010",
 	container: "#151515",

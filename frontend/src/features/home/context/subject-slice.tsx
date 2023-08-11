@@ -1,14 +1,18 @@
 import { ISubject } from "@/services/interfaces/subjects";
 import { createSlice } from "@reduxjs/toolkit";
 
+export type TSortBy = "increasingAmount" | "decreasingAmount" | "increasingDate" | "decreasingDate";
+
 interface SubjectSlice {
 	subjects: ISubject[];
 	searchSubjectValue: string;
+	sortBy: TSortBy;
 }
 
 const defaultValues: SubjectSlice = {
 	subjects: [],
 	searchSubjectValue: "",
+	sortBy: "decreasingAmount",
 };
 
 export const subjectSlice = createSlice({
@@ -32,7 +36,11 @@ export const subjectSlice = createSlice({
 		setSubjectFilter: (state, action: { payload: { searchValue: string } }) => {
 			state.searchSubjectValue = action.payload.searchValue;
 		},
+
+		setSortBy: (state, action: { payload: { newSortBy: TSortBy } }) => {
+			state.sortBy = action.payload.newSortBy;
+		},
 	},
 });
 
-export const { setSubjects, setNewSubject, setUpdateSubject, setSubjectFilter } = subjectSlice.actions;
+export const { setSubjects, setNewSubject, setUpdateSubject, setSubjectFilter , setSortBy} = subjectSlice.actions;
