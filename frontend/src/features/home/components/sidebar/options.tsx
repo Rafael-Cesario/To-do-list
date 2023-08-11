@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { StyledMenu as StyledOptions } from "../../styles/options-style";
+import { StyledMenu as StyledOptions } from "../../styles/sidebar/options-style";
 import { useState } from "react";
 import { setOpenOptions } from "../../context/options-slice";
 import { IList } from "@/services/interfaces/list";

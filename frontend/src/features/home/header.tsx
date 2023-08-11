@@ -1,6 +1,6 @@
 "use client";
 import { useSelector } from "react-redux";
-import { StyledHeader } from "./styles/header-style";
+import { StyledHeader } from "./styles/header/header-style";
 import { Store } from "@/context/store";
 
 export const Header = () => {

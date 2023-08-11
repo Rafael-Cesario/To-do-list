@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { StyledCreateList } from "../../styles/create-list-style";
+import { StyledCreateList } from "../../styles/sidebar/create-list-style";
 import { ButtonLoading } from "@/components/button-loading";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
 import { cookies } from "@/services/cookies";

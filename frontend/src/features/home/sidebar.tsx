@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CreateList } from "./components/sidebar/create-list";
 import { ListContainer } from "./components/sidebar/list-container";
 import { SearchList } from "./components/sidebar/search-list";
-import { StyledCloseSidebar, StyledSidebar } from "./styles/sidebar-style";
+import { StyledCloseSidebar, StyledSidebar } from "./styles/sidebar/sidebar-style";
 
 export const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(true);

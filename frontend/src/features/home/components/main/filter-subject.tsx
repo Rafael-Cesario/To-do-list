@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledFilterSubject } from "../../styles/filter-subject-style";
+import { StyledFilterSubject } from "../../styles/main/filter-subject-style";
 import { TSortBy, setSortBy, setSubjectFilter } from "../../context/subject-slice";
 import { useState } from "react";
 import { Store } from "@/context/store";

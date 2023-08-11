@@ -6,7 +6,7 @@ import { Sidebar } from "../sidebar";
 import { AllProviders } from "@/lib/all-providers";
 import { Notification } from "@/components/notification";
 import { RCreateList, RDeleteList, RRenameList } from "@/services/interfaces/list";
-import { ListActions } from "../components/list-actions";
+import { ListActions } from "../components/sidebar/list-actions";
 
 const Component = () => (
 	<AllProviders>

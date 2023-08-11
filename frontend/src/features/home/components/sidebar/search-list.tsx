@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSearchValue } from "../../context/list-slice";
 import { HiSearch } from "react-icons/hi";
-import { StyledSearchList } from "../../styles/search-list-style";
+import { StyledSearchList } from "../../styles/sidebar/search-list-style";
 
 export const SearchList = () => {
 	const [search, setSearch] = useState("");

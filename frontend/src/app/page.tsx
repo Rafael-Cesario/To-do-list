@@ -1,10 +1,11 @@
-import { ListActions } from "@/features/home/components/list-actions";
-import { Loader } from "@/features/home/components/loader";
+import { ListActions } from "@/features/home/components/sidebar/list-actions";
+import { Loader } from "@/features/home/components/sidebar/loader";
 import { Logout } from "@/features/home/components/logout";
 import { Header } from "@/features/home/header";
 import { Main } from "@/features/home/main";
 import { Sidebar } from "@/features/home/sidebar";
 import { StyledErrorPage } from "@/features/home/styles/error-page-style";
+import { SubjectArea } from "@/features/home/subject-area";
 import { client } from "@/services/client";
 import { CookieKeys, IUserCookies } from "@/services/interfaces/cookies";
 import { IGetLists, RGetLists } from "@/services/interfaces/list";
@@ -59,8 +60,8 @@ export default async function Home() {
 			<main className="center">
 				<Header />
 				<Main />
+				<SubjectArea />
 			</main>
-
 		</StyledHome>
 	);
 }

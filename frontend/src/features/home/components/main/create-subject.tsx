@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { StyledCreateSubject } from "../../styles/create-subject-style";
+import { StyledCreateSubject } from "../../styles/main/create-subject-style";
 import { useMutationsSubject } from "@/utils/hooks/use-mutations-subject";
 import { useDispatch, useSelector } from "react-redux";
 import { Store } from "@/context/store";

@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { setActive, setLists } from "../context/list-slice";
+import { setActive, setLists } from "../../context/list-slice";
 import { IList } from "@/services/interfaces/list";
 
 export const Loader = ({ lists }: { lists: IList[] }) => {

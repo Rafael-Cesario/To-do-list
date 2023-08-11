@@ -3,13 +3,13 @@ import { setNotification } from "@/context/slice-notification";
 import { Store } from "@/context/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledListOption } from "../styles/option-list-style";
+import { StyledListOption } from "../../styles/sidebar/option-list-style";
 import { showError } from "@/utils/show-error";
 import { errorsMap } from "@/services/errors-map";
 import { useMutationsList } from "@/utils/hooks/use-mutations-list";
-import { setRenameList } from "../context/list-slice";
+import { setRenameList } from "../../context/list-slice";
 import { ButtonLoading } from "@/components/button-loading";
-import { setOpenOptions } from "../context/options-slice";
+import { setOpenOptions } from "../../context/options-slice";
 
 export const RenameList = () => {
 	const { active, lists } = useSelector((state: Store) => state.list);
