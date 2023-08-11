@@ -7,7 +7,7 @@ export const Header = () => {
 	const { active } = useSelector((state: Store) => state.list);
 	const { subjects } = useSelector((state: Store) => state.subject);
 
-	if (!active) return <></>;
+	if (!active) return null;
 
 	return (
 		<StyledHeader>

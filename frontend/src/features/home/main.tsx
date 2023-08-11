@@ -1,3 +1,4 @@
+"use client";
 import { CreateSubject } from "./components/main/create-subject";
 import { FilterSubject } from "./components/main/filter-subject";
 import { LoaderSubject } from "./components/main/loader-subject";

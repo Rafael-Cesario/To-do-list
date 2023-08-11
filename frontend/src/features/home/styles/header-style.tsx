@@ -2,7 +2,7 @@
 import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
-export const StyledHeader = styled.header`
+export const StyledHeader = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 1rem 2rem;

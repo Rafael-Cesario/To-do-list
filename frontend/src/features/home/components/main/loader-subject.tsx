@@ -5,6 +5,7 @@ import { setSubjects } from "../../context/subject-slice";
 import { IGetSubjects, RGetSubjects } from "@/services/interfaces/subjects";
 import { subjectQueries } from "@/services/queries/subjects";
 import { client } from "@/services/client";
+import { useEffect } from "react";
 
 export const LoaderSubject = () => {
 	const { active } = useSelector((state: Store) => state.list);
@@ -16,7 +17,9 @@ export const LoaderSubject = () => {
 		dispatch(setSubjects({ subjects }));
 	};
 
-	loadSubjects();
+	useEffect(() => {
+		loadSubjects();
+	}, []);
 
 	return null;
 };
