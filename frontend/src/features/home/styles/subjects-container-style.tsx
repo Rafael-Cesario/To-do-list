@@ -8,26 +8,31 @@ export const StyledSubjectsContainer = styled.div`
 	.subject {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-start;
 		background-color: ${Palette.container};
 		padding: 0.5rem 1rem;
-		border-bottom: 4px solid ${Palette.borderContainer};
-		border-radius: ${Palette.borderRadius};
 		margin-bottom: 1rem;
+		border-radius: ${Palette.borderRadius};
+		border-left: 1px solid transparent;
+		transition: 0.1s;
+		cursor: pointer;
+		box-shadow: 4px 4px 4px #00000030;
+		border: 1px solid ${Palette.borderContainer};
 
-		.title {
-			font-size: 1.2rem;
+		&:hover {
+			border: 1px solid ${Palette.primary};
 		}
 
-		.info {
-			margin-left: 10px;
+		.title {
+			font-size: 1rem;
+		}
 
-			.item {
-				border-radius: ${Palette.borderRadius};
-				background-color: ${Palette.borderContainer};
-				padding: 4px 16px;
-				margin: 4px;
-				font-size: 12px;
+		.item {
+			font-size: 0.8rem;
+			color: ${Palette.fadedText};
+
+			&:nth-child(1) {
+				margin-right: 1rem;
 			}
 		}
 	}
