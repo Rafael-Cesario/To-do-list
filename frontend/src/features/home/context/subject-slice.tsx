@@ -7,12 +7,14 @@ interface SubjectSlice {
 	subjects: ISubject[];
 	searchSubjectValue: string;
 	sortBy: TSortBy;
+	active: ISubject | null;
 }
 
 const defaultValues: SubjectSlice = {
 	subjects: [],
 	searchSubjectValue: "",
 	sortBy: "decreasingAmount",
+	active: null,
 };
 
 export const subjectSlice = createSlice({
@@ -40,7 +42,11 @@ export const subjectSlice = createSlice({
 		setSortBy: (state, action: { payload: { newSortBy: TSortBy } }) => {
 			state.sortBy = action.payload.newSortBy;
 		},
+
+		setActive: (state, action: { payload: { subject: ISubject | null } }) => {
+			state.active = action.payload.subject;
+		},
 	},
 });
 
-export const { setSubjects, setNewSubject, setUpdateSubject, setSubjectFilter , setSortBy} = subjectSlice.actions;
+export const { setSubjects, setNewSubject, setUpdateSubject, setSubjectFilter, setSortBy, setActive } = subjectSlice.actions;

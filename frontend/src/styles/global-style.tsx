@@ -10,23 +10,24 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
     }
 
+    *::-webkit-scrollbar {
+         width: 10px;
+         background-color: ${Palette.background};
+    } 
+
+    *::-webkit-scrollbar-button {
+         background-color: #222;
+    }
+
+    *::-webkit-scrollbar-thumb {
+         background-color: #333;
+         border-radius: 2px;
+    }
+
     body {
         background-color: ${Palette.background};
         color: ${Palette.text};
 
-       &::-webkit-scrollbar {
-            width: 10px;
-            background-color: ${Palette.background};
-       } 
-
-       &::-webkit-scrollbar-button {
-            background-color: #222;
-       }
-
-       &::-webkit-scrollbar-thumb {
-            background-color: #333;
-            border-radius: 2px;
-       }
     }
 
     input, button {

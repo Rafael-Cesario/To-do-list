@@ -1,12 +1,15 @@
 "use client";
 import { Store } from "@/context/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledSubjectsContainer } from "../../styles/main/subjects-container-style";
 import { SortSubject } from "../../utils/sort-subjects";
+import { setActive } from "../../context/subject-slice";
 
 export const SubjectsContainer = () => {
 	const { subjects, searchSubjectValue, sortBy } = useSelector((state: Store) => state.subject);
 	const sortSubjects = new SortSubject();
+
+	const dispatch = useDispatch();
 
 	const filteredSubjects = subjects.filter((subject) => subject.name.match(new RegExp(searchSubjectValue, "i")));
 	const sortedSubjects = sortSubjects[sortBy](filteredSubjects);
@@ -20,7 +23,7 @@ export const SubjectsContainer = () => {
 				const subjectDate = `${day}/${month}/${date.getFullYear()}`;
 
 				return (
-					<div role="subject" key={subject.subjectID} className="subject">
+					<div onClick={() => dispatch(setActive({ subject }))} role="subject" key={subject.subjectID} className="subject">
 						<h1 className="title">{subject.name}</h1>
 
 						<div className="info">

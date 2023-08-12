@@ -16,7 +16,7 @@ export const StyledSidebar = styled.div`
 	grid-column: 1 / 1;
 	grid-row: 1 / 3;
 
-	animation: show 0.3s ease-out;
+	animation: show 0.3s ease-out both;
 
 	.header {
 		margin-bottom: 5rem;
@@ -60,7 +60,7 @@ export const StyledSidebar = styled.div`
 
 	@keyframes show {
 		from {
-			transform: translate(-100%, 0);
+			transform: translate(-100%, 0vh);
 		}
 	}
 `;

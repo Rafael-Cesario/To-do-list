@@ -3,12 +3,12 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledSubjectArea = styled.div`
-	position: absolute;
+	position: fixed;
 	z-index: 1;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 	background-color: #00000080;
 	backdrop-filter: blur(2px);
 	display: flex;
@@ -21,14 +21,18 @@ export const StyledSubjectArea = styled.div`
 		width: 30vw;
 		max-width: 1000px;
 		min-width: 400px;
-		min-height: 100vh;
+		height: 97vh;
 		background-color: ${Palette.container};
 		padding: 1rem 2rem;
+		overflow-y: scroll;
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+		}
 
 		.close {
-			position: absolute;
-			right: 0;
-			margin: 0 2rem;
+			margin: 0 -1rem;
 			border: none;
 			color: ${Palette.fadedText};
 			font-size: 1rem;
