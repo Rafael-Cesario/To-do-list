@@ -29,6 +29,10 @@ export const StyledSubjectArea = styled.div`
 		.header {
 			display: flex;
 			justify-content: space-between;
+
+			.title {
+				text-transform: capitalize;
+			}
 		}
 
 		.close {

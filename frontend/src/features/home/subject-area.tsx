@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StyledSubjectArea } from "./styles/subject-area/subject-area-style";
 import { Store } from "@/context/store";
 import { setActive } from "./context/subject-slice";
+import { formatDate } from "@/utils/formatDate";
 
 export const SubjectArea = () => {
 	const { active } = useSelector((state: Store) => state.subject);
@@ -14,15 +15,15 @@ export const SubjectArea = () => {
 		<StyledSubjectArea>
 			<div className="container">
 				<div className="header">
-					<h1 className="title">Hello</h1>
+					<h1 className="title">{active.name}</h1>
 					<button onClick={() => dispatch(setActive({ subject: null }))} className="close">
 						x
 					</button>
 				</div>
 
 				<div className="details">
-					<span>Adicionado 4x</span>
-					<span>11/08/2023</span>
+					<span>Adicionado {active.amount}x</span>
+					<span>{formatDate(active.date)}</span>
 				</div>
 
 				<div className="notes">
