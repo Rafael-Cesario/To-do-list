@@ -28,18 +28,29 @@ export const StyledSubjectArea = styled.div`
 
 		.header {
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-end;
+			flex-wrap: wrap;
+			margin-bottom: 8px;
 
 			.title {
 				text-transform: capitalize;
+				font-size: 2rem;
+				font-weight: bold;
+				padding: 0;
+				outline: none;
+				width: fit-content;
+				width: 100%;
+				border: none;
+				border-bottom: 2px solid ${Palette.primary};
+				border-radius: 0;
 			}
 		}
 
 		.close {
-			margin: 0 -1rem;
 			border: none;
-			color: ${Palette.fadedText};
 			font-size: 1rem;
+			color: ${Palette.fadedText};
+			background-color: ${Palette.background};
 
 			&:hover {
 				background-color: ${Palette.errorText};
@@ -63,7 +74,7 @@ export const StyledSubjectArea = styled.div`
 
 			textarea {
 				width: 100%;
-				min-height: 100px;
+				min-height: 200px;
 				resize: vertical;
 				padding: 1rem;
 				background-color: ${Palette.background};
@@ -73,6 +84,32 @@ export const StyledSubjectArea = styled.div`
 
 				&:focus {
 					outline: 2px solid ${Palette.primary};
+				}
+			}
+		}
+
+		.buttons {
+			display: flex;
+			justify-content: space-between;
+
+			.delete {
+				margin-right: 1rem;
+				background-color: ${Palette.errorText};
+			}
+
+			.save {
+				background-color: ${Palette.primary};
+			}
+
+			.delete,
+			.save {
+				flex-grow: 1;
+				border: none;
+				transition: 0.1s;
+
+				&:hover {
+					background-color: ${Palette.text};
+					color: ${Palette.background};
 				}
 			}
 		}
