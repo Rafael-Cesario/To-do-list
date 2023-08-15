@@ -23,6 +23,7 @@ const defaultSubject: ISubject = {
 export const SubjectArea = () => {
 	const { active } = useSelector((state: Store) => state.subject);
 	const [subjectValues, setSubjectValues] = useState<ISubject>(active || defaultSubject);
+	const [feedback, setFeedback] = useState<{ type: "error" | "success"; message: string }>({ type: "error", message: "" });
 
 	const dispatch = useDispatch();
 
@@ -36,6 +37,10 @@ export const SubjectArea = () => {
 
 	const saveChanges = () => {
 		console.log({ subjectValues });
+
+		if (!subjectValues.name) return setFeedback({ type: "error", message: "Seu assunto precisa de um nome" });
+
+		setFeedback({ type: "success", message: "Suas alterações foram salvas" });
 	};
 
 	useEffect(() => {
@@ -68,6 +73,16 @@ export const SubjectArea = () => {
 				{/* tags */}
 				{/* Delete subject */}
 				{/* Save changes */}
+
+				{feedback.message && (
+					<div className={feedback.type + " feedback"}>
+						<p>{feedback.message}</p>
+
+						<button onClick={() => setFeedback({ type: "error", message: "" })} className="close">
+							x
+						</button>
+					</div>
+				)}
 
 				<div className="buttons">
 					<button className="delete">Excluir assunto</button>
