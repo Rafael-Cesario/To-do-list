@@ -7,6 +7,7 @@ import { formatDate } from "@/utils/formatDate";
 import { useEffect, useState } from "react";
 import { ISubject } from "@/services/interfaces/subjects";
 import { produce } from "immer";
+import { Feedback } from "./components/subject-area/feedback";
 
 type SubjectKeys = "name" | "notes";
 
@@ -74,15 +75,7 @@ export const SubjectArea = () => {
 				{/* Delete subject */}
 				{/* Save changes */}
 
-				{feedback.message && (
-					<div className={feedback.type + " feedback"}>
-						<p>{feedback.message}</p>
-
-						<button onClick={() => setFeedback({ type: "error", message: "" })} className="close">
-							x
-						</button>
-					</div>
-				)}
+				{feedback.message && <Feedback feedback={feedback} setFeedback={setFeedback} />}
 
 				<div className="buttons">
 					<button className="delete">Excluir assunto</button>

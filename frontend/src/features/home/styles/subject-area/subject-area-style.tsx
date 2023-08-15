@@ -114,27 +114,4 @@ export const StyledSubjectArea = styled.div`
 			}
 		}
 	}
-
-	.feedback {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border-radius: ${Palette.borderRadius};
-		padding: 5px 10px;
-		margin: 1rem 0;
-
-		.close {
-			margin: 0;
-			margin-left: 1rem;
-			padding: 5px 10px;
-		}
-	}
-
-	.error {
-		background-color: ${Palette.errorText};
-	}
-
-	.success {
-		background-color: ${Palette.successText};
-	}
 `;
