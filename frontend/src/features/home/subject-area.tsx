@@ -58,7 +58,7 @@ export const SubjectArea = () => {
 						x
 					</button>
 
-					<input contentEditable="true" className="title" value={subjectValues.name ?? active.name} onChange={(e) => updateSubjectValue("name", e.target.value)} />
+					<input role="subject-name" contentEditable="true" className="title" value={subjectValues.name ?? active.name} onChange={(e) => updateSubjectValue("name", e.target.value)} />
 				</div>
 
 				<div className="details">
@@ -79,7 +79,8 @@ export const SubjectArea = () => {
 
 				<div className="buttons">
 					<button className="delete">Excluir assunto</button>
-					<button onClick={() => saveChanges()} className="save">
+
+					<button role="save" onClick={() => saveChanges()} className="save">
 						Salvar alterações
 					</button>
 				</div>

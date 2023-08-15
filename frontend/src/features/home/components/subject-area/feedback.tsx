@@ -9,8 +9,8 @@ interface Props {
 
 export const Feedback = ({ feedback, setFeedback }: Props) => {
 	return (
-		<StyledFeedback type={feedback.type}>
-			<p>{feedback.message}</p>
+		<StyledFeedback type={feedback.type} role="feedback">
+			<p className="text">{feedback.message}</p>
 
 			<button onClick={() => setFeedback({ type: "error", message: "" })} className="close">
 				x
