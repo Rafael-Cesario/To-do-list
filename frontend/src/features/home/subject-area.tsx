@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { ISubject } from "@/services/interfaces/subjects";
 import { produce } from "immer";
 import { Feedback } from "./components/subject-area/feedback";
+import { Delete } from "./components/subject-area/delete";
 
 type SubjectKeys = "name" | "notes";
 
@@ -71,14 +72,10 @@ export const SubjectArea = () => {
 					<textarea name="notes" placeholder="Adicione suas anotações aqui. Ex: Links" value={subjectValues.notes} onChange={(e) => updateSubjectValue("notes", e.target.value)}></textarea>
 				</div>
 
-				{/* tags */}
-				{/* Delete subject */}
-				{/* Save changes */}
-
 				{feedback.message && <Feedback feedback={feedback} setFeedback={setFeedback} />}
 
 				<div className="buttons">
-					<button className="delete">Excluir assunto</button>
+					<Delete />
 
 					<button role="save" onClick={() => saveChanges()} className="save">
 						Salvar alterações

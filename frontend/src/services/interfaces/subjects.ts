@@ -44,3 +44,7 @@ export interface RUpdateSubject {
 export interface IDeleteSubject {
 	subjectID: string;
 }
+
+export interface RDeleteSubject {
+	deleteSubject: string;
+}
