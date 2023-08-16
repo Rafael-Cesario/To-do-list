@@ -99,6 +99,7 @@ export const StyledSubjectArea = styled.div`
 
 			.save {
 				background-color: ${Palette.primary};
+				width: 100%;
 			}
 
 			.delete,

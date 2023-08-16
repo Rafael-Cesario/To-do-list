@@ -75,7 +75,7 @@ export const SubjectArea = () => {
 				{feedback.message && <Feedback feedback={feedback} setFeedback={setFeedback} />}
 
 				<div className="buttons">
-					<Delete />
+					<Delete subject={subjectValues} />
 
 					<button role="save" onClick={() => saveChanges()} className="save">
 						Salvar alterações

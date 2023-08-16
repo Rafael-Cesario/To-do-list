@@ -5,14 +5,15 @@ export const StyledNotification = styled.div<{ type: string }>`
 	position: absolute;
 	right: 0;
 	min-width: 25rem;
-	min-height: 5rem;
 	max-width: 30rem;
+	width: 100%;
+	min-height: 5rem;
 	margin: 0.5rem;
-	z-index: 1;
+	z-index: 2;
 	background-color: ${Palette.container};
 	padding: 1rem 4rem 1rem 2rem;
 	border-radius: ${Palette.borderRadius};
-	box-shadow: 0 10px 5px #00000020;
+	box-shadow: 5px 10px 5px #00000090;
 	border-left: 10px solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
 
 	.title {

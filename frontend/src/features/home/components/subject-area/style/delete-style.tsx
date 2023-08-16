@@ -2,6 +2,13 @@ import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledDelete = styled.div`
+	width: 100%;
+	margin-right: 1rem;
+
+	.delete {
+		width: 100%;
+	}
+
 	.container-delete-subject {
 		position: absolute;
 		top: 0;
@@ -26,6 +33,11 @@ export const StyledDelete = styled.div`
 		border: 1px solid #333;
 		box-shadow: 10px 10px 10px #00000030;
 		text-align: center;
+
+		.title {
+			margin-bottom: 8px;
+			text-transform: capitalize;
+		}
 
 		.options {
 			display: flex;

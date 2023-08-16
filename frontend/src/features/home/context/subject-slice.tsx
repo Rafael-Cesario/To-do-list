@@ -46,7 +46,12 @@ export const subjectSlice = createSlice({
 		setActive: (state, action: { payload: { subject: ISubject | null } }) => {
 			state.active = action.payload.subject;
 		},
+
+		setDeleteSubject: (state, action: { payload: { subjectID: string } }) => {
+			const index = state.subjects.findIndex((subject) => subject.subjectID === action.payload.subjectID);
+			state.subjects.splice(index, 1);
+		},
 	},
 });
 
-export const { setSubjects, setNewSubject, setUpdateSubject, setSubjectFilter, setSortBy, setActive } = subjectSlice.actions;
+export const { setSubjects, setNewSubject, setUpdateSubject, setSubjectFilter, setSortBy, setActive, setDeleteSubject } = subjectSlice.actions;
