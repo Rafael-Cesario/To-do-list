@@ -9,6 +9,7 @@ import { ISubject } from "@/services/interfaces/subjects";
 import { produce } from "immer";
 import { Feedback } from "./components/subject-area/feedback";
 import { Delete } from "./components/subject-area/delete";
+import { TagContainer } from "./components/subject-area/tag-container";
 
 type SubjectKeys = "name" | "notes";
 
@@ -71,6 +72,8 @@ export const SubjectArea = () => {
 					<h2 className="title">Anotações</h2>
 					<textarea name="notes" placeholder="Adicione suas anotações aqui. Ex: Links" value={subjectValues.notes} onChange={(e) => updateSubjectValue("notes", e.target.value)}></textarea>
 				</div>
+
+				<TagContainer />
 
 				{feedback.message && <Feedback feedback={feedback} setFeedback={setFeedback} />}
 

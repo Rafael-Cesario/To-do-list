@@ -19,7 +19,7 @@ export const StyledSubjectArea = styled.div`
 		border-radius: ${Palette.borderRadius};
 		border: 2px solid ${Palette.borderContainer};
 		width: 30vw;
-		max-width: 1000px;
+		max-width: 400px;
 		min-width: 400px;
 		height: 97vh;
 		background-color: ${Palette.container};
@@ -70,6 +70,7 @@ export const StyledSubjectArea = styled.div`
 
 			.title {
 				margin-bottom: 1rem;
+				font-size: 1.5rem;
 			}
 
 			textarea {
@@ -91,6 +92,7 @@ export const StyledSubjectArea = styled.div`
 		.buttons {
 			display: flex;
 			justify-content: space-between;
+			margin-top: 8rem;
 
 			.delete {
 				margin-right: 1rem;
