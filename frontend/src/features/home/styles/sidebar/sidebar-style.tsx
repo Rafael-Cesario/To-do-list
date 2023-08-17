@@ -13,11 +13,6 @@ export const StyledSidebar = styled.div`
 	padding: 1rem 2rem;
 	z-index: 1;
 
-	grid-column: 1 / 1;
-	grid-row: 1 / 3;
-
-	animation: show 0.3s ease-out both;
-
 	.header {
 		margin-bottom: 5rem;
 		display: flex;
@@ -55,12 +50,6 @@ export const StyledSidebar = styled.div`
 				outline: 2px solid ${Palette.primary};
 				color: #ddd;
 			}
-		}
-	}
-
-	@keyframes show {
-		from {
-			transform: translate(-100%, 0vh);
 		}
 	}
 `;

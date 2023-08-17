@@ -4,6 +4,7 @@ import { FilterSubject } from "./components/main/filter-subject";
 import { LoaderSubject } from "./components/main/loader-subject";
 import { SubjectsContainer } from "./components/main/subjects-container";
 import { StyledMain } from "./styles/main/main-style";
+import { SubjectArea } from "./subject-area";
 
 export const Main = () => {
 	return (
@@ -12,6 +13,7 @@ export const Main = () => {
 			<CreateSubject />
 			<FilterSubject />
 			<SubjectsContainer />
+			<SubjectArea />
 		</StyledMain>
 	);
 };

@@ -53,7 +53,7 @@ export const SubjectArea = () => {
 
 	return (
 		<StyledSubjectArea>
-			<div className="container">
+			<div role="subject-area" className="container">
 				<div className="header">
 					<button onClick={() => dispatch(setActive({ subject: null }))} className="close">
 						x

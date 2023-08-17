@@ -6,6 +6,7 @@ import { useMutationsSubject } from "@/utils/hooks/use-mutations-subject";
 import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/slice-notification";
 import { setActive, setDeleteSubject } from "../../context/subject-slice";
+import { ButtonLoading } from "@/components/button-loading";
 
 interface Props {
 	subject: ISubject;
@@ -32,7 +33,7 @@ export const Delete = ({ subject }: Props) => {
 
 	return (
 		<StyledDelete>
-			<button onClick={() => setDeleteContainer(true)} className="delete">
+			<button role="delete-subject" onClick={() => setDeleteContainer(true)} className="delete">
 				Excluir assunto
 			</button>
 
@@ -43,7 +44,14 @@ export const Delete = ({ subject }: Props) => {
 						<p>Quer mesmo excluir este assunto?</p>
 
 						<div className="options">
-							<button onClick={() => deleteSubject()}>Sim</button>
+							{loading && <ButtonLoading />}
+
+							{loading || (
+								<button role="submit" onClick={() => deleteSubject()}>
+									Sim
+								</button>
+							)}
+
 							<button onClick={() => setDeleteContainer(false)}>Não</button>
 						</div>
 					</div>
