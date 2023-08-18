@@ -9,13 +9,13 @@ export const TagContainer = () => {
 		<StyledTagContainer>
 			<div className="title">
 				<h1 className="text">Tags</h1>
-				<button className="create-button" onClick={() => setCreateTagContainer(true)}>
+				<button role="open-container" className="create-button" onClick={() => setCreateTagContainer(true)}>
 					+
 				</button>
 			</div>
 
 			{createTagContainer && (
-				<div className="create-tag-container">
+				<div className="create-tag-container" role="create-tag-container">
 					<div className="create-tag">
 						<h1 className="title">Criar tag</h1>
 
@@ -42,7 +42,7 @@ export const TagContainer = () => {
 							Criar minha tag
 						</button>
 
-						<button onClick={() => setCreateTagContainer(false)} className="cancel">
+						<button role="close-tag-container" onClick={() => setCreateTagContainer(false)} className="cancel">
 							Cancelar
 						</button>
 					</div>
