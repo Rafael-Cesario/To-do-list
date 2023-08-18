@@ -24,4 +24,10 @@ describe("Tag container", () => {
 		expect(screen.getByRole("black").children).toHaveLength(1);
 		expect(screen.getByRole("blue").children[1]).toBeInTheDocument();
 	});
+
+	it("Show feedback if tag has no name", async () => {
+		await user.click(screen.getByRole("open-container"));
+		await user.click(screen.getByRole("submit"));
+		expect(screen.getByRole("feedback")).toBeInTheDocument();
+	});
 });

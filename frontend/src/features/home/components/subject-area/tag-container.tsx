@@ -42,7 +42,13 @@ export const TagContainer = () => {
 
 						<div className="name">
 							<label htmlFor="tag-name">Nome</label>
-							{feedback && <p className="error">{feedback}</p>}
+
+							{feedback && (
+								<p role="feedback" className="error">
+									{feedback}
+								</p>
+							)}
+
 							<input
 								style={{ backgroundColor: colors[tagValues.color as keyof typeof colors] }}
 								value={tagValues.name}
