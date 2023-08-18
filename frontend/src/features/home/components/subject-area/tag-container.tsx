@@ -20,8 +20,6 @@ export const TagContainer = () => {
 	};
 
 	const createTag = async () => {
-		console.log({ tagValues });
-
 		if (!tagValues.name) return setFeedback("Sua tag precisa de um nome");
 		setFeedback("");
 	};
