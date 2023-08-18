@@ -74,36 +74,37 @@ export const StyledTagContainer = styled.div`
 					text-align: center;
 				}
 
-				.colors button {
-					margin: 2px;
-					padding: 0;
-					width: 30px;
-					height: 30px;
-					transition: 0.2s;
-					border: none;
-					outline: none;
-					position: relative;
+				.colors {
+					display: flex;
 
-					&:focus {
-						transform: scale(1.1);
-					}
+					.color {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
 
-					&:hover {
-						transform: scale(1.1);
-					}
-				}
+						.icon {
+							width: 30px;
+							height: 30px;
+						}
 
-				.active {
+						button {
+							margin: 2px;
+							padding: 0;
+							width: 30px;
+							height: 30px;
+							transition: 0.2s;
+							border: none;
+							outline: none;
+							position: relative;
 
-					&::after {
-						content: "";
-						position: absolute;
-						transform: translateY(8px);
-						left: 0;
-						bottom: 0;
-						width: 100%;
-						height: 2px;
-						background-color: #222;
+							&:focus {
+								transform: scale(1.1);
+							}
+
+							&:hover {
+								transform: scale(1.1);
+							}
+						}
 					}
 				}
 			}

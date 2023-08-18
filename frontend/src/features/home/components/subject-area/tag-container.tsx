@@ -1,9 +1,26 @@
 "use client";
 import { StyledTagContainer } from "./style/tag-container-style";
 import { useState } from "react";
+import { MdArrowDropUp } from "react-icons/md";
 
 export const TagContainer = () => {
 	const [createTagContainer, setCreateTagContainer] = useState(false);
+	const [tagValues, setTagValues] = useState({ name: "", color: "black" });
+
+	const colors = {
+		black: "#111111",
+		red: "#913030",
+		orange: "#a9592c",
+		yellow: "#caa522",
+		green: "#2a7e38",
+		blue: "#124b80",
+		purple: "#592a8e",
+		pink: "#d76eaa",
+	};
+
+	const createTag = async () => {
+		console.log({ tagValues });
+	};
 
 	return (
 		<StyledTagContainer>
@@ -21,24 +38,22 @@ export const TagContainer = () => {
 
 						<div className="name">
 							<label htmlFor="tag-name">Nome</label>
-							<input role="tag-name" type="text" id="tag-name" placeholder="Importante, finalizado..." />
+							<input value={tagValues.name} onChange={(e) => setTagValues({ ...tagValues, name: e.target.value })} role="tag-name" type="text" id="tag-name" placeholder="Importante, finalizado..." />
 						</div>
 
 						<div className="colors-field">
 							<p className="text">Escolha uma cor para sua nova tag</p>
 							<div className="colors">
-								<button style={{ backgroundColor: "#111" }} data-color="black" />
-								<button style={{ backgroundColor: "#913030" }} data-color="red" />
-								<button style={{ backgroundColor: "#a9592c" }} data-color="orange" />
-								<button style={{ backgroundColor: "#caa522" }} data-color="yellow" />
-								<button style={{ backgroundColor: "#2a7e38" }} data-color="green" />
-								<button style={{ backgroundColor: "#124b80" }} data-color="blue" />
-								<button style={{ backgroundColor: "#592a8e" }} data-color="purple" />
-								<button style={{ backgroundColor: "#d76eaa" }} data-color="pink" />
+								{Object.entries(colors).map(([colorName, colorCode]) => (
+									<div key={colorName} className="color">
+										<button onClick={() => setTagValues({ ...tagValues, color: colorName })} className={tagValues.color === colorName ? "active" : ""} style={{ backgroundColor: colorCode }} />
+										{tagValues.color === colorName && <MdArrowDropUp className="icon" />}
+									</div>
+								))}
 							</div>
 						</div>
 
-						<button className="submit" role="submit">
+						<button className="submit" role="submit" onClick={() => createTag()}>
 							Criar minha tag
 						</button>
 
