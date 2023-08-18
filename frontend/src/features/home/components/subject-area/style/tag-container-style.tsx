@@ -57,7 +57,10 @@ export const StyledTagContainer = styled.div`
 				margin: 2rem 0;
 
 				input {
+					text-align: center;
+					font-weight: bold;
 					border: 2px solid transparent;
+					text-shadow: 1px 1px 2px #00000050;
 					outline: none;
 				}
 
@@ -83,8 +86,9 @@ export const StyledTagContainer = styled.div`
 						align-items: center;
 
 						.icon {
-							width: 30px;
-							height: 30px;
+							width: 25px;
+							height: 25px;
+							margin-top: 4px;
 						}
 
 						button {

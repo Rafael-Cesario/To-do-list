@@ -1,7 +1,7 @@
 "use client";
 import { StyledTagContainer } from "./style/tag-container-style";
 import { useState } from "react";
-import { MdArrowDropUp } from "react-icons/md";
+import { FaRegHandPointer } from "react-icons/fa";
 
 export const TagContainer = () => {
 	const [createTagContainer, setCreateTagContainer] = useState(false);
@@ -38,7 +38,15 @@ export const TagContainer = () => {
 
 						<div className="name">
 							<label htmlFor="tag-name">Nome</label>
-							<input value={tagValues.name} onChange={(e) => setTagValues({ ...tagValues, name: e.target.value })} role="tag-name" type="text" id="tag-name" placeholder="Importante, finalizado..." />
+							<input
+								style={{ backgroundColor: colors[tagValues.color as keyof typeof colors] }}
+								value={tagValues.name}
+								onChange={(e) => setTagValues({ ...tagValues, name: e.target.value })}
+								role="tag-name"
+								type="text"
+								id="tag-name"
+								placeholder="Importante, finalizado..."
+							/>
 						</div>
 
 						<div className="colors-field">
@@ -47,7 +55,7 @@ export const TagContainer = () => {
 								{Object.entries(colors).map(([colorName, colorCode]) => (
 									<div role={colorName} key={colorName} className="color">
 										<button onClick={() => setTagValues({ ...tagValues, color: colorName })} className={tagValues.color === colorName ? "active" : ""} style={{ backgroundColor: colorCode }} />
-										{tagValues.color === colorName && <MdArrowDropUp className="icon" />}
+										{tagValues.color === colorName && <FaRegHandPointer className="icon" />}
 									</div>
 								))}
 							</div>
