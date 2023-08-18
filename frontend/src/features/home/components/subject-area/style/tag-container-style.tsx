@@ -54,7 +54,17 @@ export const StyledTagContainer = styled.div`
 			align-items: center;
 
 			.name {
+				width: 100%;
 				margin: 2rem 0;
+
+				.error {
+					background-color: ${Palette.errorText};
+					border-radius: ${Palette.borderRadius};
+					padding: 5px 10px;
+					margin: 4px 0;
+					color: #ddd;
+					font-size: 0.8rem;
+				}
 
 				input {
 					text-align: center;

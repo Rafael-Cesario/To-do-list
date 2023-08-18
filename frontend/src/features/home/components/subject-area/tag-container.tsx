@@ -5,6 +5,7 @@ import { FaRegHandPointer } from "react-icons/fa";
 
 export const TagContainer = () => {
 	const [createTagContainer, setCreateTagContainer] = useState(false);
+	const [feedback, setFeedback] = useState("");
 	const [tagValues, setTagValues] = useState({ name: "", color: "black" });
 
 	const colors = {
@@ -20,6 +21,9 @@ export const TagContainer = () => {
 
 	const createTag = async () => {
 		console.log({ tagValues });
+
+		if (!tagValues.name) return setFeedback("Sua tag precisa de um nome");
+		setFeedback("");
 	};
 
 	return (
@@ -38,6 +42,7 @@ export const TagContainer = () => {
 
 						<div className="name">
 							<label htmlFor="tag-name">Nome</label>
+							{feedback && <p className="error">{feedback}</p>}
 							<input
 								style={{ backgroundColor: colors[tagValues.color as keyof typeof colors] }}
 								value={tagValues.name}
@@ -66,7 +71,7 @@ export const TagContainer = () => {
 						</button>
 
 						<button role="close-tag-container" onClick={() => setCreateTagContainer(false)} className="cancel">
-							Cancelar
+							Fechar
 						</button>
 					</div>
 				</div>
