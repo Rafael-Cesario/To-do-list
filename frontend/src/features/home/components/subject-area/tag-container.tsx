@@ -1,12 +1,15 @@
 "use client";
+import { Store } from "@/context/store";
 import { StyledTagContainer } from "./style/tag-container-style";
 import { useState } from "react";
 import { FaRegHandPointer } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export const TagContainer = () => {
 	const [createTagContainer, setCreateTagContainer] = useState(false);
 	const [feedback, setFeedback] = useState("");
 	const [tagValues, setTagValues] = useState({ name: "", color: "black" });
+	const { tags, userID } = useSelector((state: Store) => state.tags);
 
 	const colors = {
 		black: "#111111",
