@@ -45,7 +45,7 @@ export const TagContainer = () => {
 							<p className="text">Escolha uma cor para sua nova tag</p>
 							<div className="colors">
 								{Object.entries(colors).map(([colorName, colorCode]) => (
-									<div key={colorName} className="color">
+									<div role={colorName} key={colorName} className="color">
 										<button onClick={() => setTagValues({ ...tagValues, color: colorName })} className={tagValues.color === colorName ? "active" : ""} style={{ backgroundColor: colorCode }} />
 										{tagValues.color === colorName && <MdArrowDropUp className="icon" />}
 									</div>
