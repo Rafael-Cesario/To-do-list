@@ -2,8 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type Mutation {
+  createUser(createUserData: CreateUserInput!): UserModel!
+}
+
 type Query {
-  getOneUser: UserModel!
+  hello: String!
 }
 
 type UserModel {
