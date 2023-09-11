@@ -8,8 +8,20 @@ input CreateUserInput {
   password: String!
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginModel {
+  email: String!
+  token: String!
+  userID: String!
+}
+
 type Mutation {
   createUser(createUserData: CreateUserInput!): UserModel!
+  login(loginData: LoginInput!): LoginModel!
 }
 
 type Query {
