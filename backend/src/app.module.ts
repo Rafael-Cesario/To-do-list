@@ -16,6 +16,9 @@ import { PrismaModule } from './prisma/prisma.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       playground: false,
+      formatError: (error: any) => ({
+        message: error.extensions?.originalError.message || '',
+      }),
     }),
   ],
 })

@@ -1,10 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateUserInput, UserModel } from './user.model';
+import { UserModel } from './user.model';
+import { CreateUserInput } from './user.dto';
+import { UserService } from './user.service';
 
 @Resolver()
 export class UserResolver {
-  constructor(private prisma: PrismaService) {}
+  constructor(private userService: UserService) {}
 
   @Query(() => String)
   async hello() {
@@ -13,8 +14,6 @@ export class UserResolver {
 
   @Mutation(() => UserModel)
   async createUser(@Args('createUserData') createUserData: CreateUserInput) {
-    console.log({ createUserData });
-    const user = await this.prisma.user.create({ data: createUserData });
-    return user;
+    return this.userService.createUser(createUserData);
   }
 }

@@ -1,4 +1,4 @@
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserModel {
@@ -16,16 +16,4 @@ export class UserModel {
 
   @Field()
   createdAt: string;
-}
-
-@InputType()
-export class CreateUserInput {
-  @Field()
-  email: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  password: string;
 }
