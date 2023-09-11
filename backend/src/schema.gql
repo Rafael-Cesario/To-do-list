@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  getOneUser: UserModel!
+}
+
+type UserModel {
+  createdAt: String!
+  email: String!
+  id: String!
+  name: String!
+  password: String!
+}
