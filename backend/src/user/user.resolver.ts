@@ -14,6 +14,7 @@ export class UserResolver {
   @Mutation(() => UserModel)
   async createUser(@Args('createUserData') createUserData: CreateUserInput) {
     console.log({ createUserData });
-    return;
+    const user = await this.prisma.user.create({ data: createUserData });
+    return user;
   }
 }
