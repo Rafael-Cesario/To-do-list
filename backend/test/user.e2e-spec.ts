@@ -1,7 +1,11 @@
+import request from 'supertest-graphql';
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { userQueries } from './queries/user';
+import { CreateUserResponse } from './interfaces/user';
+import { CreateUserInput } from 'src/user/user.dto';
 
 describe('User resolver', () => {
   let prisma: PrismaService;
@@ -14,6 +18,7 @@ describe('User resolver', () => {
 
     prisma = moduleFixture.get(PrismaService);
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe());
     await app.init();
   });
 
@@ -22,10 +27,31 @@ describe('User resolver', () => {
       await prisma.user.deleteMany();
     });
 
-    it.todo('Create a new user', async () => {});
+    it('Create a new user', async () => {
+      const createUserData = { email: 'user01@email.com', name: 'user01', password: 'Password123' };
+      const { data } = await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
+      const user = await prisma.user.findUnique({ where: { id: data.createUser.id } });
 
-    it.todo('Throws a bed request error due to invalid data');
+      expect(data.createUser).toBeDefined();
+      expect(data.createUser.password).toBe('');
+      expect(user.password).not.toBe(createUserData.password);
+    });
 
-    it.todo('Throws a error due to duplicated user');
+    it('Throws a bad request error due to invalid data', async () => {
+      const { errors } = await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer())
+        .mutate(userQueries.CREATE_USER)
+        .variables({ createUserData: { email: '', name: '', password: '' } });
+
+      expect(errors[0].message).toHaveLength(3);
+    });
+
+    it('Throws a error due to duplicated user', async () => {
+      const createUserData = { email: 'user01@email.com', name: 'user01', password: 'Password123' };
+
+      await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
+      const { errors } = await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
+
+      expect(errors[0].message).toMatch(/duplicated:/);
+    });
   });
 });
