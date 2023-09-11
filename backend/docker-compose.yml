@@ -14,5 +14,16 @@ services:
     volumes:
       - './database:/var/lib/postgresql/data/'
 
+  database-test:
+    image: postgres:alpine3.18
+    container_name: postgres-test
+    environment:
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=test
+    ports:
+      - 9090:5432
+    expose:
+      - 9090
+
 volumes:
   database:

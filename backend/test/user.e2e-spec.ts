@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 describe('AppController (e2e)', () => {
+  let prisma: PrismaService;
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -11,14 +12,14 @@ describe('AppController (e2e)', () => {
       imports: [AppModule],
     }).compile();
 
+    prisma = moduleFixture.get(PrismaService);
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterEach(async () => {
+    await prisma.user.deleteMany();
   });
+
+  it.todo('Create a new user', async () => {});
 });
