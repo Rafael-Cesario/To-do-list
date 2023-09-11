@@ -5,7 +5,7 @@ import { AppModule } from '../src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { userQueries } from './queries/user';
 import { CreateUserResponse } from './interfaces/user';
-import { CreateUserInput } from 'src/user/user.dto';
+import { CreateUserInput } from 'src/models/user/user.dto';
 
 describe('User resolver', () => {
   let prisma: PrismaService;
