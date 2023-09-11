@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 
-describe('AppController (e2e)', () => {
+describe('User resolver', () => {
   let prisma: PrismaService;
   let app: INestApplication;
 
@@ -17,9 +17,15 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  afterEach(async () => {
-    await prisma.user.deleteMany();
-  });
+  describe('Create user', () => {
+    afterEach(async () => {
+      await prisma.user.deleteMany();
+    });
 
-  it.todo('Create a new user', async () => {});
+    it.todo('Create a new user', async () => {});
+
+    it.todo('Throws a bed request error due to invalid data');
+
+    it.todo('Throws a error due to duplicated user');
+  });
 });
