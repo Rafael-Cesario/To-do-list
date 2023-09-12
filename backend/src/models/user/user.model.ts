@@ -15,5 +15,5 @@ export class UserModel {
   password: string;
 
   @Field()
-  createdAt: string;
+  createdAt: Date;
 }

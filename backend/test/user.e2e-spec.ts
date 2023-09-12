@@ -7,7 +7,7 @@ import { userQueries } from './queries/user';
 import { CreateUserResponse } from './interfaces/user';
 import { CreateUserInput } from 'src/models/user/user.dto';
 
-describe('User resolver', () => {
+describe('User', () => {
   let prisma: PrismaService;
   let app: INestApplication;
 
