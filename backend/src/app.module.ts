@@ -7,6 +7,7 @@ import { join } from 'path';
 import { UserModule } from './models/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './models/authentication/auth.module';
+import { ListModule } from './models/list/list.module';
 
 const graphqlModule = GraphQLModule.forRoot<ApolloDriverConfig>({
   driver: ApolloDriver,
@@ -18,6 +19,6 @@ const graphqlModule = GraphQLModule.forRoot<ApolloDriverConfig>({
 });
 
 @Module({
-  imports: [ConfigModule.forRoot(), graphqlModule, PrismaModule, UserModule, AuthModule],
+  imports: [ConfigModule.forRoot(), graphqlModule, PrismaModule, UserModule, AuthModule, ListModule],
 })
 export class AppModule {}
