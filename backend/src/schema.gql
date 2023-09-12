@@ -18,9 +18,14 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input GetListInput {
+  userID: String!
+}
+
 type ListModel {
   id: String!
   name: String!
+  tasks: [TaskModel]!
   userID: String!
 }
 
@@ -42,7 +47,25 @@ type Mutation {
 }
 
 type Query {
+  getLists(getListData: GetListInput!): [ListModel!]!
   hello: String!
+}
+
+type TagModel {
+  color: String!
+  id: String!
+  name: String!
+  taskId: String!
+}
+
+type TaskModel {
+  createdAt: DateTime!
+  description: String!
+  id: String!
+  listID: String!
+  status: Float!
+  tags: [TagModel]!
+  title: String!
 }
 
 type UserModel {

@@ -13,3 +13,10 @@ export class CreateListInput {
   @Field()
   userID: string;
 }
+
+@InputType()
+export class GetListInput {
+  @IsNotEmpty()
+  @Field()
+  userID: string;
+}
