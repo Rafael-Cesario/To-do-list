@@ -4,8 +4,8 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { userQueries } from './queries/user';
-import { CreateUserResponse } from './interfaces/user';
 import { CreateUserInput } from 'src/models/user/user.dto';
+import { UserModel } from 'src/models/user/user.model';
 
 describe('User', () => {
   let prisma: PrismaService;
@@ -29,7 +29,7 @@ describe('User', () => {
 
     it('Create a new user', async () => {
       const createUserData = { email: 'user01@email.com', name: 'user01', password: 'Password123' };
-      const { data } = await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
+      const { data } = await request<{ createUser: UserModel }, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
       const user = await prisma.user.findUnique({ where: { id: data.createUser.id } });
 
       expect(data.createUser).toBeDefined();
@@ -38,7 +38,7 @@ describe('User', () => {
     });
 
     it('Throws a bad request error due to invalid data', async () => {
-      const { errors } = await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer())
+      const { errors } = await request<{ createUser: UserModel }, { createUserData: CreateUserInput }>(app.getHttpServer())
         .mutate(userQueries.CREATE_USER)
         .variables({ createUserData: { email: '', name: '', password: '' } });
 
@@ -48,8 +48,8 @@ describe('User', () => {
     it('Throws a error due to duplicated user', async () => {
       const createUserData = { email: 'user01@email.com', name: 'user01', password: 'Password123' };
 
-      await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
-      const { errors } = await request<CreateUserResponse, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
+      await request<{ createUser: UserModel }, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
+      const { errors } = await request<{ createUser: UserModel }, { createUserData: CreateUserInput }>(app.getHttpServer()).mutate(userQueries.CREATE_USER).variables({ createUserData });
 
       expect(errors[0].message).toMatch(/duplicated:/);
     });
