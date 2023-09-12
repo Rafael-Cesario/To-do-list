@@ -1,17 +1,21 @@
+import request from 'supertest-graphql';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
-import { UserModel } from 'src/models/user/user.model';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { authQueries } from './queries/auth';
+import { LoginModel } from 'src/models/authentication/auth.models';
+import { LoginInput } from 'src/models/authentication/auth.dto';
+import { CreateUserInput } from 'src/models/user/user.dto';
+import { encryptPassword } from 'src/utils/crypt';
 
 describe('Authentication', () => {
   let prisma: PrismaService;
   let app: INestApplication;
-  let user: UserModel;
+  const user: CreateUserInput = { email: 'user01@email.com', name: 'user01', password: 'Password123' };
 
   const createUser = async () => {
-    const newUser = await prisma.user.create({ data: { email: 'user01@email.com', name: 'user01', password: 'Password123' } });
-    user = newUser;
+    await prisma.user.create({ data: { ...user, password: encryptPassword(user.password) } });
   };
 
   beforeEach(async () => {
@@ -23,11 +27,34 @@ describe('Authentication', () => {
     await createUser();
   });
 
+  afterEach(async () => {
+    await prisma.user.deleteMany();
+  });
+
   describe('Login', () => {
-    it.todo('Generates a token after login');
+    const loginRequest = async (loginData: LoginInput) => {
+      const { data, errors } = await request<{ login: LoginModel }>(app.getHttpServer()).mutate(authQueries.LOGIN).variables({ loginData });
+      return { data, error: errors?.[0].message };
+    };
 
-    it.todo('Throws an error due to empty data');
+    it('Generates a token after login', async () => {
+      const { data } = await loginRequest({ email: user.email, password: user.password });
 
-    it.todo('Throws an error due to wrong password');
+      expect(data.login).toEqual({
+        email: expect.any(String),
+        userID: expect.any(String),
+        token: expect.any(String),
+      });
+    });
+
+    it('Throws an error due to empty data', async () => {
+      const { error } = await loginRequest({ email: '', password: '' });
+      expect(error).toHaveLength(2);
+    });
+
+    it('Throws an error due to wrong password', async () => {
+      const { error } = await loginRequest({ email: user.email, password: 'Wrong one' });
+      expect(error).toBe('unauthorized: Invalid credentials');
+    });
   });
 });
