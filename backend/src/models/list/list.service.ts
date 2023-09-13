@@ -1,5 +1,5 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateListInput, GetListInput } from './list.dto';
+import { CreateListInput, GetListInput, UpdateListInput } from './list.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -18,6 +18,14 @@ export class ListService {
     if (isDuplicated) throw new ConflictException('duplicated: A list with the same name already exist');
 
     const list = await this.prisma.list.create({ data: { name, userID } });
+    return list;
+  }
+
+  async updateList({ listID, newName }: UpdateListInput) {
+    const isDuplicated = await this.prisma.list.findFirst({ where: { name: newName } });
+    if (isDuplicated) throw new ConflictException('duplicated: A list with the same name already exist');
+
+    const list = await this.prisma.list.update({ where: { id: listID }, data: { name: newName }, include: { tasks: { include: { tags: true } } } });
     return list;
   }
 }

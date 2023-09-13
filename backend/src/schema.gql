@@ -44,6 +44,7 @@ type Mutation {
   createList(createListData: CreateListInput!): ListModel!
   createUser(createUserData: CreateUserInput!): UserModel!
   login(loginData: LoginInput!): LoginModel!
+  updateList(updateListData: UpdateListInput!): ListModel!
 }
 
 type Query {
@@ -66,6 +67,11 @@ type TaskModel {
   status: Float!
   tags: [TagModel]!
   title: String!
+}
+
+input UpdateListInput {
+  listID: String!
+  newName: String!
 }
 
 type UserModel {
