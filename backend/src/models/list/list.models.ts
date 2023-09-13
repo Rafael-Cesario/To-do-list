@@ -15,18 +15,3 @@ export class ListModel {
   @Field(() => [TaskModel], { nullable: 'items' })
   tasks: TaskModel[];
 }
-
-@ObjectType()
-export class TagModel {
-  @Field()
-  id: string;
-
-  @Field()
-  taskId: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  color: string;
-}

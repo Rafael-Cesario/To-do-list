@@ -1,5 +1,4 @@
-import { ObjectType, Field } from '@nestjs/graphql';
-import { TagModel } from '../list/list.models';
+import { ObjectType, Field, registerEnumType } from '@nestjs/graphql';
 
 @ObjectType()
 export class TaskModel {
@@ -25,8 +24,25 @@ export class TaskModel {
   tags: TagModel[];
 }
 
-enum Status {
-  NEXT,
-  CURRENT,
-  DONE,
+@ObjectType()
+export class TagModel {
+  @Field()
+  id: string;
+
+  @Field()
+  taskId: string;
+
+  @Field()
+  name: string;
+
+  @Field()
+  color: string;
 }
+
+export enum Status {
+  NEXT = 'NEXT',
+  CURRENT = 'CURRENT',
+  DONE = 'DONE',
+}
+
+registerEnumType(Status, { name: 'Status' });

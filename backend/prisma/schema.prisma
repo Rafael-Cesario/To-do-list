@@ -13,7 +13,7 @@ model User {
   name      String
   password  String
   createdAt DateTime @default(now())
-  lists      List[]
+  lists     List[]
 
   @@map("users")
 }
@@ -23,7 +23,7 @@ model List {
   user   User   @relation(references: [id], fields: [userID])
   userID String
   name   String
-  tasks   Task[]
+  tasks  Task[]
 
   @@map("lists")
 }
@@ -33,7 +33,7 @@ model Task {
   list        List     @relation(fields: [listID], references: [id])
   listID      String
   title       String
-  description String
+  description String   @default("")
   createdAt   DateTime @default(now())
   status      Status   @default(NEXT)
   tags        Tag[]
