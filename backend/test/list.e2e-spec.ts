@@ -5,7 +5,7 @@ import { AppModule } from 'src/app.module';
 import { UserModel } from 'src/models/user/user.model';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { listQueries } from './queries/list';
-import { CreateListInput, GetListInput, UpdateListInput } from 'src/models/list/list.dto';
+import { CreateListInput, DeleteListInput, GetListInput, UpdateListInput } from 'src/models/list/list.dto';
 import { ListModel } from 'src/models/list/list.models';
 
 describe('Lists', () => {
@@ -29,6 +29,11 @@ describe('Lists', () => {
 
   const requestUpdateList = async (updateListData: UpdateListInput) => {
     const { data, errors } = await request<{ updateList: ListModel }>(app.getHttpServer()).mutate(listQueries.UPDATE_LIST).variables({ updateListData });
+    return { data, error: errors?.[0].message };
+  };
+
+  const requestDeletelist = async (deleteListData: DeleteListInput) => {
+    const { data, errors } = await request<{ deleteList: string }>(app.getHttpServer()).mutate(listQueries.DELETE_LIST).variables({ deleteListData });
     return { data, error: errors?.[0].message };
   };
 
@@ -140,6 +145,32 @@ describe('Lists', () => {
       const { error } = await requestUpdateList(listInputUpdate);
 
       expect(error).toBe('duplicated: A list with the same name already exist');
+    });
+  });
+
+  describe('Delete list', () => {
+    beforeAll(async () => {
+      await createUser();
+    });
+
+    afterAll(async () => {
+      await prisma.user.deleteMany();
+    });
+
+    it('Delete a list', async () => {
+      const listInput: CreateListInput = { userID: user.id, name: 'list 01' };
+      const list = await prisma.list.create({ data: listInput });
+
+      const { data } = await requestDeletelist({ listID: list.id });
+      expect(data.deleteList).toBe('Success: Your list was deleted');
+
+      const lists = await prisma.list.findMany();
+      expect(lists).toHaveLength(0);
+    });
+
+    it('Throws an error due to list not found', async () => {
+      const { error } = await requestDeletelist({ listID: 'not found' });
+      expect(error).toBe('notFound: List not found');
     });
   });
 });

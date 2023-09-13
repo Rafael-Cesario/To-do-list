@@ -58,6 +58,12 @@ class ListQueries {
       }
     }
   `;
+
+  readonly DELETE_LIST = gql`
+    mutation DeleteList($deleteListData: DeleteListInput!) {
+      deleteList(deleteListData: $deleteListData)
+    }
+  `;
 }
 
 export const listQueries = new ListQueries();
