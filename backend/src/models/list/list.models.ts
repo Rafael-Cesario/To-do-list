@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { TaskModel } from '../task/task.model';
 
 @ObjectType()
 export class ListModel {
@@ -16,30 +17,6 @@ export class ListModel {
 }
 
 @ObjectType()
-export class TaskModel {
-  @Field()
-  id: string;
-
-  @Field()
-  listID: string;
-
-  @Field()
-  title: string;
-
-  @Field()
-  description: string;
-
-  @Field()
-  createdAt: Date;
-
-  @Field()
-  status: Status;
-
-  @Field(() => [TagModel], { nullable: 'items' })
-  tags: TagModel[];
-}
-
-@ObjectType()
 export class TagModel {
   @Field()
   id: string;
@@ -52,10 +29,4 @@ export class TagModel {
 
   @Field()
   color: string;
-}
-
-enum Status {
-  NEXT,
-  CURRENT,
-  DONE,
 }
