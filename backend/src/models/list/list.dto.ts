@@ -26,9 +26,16 @@ export class UpdateListInput {
   @IsNotEmpty()
   @Field()
   listID: string;
-  
+
   @Field()
   @Length(3, 30)
   @Transform(({ value }: { value: string }) => value.toLowerCase().trim())
   newName: string;
+}
+
+@InputType()
+export class DeleteListInput {
+  @IsNotEmpty()
+  @Field()
+  listID: string;
 }

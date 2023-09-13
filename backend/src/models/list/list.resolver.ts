@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ListModel } from './list.models';
-import { CreateListInput, GetListInput, UpdateListInput } from './list.dto';
+import { CreateListInput, GetListInput, UpdateListInput , DeleteListInput} from './list.dto';
 import { ListService } from './list.service';
 
 @Resolver()
@@ -20,5 +20,10 @@ export class ListResolver {
   @Mutation(() => ListModel)
   async updateList(@Args('updateListData') updateListData: UpdateListInput) {
     return this.listService.updateList(updateListData);
+  }
+
+  @Mutation(() => String) 
+  async deleteList(@Args('deleteListData') deleteListData: DeleteListInput) {
+    return this.listService.deleteList(deleteListData);
   }
 }

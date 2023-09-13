@@ -18,6 +18,10 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input DeleteListInput {
+  listID: String!
+}
+
 input GetListInput {
   userID: String!
 }
@@ -43,6 +47,7 @@ type LoginModel {
 type Mutation {
   createList(createListData: CreateListInput!): ListModel!
   createUser(createUserData: CreateUserInput!): UserModel!
+  deleteList(deleteListData: DeleteListInput!): String!
   login(loginData: LoginInput!): LoginModel!
   updateList(updateListData: UpdateListInput!): ListModel!
 }

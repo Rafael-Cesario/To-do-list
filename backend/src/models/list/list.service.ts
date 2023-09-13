@@ -1,5 +1,5 @@
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateListInput, GetListInput, UpdateListInput } from './list.dto';
+import { CreateListInput, DeleteListInput, GetListInput, UpdateListInput } from './list.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -27,5 +27,13 @@ export class ListService {
 
     const list = await this.prisma.list.update({ where: { id: listID }, data: { name: newName }, include: { tasks: { include: { tags: true } } } });
     return list;
+  }
+
+  async deleteList({ listID }: DeleteListInput) {
+    const list = await this.prisma.list.findUnique({ where: { id: listID } });
+    if (!list) throw new NotFoundException('notFound: List not found');
+
+    await this.prisma.list.delete({ where: { id: listID } });
+    return 'Success: Your list was deleted';
   }
 }
