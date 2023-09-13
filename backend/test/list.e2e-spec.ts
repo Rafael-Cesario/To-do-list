@@ -5,7 +5,7 @@ import { AppModule } from 'src/app.module';
 import { UserModel } from 'src/models/user/user.model';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { listQueries } from './queries/list';
-import { CreateListInput, GetListInput } from 'src/models/list/list.dto';
+import { CreateListInput, GetListInput, UpdateListInput } from 'src/models/list/list.dto';
 import { ListModel } from 'src/models/list/list.models';
 
 describe('Lists', () => {
@@ -24,6 +24,11 @@ describe('Lists', () => {
 
   const requestGetLists = async (getListData: GetListInput) => {
     const { data, errors } = await request<{ getLists: ListModel }>(app.getHttpServer()).query(listQueries.GET_LISTS).variables({ getListData });
+    return { data, error: errors?.[0].message };
+  };
+
+  const requestUpdateList = async (updateListData: UpdateListInput) => {
+    const { data, errors } = await request<{ updateList: ListModel }>(app.getHttpServer()).mutate(listQueries.UPDATE_LIST).variables({ updateListData });
     return { data, error: errors?.[0].message };
   };
 
@@ -96,6 +101,45 @@ describe('Lists', () => {
     it('Throws an error due to wrong userID', async () => {
       const { error } = await requestGetLists({ userID: 'wrong' });
       expect(error).toBe('notFound: User not found');
+    });
+  });
+
+  describe('Update list', () => {
+    beforeAll(async () => {
+      await createUser();
+    });
+
+    afterAll(async () => {
+      await prisma.list.deleteMany();
+      await prisma.user.deleteMany();
+    });
+
+    it('Update listname', async () => {
+      const listInput: CreateListInput = { userID: user.id, name: 'list 01' };
+      const list = await prisma.list.create({ data: listInput });
+
+      const listInputUpdate: UpdateListInput = { listID: list.id, newName: 'New listname' };
+      const { data } = await requestUpdateList(listInputUpdate);
+
+      expect(data.updateList).toEqual({
+        name: expect.stringContaining(listInputUpdate.newName.toLowerCase()),
+        id: expect.any(String),
+        userID: expect.any(String),
+        tasks: expect.any(Array),
+      });
+    });
+
+    it('Throws an error due to duplicated name', async () => {
+      const listInput: CreateListInput = { userID: user.id, name: 'list 01' };
+      const list = await prisma.list.create({ data: listInput });
+
+      const listInput02: CreateListInput = { userID: user.id, name: 'list 02' };
+      const list02 = await prisma.list.create({ data: listInput02 });
+
+      const listInputUpdate: UpdateListInput = { listID: list.id, newName: list02.name };
+      const { error } = await requestUpdateList(listInputUpdate);
+
+      expect(error).toBe('duplicated: A list with the same name already exist');
     });
   });
 });

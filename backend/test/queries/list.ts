@@ -34,6 +34,30 @@ class ListQueries {
       }
     }
   `;
+
+  readonly UPDATE_LIST = gql`
+    mutation UpdateList($updateListData: UpdateListInput!) {
+      updateList(updateListData: $updateListData) {
+        id
+        name
+        tasks {
+          tags {
+            color
+            id
+            name
+            taskId
+          }
+          createdAt
+          description
+          id
+          listID
+          status
+          title
+        }
+        userID
+      }
+    }
+  `;
 }
 
 export const listQueries = new ListQueries();
