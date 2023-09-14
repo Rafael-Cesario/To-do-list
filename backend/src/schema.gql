@@ -30,6 +30,10 @@ input DeleteListInput {
   listID: String!
 }
 
+input DeleteTaskInput {
+  taskID: String!
+}
+
 input GetListInput {
   userID: String!
 }
@@ -57,6 +61,7 @@ type Mutation {
   createTask(createTaskData: CreateTaskInput!): TaskModel!
   createUser(createUserData: CreateUserInput!): UserModel!
   deleteList(deleteListData: DeleteListInput!): String!
+  deleteTask(deleteTaskData: DeleteTaskInput!): String!
   login(loginData: LoginInput!): LoginModel!
   updateList(updateListData: UpdateListInput!): ListModel!
   updateTask(updateTaskData: UpdateTaskInput!): TaskModel!

@@ -43,3 +43,10 @@ export class UpdateTaskInput extends PickType(CreateTaskInput, ['title', 'descri
   @Field()
   taskID: string;
 }
+
+@InputType()
+export class DeleteTaskInput {
+  @IsNotEmpty()
+  @Field()
+  taskID: string;
+}

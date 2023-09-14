@@ -20,7 +20,7 @@ model User {
 
 model List {
   id     String @id @default(uuid())
-  user   User   @relation(references: [id], fields: [userID])
+  user   User   @relation(references: [id], fields: [userID], onDelete: Cascade)
   userID String
   name   String
   tasks  Task[]
@@ -30,7 +30,7 @@ model List {
 
 model Task {
   id          String   @id @default(uuid())
-  list        List     @relation(fields: [listID], references: [id])
+  list        List     @relation(fields: [listID], references: [id], onDelete: Cascade)
   listID      String
   title       String
   description String   @default("")
@@ -43,7 +43,7 @@ model Task {
 
 model Tag {
   id     String @id @default(uuid())
-  task   Task   @relation(fields: [taskID], references: [id])
+  task   Task   @relation(fields: [taskID], references: [id], onDelete: Cascade)
   taskID String
   name   String
   color  String

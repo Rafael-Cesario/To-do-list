@@ -1,6 +1,6 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateTaskInput, UpdateTaskInput } from './task.dto';
+import { CreateTaskInput, DeleteTaskInput, UpdateTaskInput } from './task.dto';
 
 @Injectable()
 export class TaskService {
@@ -29,5 +29,13 @@ export class TaskService {
     });
 
     return task;
+  }
+
+  async deleteTask({ taskID }: DeleteTaskInput) {
+    const task = await this.prisma.task.findUnique({ where: { id: taskID } });
+    if (!task) throw new NotFoundException('notFound: Task not found');
+
+    await this.prisma.task.delete({ where: { id: taskID } });
+    return 'Success: Your task was deleted';
   }
 }
