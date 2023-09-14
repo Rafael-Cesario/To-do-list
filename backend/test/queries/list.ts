@@ -28,7 +28,7 @@ class ListQueries {
             color
             id
             name
-            taskId
+            taskID
           }
         }
       }
@@ -45,7 +45,7 @@ class ListQueries {
             color
             id
             name
-            taskId
+            taskID
           }
           createdAt
           description
