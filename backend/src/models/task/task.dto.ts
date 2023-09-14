@@ -1,7 +1,7 @@
 import { IsEnum, IsNotEmpty, Length } from 'class-validator';
 import { Field, InputType } from '@nestjs/graphql';
 import { Status } from './task.model';
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 @InputType()
 export class CreateTaskInput {
@@ -21,6 +21,7 @@ export class CreateTaskInput {
   @Field()
   status: Status;
 
+  @Type(() => TagInput)
   @Field(() => [TagInput], { nullable: 'items' })
   tags: TagInput[];
 }

@@ -17,7 +17,7 @@ export class TaskModel {
   @Field()
   createdAt: Date;
 
-  @Field()
+  @Field(() => Status)
   status: Status;
 
   @Field(() => [TagModel], { nullable: 'items' })
@@ -30,7 +30,7 @@ export class TagModel {
   id: string;
 
   @Field()
-  taskId: string;
+  taskID: string;
 
   @Field()
   name: string;
@@ -40,9 +40,9 @@ export class TagModel {
 }
 
 export enum Status {
-  NEXT = 'NEXT',
-  CURRENT = 'CURRENT',
-  DONE = 'DONE',
+  NEXT = "NEXT",
+  CURRENT = "CURRENT",
+  DONE = "DONE",
 }
 
 registerEnumType(Status, { name: 'Status' });

@@ -8,7 +8,7 @@ export class TaskService {
 
   async createTask(createTaskData: CreateTaskInput) {
     const isDuplicated = await this.prisma.task.findFirst({ where: { title: createTaskData.title } });
-    if (isDuplicated) throw new ConflictException('duplicated: "A task with the same title already exist');
+    if (isDuplicated) throw new ConflictException('duplicated: A task with the same title already exist');
 
     const { tags, ...taskData } = createTaskData;
     const task = await this.prisma.task.create({ data: { ...taskData, tags: { create: tags } }, include: { tags: true } });

@@ -43,8 +43,8 @@ model Task {
 
 model Tag {
   id     String @id @default(uuid())
-  task   Task   @relation(fields: [taskId], references: [id])
-  taskId String
+  task   Task   @relation(fields: [taskID], references: [id])
+  taskID String
   name   String
   color  String
 

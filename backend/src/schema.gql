@@ -66,6 +66,12 @@ type Query {
   hello: String!
 }
 
+enum Status {
+  CURRENT
+  DONE
+  NEXT
+}
+
 input TagInput {
   color: String!
   name: String!
@@ -75,7 +81,7 @@ type TagModel {
   color: String!
   id: String!
   name: String!
-  taskId: String!
+  taskID: String!
 }
 
 type TaskModel {
@@ -83,7 +89,7 @@ type TaskModel {
   description: String!
   id: String!
   listID: String!
-  status: String!
+  status: Status!
   tags: [TagModel]!
   title: String!
 }
