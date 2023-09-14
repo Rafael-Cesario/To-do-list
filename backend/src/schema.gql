@@ -37,7 +37,7 @@ input GetListInput {
 type ListModel {
   id: String!
   name: String!
-  tasks: [TaskModel]!
+  tasks: [TaskModel]
   userID: String!
 }
 

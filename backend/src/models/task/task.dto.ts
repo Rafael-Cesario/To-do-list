@@ -17,7 +17,7 @@ export class CreateTaskInput {
   @Field({ nullable: true })
   description: string;
 
-  @IsEnum(['NEXT', 'CURRENT', 'DONE'])
+  @IsEnum(Status)
   @Field()
   status: Status;
 

@@ -12,6 +12,6 @@ export class ListModel {
   @Field()
   name: string;
 
-  @Field(() => [TaskModel], { nullable: 'items' })
-  tasks: TaskModel[];
+  @Field(() => [TaskModel], { nullable: 'itemsAndList' })
+  tasks?: TaskModel[];
 }
