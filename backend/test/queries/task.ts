@@ -38,5 +38,11 @@ class TaskQueries {
       }
     }
   `;
+
+  readonly DELETE_TASK = gql`
+    mutation DeleteTask($deleteTaskData: DeleteTaskInput!) {
+      deleteTask(deleteTaskData: $deleteTaskData)
+    }
+  `;
 }
 export const taskQueries = new TaskQueries();

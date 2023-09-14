@@ -3,7 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'src/app.module';
 import { ListModel } from 'src/models/list/list.models';
-import { CreateTaskInput, UpdateTaskInput } from 'src/models/task/task.dto';
+import { CreateTaskInput, DeleteTaskInput, UpdateTaskInput } from 'src/models/task/task.dto';
 import { UserModel } from 'src/models/user/user.model';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Status, TaskModel } from 'src/models/task/task.model';
@@ -137,6 +137,39 @@ describe('Task', () => {
       const { errors } = await requestUpdateTask(updateTaskInput);
 
       expect(errors[0].message).toBe('duplicated: A task with the same title already exist');
+    });
+  });
+
+  describe('Delete task', () => {
+    let task: TaskModel;
+
+    beforeEach(async () => {
+      const data = await prisma.task.create({
+        data: { listID: list.id, title: 'task01', description: '', status: 'NEXT', tags: { create: { color: '205090', name: 'tag01' } } },
+        include: { tags: true },
+      });
+
+      task = { ...data, status: Status[data.status] };
+    });
+
+    afterEach(async () => {
+      await prisma.tag.deleteMany();
+      await prisma.task.deleteMany();
+    });
+
+    const requestDeleteTask = async (deleteTaskData: DeleteTaskInput) => {
+      const { data, errors } = await request<{ deleteTask: string }>(app.getHttpServer()).mutate(taskQueries.DELETE_TASK).variables({ deleteTaskData });
+      return { data, errors };
+    };
+
+    it('Delete a task', async () => {
+      const { data } = await requestDeleteTask({ taskID: task.id });
+      expect(data.deleteTask).toBe('Success: Your task was deleted');
+    });
+
+    it('Throws an error, task not found', async () => {
+      const { errors } = await requestDeleteTask({ taskID: 'not found' });
+      expect(errors[0].message).toBe('notFound: Task not found');
     });
   });
 });
