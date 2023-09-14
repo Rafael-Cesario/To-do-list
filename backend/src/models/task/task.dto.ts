@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, Length } from 'class-validator';
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, PickType } from '@nestjs/graphql';
 import { Status } from './task.model';
 import { Transform, Type } from 'class-transformer';
 
@@ -35,4 +35,11 @@ export class TagInput {
   @Length(7)
   @Field()
   color: string;
+}
+
+@InputType()
+export class UpdateTaskInput extends PickType(CreateTaskInput, ['title', 'description', 'status', 'tags']) {
+  @IsNotEmpty()
+  @Field()
+  taskID: string;
 }

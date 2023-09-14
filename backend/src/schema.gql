@@ -59,6 +59,7 @@ type Mutation {
   deleteList(deleteListData: DeleteListInput!): String!
   login(loginData: LoginInput!): LoginModel!
   updateList(updateListData: UpdateListInput!): ListModel!
+  updateTask(updateTaskData: UpdateTaskInput!): TaskModel!
 }
 
 type Query {
@@ -97,6 +98,14 @@ type TaskModel {
 input UpdateListInput {
   listID: String!
   newName: String!
+}
+
+input UpdateTaskInput {
+  description: String
+  status: String!
+  tags: [TagInput]!
+  taskID: String!
+  title: String!
 }
 
 type UserModel {
