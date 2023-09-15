@@ -1,3 +1,5 @@
+import StyledComponentsRegistry from "@/lib/styled-components";
+import { StyledGlobal } from "@/styles/styled-global";
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 
@@ -11,7 +13,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="pt-br">
-			<body className={roboto_slab.className}>{children}</body>
+			<body className={roboto_slab.className}>
+				<StyledComponentsRegistry>
+					<StyledGlobal />
+					{children}
+				</StyledComponentsRegistry>
+			</body>
 		</html>
 	);
 }
