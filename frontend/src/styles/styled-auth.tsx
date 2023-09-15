@@ -10,6 +10,11 @@ export const StyledAuth = styled.main`
 	align-items: center;
 	min-height: 90vh;
 
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.title,
 	.field-container {
 		margin-bottom: 4rem;
