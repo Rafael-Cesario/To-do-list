@@ -14,11 +14,11 @@ interface FieldProps {
 		errors: typeof defaultUserData;
 		userData: typeof defaultUserData;
 		setErrors: (newState: typeof defaultUserData) => void;
-		changeUserData: (key: keyof typeof defaultUserData, value: string) => void;
+		setUserData: (newState: typeof defaultUserData) => void;
 	};
 }
 
-export const Field = ({ props: { errors, setErrors, fieldName, label, changeUserData, userData, placeholder, type } }: FieldProps) => {
+export const Field = ({ props: { errors, setErrors, fieldName, label, setUserData, userData, placeholder, type } }: FieldProps) => {
 	const [inputType, setInputType] = useState(type);
 
 	const validateField = (field: keyof typeof errors, value: string) => {
@@ -29,13 +29,20 @@ export const Field = ({ props: { errors, setErrors, fieldName, label, changeUser
 		setErrors(newErrors);
 	};
 
+	const changeUserData = (key: keyof typeof defaultUserData, value: string) => {
+		const newData = produce(userData, (draft) => {
+			draft[key] = value;
+		});
+		setUserData(newData);
+	};
+
 	return (
 		<div className="field">
 			<label htmlFor={fieldName}>{label}</label>
 
 			<div className="input">
 				<input
-					id="email"
+					id={fieldName}
 					type={inputType}
 					placeholder={placeholder}
 					value={userData[fieldName]}

@@ -39,13 +39,6 @@ const Authentication = () => {
 		return emptyValues;
 	};
 
-	const changeUserData = (key: keyof typeof defaultUserData, value: string) => {
-		const newData = produce(userData, (draft) => {
-			draft[key] = value;
-		});
-		setUserData(newData);
-	};
-
 	return (
 		<StyledAuth>
 			<h1 className="title">Criar conta</h1>
@@ -56,10 +49,10 @@ const Authentication = () => {
 					createUser();
 				}}>
 				<div className="field-container">
-					<Field props={{ label: "Email", placeholder: "usuario@email.com", type: "text", fieldName: "email", errors, setErrors, userData, changeUserData }} />
-					<Field props={{ label: "Nome", placeholder: "Nome", fieldName: "name", type: "text", errors, setErrors, userData, changeUserData }} />
-					<Field props={{ label: "Senha", placeholder: "Use letras e números para criar uma senha forte", type: "password", fieldName: "password", errors, setErrors, userData, changeUserData }} />
-					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", type: "password", fieldName: "passwordCheck", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Email", placeholder: "usuario@email.com", type: "text", fieldName: "email", errors, setErrors, userData, setUserData }} />
+					<Field props={{ label: "Nome", placeholder: "Nome", fieldName: "name", type: "text", errors, setErrors, userData, setUserData }} />
+					<Field props={{ label: "Senha", placeholder: "Use letras e números para criar uma senha forte", type: "password", fieldName: "password", errors, setErrors, userData, setUserData }} />
+					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", type: "password", fieldName: "passwordCheck", errors, setErrors, userData, setUserData }} />
 				</div>
 
 				<button className="submit">Entrar</button>
