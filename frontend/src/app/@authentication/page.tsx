@@ -2,8 +2,10 @@
 import { produce } from "immer";
 import { StyledAuth } from "@/styles/styled-auth";
 import { useState } from "react";
+import { validations } from "@/utils/validations";
+import { Field } from "@/components/field";
 
-const defaultUserData = {
+export const defaultUserData = {
 	email: "",
 	name: "",
 	password: "",
@@ -12,17 +14,36 @@ const defaultUserData = {
 
 const Authentication = () => {
 	const [userData, setUserData] = useState(defaultUserData);
+	const [errors, setErrors] = useState(defaultUserData);
+
+	const createUser = () => {
+		const emptyValues = checkEmptyValues();
+		if (emptyValues.length) return;
+
+		const hasError = Object.values(errors).filter((error) => error !== "");
+		if (hasError) return;
+
+		console.log({ userData });
+	};
+
+	const checkEmptyValues = () => {
+		const emptyValues = Object.entries(userData).filter(([key, value]) => value.trim() === "");
+
+		const newErrors = produce(errors, (draft) => {
+			emptyValues.forEach(([key, value]) => {
+				draft[key as keyof typeof userData] = "Este campo não pode ficar vazio";
+			});
+		});
+
+		setErrors(newErrors);
+		return emptyValues;
+	};
 
 	const changeUserData = (key: keyof typeof defaultUserData, value: string) => {
 		const newData = produce(userData, (draft) => {
 			draft[key] = value;
 		});
-
 		setUserData(newData);
-	};
-
-	const createUser = () => {
-		console.log({ userData });
 	};
 
 	return (
@@ -35,29 +56,10 @@ const Authentication = () => {
 					createUser();
 				}}>
 				<div className="field-container">
-					<div className="field">
-						<label htmlFor="email">Email</label>
-						<input value={userData.email} onChange={(e) => changeUserData("email", e.target.value)} type="text" placeholder="meuEmail@domínio.com" id="email" />
-						<span className="error">Seu email não é valido</span>
-					</div>
-
-					<div className="field">
-						<label htmlFor="name">Nome</label>
-						<input value={userData.name} onChange={(e) => changeUserData("name", e.target.value)} type="text" id="name" placeholder="Meu nome" />
-						<span className="error">Seu nome é muito curto</span>
-					</div>
-
-					<div className="field">
-						<label htmlFor="password">Senha</label>
-						<input value={userData.password} onChange={(e) => changeUserData("password", e.target.value)} type="text" placeholder="..." id="password" />
-						<span className="error">Sua senha deve conter letrar e números</span>
-					</div>
-
-					<div className="field">
-						<label htmlFor="password-check">Confirmar senha</label>
-						<input value={userData.passwordCheck} onChange={(e) => changeUserData("passwordCheck", e.target.value)} type="text" id="password-check" placeholder="..." />
-						<span className="error">Suas senhas devem ser iguáis</span>
-					</div>
+					<Field props={{ label: "Email", placeholder: "usuario@email.com", fieldName: "email", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Nome", placeholder: "Nome", fieldName: "name", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Senha", placeholder: "Use letras e números para criar uma senha forte", fieldName: "password", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", fieldName: "passwordCheck", errors, setErrors, userData, changeUserData }} />
 				</div>
 
 				<button className="submit">Entrar</button>
