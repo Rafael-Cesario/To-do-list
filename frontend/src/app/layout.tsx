@@ -3,7 +3,9 @@ import { StyledGlobal } from "@/styles/styled-global";
 import type { Metadata } from "next";
 import { Roboto_Slab } from "next/font/google";
 
-const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
+const roboto_slab = Roboto_Slab({
+	subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
 	title: "To Do List",

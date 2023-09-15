@@ -1,5 +1,6 @@
 "use client";
 import * as styled from "styled-components";
+import { Palette } from "./palette";
 
 export const StyledGlobal = styled.createGlobalStyle`
 	* {
@@ -9,7 +10,34 @@ export const StyledGlobal = styled.createGlobalStyle`
 	}
 
 	body {
-		background-color: #111;
-		color: #eee;
+		background-color: ${Palette.background};
+		color: ${Palette.text};
+	}
+
+	input,
+	button {
+		border-radius: ${Palette.borderRadius};
+		color: ${Palette.text};
+		padding: 12px 16px;
+		border: none;
+
+		&:focus {
+			outline: 2px solid ${Palette.primary};
+		}
+	}
+
+	input {
+		background-color: ${Palette.container};
+	}
+
+	button {
+		background-color: ${Palette.primary};
+		cursor: pointer;
+		transition: 0.3s;
+		font-weight: bold;
+
+		&:active {
+			transform: scale(0.95);
+		}
 	}
 `;
