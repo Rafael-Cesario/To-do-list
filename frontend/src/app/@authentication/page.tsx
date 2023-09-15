@@ -56,10 +56,10 @@ const Authentication = () => {
 					createUser();
 				}}>
 				<div className="field-container">
-					<Field props={{ label: "Email", placeholder: "usuario@email.com", fieldName: "email", errors, setErrors, userData, changeUserData }} />
-					<Field props={{ label: "Nome", placeholder: "Nome", fieldName: "name", errors, setErrors, userData, changeUserData }} />
-					<Field props={{ label: "Senha", placeholder: "Use letras e números para criar uma senha forte", fieldName: "password", errors, setErrors, userData, changeUserData }} />
-					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", fieldName: "passwordCheck", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Email", placeholder: "usuario@email.com", type: "text", fieldName: "email", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Nome", placeholder: "Nome", fieldName: "name", type: "text", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Senha", placeholder: "Use letras e números para criar uma senha forte", type: "password", fieldName: "password", errors, setErrors, userData, changeUserData }} />
+					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", type: "password", fieldName: "passwordCheck", errors, setErrors, userData, changeUserData }} />
 				</div>
 
 				<button className="submit">Entrar</button>

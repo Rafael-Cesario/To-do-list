@@ -38,8 +38,23 @@ export const StyledAuth = styled.main`
 			color: ${Palette.error};
 		}
 
+		.input {
+			display: flex;
+			align-items: center;
+			background-color: ${Palette.container};
+
+			input {
+				width: 100%;
+			}
+
+			.icon {
+				margin: 0 1rem;
+				cursor: pointer;
+			}
+		}
+
 		label,
-		input {
+		.input {
 			margin-bottom: 8px;
 		}
 
