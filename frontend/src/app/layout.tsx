@@ -10,13 +10,15 @@ export const metadata: Metadata = {
 	description: "To do list app",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children, authentication }: { children: React.ReactNode; authentication: React.ReactNode }) {
+	const isLoggedIn = false;
+
 	return (
 		<html lang="pt-br">
 			<body className={roboto_slab.className}>
 				<StyledComponentsRegistry>
 					<StyledGlobal />
-					{children}
+					{isLoggedIn ? children : authentication}
 				</StyledComponentsRegistry>
 			</body>
 		</html>
