@@ -11,6 +11,7 @@ module.exports = {
 	rules: {
 		semi: ["warn", "always"],
 		"@typescript-eslint/no-unused-vars": "warn",
+		"@typescript-eslint/no-explicit-any": "off",
 	},
 	globals: {
 		React: "readonly",

@@ -1,8 +1,12 @@
 "use client";
+import { messageErrors } from "@/services/interfaces/errors";
 import { produce } from "immer";
 import { StyledAuth } from "@/styles/styled-auth";
 import { useState } from "react";
 import { Field } from "@/components/field";
+import { useMutation } from "@apollo/client";
+import { userQueries } from "@/services/queries/user";
+import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
 
 export const defaultUserData = {
 	email: "",
@@ -14,15 +18,28 @@ export const defaultUserData = {
 const Authentication = () => {
 	const [userData, setUserData] = useState(defaultUserData);
 	const [errors, setErrors] = useState(defaultUserData);
+	const [createUserMutation] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
 
-	const createUser = () => {
+	const createUser = async () => {
 		const emptyValues = checkEmptyValues();
 		if (emptyValues.length) return;
 
 		const hasError = Object.values(errors).filter((error) => error !== "");
-		if (hasError) return;
+		if (hasError.length) return;
 
-		console.log({ userData });
+		try {
+			const { email, name, password } = userData;
+			const variables: ICreateUser = { createUserData: { email, name, password } };
+			await createUserMutation({ variables });
+			setUserData(defaultUserData);
+			// todo > send notification with success message
+			// todo > change form to login form
+		} catch (error: any) {
+			const [errorCode] = error.message.split(":");
+			const errorMessage = messageErrors.user[errorCode as keyof typeof messageErrors.user] || messageErrors.default;
+			console.log({ errorMessage });
+			// todo > send notification with error
+		}
 	};
 
 	const checkEmptyValues = () => {
