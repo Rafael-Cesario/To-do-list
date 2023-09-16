@@ -1,3 +1,4 @@
+import { Providers } from "@/lib/providers";
 import StyledComponentsRegistry from "@/lib/styled-components";
 import { StyledGlobal } from "@/styles/styled-global";
 import type { Metadata } from "next";
@@ -18,10 +19,10 @@ export default function RootLayout({ children, authentication }: { children: Rea
 	return (
 		<html lang="pt-br">
 			<body className={roboto_slab.className}>
-				<StyledComponentsRegistry>
+				<Providers>
 					<StyledGlobal />
 					{isLoggedIn ? children : authentication}
-				</StyledComponentsRegistry>
+				</Providers>
 			</body>
 		</html>
 	);

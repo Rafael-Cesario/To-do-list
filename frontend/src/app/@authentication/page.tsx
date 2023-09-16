@@ -1,9 +1,10 @@
 "use client";
 import { produce } from "immer";
 import { StyledAuth } from "@/styles/styled-auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validations } from "@/utils/validations";
 import { Field } from "@/components/field";
+import { gql, useQuery } from "@apollo/client";
 
 export const defaultUserData = {
 	email: "",
