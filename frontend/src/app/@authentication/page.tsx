@@ -1,10 +1,8 @@
 "use client";
 import { produce } from "immer";
 import { StyledAuth } from "@/styles/styled-auth";
-import { useEffect, useState } from "react";
-import { validations } from "@/utils/validations";
+import { useState } from "react";
 import { Field } from "@/components/field";
-import { gql, useQuery } from "@apollo/client";
 
 export const defaultUserData = {
 	email: "",
@@ -28,10 +26,10 @@ const Authentication = () => {
 	};
 
 	const checkEmptyValues = () => {
-		const emptyValues = Object.entries(userData).filter(([key, value]) => value.trim() === "");
+		const emptyValues = Object.entries(userData).filter((field) => field[1].trim() === "");
 
 		const newErrors = produce(errors, (draft) => {
-			emptyValues.forEach(([key, value]) => {
+			emptyValues.forEach(([key]) => {
 				draft[key as keyof typeof userData] = "Este campo não pode ficar vazio";
 			});
 		});
