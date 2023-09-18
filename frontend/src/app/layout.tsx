@@ -1,8 +1,8 @@
-import { Providers } from "@/lib/providers";
-import StyledComponentsRegistry from "@/lib/styled-components";
-import { StyledGlobal } from "@/styles/styled-global";
 import type { Metadata } from "next";
+import { Providers } from "@/lib/providers";
+import { StyledGlobal } from "@/styles/styled-global";
 import { Roboto_Slab } from "next/font/google";
+import { Notification } from "@/components/notification";
 
 const roboto_slab = Roboto_Slab({
 	subsets: ["latin"],
@@ -21,6 +21,7 @@ export default function RootLayout({ children, authentication }: { children: Rea
 			<body className={roboto_slab.className}>
 				<Providers>
 					<StyledGlobal />
+					<Notification />
 					{isLoggedIn ? children : authentication}
 				</Providers>
 			</body>
