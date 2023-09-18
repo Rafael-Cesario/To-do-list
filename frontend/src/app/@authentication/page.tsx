@@ -9,6 +9,7 @@ import { userQueries } from "@/services/queries/user";
 import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
 import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/notification-slice";
+import { LoadingButton } from "@/components/loading-button";
 
 export const defaultUserData = {
 	email: "",
@@ -20,7 +21,7 @@ export const defaultUserData = {
 const Authentication = () => {
 	const [userData, setUserData] = useState(defaultUserData);
 	const [errors, setErrors] = useState(defaultUserData);
-	const [createUserMutation] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
+	const [createUserMutation, { loading }] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
 
 	const dispatch = useDispatch();
 
@@ -74,7 +75,8 @@ const Authentication = () => {
 					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", type: "password", fieldName: "passwordCheck", errors, setErrors, userData, setUserData }} />
 				</div>
 
-				<button className="submit">Entrar</button>
+				{loading || <button className="submit">Entrar</button>}
+				{loading && <LoadingButton className="submit" />}
 
 				<button type="button" className="form">
 					Não tem uma conta? Clique aqui para criar.
