@@ -8,14 +8,26 @@ interface NotificationSlice {
 }
 
 const defaultValues: NotificationSlice = {
-	isOpen: true,
-	type: "error",
-	title: "Error",
-	message: "Algum erro ocorreu",
+	isOpen: false,
+	type: "success",
+	title: "",
+	message: "",
 };
 
 export const notificationSlice = createSlice({
 	name: "notification",
 	initialState: defaultValues,
-	reducers: {},
+
+	reducers: {
+		setNotification(state, action: { payload: { newState: NotificationSlice } }) {
+			const { isOpen, type, title, message } = action.payload.newState;
+
+			state.isOpen = isOpen;
+			state.type = type;
+			state.title = title;
+			state.message = message;
+		},
+	},
 });
+
+export const { setNotification } = notificationSlice.actions;

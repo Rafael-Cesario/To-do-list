@@ -3,7 +3,9 @@ export const Palette = {
 	container: "#181818",
 	text: "#eeeeee",
 	primary: "#1060cc",
+
 	error: "#B63E3E",
+	success: "#257d27",
 
 	borderRadius: "2px",
 };
