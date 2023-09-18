@@ -15,7 +15,7 @@ export const Notification = () => {
 	if (!isOpen) return null;
 
 	return (
-		<StyledNotification type={type}>
+		<StyledNotification type={type} data-cy="notification">
 			<button className="close" onClick={() => closeNotification()}>
 				x
 			</button>
