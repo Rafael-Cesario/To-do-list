@@ -7,6 +7,8 @@ import { Field } from "@/components/field";
 import { useMutation } from "@apollo/client";
 import { userQueries } from "@/services/queries/user";
 import { ICreateUser, RCreateUser } from "@/services/interfaces/user";
+import { useDispatch } from "react-redux";
+import { setNotification } from "@/context/notification-slice";
 
 export const defaultUserData = {
 	email: "",
@@ -20,6 +22,8 @@ const Authentication = () => {
 	const [errors, setErrors] = useState(defaultUserData);
 	const [createUserMutation] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
 
+	const dispatch = useDispatch();
+
 	const createUser = async () => {
 		const emptyValues = checkEmptyValues();
 		if (emptyValues.length) return;
@@ -32,13 +36,12 @@ const Authentication = () => {
 			const variables: ICreateUser = { createUserData: { email, name, password } };
 			await createUserMutation({ variables });
 			setUserData(defaultUserData);
-			// todo > send notification with success message
-			// todo > change form to login form
+			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Novo usuário criado", message: "Sua nova conta foi criada com sucesso, você já pode fazer login" } }));
+			// Todo > change form to login form
 		} catch (error: any) {
 			const [errorCode] = error.message.split(":");
 			const errorMessage = messageErrors.user[errorCode as keyof typeof messageErrors.user] || messageErrors.default;
-			console.log({ errorMessage });
-			// todo > send notification with error
+			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Ops, algo deu errado", message: errorMessage } }));
 		}
 	};
 
