@@ -42,6 +42,7 @@ export const Field = ({ props: { errors, setErrors, fieldName, label, setUserDat
 
 			<div className="input">
 				<input
+					data-cy={fieldName + "-input"}
 					id={fieldName}
 					type={inputType}
 					placeholder={placeholder}
@@ -52,8 +53,8 @@ export const Field = ({ props: { errors, setErrors, fieldName, label, setUserDat
 					}}
 				/>
 
-				{inputType === "password" && <AiFillEyeInvisible className="icon" onClick={() => setInputType("text")} />}
-				{type === "password" && inputType === "text" && <AiFillEye className="icon" onClick={() => setInputType("password")} />}
+				{inputType === "password" && <AiFillEyeInvisible data-cy={fieldName + "-hide"} className="icon" onClick={() => setInputType("text")} />}
+				{type === "password" && inputType === "text" && <AiFillEye data-cy={fieldName + "-show"} className="icon" onClick={() => setInputType("password")} />}
 			</div>
 
 			<span className="error">{errors[fieldName]}</span>
