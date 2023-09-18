@@ -57,7 +57,7 @@ export const Field = ({ props: { errors, setErrors, fieldName, label, setUserDat
 				{type === "password" && inputType === "text" && <AiFillEye data-cy={fieldName + "-show"} className="icon" onClick={() => setInputType("password")} />}
 			</div>
 
-			<span className="error">{errors[fieldName]}</span>
+			<span className="error" data-cy={fieldName + "-error"}>{errors[fieldName]}</span>
 		</div>
 	);
 };

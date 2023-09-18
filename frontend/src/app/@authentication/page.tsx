@@ -75,7 +75,7 @@ const Authentication = () => {
 					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", type: "password", fieldName: "passwordCheck", errors, setErrors, userData, setUserData }} />
 				</div>
 
-				{loading || <button className="submit">Entrar</button>}
+				{loading || <button data-cy="submit" className="submit">Entrar</button>}
 				{loading && <LoadingButton className="submit" />}
 
 				<button type="button" className="form">
