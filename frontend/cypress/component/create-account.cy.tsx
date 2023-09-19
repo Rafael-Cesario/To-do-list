@@ -1,19 +1,20 @@
-import Authentication from "@/app/@authentication/page";
+import { CreateAccount } from "@/features/create-account";
 import { Providers } from "@/lib/providers";
 
 const Component = () => {
 	return (
 		<Providers>
-			<Authentication />
+			<CreateAccount />
 		</Providers>
 	);
 };
 
-describe("Authentication", () => {
+describe("Create account", () => {
 	beforeEach(() => {
 		cy.mount(<Component />);
 	});
 
+	// Todo > Should be a < Field /> Test
 	it("Show and hide password", () => {
 		cy.get(`[data-cy="password-hide"]`).click();
 		cy.get(`[data-cy="password-input"]`).should("have.attr", "type", "text");

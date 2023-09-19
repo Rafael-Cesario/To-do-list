@@ -2,18 +2,14 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
 	component: {
+		reporter: "list",
 		watchForFileChanges: false,
-		devServer: {
-			framework: "next",
-			bundler: "webpack",
-		},
+		devServer: { framework: "next", bundler: "webpack" },
 	},
 
 	e2e: {
-		baseUrl: "http://localhost:3000/",
+		reporter: "list",
 		watchForFileChanges: false,
-		setupNodeEvents(on, config) {
-			// implement node event listeners here
-		},
+		baseUrl: "http://localhost:3000/",
 	},
 });
