@@ -4,4 +4,8 @@ export const messageErrors = {
 	user: {
 		duplicated: "Este e-mail já esta em uso.",
 	},
+
+	auth: {
+		unauthorized: "Email ou senha incorretos",
+	},
 };

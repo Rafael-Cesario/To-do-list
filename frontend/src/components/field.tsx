@@ -4,6 +4,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 interface FieldProps<TypeUserData> {
 	props: {
+		focus?: boolean;
 		label: string;
 		value: string;
 		error: string;
@@ -16,7 +17,7 @@ interface FieldProps<TypeUserData> {
 	};
 }
 
-export const Field = <TypeUserData,>({ props: { fieldName, label, placeholder, type, value, error, key, changeUserData, validateField } }: FieldProps<TypeUserData>) => {
+export const Field = <TypeUserData,>({ props: { focus, fieldName, label, placeholder, type, value, error, key, changeUserData, validateField } }: FieldProps<TypeUserData>) => {
 	const [inputType, setInputType] = useState(type);
 
 	return (
@@ -25,6 +26,7 @@ export const Field = <TypeUserData,>({ props: { fieldName, label, placeholder, t
 
 			<div className="input">
 				<input
+					autoFocus={focus}
 					data-cy={key + "-input"}
 					id={key}
 					type={inputType}

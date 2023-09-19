@@ -1,11 +1,14 @@
 "use client";
 import { Field } from "@/components/field";
+import { setNotification } from "@/context/notification-slice";
 import { ILogin, RLogin } from "@/services/interfaces/authentication";
+import { messageErrors } from "@/services/interfaces/errors";
 import { authQueries } from "@/services/queries/authentication";
 import { StyledAuth } from "@/styles/styled-auth";
 import { useMutation } from "@apollo/client";
 import { produce } from "immer";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const defaultUserData = {
 	email: "",
@@ -16,6 +19,7 @@ export const Login = () => {
 	const [userData, setUserData] = useState(defaultUserData);
 	const [errors, setErrors] = useState(defaultUserData);
 	const [loginMutation, { loading }] = useMutation<RLogin, ILogin>(authQueries.LOGIN);
+	const dispatch = useDispatch();
 
 	const changeUserData = (fieldName: keyof typeof defaultUserData, value: string) => {
 		const state = produce(userData, (draft) => {
@@ -44,8 +48,15 @@ export const Login = () => {
 		try {
 			const { data } = await loginMutation({ variables: { loginData: userData } });
 			console.log({ data });
+			setUserData(defaultUserData);
+			// todo > save cookies
+			// todo > send user to home page
+			// todo > Test
 		} catch (error: any) {
-			console.log({ error });
+			const [errorCode] = error.message.split(": ");
+			const errorMessage = messageErrors.auth[errorCode as keyof typeof messageErrors.auth] ?? messageErrors.default;
+			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: errorMessage } }));
+			// todo > Test
 		}
 	};
 
@@ -60,6 +71,7 @@ export const Login = () => {
 				<div className="field-container">
 					<Field
 						props={{
+							focus: true,
 							changeUserData,
 							error: errors.email,
 							fieldName: "email",

@@ -90,6 +90,7 @@ export const CreateAccount = () => {
 				<div className="field-container">
 					<Field
 						props={{
+							focus: true,
 							key: "email",
 							fieldName: "email",
 							label: "Email",
