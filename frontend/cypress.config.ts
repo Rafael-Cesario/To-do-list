@@ -2,6 +2,7 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
 	component: {
+		watchForFileChanges: false,
 		devServer: {
 			framework: "next",
 			bundler: "webpack",
