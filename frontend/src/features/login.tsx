@@ -36,6 +36,8 @@ export const Login = () => {
 	const login = () => {
 		const emptyValues = checkEmptyValues();
 		if (emptyValues.length) return;
+
+		console.log({ userData });
 	};
 
 	return (
@@ -74,7 +76,7 @@ export const Login = () => {
 					/>
 				</div>
 
-				<button className="submit" onClick={() => login()}>
+				<button className="submit" data-cy="submit" onClick={() => login()}>
 					Entrar
 				</button>
 				<button className="form"> Não tem uma conta? Clique aqui para criar.</button>
