@@ -12,7 +12,7 @@ interface FieldProps<TypeUserData> {
 		key: string;
 		fieldName: keyof TypeUserData;
 		changeUserData: (fieldName: keyof TypeUserData, value: string) => void;
-		validateField: (fieldName: keyof TypeUserData, value: string) => void;
+		validateField?: (fieldName: keyof TypeUserData, value: string) => void;
 	};
 }
 
@@ -32,7 +32,7 @@ export const Field = <TypeUserData,>({ props: { fieldName, label, placeholder, t
 					value={value}
 					onChange={(e) => {
 						changeUserData(fieldName, e.target.value);
-						validateField(fieldName, e.target.value);
+						validateField && validateField(fieldName, e.target.value);
 					}}
 				/>
 

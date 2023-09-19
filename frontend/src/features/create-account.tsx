@@ -60,19 +60,19 @@ export const CreateAccount = () => {
 		return emptyValues;
 	};
 
-	const validateField = (field: keyof typeof errors, value: string) => {
-		const error = validations[field](value, userData.password);
+	const validateField = (fieldName: keyof typeof errors, value: string) => {
+		const error = validations[fieldName](value, userData.password);
 
 		const newErrors = produce(errors, (draft) => {
-			draft[field] = error;
+			draft[fieldName] = error;
 		});
 
 		setErrors(newErrors);
 	};
 
-	const changeUserData = (key: keyof typeof defaultUserData, value: string) => {
+	const changeUserData = (fieldName: keyof typeof defaultUserData, value: string) => {
 		const newData = produce(userData, (draft) => {
-			draft[key] = value;
+			draft[fieldName] = value;
 		});
 
 		setUserData(newData);
@@ -147,13 +147,13 @@ export const CreateAccount = () => {
 
 				{loading || (
 					<button data-cy="submit" className="submit">
-						Entrar
+						Criar conta
 					</button>
 				)}
 				{loading && <LoadingButton className="submit" />}
 
 				<button type="button" className="form">
-					Não tem uma conta? Clique aqui para criar.
+					Já tem uma conta? Clique aqui para fazer login.
 				</button>
 			</form>
 		</StyledAuth>
