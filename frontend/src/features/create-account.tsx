@@ -6,6 +6,7 @@ import { messageErrors } from "@/services/interfaces/errors";
 import { RCreateUser, ICreateUser } from "@/services/interfaces/user";
 import { userQueries } from "@/services/queries/user";
 import { StyledAuth } from "@/styles/styled-auth";
+import { validations } from "@/utils/validations";
 import { useMutation } from "@apollo/client";
 import { produce } from "immer";
 import { useState } from "react";
@@ -59,6 +60,24 @@ export const CreateAccount = () => {
 		return emptyValues;
 	};
 
+	const validateField = (field: keyof typeof errors, value: string) => {
+		const error = validations[field](value, userData.password);
+
+		const newErrors = produce(errors, (draft) => {
+			draft[field] = error;
+		});
+
+		setErrors(newErrors);
+	};
+
+	const changeUserData = (key: keyof typeof defaultUserData, value: string) => {
+		const newData = produce(userData, (draft) => {
+			draft[key] = value;
+		});
+
+		setUserData(newData);
+	};
+
 	return (
 		<StyledAuth>
 			<h1 className="title">Criar conta</h1>
@@ -69,10 +88,61 @@ export const CreateAccount = () => {
 					createUser();
 				}}>
 				<div className="field-container">
-					<Field props={{ label: "Email", placeholder: "usuario@email.com", type: "text", fieldName: "email", errors, setErrors, userData, setUserData }} />
-					<Field props={{ label: "Nome", placeholder: "Nome", fieldName: "name", type: "text", errors, setErrors, userData, setUserData }} />
-					<Field props={{ label: "Senha", placeholder: "Use letras e números para criar uma senha forte", type: "password", fieldName: "password", errors, setErrors, userData, setUserData }} />
-					<Field props={{ label: "Confirmar senha", placeholder: "Digite novamente a sua senha", type: "password", fieldName: "passwordCheck", errors, setErrors, userData, setUserData }} />
+					<Field
+						props={{
+							key: "email",
+							fieldName: "email",
+							label: "Email",
+							placeholder: "usuario@email.com",
+							type: "text",
+							error: errors.email,
+							value: userData.email,
+							validateField,
+							changeUserData,
+						}}
+					/>
+
+					<Field
+						props={{
+							key: "name",
+							fieldName: "name",
+							label: "Nome",
+							placeholder: "Nome",
+							type: "text",
+							error: errors.name,
+							value: userData.name,
+							changeUserData,
+							validateField,
+						}}
+					/>
+
+					<Field
+						props={{
+							key: "password",
+							fieldName: "password",
+							label: "Senha",
+							placeholder: "Use letras e números para criar uma senha forte",
+							type: "password",
+							error: errors.password,
+							value: userData.password,
+							changeUserData,
+							validateField,
+						}}
+					/>
+
+					<Field
+						props={{
+							key: "passwordCheck",
+							fieldName: "passwordCheck",
+							label: "Confirmar senha",
+							placeholder: "Digite novamente a sua senha",
+							type: "password",
+							error: errors.passwordCheck,
+							value: userData.passwordCheck,
+							changeUserData,
+							validateField,
+						}}
+					/>
 				</div>
 
 				{loading || (
