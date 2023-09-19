@@ -16,6 +16,8 @@
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "@types/styled-components": "^5.1.27",
+    "axios": "^1.5.0",
+    "cookie": "^0.5.0",
     "eslint-config-next": "13.4.19",
     "graphql": "^16.8.0",
     "immer": "^10.0.2",
@@ -29,6 +31,8 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.2",
+    "@types/cookies": "^0.7.8",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "cypress": "^13.2.0",

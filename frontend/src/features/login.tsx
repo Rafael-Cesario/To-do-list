@@ -9,6 +9,8 @@ import { useMutation } from "@apollo/client";
 import { produce } from "immer";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+import { SetCookies, UserCookies } from "@/services/interfaces/cookies";
 
 const defaultUserData = {
 	email: "",
@@ -47,9 +49,16 @@ export const Login = () => {
 
 		try {
 			const { data } = await loginMutation({ variables: { loginData: userData } });
-			console.log({ data });
+			if (!data) throw new Error("Data is undefined");
+
 			setUserData(defaultUserData);
-			// todo > save cookies
+
+			const maxAge = 60 * 60 * 24 * 7; // 1 week
+			const userCookies: UserCookies = data.login;
+			const cookie: SetCookies = { key: "user", maxAge, value: JSON.stringify(userCookies) };
+
+			axios({ method: "post", url: "/api/cookies", data: cookie });
+
 			// todo > send user to home page
 			// todo > Test
 		} catch (error: any) {
