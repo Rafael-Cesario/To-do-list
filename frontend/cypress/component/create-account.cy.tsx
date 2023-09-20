@@ -2,9 +2,12 @@ import { CreateAccount } from "@/features/create-account";
 import { Providers } from "@/lib/providers";
 
 const Component = () => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const setFormActive = (formName: "login" | "create") => {};
+
 	return (
 		<Providers>
-			<CreateAccount />
+			<CreateAccount props={{ setFormActive }} />
 		</Providers>
 	);
 };
