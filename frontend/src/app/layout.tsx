@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Providers } from "@/lib/providers";
 import { StyledGlobal } from "@/styles/styled-global";
 import { Roboto_Slab } from "next/font/google";
@@ -13,8 +14,19 @@ export const metadata: Metadata = {
 	description: "To do list app",
 };
 
+const getUserCookies = () => {
+	const cookieStore = cookies();
+	const cookieData = cookieStore.get("user");
+	if (!cookieData) return false;
+
+	// todo > check if token is valid
+	// const { token }: UserCookies = JSON.parse(cookieData.value);
+
+	return true;
+};
+
 export default function RootLayout({ children, authentication }: { children: React.ReactNode; authentication: React.ReactNode }) {
-	const isLoggedIn = false;
+	const isLoggedIn = getUserCookies();
 
 	return (
 		<html lang="pt-br">

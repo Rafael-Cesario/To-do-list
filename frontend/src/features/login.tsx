@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { Field } from "@/components/field";
 import { setNotification } from "@/context/notification-slice";
 import { ILogin, RLogin } from "@/services/interfaces/authentication";
@@ -7,9 +8,9 @@ import { authQueries } from "@/services/queries/authentication";
 import { StyledAuth } from "@/styles/styled-auth";
 import { useMutation } from "@apollo/client";
 import { produce } from "immer";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { SetCookies, UserCookies } from "@/services/interfaces/cookies";
 
 const defaultUserData = {
@@ -22,6 +23,7 @@ export const Login = () => {
 	const [errors, setErrors] = useState(defaultUserData);
 	const [loginMutation, { loading }] = useMutation<RLogin, ILogin>(authQueries.LOGIN);
 	const dispatch = useDispatch();
+	const router = useRouter();
 
 	const changeUserData = (fieldName: keyof typeof defaultUserData, value: string) => {
 		const state = produce(userData, (draft) => {
@@ -57,9 +59,8 @@ export const Login = () => {
 			const userCookies: UserCookies = data.login;
 			const cookie: SetCookies = { key: "user", maxAge, value: JSON.stringify(userCookies) };
 
-			axios({ method: "post", url: "/api/cookies", data: cookie });
-
-			// todo > send user to home page
+			await axios({ method: "post", url: "/api/cookies", data: cookie });
+			router.refresh();
 			// todo > Test
 		} catch (error: any) {
 			const [errorCode] = error.message.split(": ");
