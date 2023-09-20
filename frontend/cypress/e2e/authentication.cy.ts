@@ -10,11 +10,12 @@ const aliasMutaton = (req: CyHttpMessages.IncomingHttpRequest, operationName: st
 };
 
 describe("Authentication", () => {
-	beforeEach(() => {
-		cy.visit("/");
-	});
-
 	describe("Create user", () => {
+		beforeEach(() => {
+			cy.visit("/");
+			cy.get(`[data-cy="form"]`).click();
+		});
+
 		it("Creates a new user", () => {
 			cy.intercept("POST", url, (req) => aliasMutaton(req, "CreateUser", { data: { createUser: "New user created" } }));
 
@@ -29,7 +30,7 @@ describe("Authentication", () => {
 			cy.get("[data-cy='notification'] > .title").should("have.text", "Novo usuário criado");
 		});
 
-		it("Catch an response error for duplicated user", () => {
+		it("Catch a response error for duplicated user", () => {
 			cy.intercept("POST", url, (req) => aliasMutaton(req, "CreateUser", { errors: [{ message: "duplicated:" }] }));
 
 			cy.get("[data-cy='email-input']").type("user01@email.com");
@@ -41,6 +42,31 @@ describe("Authentication", () => {
 
 			cy.get("[data-cy='email-input']").should("have.value", "user01@email.com");
 			cy.get("[data-cy='notification'] > .title").should("have.text", "Ops, algo deu errado");
+		});
+	});
+
+	describe("Login", () => {
+		beforeEach(() => {
+			cy.visit("/");
+		});
+
+		it("Catch a response error due to wrong credentials", () => {
+			cy.intercept("POST", url, (req) => aliasMutaton(req, "Login", { errors: [{ message: "unauthorized" }] }));
+			cy.get('[data-cy="email-input"]').type("notAnUser@domain.com");
+			cy.get('[data-cy="password-input"]').type("Password123");
+			cy.get('[data-cy="submit"]').click();
+			cy.wait("@Login");
+			cy.get('[data-cy="notification"] > .text').should("have.text", "Email ou senha incorretos");
+		});
+
+		it("Sends user to home page after login", () => {
+			cy.intercept("POST", url, (req) => aliasMutaton(req, "Login", { data: { login: { token: "123qwe123", email: "notAnUser@domain.com" } } }));
+			cy.get('[data-cy="email-input"]').type("notAnUser@domain.com");
+			cy.get('[data-cy="password-input"]').type("Password123");
+			cy.get('[data-cy="submit"]').click();
+			cy.wait("@Login");
+			cy.get(`.title`).should("not.exist");
+			cy.getCookie("user").should("exist");
 		});
 	});
 });

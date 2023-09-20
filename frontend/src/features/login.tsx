@@ -66,12 +66,10 @@ export const Login = ({ props: { setFormActive } }: ILoginProps) => {
 
 			await axios({ method: "post", url: "/api/cookies", data: cookie });
 			router.refresh();
-			// todo > Test
 		} catch (error: any) {
 			const [errorCode] = error.message.split(": ");
 			const errorMessage = messageErrors.auth[errorCode as keyof typeof messageErrors.auth] ?? messageErrors.default;
 			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: errorMessage } }));
-			// todo > Test
 		}
 	};
 
@@ -120,7 +118,7 @@ export const Login = ({ props: { setFormActive } }: ILoginProps) => {
 
 				{loading && <LoadingButton className="submit" />}
 
-				<button type="button" className="form" onClick={() => setFormActive("create")}>
+				<button data-cy="form" type="button" className="form" onClick={() => setFormActive("create")}>
 					Não tem uma conta? Clique aqui para criar.
 				</button>
 			</form>
