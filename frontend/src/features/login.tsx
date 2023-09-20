@@ -12,13 +12,18 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { SetCookies, UserCookies } from "@/services/interfaces/cookies";
+import { LoadingButton } from "@/components/loading-button";
+
+interface ILoginProps {
+	props: { setFormActive: (state: "login" | "create") => void };
+}
 
 const defaultUserData = {
 	email: "",
 	password: "",
 };
 
-export const Login = () => {
+export const Login = ({ props: { setFormActive } }: ILoginProps) => {
 	const [userData, setUserData] = useState(defaultUserData);
 	const [errors, setErrors] = useState(defaultUserData);
 	const [loginMutation, { loading }] = useMutation<RLogin, ILogin>(authQueries.LOGIN);
@@ -107,11 +112,17 @@ export const Login = () => {
 					/>
 				</div>
 
-				<button className="submit" data-cy="submit" onClick={() => login()}>
-					Entrar
-				</button>
+				{loading || (
+					<button className="submit" data-cy="submit" onClick={() => login()}>
+						Entrar
+					</button>
+				)}
 
-				<button className="form"> Não tem uma conta? Clique aqui para criar.</button>
+				{loading && <LoadingButton className="submit" />}
+
+				<button type="button" className="form" onClick={() => setFormActive("create")}>
+					Não tem uma conta? Clique aqui para criar.
+				</button>
 			</form>
 		</StyledAuth>
 	);

@@ -12,6 +12,10 @@ import { produce } from "immer";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
+interface ICreateAccountProps {
+	props: { setFormActive: (state: "login" | "create") => void };
+}
+
 export const defaultUserData = {
 	email: "",
 	name: "",
@@ -19,7 +23,7 @@ export const defaultUserData = {
 	passwordCheck: "",
 };
 
-export const CreateAccount = () => {
+export const CreateAccount = ({ props: { setFormActive } }: ICreateAccountProps) => {
 	const [userData, setUserData] = useState(defaultUserData);
 	const [errors, setErrors] = useState(defaultUserData);
 	const [createUserMutation, { loading }] = useMutation<RCreateUser, ICreateUser>(userQueries.CREATE_USER);
@@ -39,7 +43,7 @@ export const CreateAccount = () => {
 			await createUserMutation({ variables });
 			setUserData(defaultUserData);
 			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Novo usuário criado", message: "Sua nova conta foi criada com sucesso, você já pode fazer login" } }));
-			// Todo > change form to login form
+			setFormActive("login");
 		} catch (error: any) {
 			const [errorCode] = error.message.split(":");
 			const errorMessage = messageErrors.user[errorCode as keyof typeof messageErrors.user] || messageErrors.default;
@@ -153,7 +157,7 @@ export const CreateAccount = () => {
 				)}
 				{loading && <LoadingButton className="submit" />}
 
-				<button type="button" className="form">
+				<button onClick={() => setFormActive("login")} type="button" className="form">
 					Já tem uma conta? Clique aqui para fazer login.
 				</button>
 			</form>
