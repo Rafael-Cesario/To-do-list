@@ -3,6 +3,7 @@
 import { IGetLists, RGetLists } from "@/services/interfaces/list";
 import { listQueries } from "@/services/queries/list";
 import { useQuery } from "@apollo/client";
+import { LoadingListsSkeleton } from "./loading-lists-skeleton";
 
 interface Props {
 	userID: string;
@@ -11,8 +12,7 @@ interface Props {
 export const ListContainer = ({ userID }: Props) => {
 	const { data, loading } = useQuery<RGetLists, IGetLists>(listQueries.GET_LISTS, { variables: { getListData: { userID } } });
 
-	// todo > List skeleton loading component
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <LoadingListsSkeleton />;
 
 	return (
 		<ul className="list-container">

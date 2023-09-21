@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { StyledSidebar } from "./styles/styled-sidebar";
 import { CookieKeys, UserCookies } from "@/services/interfaces/cookies";
-import { ListContainer } from "./components/list-container";
+import { ListContainer } from "./components/sidebar/list-container";
 
 const getCookies = <Type,>(key: CookieKeys) => {
 	const cookieStore = cookies();
