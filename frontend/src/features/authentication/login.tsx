@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { Field } from "@/components/field";
+import { Field } from "@/features/authentication/components/field";
 import { setNotification } from "@/context/notification-slice";
 import { ILogin, RLogin } from "@/services/interfaces/authentication";
 import { messageErrors } from "@/services/interfaces/errors";
@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { SetCookies, UserCookies } from "@/services/interfaces/cookies";
-import { LoadingButton } from "@/components/loading-button";
+import { LoadingButton } from "@/features/authentication/components/loading-button";
 
 interface ILoginProps {
 	props: { setFormActive: (state: "login" | "create") => void };

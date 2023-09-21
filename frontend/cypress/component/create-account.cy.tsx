@@ -1,4 +1,4 @@
-import { CreateAccount } from "@/features/create-account";
+import { CreateAccount } from "@/features/authentication/create-account";
 import { Providers } from "@/lib/providers";
 
 const Component = () => {

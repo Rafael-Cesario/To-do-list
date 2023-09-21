@@ -50,6 +50,11 @@ describe("Authentication", () => {
 			cy.visit("/");
 		});
 
+		it("Can't submit with empty fields", () => {
+			cy.get('[data-cy="submit"]').click();
+			cy.get('[data-cy="email-error"]').should("have.text", "Este campo não pode ficar vazio");
+		});
+
 		it("Catch a response error due to wrong credentials", () => {
 			cy.intercept("POST", url, (req) => aliasMutaton(req, "Login", { errors: [{ message: "unauthorized" }] }));
 			cy.get('[data-cy="email-input"]').type("notAnUser@domain.com");

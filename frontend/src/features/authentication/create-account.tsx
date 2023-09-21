@@ -1,6 +1,6 @@
 "use client";
-import { Field } from "@/components/field";
-import { LoadingButton } from "@/components/loading-button";
+import { Field } from "@/features/authentication/components/field";
+import { LoadingButton } from "@/features/authentication/components/loading-button";
 import { setNotification } from "@/context/notification-slice";
 import { messageErrors } from "@/services/interfaces/errors";
 import { RCreateUser, ICreateUser } from "@/services/interfaces/user";
