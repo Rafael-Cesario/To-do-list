@@ -46,6 +46,11 @@ export const StyledSidebar = styled.div`
 			}
 		}
 
+		.empty-lists {
+			font-size: 0.8rem;
+			color: ${Palette.text + "50"};
+		}
+
 		.active {
 			color: ${Palette.primary};
 		}

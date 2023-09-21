@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { StyledSidebar } from "./styles/styled-sidebar";
 import { CookieKeys, UserCookies } from "@/services/interfaces/cookies";
+import { ListContainer } from "./components/list-container";
 
 const getCookies = <Type,>(key: CookieKeys) => {
 	const cookieStore = cookies();
@@ -9,7 +10,7 @@ const getCookies = <Type,>(key: CookieKeys) => {
 };
 
 export const Sidebar = () => {
-	const { name } = getCookies<UserCookies>("user");
+	const { name, userID } = getCookies<UserCookies>("user");
 
 	return (
 		<StyledSidebar>
@@ -19,22 +20,7 @@ export const Sidebar = () => {
 
 			<input type="text" placeholder="Buscar listas" className="search-list" />
 
-			<ul className="list-container">
-				<div className="list active">
-					<li>Daily</li>
-					<span className="task-amount">05</span>
-				</div>
-
-				<div className="list">
-					<li>Daily</li>
-					<span className="task-amount">05</span>
-				</div>
-
-				<div className="list">
-					<li>Daily</li>
-					<span className="task-amount">05</span>
-				</div>
-			</ul>
+			<ListContainer userID={userID} />
 
 			<button className="create-list">Criar nova lista</button>
 		</StyledSidebar>
