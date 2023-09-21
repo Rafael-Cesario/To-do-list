@@ -7,6 +7,7 @@ class AuthQueries {
 				email
 				token
 				userID
+				name
 			}
 		}
 	`;

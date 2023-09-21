@@ -19,6 +19,6 @@ export class AuthService {
     if (!isSamePassword) throw new UnauthorizedException('unauthorized: Invalid credentials');
 
     const token = await this.jwt.signAsync({ email });
-    return { userID: user.id, email: user.email, token };
+    return { userID: user.id, email: user.email, token, name: user.name };
   }
 }

@@ -10,5 +10,6 @@ export interface RLogin {
 		userID: string;
 		email: string;
 		token: string;
+		name: string;
 	};
 }

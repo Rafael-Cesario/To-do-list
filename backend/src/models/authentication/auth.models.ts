@@ -9,5 +9,8 @@ export class LoginModel {
   email: string;
 
   @Field()
+  name: string;
+
+  @Field()
   token: string;
 }
