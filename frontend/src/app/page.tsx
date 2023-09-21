@@ -1,3 +1,14 @@
+import { Header } from "@/features/home/header";
+import { Main } from "@/features/home/main";
+import { Sidebar } from "@/features/home/sidebar";
+import { StyledHome } from "@/styles/styled-home";
+
 export default function Home() {
-  return <h1>To do list</h1>
+	return (
+		<StyledHome>
+			<Sidebar />
+			<Header />
+			<Main />
+		</StyledHome>
+	);
 }
