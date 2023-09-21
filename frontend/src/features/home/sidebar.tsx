@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { StyledSidebar } from "./styles/styled-sidebar";
 import { CookieKeys, UserCookies } from "@/services/interfaces/cookies";
 import { ListContainer } from "./components/sidebar/list-container";
+import { CreateList } from "./components/sidebar/create-list";
 
 const getCookies = <Type,>(key: CookieKeys) => {
 	const cookieStore = cookies();
@@ -22,7 +23,7 @@ export const Sidebar = () => {
 
 			<ListContainer userID={userID} />
 
-			<button className="create-list">Criar nova lista</button>
+			<CreateList />
 		</StyledSidebar>
 	);
 };
