@@ -10,6 +10,7 @@ export const StyledSidebar = styled.div`
 	padding: 1rem 2rem;
 
 	.user {
+		text-transform: capitalize;
 		margin-bottom: 2rem;
 		padding-bottom: 1rem;
 		border-bottom: 2px solid #222;

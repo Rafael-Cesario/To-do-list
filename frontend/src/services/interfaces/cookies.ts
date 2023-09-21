@@ -9,5 +9,6 @@ export interface SetCookies {
 export interface UserCookies {
 	userID: string;
 	email: string;
+	name: string;
 	token: string;
 }
