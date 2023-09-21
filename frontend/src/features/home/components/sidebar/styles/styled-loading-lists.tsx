@@ -1,7 +1,8 @@
 import { Palette } from "@/styles/palette";
 import styled from "styled-components";
+import { StyledListContainer } from "./styled-list-container";
 
-export const StyledLoadingLists = styled.ul`
+export const StyledLoadingLists = styled(StyledListContainer)`
 	.list {
 		width: 100%;
 		height: 1.5rem;

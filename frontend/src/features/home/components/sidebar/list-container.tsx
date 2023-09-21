@@ -4,6 +4,7 @@ import { IGetLists, RGetLists } from "@/services/interfaces/list";
 import { listQueries } from "@/services/queries/list";
 import { useQuery } from "@apollo/client";
 import { LoadingListsSkeleton } from "./loading-lists-skeleton";
+import { StyledListContainer } from "./styles/styled-list-container";
 
 interface Props {
 	userID: string;
@@ -15,7 +16,7 @@ export const ListContainer = ({ userID }: Props) => {
 	if (loading) return <LoadingListsSkeleton />;
 
 	return (
-		<ul className="list-container">
+		<StyledListContainer>
 			{data?.lists?.map((list) => (
 				<div className="list" key={list.id}>
 					<li>{list.name}</li>
@@ -24,6 +25,6 @@ export const ListContainer = ({ userID }: Props) => {
 			))}
 
 			{!data?.lists && <span className="empty-lists">Suas listas aparecerão aqui</span>}
-		</ul>
+		</StyledListContainer>
 	);
 };
