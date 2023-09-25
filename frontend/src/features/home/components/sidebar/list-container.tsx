@@ -7,7 +7,7 @@ import { LoadingListsSkeleton } from "./loading-lists-skeleton";
 import { StyledListContainer } from "./styles/styled-list-container";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLists } from "../../context/list-slice";
+import { setActiveList, setLists } from "../../context/list-slice";
 import { Store } from "@/context/store";
 
 interface Props {
@@ -31,7 +31,7 @@ export const ListContainer = ({ userID }: Props) => {
 			{lists
 				.filter((list) => list.name.match(new RegExp(filter, "i")))
 				.map((list) => (
-					<div className="list" key={list.id}>
+					<div onClick={() => dispatch(setActiveList({ newActive: list }))} className="list" key={list.id}>
 						<li>{list.name}</li>
 						<span className="task-amount">{list.tasks?.length}</span>
 					</div>

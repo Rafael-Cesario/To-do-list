@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 interface ListSlice {
 	lists: IList[];
 	filter: string;
+	active: IList | null;
 }
 
 const defaultValues: ListSlice = {
 	lists: [],
 	filter: "",
+	active: null,
 };
 
 export const listSlice = createSlice({
@@ -27,7 +29,11 @@ export const listSlice = createSlice({
 		setAddList(state, action: { payload: { newList: IList } }) {
 			state.lists.push(action.payload.newList);
 		},
+
+		setActiveList(state, action: { payload: { newActive: IList } }) {
+			state.active = action.payload.newActive;
+		},
 	},
 });
 
-export const { setLists, setAddList, setListFilter } = listSlice.actions;
+export const { setLists, setAddList, setListFilter, setActiveList } = listSlice.actions;

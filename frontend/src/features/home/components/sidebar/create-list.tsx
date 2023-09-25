@@ -8,7 +8,7 @@ import { ICreateList, RCreateList } from "@/services/interfaces/list";
 import { messageErrors } from "@/services/interfaces/errors";
 import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/notification-slice";
-import { setAddList } from "../../context/list-slice";
+import { setActiveList, setAddList } from "../../context/list-slice";
 import { LoadingButton } from "@/features/authentication/components/loading-button";
 
 interface Props {
@@ -33,6 +33,7 @@ export const CreateList = ({ userID }: Props) => {
 			if (!data) throw new Error("Data is undefined");
 
 			dispatch(setAddList({ newList: { ...data.createList, tasks: [] } }));
+			dispatch(setActiveList({ newActive: data.createList }));
 			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Nova lista", message: `Sua lista " ${listName} " foi criada com sucesso` } }));
 
 			setListName("");
