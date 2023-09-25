@@ -16,3 +16,14 @@ export interface IGetLists {
 export interface RGetLists {
 	lists: IList[];
 }
+
+export interface ICreateList {
+	createListData: {
+		userID: string;
+		name: string;
+	};
+}
+
+export interface RCreateList {
+	createList: IList;
+}

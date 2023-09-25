@@ -23,7 +23,7 @@ export const Sidebar = () => {
 
 			<ListContainer userID={userID} />
 
-			<CreateList />
+			<CreateList userID={userID} />
 		</StyledSidebar>
 	);
 };

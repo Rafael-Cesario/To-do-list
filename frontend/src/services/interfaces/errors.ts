@@ -8,4 +8,8 @@ export const messageErrors = {
 	auth: {
 		unauthorized: "Email ou senha incorretos",
 	},
+
+	list: {
+		duplicated: "Uma lista com o mesmo nome já existe.",
+	},
 };

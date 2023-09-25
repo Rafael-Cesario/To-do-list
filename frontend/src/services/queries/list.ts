@@ -24,6 +24,16 @@ class ListQueries {
 			}
 		}
 	`;
+
+	readonly CREATE_LIST = gql`
+		mutation CreateList($createListData: CreateListInput!) {
+			createList(createListData: $createListData) {
+				id
+				name
+				userID
+			}
+		}
+	`;
 }
 
 export const listQueries = new ListQueries();
