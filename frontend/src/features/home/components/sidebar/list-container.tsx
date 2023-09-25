@@ -16,7 +16,8 @@ interface Props {
 
 export const ListContainer = ({ userID }: Props) => {
 	const { data, loading } = useQuery<RGetLists, IGetLists>(listQueries.GET_LISTS, { variables: { getListData: { userID } } });
-	const { lists } = useSelector((state: Store) => state.list);
+	const { lists, filter } = useSelector((state: Store) => state.list);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -27,12 +28,14 @@ export const ListContainer = ({ userID }: Props) => {
 
 	return (
 		<StyledListContainer>
-			{lists.map((list) => (
-				<div className="list" key={list.id}>
-					<li>{list.name}</li>
-					<span className="task-amount">{list.tasks?.length}</span>
-				</div>
-			))}
+			{lists
+				.filter((list) => list.name.match(new RegExp(filter, "i")))
+				.map((list) => (
+					<div className="list" key={list.id}>
+						<li>{list.name}</li>
+						<span className="task-amount">{list.tasks?.length}</span>
+					</div>
+				))}
 
 			{!lists.length && <span className="empty-lists">Suas listas aparecerão aqui</span>}
 		</StyledListContainer>
