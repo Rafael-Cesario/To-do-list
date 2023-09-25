@@ -74,5 +74,9 @@ export const StyledCreateList = styled.div`
 				background-color: ${Palette.primary + "90"};
 			}
 		}
+
+		.loading {
+			background-color: #222;
+		}
 	}
 `;

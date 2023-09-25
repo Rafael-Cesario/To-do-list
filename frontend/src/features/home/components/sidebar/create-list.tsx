@@ -9,6 +9,7 @@ import { messageErrors } from "@/services/interfaces/errors";
 import { useDispatch } from "react-redux";
 import { setNotification } from "@/context/notification-slice";
 import { setAddList } from "../../context/list-slice";
+import { LoadingButton } from "@/features/authentication/components/loading-button";
 
 interface Props {
 	userID: string;
@@ -65,9 +66,13 @@ export const CreateList = ({ userID }: Props) => {
 							<span className="error">{error}</span>
 						</div>
 
-						<button className="submit" onClick={() => createList()}>
-							Criar
-						</button>
+						{loading || (
+							<button className="submit" onClick={() => createList()}>
+								Criar
+							</button>
+						)}
+
+						{loading && <LoadingButton className="submit loading" />}
 					</div>
 				</StyledCreateList>
 			)}
