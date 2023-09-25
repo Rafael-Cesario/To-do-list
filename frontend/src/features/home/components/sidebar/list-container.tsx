@@ -27,7 +27,7 @@ export const ListContainer = ({ userID }: Props) => {
 	if (loading) return <LoadingListsSkeleton />;
 
 	return (
-		<StyledListContainer>
+		<StyledListContainer data-cy="list-container">
 			{lists
 				.filter((list) => list.name.match(new RegExp(filter, "i")))
 				.map((list) => (

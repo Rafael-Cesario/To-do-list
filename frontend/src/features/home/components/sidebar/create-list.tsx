@@ -47,12 +47,12 @@ export const CreateList = ({ userID }: Props) => {
 
 	return (
 		<>
-			<button className="create-list" onClick={() => setIsOpen(true)}>
+			<button data-cy="create-list" className="create-list" onClick={() => setIsOpen(true)}>
 				Criar nova lista
 			</button>
 
 			{isOpen && (
-				<StyledCreateList>
+				<StyledCreateList data-cy="create-list-container">
 					<div className="container">
 						<button className="close" onClick={() => setIsOpen(false)}>
 							x
@@ -62,12 +62,12 @@ export const CreateList = ({ userID }: Props) => {
 
 						<div className="field">
 							<label htmlFor="name">Nome</label>
-							<input value={listName} onChange={(e) => setListName(e.target.value)} autoFocus={true} type="text" id="name" placeholder="Digite um nome para sua lista" />
+							<input data-cy="name" value={listName} onChange={(e) => setListName(e.target.value)} autoFocus={true} type="text" id="name" placeholder="Digite um nome para sua lista" />
 							<span className="error">{error}</span>
 						</div>
 
 						{loading || (
-							<button className="submit" onClick={() => createList()}>
+							<button data-cy="submit" className="submit" onClick={() => createList()}>
 								Criar
 							</button>
 						)}
