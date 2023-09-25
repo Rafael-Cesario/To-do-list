@@ -10,6 +10,7 @@ export const SearchList = () => {
 
 	return (
 		<input
+			data-cy="search-list"
 			type="text"
 			placeholder="Buscar listas"
 			className="search-list"
