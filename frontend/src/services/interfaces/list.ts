@@ -14,7 +14,7 @@ export interface IGetLists {
 }
 
 export interface RGetLists {
-	lists: IList[];
+	getLists: IList[];
 }
 
 export interface ICreateList {
