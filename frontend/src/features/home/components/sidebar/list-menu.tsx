@@ -8,7 +8,7 @@ import { setActiveList, setListMenu, setUpdateList } from "../../context/list-sl
 import { useMutation } from "@apollo/client";
 import { listQueries } from "@/services/queries/list";
 import { LoadingButton } from "@/features/authentication/components/loading-button";
-import { IUpdateList, RUpdateList } from "@/services/interfaces/list";
+import { IDeleteList, IUpdateList, RDeleteList, RUpdateList } from "@/services/interfaces/list";
 import { setNotification } from "@/context/notification-slice";
 import { messageErrors } from "@/services/interfaces/errors";
 
@@ -19,6 +19,7 @@ export const ListMenu = () => {
 
 	const dispatch = useDispatch();
 	const [updateListMutation, { loading: saveListLoading }] = useMutation<RUpdateList, IUpdateList>(listQueries.UPDATE_LIST);
+	const [deleteListMutation, { loading: deleteListLoading }] = useMutation<RDeleteList, IDeleteList>(listQueries.DELETE_LIST);
 
 	if (!isMenuOpen || !active) return null;
 
@@ -40,6 +41,17 @@ export const ListMenu = () => {
 			const message = messageErrors.list[errorCode as keyof typeof messageErrors.list];
 			if (!message) return dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: messageErrors.default } }));
 			setError(message);
+		}
+	};
+
+	const deleteList = async () => {
+		try {
+			const variables: IDeleteList = { deleteListData: { listID: active.id } };
+			const { data } = await deleteListMutation({ variables });
+			console.log({ data });
+		} catch (error: any) {
+			const [errorCode] = error.message.split(":");
+			console.log({ errorCode, error });
 		}
 	};
 
@@ -67,7 +79,13 @@ export const ListMenu = () => {
 
 					{saveListLoading && <LoadingButton className="save" />}
 
-					<button className="delete">Excluir lista</button>
+					{deleteListLoading || (
+						<button className="delete" onClick={() => deleteList()}>
+							Excluir lista
+						</button>
+					)}
+
+					{deleteListLoading && <LoadingButton className="delete" />}
 				</div>
 			</div>
 		</StyledListMenu>
