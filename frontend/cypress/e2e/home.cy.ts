@@ -49,5 +49,13 @@ describe("Home page", () => {
 			cy.get("[data-cy='search-list']").clear();
 			cy.get('[data-cy="list-container"] > div').should("have.length", lists.length);
 		});
+
+		it("Set a list as active", () => {
+			cy.get('[data-cy="list-container"] > :nth-child(1)').click();
+			cy.get(".active > .title").should("have.text", lists[0].name);
+
+			cy.get("[data-cy='list-menu-0']").click();
+			cy.get(".container > .title").should("have.text", lists[0].name);
+		});
 	});
 });

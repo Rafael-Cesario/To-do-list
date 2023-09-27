@@ -30,14 +30,14 @@ export const ListContainer = ({ userID }: Props) => {
 		<StyledListContainer data-cy="list-container">
 			{lists
 				.filter((list) => list.name.match(new RegExp(filter, "i")))
-				.map((list) => (
+				.map((list, index) => (
 					<div onClick={() => dispatch(setActiveList({ newActive: list }))} className="list" key={list.id}>
 						<li>{list.name}</li>
 
 						<div className="side">
 							<span className="task-amount">{list.tasks?.length}</span>
 
-							<button onClick={() => dispatch(setListMenu({ isOpen: true }))} className="list-menu">
+							<button data-cy={"list-menu-" + index} onClick={() => dispatch(setListMenu({ isOpen: true }))} className="list-menu">
 								<GiHamburgerMenu title="Menu lista" className="icon" />
 							</button>
 						</div>
