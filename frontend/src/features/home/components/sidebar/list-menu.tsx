@@ -18,7 +18,7 @@ export const ListMenu = () => {
 	const [error, setError] = useState("");
 
 	const dispatch = useDispatch();
-	const [updateListMutation, { loading }] = useMutation<RUpdateList, IUpdateList>(listQueries.UPDATE_LIST);
+	const [updateListMutation, { loading: saveListLoading }] = useMutation<RUpdateList, IUpdateList>(listQueries.UPDATE_LIST);
 
 	if (!isMenuOpen || !active) return null;
 
@@ -59,13 +59,13 @@ export const ListMenu = () => {
 				</div>
 
 				<div className="buttons">
-					{loading || (
+					{saveListLoading || (
 						<button className="save" onClick={() => saveList()}>
 							Salvar alterações
 						</button>
 					)}
 
-					{loading && <LoadingButton className="save" />}
+					{saveListLoading && <LoadingButton className="save" />}
 
 					<button className="delete">Excluir lista</button>
 				</div>

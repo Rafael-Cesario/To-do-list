@@ -38,3 +38,13 @@ export interface IUpdateList {
 export interface RUpdateList {
 	updateList: IList;
 }
+
+export interface IDeleteList {
+	deleteListData: {
+		listID: string;
+	};
+}
+
+export interface RDeleteList {
+	deleteList: string;
+}
