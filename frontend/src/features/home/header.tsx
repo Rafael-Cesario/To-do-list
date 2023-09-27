@@ -17,7 +17,6 @@ export const Header = () => {
 
 			<div className="right">
 				<input className="search-task" type="text" placeholder="Buscar tarefa, tag, ou data" />
-				<button className="configs">Configurações</button>
 				<button className="create-task">Adicionar tarefa</button>
 			</div>
 		</StyledHeader>

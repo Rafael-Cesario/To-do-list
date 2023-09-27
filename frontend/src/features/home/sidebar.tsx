@@ -4,6 +4,7 @@ import { CookieKeys, UserCookies } from "@/services/interfaces/cookies";
 import { ListContainer } from "./components/sidebar/list-container";
 import { CreateList } from "./components/sidebar/create-list";
 import { SearchList } from "./components/sidebar/search-list";
+import { ListMenu } from "./components/sidebar/list-menu";
 
 const getCookies = <Type,>(key: CookieKeys) => {
 	const cookieStore = cookies();
@@ -21,6 +22,7 @@ export const Sidebar = () => {
 			<SearchList />
 			<ListContainer userID={userID} />
 			<CreateList userID={userID} />
+			<ListMenu />
 		</StyledSidebar>
 	);
 };

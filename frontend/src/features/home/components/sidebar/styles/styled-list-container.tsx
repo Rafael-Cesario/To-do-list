@@ -7,19 +7,36 @@ export const StyledListContainer = styled.ul`
 	.list {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		margin: 12px 0;
 		color: ${Palette.text + "90"};
 		font-weight: bold;
 		cursor: pointer;
 
-		.task-amount {
-			background-color: #222;
-			padding: 4px;
-			border-radius: ${Palette.borderRadius};
-			font-size: 0.8rem;
+		.side {
+			display: flex;
+			align-items: center;
 		}
 
-		&:hover {
+		.task-amount {
+			background-color: #222;
+			padding: 4px 8px;
+			border-radius: ${Palette.borderRadius};
+			font-size: 0.8rem;
+			margin-right: 1rem;
+		}
+
+		.list-menu {
+			background-color: transparent;
+			color: ${Palette.text + "80"};
+			font-size: 1.2rem;
+			padding: 0;
+			margin: 0;
+			margin-top: 4px;
+		}
+
+		&:hover,
+		.list-menu:hover {
 			color: ${Palette.primary};
 		}
 	}

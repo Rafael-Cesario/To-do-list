@@ -30,17 +30,7 @@ export const StyledHeader = styled.header`
 
 		.search-task {
 			flex-grow: 1;
-		}
-
-		.configs {
-			background-color: transparent;
-			color: ${Palette.text + "90"};
-			margin: 0 2rem;
-
-			&:hover {
-				background-color: ${Palette.container};
-				color: ${Palette.text};
-			}
+			margin-right: 2rem;
 		}
 	}
 `;
