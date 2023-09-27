@@ -86,4 +86,31 @@ export const StyledListMenu = styled.div`
 			}
 		}
 	}
+
+	.delete-list {
+		border-radius: ${Palette.borderRadius};
+		border: 1px solid ${Palette.error};
+		background-color: #111;
+		box-shadow: 10px 10px 10px #00000030;
+		margin-top: 2rem;
+		width: 100%;
+		text-align: center;
+		padding: 2rem;
+
+		.text {
+			margin-bottom: 1rem;
+		}
+
+		button {
+			margin: 1rem 0;
+			background-color: #aaa;
+			color: #111;
+			width: 48%;
+
+			&:hover {
+				background-color: #222;
+				color: #ddd;
+			}
+		}
+	}
 `;

@@ -16,6 +16,7 @@ export const ListMenu = () => {
 	const { active, isMenuOpen } = useSelector((state: Store) => state.list);
 	const [listName, setListName] = useState("");
 	const [error, setError] = useState("");
+	const [confirmDelete, setConfirmDelete] = useState(false);
 
 	const dispatch = useDispatch();
 	const [updateListMutation, { loading: saveListLoading }] = useMutation<RUpdateList, IUpdateList>(listQueries.UPDATE_LIST);
@@ -48,6 +49,7 @@ export const ListMenu = () => {
 		try {
 			const variables: IDeleteList = { deleteListData: { listID: active.id } };
 			await deleteListMutation({ variables });
+			setConfirmDelete(false);
 			dispatch(setDeleteList({ listID: active.id }));
 			dispatch(setActiveList({ newActive: null }));
 			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Lista removida", message: "Sua lista foi excluida com sucesso." } }));
@@ -82,13 +84,24 @@ export const ListMenu = () => {
 					{saveListLoading && <LoadingButton className="save" />}
 
 					{deleteListLoading || (
-						<button className="delete" onClick={() => deleteList()}>
+						<button className="delete" onClick={() => setConfirmDelete(!confirmDelete)}>
 							Excluir lista
 						</button>
 					)}
 
 					{deleteListLoading && <LoadingButton className="delete" />}
 				</div>
+
+				{confirmDelete && (
+					<div className="delete-list">
+						<p className="text">Quer mesmo remover sua lista?</p>
+
+						<div className="buttons">
+							<button onClick={() => deleteList()}>Sim</button>
+							<button onClick={() => setConfirmDelete(false)}>Não</button>
+						</div>
+					</div>
+				)}
 			</div>
 		</StyledListMenu>
 	);
