@@ -45,7 +45,13 @@ export const StyledListMenu = styled.div`
 
 			#name {
 				background-color: #222;
+			}
+
+			.error {
+				margin: 8px;
 				margin-bottom: 3rem;
+				font-size: 0.8rem;
+				color: ${Palette.error};
 			}
 		}
 

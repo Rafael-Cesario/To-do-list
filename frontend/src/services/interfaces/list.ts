@@ -27,3 +27,14 @@ export interface ICreateList {
 export interface RCreateList {
 	createList: IList;
 }
+
+export interface IUpdateList {
+	updateListData: {
+		listID: string;
+		newName: string;
+	};
+}
+
+export interface RUpdateList {
+	updateList: IList;
+}

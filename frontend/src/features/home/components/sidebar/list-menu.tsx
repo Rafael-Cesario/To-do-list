@@ -8,10 +8,23 @@ import { setListMenu } from "../../context/list-slice";
 
 export const ListMenu = () => {
 	const { active, isMenuOpen } = useSelector((state: Store) => state.list);
+	const [listName, setListName] = useState("");
 	const [error, setError] = useState("");
 	const dispatch = useDispatch();
 
 	if (!isMenuOpen || !active) return null;
+
+	const saveList = () => {
+		if (!listName) return setError("Sua lista precisa de um nome");
+		setError("");
+
+		// todo >
+		// mutation
+		// loading
+		// update state
+		// clear input
+		// notification
+	};
 
 	return (
 		<StyledListMenu>
@@ -24,12 +37,14 @@ export const ListMenu = () => {
 
 				<div className="data">
 					<label htmlFor="name">Nome</label>
-					<input placeholder={active.name} type="text" id="name" />
+					<input placeholder={active.name} type="text" id="name" value={listName} onChange={(e) => setListName(e.target.value)} />
 					<span className="error">{error}</span>
 				</div>
 
 				<div className="buttons">
-					<button className="save">Salvar alterações</button>
+					<button className="save" onClick={() => saveList()}>
+						Salvar alterações
+					</button>
 					<button className="delete">Excluir lista</button>
 				</div>
 			</div>
