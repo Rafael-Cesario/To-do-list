@@ -1,8 +1,7 @@
-import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
 export const StyledLoadingButton = styled.button`
-	background-color: ${Palette.container};
+	background-color: #222;
 	pointer-events: none;
 
 	span {

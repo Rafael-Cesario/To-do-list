@@ -39,7 +39,13 @@ export const listSlice = createSlice({
 		setListMenu(state, action: { payload: { isOpen: boolean } }) {
 			state.isMenuOpen = action.payload.isOpen;
 		},
+
+		setUpdateList(state, action: { payload: { newList: IList } }) {
+			const { newList } = action.payload;
+			const listIndex = state.lists.findIndex((list) => list.id === newList.id);
+			state.lists[listIndex] = newList;
+		},
 	},
 });
 
-export const { setLists, setAddList, setListFilter, setActiveList , setListMenu} = listSlice.actions;
+export const { setLists, setAddList, setListFilter, setActiveList, setListMenu , setUpdateList} = listSlice.actions;
