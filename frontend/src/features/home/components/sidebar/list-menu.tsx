@@ -2,19 +2,23 @@
 
 import { Store } from "@/context/store";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledListMenu } from "./styles/styled-list-menu";
+import { setListMenu } from "../../context/list-slice";
 
 export const ListMenu = () => {
-	const { active } = useSelector((state: Store) => state.list);
+	const { active, isMenuOpen } = useSelector((state: Store) => state.list);
 	const [error, setError] = useState("");
+	const dispatch = useDispatch();
 
-	if (!active) return null;
+	if (!isMenuOpen || !active) return null;
 
 	return (
 		<StyledListMenu>
 			<div className="container">
-				<button className="close">x</button>
+				<button className="close" onClick={() => dispatch(setListMenu({ isOpen: false }))}>
+					x
+				</button>
 
 				<h1 className="title">{active.name}</h1>
 

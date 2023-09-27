@@ -5,12 +5,14 @@ interface ListSlice {
 	lists: IList[];
 	filter: string;
 	active: IList | null;
+	isMenuOpen: boolean;
 }
 
 const defaultValues: ListSlice = {
 	lists: [],
 	filter: "",
 	active: null,
+	isMenuOpen: false,
 };
 
 export const listSlice = createSlice({
@@ -33,7 +35,11 @@ export const listSlice = createSlice({
 		setActiveList(state, action: { payload: { newActive: IList } }) {
 			state.active = action.payload.newActive;
 		},
+
+		setListMenu(state, action: { payload: { isOpen: boolean } }) {
+			state.isMenuOpen = action.payload.isOpen;
+		},
 	},
 });
 
-export const { setLists, setAddList, setListFilter, setActiveList } = listSlice.actions;
+export const { setLists, setAddList, setListFilter, setActiveList , setListMenu} = listSlice.actions;

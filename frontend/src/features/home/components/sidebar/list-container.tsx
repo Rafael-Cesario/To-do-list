@@ -7,7 +7,7 @@ import { LoadingListsSkeleton } from "./loading-lists-skeleton";
 import { StyledListContainer } from "./styles/styled-list-container";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveList, setLists } from "../../context/list-slice";
+import { setActiveList, setListMenu, setLists } from "../../context/list-slice";
 import { Store } from "@/context/store";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -19,10 +19,6 @@ export const ListContainer = ({ userID }: Props) => {
 	const { data, loading } = useQuery<RGetLists, IGetLists>(listQueries.GET_LISTS, { variables: { getListData: { userID } } });
 	const { lists, filter } = useSelector((state: Store) => state.list);
 	const dispatch = useDispatch();
-
-	const openListMenu = () => {
-		// todo > 
-	};
 
 	useEffect(() => {
 		if (data) dispatch(setLists({ lists: data.getLists }));
@@ -41,7 +37,7 @@ export const ListContainer = ({ userID }: Props) => {
 						<div className="side">
 							<span className="task-amount">{list.tasks?.length}</span>
 
-							<button onClick={() => openListMenu()} className="list-menu">
+							<button onClick={() => dispatch(setListMenu({ isOpen: true }))} className="list-menu">
 								<GiHamburgerMenu title="Menu lista" className="icon" />
 							</button>
 						</div>
