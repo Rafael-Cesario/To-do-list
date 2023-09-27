@@ -4,7 +4,7 @@ import { Store } from "@/context/store";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledListMenu } from "./styles/styled-list-menu";
-import { setActiveList, setListMenu, setUpdateList } from "../../context/list-slice";
+import { setActiveList, setDeleteList, setListMenu, setUpdateList } from "../../context/list-slice";
 import { useMutation } from "@apollo/client";
 import { listQueries } from "@/services/queries/list";
 import { LoadingButton } from "@/features/authentication/components/loading-button";
@@ -47,11 +47,13 @@ export const ListMenu = () => {
 	const deleteList = async () => {
 		try {
 			const variables: IDeleteList = { deleteListData: { listID: active.id } };
-			const { data } = await deleteListMutation({ variables });
-			console.log({ data });
+			await deleteListMutation({ variables });
+			dispatch(setDeleteList({ listID: active.id }));
+			dispatch(setActiveList({ newActive: null }));
+			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Lista removida", message: "Sua lista foi excluida com sucesso." } }));
+			dispatch(setListMenu({ isOpen: false }));
 		} catch (error: any) {
-			const [errorCode] = error.message.split(":");
-			console.log({ errorCode, error });
+			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: messageErrors.default } }));
 		}
 	};
 

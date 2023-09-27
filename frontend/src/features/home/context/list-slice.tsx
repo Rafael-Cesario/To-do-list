@@ -32,7 +32,7 @@ export const listSlice = createSlice({
 			state.lists.push(action.payload.newList);
 		},
 
-		setActiveList(state, action: { payload: { newActive: IList } }) {
+		setActiveList(state, action: { payload: { newActive: IList | null } }) {
 			state.active = action.payload.newActive;
 		},
 
@@ -45,7 +45,12 @@ export const listSlice = createSlice({
 			const listIndex = state.lists.findIndex((list) => list.id === newList.id);
 			state.lists[listIndex] = newList;
 		},
+
+		setDeleteList(state, action: { payload: { listID: string } }) {
+			const listIndex = state.lists.findIndex((list) => list.id === action.payload.listID);
+			state.lists.splice(listIndex, 1);
+		},
 	},
 });
 
-export const { setLists, setAddList, setListFilter, setActiveList, setListMenu , setUpdateList} = listSlice.actions;
+export const { setLists, setAddList, setListFilter, setActiveList, setListMenu, setUpdateList , setDeleteList} = listSlice.actions;

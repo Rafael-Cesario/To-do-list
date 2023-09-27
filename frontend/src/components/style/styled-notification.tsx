@@ -17,7 +17,7 @@ export const StyledNotification = styled.div<{ type: Notification }>`
 	border-radius: ${Palette.borderRadius};
 	width: 100%;
 	max-width: 400px;
-	box-shadow: 10px 10px 10px #00000030;
+	box-shadow: 10px 10px 5px #00000030;
 
 	.close {
 		position: absolute;
