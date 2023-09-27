@@ -57,5 +57,23 @@ describe("Home page", () => {
 			cy.get("[data-cy='list-menu-0']").click();
 			cy.get(".container > .title").should("have.text", lists[0].name);
 		});
+
+		describe("List menu", () => {
+			it("Rename a list", () => {
+				const newName = "list new name";
+				cy.intercept("POST", url, (req) => aliasMutaton(req, "UpdateList", { data: { updateList: { ...lists[3], name: newName } } }));
+
+				cy.get("[data-cy='list-menu-3']").click();
+				cy.get(".container > .title").should("have.text", lists[3].name);
+				cy.get("#name").type(newName);
+				cy.get(`[data-cy="save"]`).click();
+				cy.wait("@UpdateList");
+
+				cy.get(".container > .title").should("have.text", newName);
+				cy.get("[data-cy='close-list-menu']").click();
+				cy.get('[data-cy="list-container"] > :nth-child(4) > li').should("have.text", newName);
+				cy.get(".active > .title").should("have.text", newName);
+			});
+		});
 	});
 });

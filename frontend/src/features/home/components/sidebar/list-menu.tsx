@@ -62,7 +62,7 @@ export const ListMenu = () => {
 	return (
 		<StyledListMenu>
 			<div className="container">
-				<button className="close" onClick={() => dispatch(setListMenu({ isOpen: false }))}>
+				<button className="close" data-cy="close-list-menu" onClick={() => dispatch(setListMenu({ isOpen: false }))}>
 					x
 				</button>
 
@@ -76,7 +76,7 @@ export const ListMenu = () => {
 
 				<div className="buttons">
 					{saveListLoading || (
-						<button className="save" onClick={() => saveList()}>
+						<button data-cy="save" className="save" onClick={() => saveList()}>
 							Salvar alterações
 						</button>
 					)}
@@ -84,7 +84,7 @@ export const ListMenu = () => {
 					{saveListLoading && <LoadingButton className="save" />}
 
 					{deleteListLoading || (
-						<button className="delete" onClick={() => setConfirmDelete(!confirmDelete)}>
+						<button data-cy="delete" className="delete" onClick={() => setConfirmDelete(!confirmDelete)}>
 							Excluir lista
 						</button>
 					)}
