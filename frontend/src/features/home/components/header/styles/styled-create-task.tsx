@@ -143,18 +143,36 @@ export const StyledCreateTask = styled.div`
 				flex-wrap: wrap;
 				margin: 1rem 0;
 
+				.empty-tags {
+					font-size: 0.8rem;
+					color: ${Palette.text + "50"};
+				}
+
 				.tag {
 					border-radius: ${Palette.borderRadius};
-					padding: 4px 8px;
+					margin: 4px;
+					padding: 4px;
+					font-size: 0.8rem;
+					display: flex;
+
+					.name {
+						padding-left: 8px;
+					}
 
 					.remove-tag {
-						border-left: 2px solid white;
+						border-left: 2px solid ${Palette.text + "50"};
 						background-color: transparent;
 						margin-left: 8px;
 						padding: 0 8px;
 						font-size: 1rem;
+						font-weight: normal;
 					}
 				}
+			}
+
+			.error {
+				font-size: 0.8rem;
+				color: ${Palette.error};
 			}
 		}
 

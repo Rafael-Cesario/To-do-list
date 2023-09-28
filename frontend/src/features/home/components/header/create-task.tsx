@@ -1,12 +1,30 @@
 import { useState } from "react";
 import { StyledCreateTask } from "./styles/styled-create-task";
 import { Status } from "@/services/interfaces/task";
-import { produce } from "immer";
 import { TaskStatus } from "./components/task-status";
+import { TaskTag } from "./components/task-tag";
 
-type FieldName = "title" | "description";
+export interface ITagColors {
+	gray: "#222222";
+	red: "#973E3E";
+	brown: "#5B3124";
+	orange: "#B54F2F";
+	yellow: "#D8AE1C";
+	green: "#3D7921";
+	lightBlue: "#1060CC";
+	darkBlue: "#213479";
+	purple: "#481F72";
+	pink: "#B024A2";
+}
 
-export const defaultTaskValues = {
+export interface ITaskValues {
+	title: string;
+	description: string;
+	status: Status;
+	tags: { name: string; color: keyof ITagColors }[];
+}
+
+const defaultTaskValues: ITaskValues = {
 	title: "",
 	description: "",
 	status: Status.NEXT,
@@ -16,27 +34,6 @@ export const defaultTaskValues = {
 export const CreateTask = () => {
 	const [isOpen, setIsOpen] = useState(true);
 	const [task, setTask] = useState(defaultTaskValues);
-
-	const tagColors = {
-		gray: "#222222",
-		red: "#973E3E",
-		brown: "#5B3124",
-		orange: "#B54F2F",
-		yellow: "#D8AE1C",
-		green: "#3D7921",
-		lightBlue: "#1060CC",
-		darkBlue: "#213479",
-		purple: "#481F72",
-		pink: "#B024A2",
-	};
-
-	const updateFieldValue = (fieldName: FieldName, newValue: string) => {
-		const state = produce(task, (draft) => {
-			draft[fieldName] = newValue;
-		});
-
-		setTask(state);
-	};
 
 	const submitTask = () => {
 		console.log({ task });
@@ -61,7 +58,7 @@ export const CreateTask = () => {
 							<label className="field-title" htmlFor="name">
 								Titulo
 							</label>
-							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => updateFieldValue("title", e.target.value)} />
+							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} />
 							<span className="error">Sua tarefa precisa de um titulo</span>
 						</div>
 
@@ -70,7 +67,7 @@ export const CreateTask = () => {
 								Descrição ou anotações
 							</label>
 
-							<textarea name="description" id="description" placeholder="Links, notas, descrição..." value={task.description} onChange={(e) => updateFieldValue("description", e.target.value)} />
+							<textarea name="description" id="description" placeholder="Links, notas, descrição..." value={task.description} onChange={(e) => setTask({ ...task, description: e.target.value })} />
 						</div>
 
 						<div className="field-status">
@@ -83,27 +80,7 @@ export const CreateTask = () => {
 							</div>
 						</div>
 
-						<div className="field-tag">
-							<h2 className="field-title">Tags</h2>
-
-							<div className="colors">
-								{Object.entries(tagColors).map(([name, color]) => (
-									<button className="color" key={name} style={{ backgroundColor: color }} name={name} />
-								))}
-							</div>
-
-							<div>
-								<input type="text" className="tag-name" placeholder="Nova tag" />
-								<button className="tag-create">+</button>
-							</div>
-
-							<div className="tag-container">
-								<div className="tag" style={{ backgroundColor: tagColors.red }}>
-									<span>Importante</span>
-									<button className="remove-tag">x</button>
-								</div>
-							</div>
-						</div>
+						<TaskTag props={{ task, setTask }} />
 
 						<button className="submit-task" onClick={() => submitTask()}>
 							Criar
