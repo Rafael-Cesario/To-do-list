@@ -22,9 +22,9 @@ const lists: IList[] = [
 describe("Home page", () => {
 	beforeEach(() => {
 		const cookies: UserCookies = { email: "user01@email.com", name: "user01", userID: "123", token: "qweqwe" };
+		cy.intercept("POST", url, (req) => aliasMutation(req, "GetLists", { data: { getLists: lists } }));
 		cy.setCookie("user", JSON.stringify(cookies));
 		cy.visit("/");
-		cy.intercept("POST", url, (req) => aliasMutation(req, "GetLists", { data: { getLists: lists } }));
 		cy.wait("@GetLists");
 	});
 
@@ -59,44 +59,68 @@ describe("Home page", () => {
 		});
 
 		describe("List menu", () => {
-			it("Rename a list", () => {
-				const newName = "list new name";
-				cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateList", { data: { updateList: { ...lists[3], name: newName } } }));
+			describe("Rename list", () => {
+				it("Rename a list", () => {
+					const newName = "list new name";
+					cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateList", { data: { updateList: { ...lists[3], name: newName } } }));
 
-				cy.get("[data-cy='list-menu-3']").click();
-				cy.get(".container > .title").should("have.text", lists[3].name);
-				cy.get("#name").type(newName);
-				cy.get(`[data-cy="save"]`).click();
-				cy.wait("@UpdateList");
+					cy.get("[data-cy='list-menu-3']").click();
+					cy.get(".container > .title").should("have.text", lists[3].name);
+					cy.get("#name").type(newName);
+					cy.get(`[data-cy="save"]`).click();
+					cy.wait("@UpdateList");
 
-				cy.get(".container > .title").should("have.text", newName);
-				cy.get("[data-cy='close-list-menu']").click();
-				cy.get('[data-cy="list-container"] > :nth-child(4) > li').should("have.text", newName);
-				cy.get(".active > .title").should("have.text", newName);
+					cy.get(".container > .title").should("have.text", newName);
+					cy.get("[data-cy='close-list-menu']").click();
+					cy.get('[data-cy="list-container"] > :nth-child(4) > li').should("have.text", newName);
+					cy.get(".active > .title").should("have.text", newName);
+				});
+
+				it("Catch a response error", () => {
+					cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateList", { errors: [{ message: "duplicated:" }] }));
+					cy.get("[data-cy='list-menu-3']").click();
+					cy.get("#name").type("name for a list");
+					cy.get(`[data-cy="save"]`).click();
+					cy.wait("@UpdateList");
+					cy.get(`[data-cy="error"]`).should("have.text", "Uma lista com o mesmo nome já existe.");
+				});
+
+				it("Catch an unknow response error", () => {
+					cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateList", { errors: [{ message: "unknowError" }] }));
+					cy.get(`[data-cy="list-menu-3"]`).click();
+					cy.get("#name").type("Name for a list");
+					cy.get(`[data-cy="save"]`).click();
+					cy.wait("@UpdateList");
+					cy.get("[data-cy='notification'] > .text").should("contain.text", "Um erro inesperado ocorreu");
+				});
+
+				it("Show an error due to submit with empty list name", () => {
+					cy.get(`[data-cy="list-menu-3"]`).click();
+					cy.get(`[data-cy="save"]`).click();
+					cy.get(`[data-cy="error"]`).should("have.text", "Sua lista precisa de um nome");
+				});
 			});
 
-			it("Catch a response error", () => {
-				cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateList", { errors: [{ message: "duplicated:" }] }));
-				cy.get("[data-cy='list-menu-3']").click();
-				cy.get("#name").type("name for a list");
-				cy.get(`[data-cy="save"]`).click();
-				cy.wait("@UpdateList");
-				cy.get(`[data-cy="error"]`).should("have.text", "Uma lista com o mesmo nome já existe.");
-			});
+			describe("Delete list", () => {
+				it("Delete a list", () => {
+					cy.intercept("POST", url, (req) => aliasMutation(req, "DeleteList", { data: { deleteList: "List deleted" } }));
+					cy.get("[data-cy='list-menu-3']").click();
+					cy.get("[data-cy='delete']").click();
+					cy.get("[data-cy='confirm-delete']").click();
+					cy.wait("@DeleteList");
+					cy.get("[data-cy='list-container'] > .list").should("have.length", lists.length - 1);
+					cy.get("[data-cy='notification'] > .title").should("have.text", "Lista removida");
+				});
 
-			it("Catch an unknow response error", () => {
-				cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateList", { errors: [{ message: "unknowError" }] }));
-				cy.get(`[data-cy="list-menu-3"]`).click();
-				cy.get("#name").type("Name for a list");
-				cy.get(`[data-cy="save"]`).click();
-				cy.wait("@UpdateList");
-				cy.get("[data-cy='notification'] > .text").should("contain.text", "Um erro inesperado ocorreu");
-			});
-
-			it("Show an error due to submit with empty list name", () => {
-				cy.get(`[data-cy="list-menu-3"]`).click();
-				cy.get(`[data-cy="save"]`).click();
-				cy.get(`[data-cy="error"]`).should("have.text", "Sua lista precisa de um nome");
+				it("Catch a error", () => {
+					cy.intercept("POST", url, (req) => aliasMutation(req, "DeleteList", { errors: [{ message: "unknowError" }] }));
+					cy.get("[data-cy='list-menu-3']").click();
+					cy.get("[data-cy='delete']").click();
+					cy.get("[data-cy='confirm-delete']").click();
+					cy.wait("@DeleteList");
+					cy.get("[data-cy='list-container'] > .list").should("have.length", lists.length);
+					cy.get("[data-cy='notification'] > .text").should("contain.text", "Um erro inesperado ocorreu");
+				});
 			});
 		});
 	});
