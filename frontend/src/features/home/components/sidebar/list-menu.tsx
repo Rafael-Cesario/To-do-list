@@ -71,7 +71,7 @@ export const ListMenu = () => {
 				<div className="data">
 					<label htmlFor="name">Nome</label>
 					<input autoFocus={true} placeholder={active.name} type="text" id="name" value={listName} onChange={(e) => setListName(e.target.value)} />
-					<span className="error">{error}</span>
+					<span className="error" data-cy="error">{error}</span>
 				</div>
 
 				<div className="buttons">
