@@ -1,8 +1,21 @@
 import { useState } from "react";
 import { StyledCreateTask } from "./styles/styled-create-task";
+import { Status } from "@/services/interfaces/task";
+import { produce } from "immer";
+import { TaskStatus } from "./components/task-status";
+
+type FieldName = "title" | "description";
+
+export const defaultTaskValues = {
+	title: "",
+	description: "",
+	status: Status.NEXT,
+	tags: [],
+};
 
 export const CreateTask = () => {
 	const [isOpen, setIsOpen] = useState(true);
+	const [task, setTask] = useState(defaultTaskValues);
 
 	const tagColors = {
 		gray: "#222222",
@@ -17,14 +30,30 @@ export const CreateTask = () => {
 		pink: "#B024A2",
 	};
 
+	const updateFieldValue = (fieldName: FieldName, newValue: string) => {
+		const state = produce(task, (draft) => {
+			draft[fieldName] = newValue;
+		});
+
+		setTask(state);
+	};
+
+	const submitTask = () => {
+		console.log({ task });
+	};
+
 	return (
 		<>
-			<button className="create-task">Adicionar tarefa</button>
+			<button onClick={() => setIsOpen(true)} className="create-task">
+				Adicionar tarefa
+			</button>
 
 			{isOpen && (
 				<StyledCreateTask>
 					<div className="container">
-						<button className="close">x</button>
+						<button className="close" onClick={() => setIsOpen(false)}>
+							x
+						</button>
 
 						<h1 className="title">Nova Tarefa</h1>
 
@@ -32,7 +61,7 @@ export const CreateTask = () => {
 							<label className="field-title" htmlFor="name">
 								Titulo
 							</label>
-							<input type="text" id="name" placeholder="Tarefa para fazer" />
+							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => updateFieldValue("title", e.target.value)} />
 							<span className="error">Sua tarefa precisa de um titulo</span>
 						</div>
 
@@ -41,16 +70,16 @@ export const CreateTask = () => {
 								Descrição ou anotações
 							</label>
 
-							<textarea name="description" id="description" placeholder="Links, notas, descrição..."></textarea>
+							<textarea name="description" id="description" placeholder="Links, notas, descrição..." value={task.description} onChange={(e) => updateFieldValue("description", e.target.value)} />
 						</div>
 
 						<div className="field-status">
 							<h2 className="field-title">Status</h2>
 
 							<div className="status">
-								<button className="next active">Próximas</button>
-								<button className="current">Em Progresso</button>
-								<button className="done">Concluídas</button>
+								<TaskStatus props={{ text: "Próximas", className: "next", task, setTask, status: Status.NEXT, taskStatus: task.status }} />
+								<TaskStatus props={{ text: "Em Progresso", className: "current", task, setTask, status: Status.CURRENT, taskStatus: task.status }} />
+								<TaskStatus props={{ text: "Concluídas", className: "done", task, setTask, status: Status.DONE, taskStatus: task.status }} />
 							</div>
 						</div>
 
@@ -76,7 +105,9 @@ export const CreateTask = () => {
 							</div>
 						</div>
 
-						<button className="submit-task">Criar</button>
+						<button className="submit-task" onClick={() => submitTask()}>
+							Criar
+						</button>
 					</div>
 				</StyledCreateTask>
 			)}

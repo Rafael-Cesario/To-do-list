@@ -95,6 +95,10 @@ export const StyledCreateTask = styled.div`
 				margin: 8px;
 				padding: 0;
 				opacity: 0.5;
+
+				&:hover {
+					opacity: 1;
+				}
 			}
 
 			.next {

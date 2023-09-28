@@ -16,7 +16,7 @@ export interface ITag {
 }
 
 export enum Status {
-	NEXT,
-	CURRENT,
-	DONE,
+	NEXT = "NEXT",
+	CURRENT = "CURRENT",
+	DONE = "DONE",
 }
