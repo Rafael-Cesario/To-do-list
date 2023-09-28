@@ -19,7 +19,6 @@ export const TaskTag = ({ props: { task, setTask } }: Props) => {
 	const [tag, setTag] = useState(defaultTagValue);
 	const [error, setError] = useState("");
 	const nameRef = useRef<HTMLInputElement>(null);
-
 	const hasTags = task.tags.length > 0;
 
 	const tagColors: ITagColors = {
@@ -38,8 +37,6 @@ export const TaskTag = ({ props: { task, setTask } }: Props) => {
 	const createTag = () => {
 		if (!tag.name) return;
 
-		console.log("tags", task.tags);
-
 		const isDuplicated = task.tags.find((taskTag) => taskTag.name === tag.name);
 		if (isDuplicated) return setError("Uma tag com o mesmo nome já existe.");
 		setError("");
@@ -51,6 +48,15 @@ export const TaskTag = ({ props: { task, setTask } }: Props) => {
 		setTask(state);
 		setTag(defaultTagValue);
 		nameRef.current?.focus();
+	};
+
+	const removeTag = (tagName: string) => {
+		const state = produce(task, (draft) => {
+			const tagIndex = draft.tags.findIndex((tag) => tag.name === tagName);
+			draft.tags.splice(tagIndex, 1);
+		});
+
+		setTask(state);
 	};
 
 	return (
@@ -75,11 +81,15 @@ export const TaskTag = ({ props: { task, setTask } }: Props) => {
 
 			<div className="tag-container">
 				{hasTags || <p className="empty-tags">Nenhuma tag adicionada a esta tarefa</p>}
+
 				{hasTags &&
 					task.tags.map((tag) => (
 						<div className="tag" key={tag.name} style={{ backgroundColor: tagColors[tag.color] }}>
 							<p className="name">{tag.name}</p>
-							<button className="remove-tag">x</button>
+
+							<button className="remove-tag" onClick={() => removeTag(tag.name)}>
+								x
+							</button>
 						</div>
 					))}
 			</div>
