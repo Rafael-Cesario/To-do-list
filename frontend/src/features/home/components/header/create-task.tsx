@@ -70,16 +70,7 @@ export const CreateTask = () => {
 							<textarea name="description" id="description" placeholder="Links, notas, descrição..." value={task.description} onChange={(e) => setTask({ ...task, description: e.target.value })} />
 						</div>
 
-						<div className="field-status">
-							<h2 className="field-title">Status</h2>
-
-							<div className="status">
-								<TaskStatus props={{ text: "Próximas", className: "next", task, setTask, status: Status.NEXT, taskStatus: task.status }} />
-								<TaskStatus props={{ text: "Em Progresso", className: "current", task, setTask, status: Status.CURRENT, taskStatus: task.status }} />
-								<TaskStatus props={{ text: "Concluídas", className: "done", task, setTask, status: Status.DONE, taskStatus: task.status }} />
-							</div>
-						</div>
-
+						<TaskStatus props={{ task, setTask }} />
 						<TaskTag props={{ task, setTask }} />
 
 						<button className="submit-task" onClick={() => submitTask()}>

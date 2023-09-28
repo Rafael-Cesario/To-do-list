@@ -32,15 +32,13 @@ export const StyledCreateTask = styled.div`
 
 		.field-title {
 			font-size: 1rem;
-			font-weight: bold;
+			font-weight: normal;
 			margin-bottom: 1rem;
 		}
 
 		.field-name,
-		.field-description,
-		.field-status,
-		.field-tag {
-			margin-bottom: 4rem;
+		.field-description {
+			margin: 2rem 0;
 		}
 
 		.field-name {
@@ -53,7 +51,7 @@ export const StyledCreateTask = styled.div`
 
 			.error {
 				font-size: 0.8rem;
-				margin: 0 1rem;
+				margin: 1rem;
 				color: ${Palette.error};
 			}
 		}
@@ -83,39 +81,6 @@ export const StyledCreateTask = styled.div`
 				&:focus {
 					outline: 2px solid ${Palette.primary};
 				}
-			}
-		}
-
-		.field-status {
-			.next,
-			.current,
-			.done {
-				width: 120px;
-				height: 30px;
-				margin: 8px;
-				padding: 0;
-				opacity: 0.5;
-
-				&:hover {
-					opacity: 1;
-				}
-			}
-
-			.next {
-				background-color: ${Palette.insideContainer};
-			}
-
-			.current {
-				background-color: ${Palette.primary};
-			}
-
-			.done {
-				background-color: ${Palette.success};
-			}
-
-			.active {
-				opacity: 1;
-				position: relative;
 			}
 		}
 
