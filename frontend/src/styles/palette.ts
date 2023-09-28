@@ -1,6 +1,7 @@
 export const Palette = {
 	background: "#111111",
 	container: "#181818",
+	insideContainer: "#222222",
 	text: "#eeeeee",
 	primary: "#1060cc",
 

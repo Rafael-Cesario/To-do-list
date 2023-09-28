@@ -12,6 +12,15 @@ export const StyledGlobal = styled.createGlobalStyle`
 	body {
 		background-color: ${Palette.background};
 		color: ${Palette.text};
+
+		&::-webkit-scrollbar {
+			background-color: ${Palette.background};
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: ${Palette.text + "20"};
+			border-radius: ${Palette.borderRadius};
+		}
 	}
 
 	input,

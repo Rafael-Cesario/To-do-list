@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import { StyledHeader } from "./styles/styled-header";
 import { Store } from "@/context/store";
+import { CreateTask } from "./components/header/create-task";
 
 export const Header = () => {
 	const { active } = useSelector((state: Store) => state.list);
@@ -17,7 +18,7 @@ export const Header = () => {
 
 			<div className="right">
 				<input className="search-task" type="text" placeholder="Buscar tarefa, tag, ou data" />
-				<button className="create-task">Adicionar tarefa</button>
+				<CreateTask />
 			</div>
 		</StyledHeader>
 	);
