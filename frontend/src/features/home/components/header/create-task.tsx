@@ -6,9 +6,11 @@ import { TaskTag } from "./components/task-tag";
 import { ITaskValues } from "./interfaces/task";
 import { useMutation } from "@apollo/client";
 import { taskQueries } from "@/services/queries/task";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Store } from "@/context/store";
 import { LoadingButton } from "@/features/authentication/components/loading-button";
+import { setNotification } from "@/context/notification-slice";
+import { messageErrors } from "@/services/interfaces/errors";
 
 const defaultTaskValues: ITaskValues = {
 	title: "",
@@ -24,9 +26,12 @@ export const CreateTask = () => {
 	const { active } = useSelector((state: Store) => state.list);
 
 	const [createTaskMutation, { loading }] = useMutation<RCreateTask, ICreateTask>(taskQueries.CREATE_TASK);
+	const dispatch = useDispatch();
 
 	if (!active) return;
 
+	// Todo >
+	// update task slice
 	const submitTask = async () => {
 		if (!task.title) return setError("Sua tarefa precisa de um titulo.");
 		setError("");
@@ -35,15 +40,13 @@ export const CreateTask = () => {
 			const variables: ICreateTask = { createTaskData: { ...task, listID: active.id } };
 			const { data } = await createTaskMutation({ variables });
 			if (!data) throw new Error("Data is undefined");
-			console.log({ data });
 
-			// Todo >
-			// clean and close new task container
-			// send notification
-			// update task slice
+			setTask(defaultTaskValues);
+			setIsOpen(false);
+
+			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Nova Tarefa", message: "Sua nova tarefa foi adicionada com sucesso" } }));
 		} catch (error: any) {
-			console.log({ error });
-			// catch errors
+			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: messageErrors.default } }));
 		}
 	};
 
