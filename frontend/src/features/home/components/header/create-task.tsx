@@ -3,26 +3,7 @@ import { StyledCreateTask } from "./styles/styled-create-task";
 import { Status } from "@/services/interfaces/task";
 import { TaskStatus } from "./components/task-status";
 import { TaskTag } from "./components/task-tag";
-
-export interface ITagColors {
-	gray: "#222222";
-	red: "#973E3E";
-	brown: "#5B3124";
-	orange: "#B54F2F";
-	yellow: "#D8AE1C";
-	green: "#3D7921";
-	lightBlue: "#1060CC";
-	darkBlue: "#213479";
-	purple: "#481F72";
-	pink: "#B024A2";
-}
-
-export interface ITaskValues {
-	title: string;
-	description: string;
-	status: Status;
-	tags: { name: string; color: keyof ITagColors }[];
-}
+import { ITaskValues } from "./interfaces/task";
 
 const defaultTaskValues: ITaskValues = {
 	title: "",
@@ -32,10 +13,14 @@ const defaultTaskValues: ITaskValues = {
 };
 
 export const CreateTask = () => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 	const [task, setTask] = useState(defaultTaskValues);
+	const [error, setError] = useState("");
 
 	const submitTask = () => {
+		if (!task.title) return setError("Sua tarefa precisa de um titulo.");
+		setError("");
+
 		console.log({ task });
 	};
 
@@ -59,7 +44,7 @@ export const CreateTask = () => {
 								Titulo
 							</label>
 							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} />
-							<span className="error">Sua tarefa precisa de um titulo</span>
+							<span className="error">{error}</span>
 						</div>
 
 						<div className="field-description">

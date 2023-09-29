@@ -1,5 +1,5 @@
 import { Status } from "@/services/interfaces/task";
-import { ITaskValues } from "../create-task";
+import { ITaskValues } from "../interfaces/task";
 import { StyledTaskStatus } from "./styles/styled-task-status";
 
 interface Props {

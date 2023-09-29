@@ -48,12 +48,12 @@ export const StyledCreateTask = styled.div`
 			#name {
 				background-color: ${Palette.insideContainer};
 			}
+		}
 
-			.error {
-				font-size: 0.8rem;
-				margin: 1rem;
-				color: ${Palette.error};
-			}
+		.error {
+			font-size: 0.8rem;
+			margin: 1rem;
+			color: ${Palette.error};
 		}
 
 		.field-description {

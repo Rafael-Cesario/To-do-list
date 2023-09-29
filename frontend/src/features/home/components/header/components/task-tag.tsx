@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { ITagColors, ITaskValues } from "../create-task";
+import { ITagColors, ITaskValues } from "../interfaces/task";
 import { produce } from "immer";
 
 interface Props {
