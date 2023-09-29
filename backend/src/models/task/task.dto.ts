@@ -10,7 +10,7 @@ export class CreateTaskInput {
   listID: string;
 
   @Transform(({ value }: { value: string }) => value.toLowerCase().trim())
-  @Length(3, 30)
+  @Length(3, 100)
   @Field()
   title: string;
 

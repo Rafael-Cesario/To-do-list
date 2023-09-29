@@ -1,7 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
-import { ITagColors, ITaskValues } from "../interfaces/task";
 import { produce } from "immer";
+import { ITagColors, ITaskValues } from "@/services/interfaces/task";
+import { tagColors } from "@/styles/palette";
 
 interface Props {
 	props: {
@@ -20,19 +21,6 @@ export const TaskTag = ({ props: { task, setTask } }: Props) => {
 	const [error, setError] = useState("");
 	const nameRef = useRef<HTMLInputElement>(null);
 	const hasTags = task.tags.length > 0;
-
-	const tagColors: ITagColors = {
-		gray: "#222222",
-		red: "#973E3E",
-		brown: "#5B3124",
-		orange: "#B54F2F",
-		yellow: "#D8AE1C",
-		green: "#3D7921",
-		lightBlue: "#1060CC",
-		darkBlue: "#213479",
-		purple: "#481F72",
-		pink: "#B024A2",
-	};
 
 	const createTag = () => {
 		if (!tag.name) return;

@@ -1,5 +1,3 @@
-import { ITagColors } from "@/features/home/components/header/interfaces/task";
-
 export interface ITask {
 	id: string;
 	listID: string;
@@ -14,7 +12,27 @@ export interface ITag {
 	id: string;
 	taskID: string;
 	name: string;
-	color: string;
+	color: keyof ITagColors;
+}
+
+export interface ITagColors {
+	gray: string;
+	red: string;
+	brown: string;
+	orange: string;
+	yellow: string;
+	green: string;
+	lightBlue: string;
+	darkBlue: string;
+	purple: string;
+	pink: string;
+}
+
+export interface ITaskValues {
+	title: string;
+	description: string;
+	status: Status;
+	tags: { name: string; color: keyof ITagColors }[];
 }
 
 export enum Status {

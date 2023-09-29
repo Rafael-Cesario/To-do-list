@@ -56,6 +56,7 @@ export const listSlice = createSlice({
 			const { newTask } = action.payload;
 			const listIndex = state.lists.findIndex((list) => list.id === newTask.listID);
 			state.lists[listIndex].tasks.push(newTask);
+			state.active?.tasks.push(newTask);
 		},
 	},
 });
