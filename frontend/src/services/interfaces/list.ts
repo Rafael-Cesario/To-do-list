@@ -4,7 +4,7 @@ export interface IList {
 	id: string;
 	userID: string;
 	name: string;
-	tasks?: ITask[];
+	tasks: ITask[];
 }
 
 export interface IGetLists {

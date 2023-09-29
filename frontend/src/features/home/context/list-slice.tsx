@@ -1,4 +1,5 @@
 import { IList } from "@/services/interfaces/list";
+import { ITask } from "@/services/interfaces/task";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ListSlice {
@@ -50,7 +51,13 @@ export const listSlice = createSlice({
 			const listIndex = state.lists.findIndex((list) => list.id === action.payload.listID);
 			state.lists.splice(listIndex, 1);
 		},
+
+		setCreateTask(state, action: { payload: { newTask: ITask } }) {
+			const { newTask } = action.payload;
+			const listIndex = state.lists.findIndex((list) => list.id === newTask.listID);
+			state.lists[listIndex].tasks.push(newTask);
+		},
 	},
 });
 
-export const { setLists, setAddList, setListFilter, setActiveList, setListMenu, setUpdateList , setDeleteList} = listSlice.actions;
+export const { setLists, setAddList, setListFilter, setActiveList, setListMenu, setUpdateList, setDeleteList , setCreateTask} = listSlice.actions;

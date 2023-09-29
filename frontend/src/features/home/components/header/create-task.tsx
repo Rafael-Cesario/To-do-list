@@ -1,3 +1,4 @@
+import { Store } from "@/context/store";
 import { useState } from "react";
 import { StyledCreateTask } from "./styles/styled-create-task";
 import { ICreateTask, RCreateTask, Status } from "@/services/interfaces/task";
@@ -7,10 +8,10 @@ import { ITaskValues } from "./interfaces/task";
 import { useMutation } from "@apollo/client";
 import { taskQueries } from "@/services/queries/task";
 import { useDispatch, useSelector } from "react-redux";
-import { Store } from "@/context/store";
 import { LoadingButton } from "@/features/authentication/components/loading-button";
 import { setNotification } from "@/context/notification-slice";
 import { messageErrors } from "@/services/interfaces/errors";
+import { setCreateTask } from "../../context/list-slice";
 
 const defaultTaskValues: ITaskValues = {
 	title: "",
@@ -30,8 +31,6 @@ export const CreateTask = () => {
 
 	if (!active) return;
 
-	// Todo >
-	// update task slice
 	const submitTask = async () => {
 		if (!task.title) return setError("Sua tarefa precisa de um titulo.");
 		setError("");
@@ -44,6 +43,7 @@ export const CreateTask = () => {
 			setTask(defaultTaskValues);
 			setIsOpen(false);
 
+			dispatch(setCreateTask({ newTask: data.createTask }));
 			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Nova Tarefa", message: "Sua nova tarefa foi adicionada com sucesso" } }));
 		} catch (error: any) {
 			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: messageErrors.default } }));
