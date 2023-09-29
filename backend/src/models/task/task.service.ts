@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateTaskInput, DeleteTaskInput, UpdateTaskInput } from './task.dto';
 
@@ -7,9 +7,6 @@ export class TaskService {
   constructor(private prisma: PrismaService) {}
 
   async createTask(createTaskData: CreateTaskInput) {
-    const isDuplicated = await this.prisma.task.findFirst({ where: { title: createTaskData.title } });
-    if (isDuplicated) throw new ConflictException('duplicated: A task with the same title already exist');
-
     const { tags, ...taskData } = createTaskData;
     const task = await this.prisma.task.create({ data: { ...taskData, tags: { create: tags } }, include: { tags: true } });
 
@@ -18,9 +15,6 @@ export class TaskService {
 
   async updateTask(updateTaskData: UpdateTaskInput) {
     const { tags, taskID, ...taskInput } = updateTaskData;
-
-    const isDuplicated = await this.prisma.task.findFirst({ where: { title: taskInput.title, NOT: { id: taskID } } });
-    if (isDuplicated) throw new ConflictException('duplicated: A task with the same title already exist');
 
     const task = await this.prisma.task.update({
       where: { id: taskID },
