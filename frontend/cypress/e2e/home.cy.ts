@@ -1,5 +1,6 @@
 import { UserCookies } from "@/services/interfaces/cookies";
 import { IList } from "@/services/interfaces/list";
+import { ICreateTask, ITask, ITaskValues, Status } from "@/services/interfaces/task";
 import { CyHttpMessages } from "cypress/types/net-stubbing";
 
 const url = process.env.NEXT_PUBLIC_API_URL ?? "";
@@ -122,6 +123,52 @@ describe("Home page", () => {
 					cy.get("[data-cy='notification'] > .text").should("contain.text", "Um erro inesperado ocorreu");
 				});
 			});
+		});
+	});
+
+	describe.only("Header", () => {
+		beforeEach(() => {
+			cy.get("[data-cy='list-container'] > :nth-child(1)").click();
+		});
+
+		it("Creates a new task", () => {
+			const inputTask: ITaskValues = {
+				title: "Title for my task",
+				description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet varius nibh. Etiam molestie, ipsum eget finibus ultricies, magna.",
+				status: Status.DONE,
+				tags: [{ name: "important", color: "red" }],
+			};
+
+			cy.get(`[data-cy='open-create-task']`).click();
+			cy.get('[data-cy="container-create-task"]').should("exist");
+
+			cy.get(`[data-cy="input-title"]`).type(inputTask.title);
+			cy.get(`[data-cy='input-description']`).type(inputTask.description);
+			cy.get(`[data-cy="status"]`).eq(2).click();
+
+			cy.get(`[data-cy="input-tag"]`).type(inputTask.tags[0].name);
+			cy.get(`[data-cy="red"]`).click();
+			cy.get(`[data-cy="create-tag"]`).click();
+			cy.get(".tag-container").should("have.length", 1);
+
+			const ResponseCreateTask: ITask = {
+				...inputTask,
+				id: "1",
+				listID: lists[0].id,
+				createdAt: new Date(Date.now()),
+				tags: [{ id: "1", taskID: "1", ...inputTask.tags[0] }],
+			};
+
+			cy.intercept("POST", url, (req) => aliasMutation(req, "CreateTask", { data: { createTask: ResponseCreateTask } }));
+			cy.get(`[data-cy="submit-task"]`).click();
+			cy.wait("@CreateTask");
+
+			cy.get('[data-cy="container-create-task"]').should("not.exist");
+			cy.get("[data-cy='task-title']").should("have.text", inputTask.title);
+			cy.get(`[data-cy="task-status"]`).should("have.text", "Concluídas");
+			cy.get(`[data-cy="task-description"]`).should("have.text", inputTask.description);
+			cy.get(`[data-cy="task-tags"]`).should("have.length", inputTask.tags.length);
+			cy.get(`[data-cy="task-tags"] > :nth-child(1)`).should("have.text", inputTask.tags[0].name);
 		});
 	});
 });

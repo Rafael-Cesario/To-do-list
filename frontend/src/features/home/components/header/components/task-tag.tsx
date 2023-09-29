@@ -54,13 +54,21 @@ export const TaskTag = ({ props: { task, setTask } }: Props) => {
 			<form onSubmit={(e) => e.preventDefault()}>
 				<div className="colors">
 					{Object.entries(tagColors).map(([key, color]) => (
-						<button type="button" onClick={() => setTag({ ...tag, color: key as keyof ITagColors })} className="color" key={key} style={{ backgroundColor: color }} name={key} />
+						<button type="button" onClick={() => setTag({ ...tag, color: key as keyof ITagColors })} className="color" key={key} style={{ backgroundColor: color }} name={key} data-cy={key} />
 					))}
 				</div>
 
-				<input ref={nameRef} value={tag.name} onChange={(e) => setTag({ ...tag, name: e.target.value.trim().toLowerCase() })} type="text" className="tag-name" placeholder="Nova tag" />
+				<input
+					ref={nameRef}
+					value={tag.name}
+					onChange={(e) => setTag({ ...tag, name: e.target.value.trim().toLowerCase() })}
+					type="text"
+					className="tag-name"
+					placeholder="Nova tag"
+					data-cy="input-tag"
+				/>
 
-				<button className="tag-create" onClick={() => createTag()}>
+				<button data-cy="create-tag" className="tag-create" onClick={() => createTag()}>
 					+
 				</button>
 

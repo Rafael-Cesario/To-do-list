@@ -30,14 +30,20 @@ export const Main = () => {
 			{active.tasks.map((task) => (
 				<div key={task.id} className="task">
 					<div className="top">
-						<h1 className="title">{task.title}</h1>
+						<h1 data-cy="task-title" className="title">
+							{task.title}
+						</h1>
 						<span className="date">{formatDate(task.createdAt)}</span>
-						<span className={`status ${task.status.toLowerCase()}`}>{statusMap[task.status]}</span>
+						<span data-cy="task-status" className={`status ${task.status.toLowerCase()}`}>
+							{statusMap[task.status]}
+						</span>
 					</div>
 
-					<p className="description">{task.description}</p>
+					<p data-cy="task-description" className="description">
+						{task.description}
+					</p>
 
-					<div className="tags">
+					<div className="tags" data-cy="task-tags">
 						{task.tags.map((tag) => (
 							<span className="tag" key={tag.id} style={{ backgroundColor: tagColors[tag.color] }}>
 								{tag.name}

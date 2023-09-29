@@ -30,9 +30,9 @@ export const CreateTask = () => {
 
 	if (!active) return;
 
-	// todo > title max length 30 characters
 	const submitTask = async () => {
 		if (!task.title) return setError("Sua tarefa precisa de um titulo.");
+		if (task.title.length > 100) return setError("Seu titulo não deve exceder 100 caracteres");
 		setError("");
 
 		try {
@@ -53,13 +53,13 @@ export const CreateTask = () => {
 
 	return (
 		<>
-			<button onClick={() => setIsOpen(true)} className="create-task">
+			<button data-cy="open-create-task" onClick={() => setIsOpen(true)} className="create-task">
 				Adicionar tarefa
 			</button>
 
 			{isOpen && (
 				<StyledCreateTask>
-					<div className="container">
+					<div className="container" data-cy="container-create-task">
 						<button className="close" onClick={() => setIsOpen(false)}>
 							x
 						</button>
@@ -70,7 +70,7 @@ export const CreateTask = () => {
 							<label className="field-title" htmlFor="name">
 								Titulo
 							</label>
-							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} />
+							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} data-cy="input-title" />
 							<span className="error">{error}</span>
 						</div>
 
@@ -79,7 +79,14 @@ export const CreateTask = () => {
 								Descrição ou anotações
 							</label>
 
-							<textarea name="description" id="description" placeholder="Links, notas, descrição..." value={task.description} onChange={(e) => setTask({ ...task, description: e.target.value })} />
+							<textarea
+								name="description"
+								id="description"
+								placeholder="Links, notas, descrição..."
+								value={task.description}
+								onChange={(e) => setTask({ ...task, description: e.target.value })}
+								data-cy="input-description"
+							/>
 						</div>
 
 						<TaskStatus props={{ task, setTask }} />
@@ -97,7 +104,7 @@ const ButtonCreateTask = ({ loading, submitTask }: { loading: boolean; submitTas
 	if (loading) return <LoadingButton className="submit-task" />;
 
 	return (
-		<button className="submit-task" onClick={() => submitTask()}>
+		<button data-cy="submit-task" className="submit-task" onClick={() => submitTask()}>
 			Criar
 		</button>
 	);
