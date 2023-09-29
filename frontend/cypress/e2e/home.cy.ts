@@ -1,6 +1,6 @@
 import { UserCookies } from "@/services/interfaces/cookies";
 import { IList } from "@/services/interfaces/list";
-import { ICreateTask, ITask, ITaskValues, Status } from "@/services/interfaces/task";
+import { ITask, ITaskValues, Status } from "@/services/interfaces/task";
 import { CyHttpMessages } from "cypress/types/net-stubbing";
 
 const url = process.env.NEXT_PUBLIC_API_URL ?? "";
@@ -170,5 +170,19 @@ describe("Home page", () => {
 			cy.get(`[data-cy="task-tags"]`).should("have.length", inputTask.tags.length);
 			cy.get(`[data-cy="task-tags"] > :nth-child(1)`).should("have.text", inputTask.tags[0].name);
 		});
+
+		it.only("Catch title errors", () => {
+			cy.get(`[data-cy='open-create-task']`).click();
+			cy.get(`[data-cy="submit-task"]`).click();
+			cy.get(".field-name > .error").should("have.text", "Sua tarefa precisa de um titulo.");
+			cy.get(`[data-cy="input-title"]`).should("have.focus");
+
+			cy.get(`[data-cy="input-title"]`).type("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id finibus dolor, eu auctor tortor. Vestibulum lectus.");
+			cy.get(`[data-cy="submit-task"]`).click();
+			cy.get(".field-name > .error").should("have.text", "Seu titulo não deve exceder 100 caracteres");
+			cy.get(`[data-cy="input-title"]`).should("have.focus");
+		});
+
+		it("Catch create task response error");
 	});
 });

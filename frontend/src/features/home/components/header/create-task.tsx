@@ -1,5 +1,5 @@
 import { Store } from "@/context/store";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { StyledCreateTask } from "./styles/styled-create-task";
 import { ICreateTask, ITaskValues, RCreateTask, Status } from "@/services/interfaces/task";
 import { TaskStatus } from "./components/task-status";
@@ -24,6 +24,7 @@ export const CreateTask = () => {
 	const [task, setTask] = useState(defaultTaskValues);
 	const [error, setError] = useState("");
 	const { active } = useSelector((state: Store) => state.list);
+	const titleRef = useRef<HTMLInputElement>(null);
 
 	const [createTaskMutation, { loading }] = useMutation<RCreateTask, ICreateTask>(taskQueries.CREATE_TASK);
 	const dispatch = useDispatch();
@@ -31,8 +32,16 @@ export const CreateTask = () => {
 	if (!active) return;
 
 	const submitTask = async () => {
-		if (!task.title) return setError("Sua tarefa precisa de um titulo.");
-		if (task.title.length > 100) return setError("Seu titulo não deve exceder 100 caracteres");
+		if (!task.title) {
+			titleRef.current?.focus();
+			return setError("Sua tarefa precisa de um titulo.");
+		}
+
+		if (task.title.length > 100) {
+			titleRef.current?.focus();
+			return setError("Seu titulo não deve exceder 100 caracteres");
+		}
+
 		setError("");
 
 		try {
@@ -70,7 +79,7 @@ export const CreateTask = () => {
 							<label className="field-title" htmlFor="name">
 								Titulo
 							</label>
-							<input type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} data-cy="input-title" />
+							<input ref={titleRef} type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} data-cy="input-title" />
 							<span className="error">{error}</span>
 						</div>
 
