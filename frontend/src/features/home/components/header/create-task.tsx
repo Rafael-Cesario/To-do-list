@@ -8,6 +8,7 @@ import { useMutation } from "@apollo/client";
 import { taskQueries } from "@/services/queries/task";
 import { useSelector } from "react-redux";
 import { Store } from "@/context/store";
+import { LoadingButton } from "@/features/authentication/components/loading-button";
 
 const defaultTaskValues: ITaskValues = {
 	title: "",
@@ -22,7 +23,7 @@ export const CreateTask = () => {
 	const [error, setError] = useState("");
 	const { active } = useSelector((state: Store) => state.list);
 
-	const [createTaskMutation] = useMutation<RCreateTask, ICreateTask>(taskQueries.CREATE_TASK);
+	const [createTaskMutation, { loading }] = useMutation<RCreateTask, ICreateTask>(taskQueries.CREATE_TASK);
 
 	if (!active) return;
 
@@ -33,9 +34,16 @@ export const CreateTask = () => {
 		try {
 			const variables: ICreateTask = { createTaskData: { ...task, listID: active.id } };
 			const { data } = await createTaskMutation({ variables });
+			if (!data) throw new Error("Data is undefined");
 			console.log({ data });
+
+			// Todo >
+			// clean and close new task container
+			// send notification
+			// update task slice
 		} catch (error: any) {
 			console.log({ error });
+			// catch errors
 		}
 	};
 
@@ -73,12 +81,20 @@ export const CreateTask = () => {
 						<TaskStatus props={{ task, setTask }} />
 						<TaskTag props={{ task, setTask }} />
 
-						<button className="submit-task" onClick={() => submitTask()}>
-							Criar
-						</button>
+						<ButtonCreateTask loading={loading} submitTask={submitTask} />
 					</div>
 				</StyledCreateTask>
 			)}
 		</>
+	);
+};
+
+const ButtonCreateTask = ({ loading, submitTask }: { loading: boolean; submitTask: () => void }) => {
+	if (loading) return <LoadingButton className="submit-task" />;
+
+	return (
+		<button className="submit-task" onClick={() => submitTask()}>
+			Criar
+		</button>
 	);
 };
