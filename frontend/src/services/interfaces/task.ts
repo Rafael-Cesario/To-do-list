@@ -1,3 +1,5 @@
+import { ITagColors } from "@/features/home/components/header/interfaces/task";
+
 export interface ITask {
 	id: string;
 	listID: string;
@@ -19,4 +21,21 @@ export enum Status {
 	NEXT = "NEXT",
 	CURRENT = "CURRENT",
 	DONE = "DONE",
+}
+
+export interface ICreateTask {
+	createTaskData: {
+		listID: string;
+		title: string;
+		description: string;
+		status: Status;
+		tags: {
+			name: string;
+			color: keyof ITagColors;
+		}[];
+	};
+}
+
+export interface RCreateTask {
+	createTask: ITask;
 }

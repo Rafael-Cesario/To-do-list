@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { StyledCreateTask } from "./styles/styled-create-task";
-import { Status } from "@/services/interfaces/task";
+import { ICreateTask, RCreateTask, Status } from "@/services/interfaces/task";
 import { TaskStatus } from "./components/task-status";
 import { TaskTag } from "./components/task-tag";
 import { ITaskValues } from "./interfaces/task";
+import { useMutation } from "@apollo/client";
+import { taskQueries } from "@/services/queries/task";
+import { useSelector } from "react-redux";
+import { Store } from "@/context/store";
 
 const defaultTaskValues: ITaskValues = {
 	title: "",
@@ -16,12 +20,23 @@ export const CreateTask = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [task, setTask] = useState(defaultTaskValues);
 	const [error, setError] = useState("");
+	const { active } = useSelector((state: Store) => state.list);
 
-	const submitTask = () => {
+	const [createTaskMutation] = useMutation<RCreateTask, ICreateTask>(taskQueries.CREATE_TASK);
+
+	if (!active) return;
+
+	const submitTask = async () => {
 		if (!task.title) return setError("Sua tarefa precisa de um titulo.");
 		setError("");
 
-		console.log({ task });
+		try {
+			const variables: ICreateTask = { createTaskData: { ...task, listID: active.id } };
+			const { data } = await createTaskMutation({ variables });
+			console.log({ data });
+		} catch (error: any) {
+			console.log({ error });
+		}
 	};
 
 	return (
