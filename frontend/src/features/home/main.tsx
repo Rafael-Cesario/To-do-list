@@ -41,7 +41,7 @@ export const Main = () => {
 	if (!active) return null;
 
 	return (
-		<StyledMain>
+		<StyledMain data-cy="task-container">
 			{active.tasks
 				.filter((task) => filterTask(task))
 				.map((task) => (

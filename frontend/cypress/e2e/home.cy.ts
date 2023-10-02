@@ -12,8 +12,30 @@ const aliasMutation = (req: CyHttpMessages.IncomingHttpRequest, operationName: s
 	}
 };
 
+const tasks: ITask[] = [
+	{
+		id: "01",
+		listID: "01",
+		title: "task01",
+		description: "",
+		status: Status.NEXT,
+		createdAt: new Date("10/10/10"),
+		tags: [],
+	},
+
+	{
+		id: "02",
+		listID: "02",
+		title: "task02",
+		description: "",
+		status: Status.DONE,
+		createdAt: new Date("02/02/02"),
+		tags: [],
+	},
+];
+
 const lists: IList[] = [
-	{ id: "01", name: "list01", userID: "01", tasks: [] },
+	{ id: "01", name: "list01", userID: "01", tasks: tasks },
 	{ id: "02", name: "list02", userID: "02", tasks: [] },
 	{ id: "03", name: "list03", userID: "03", tasks: [] },
 	{ id: "04", name: "list04", userID: "04", tasks: [] },
@@ -190,6 +212,17 @@ describe("Home page", () => {
 			cy.get(`[data-cy="submit-task"]`).click();
 			cy.wait("@CreateTask");
 			cy.get('[data-cy="notification"] > .title').should("have.text", "Erro");
+		});
+
+		it("Filter task by title, date, status", () => {
+			cy.get(`[data-cy="search-task"]`).type("task02");
+			cy.get(`[data-cy="task-container"] > .task`).should("have.length", 1);
+
+			cy.get(`[data-cy="search-task"]`).clear().type("2002");
+			cy.get(`[data-cy="task-container"] > .task`).should("have.length", 1);
+
+			cy.get(`[data-cy="search-task"]`).clear().type("próximas");
+			cy.get(`[data-cy="task-container"] > .task`).should("have.length", 1);
 		});
 	});
 });
