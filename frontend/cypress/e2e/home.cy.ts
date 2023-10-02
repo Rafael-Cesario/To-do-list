@@ -126,7 +126,7 @@ describe("Home page", () => {
 		});
 	});
 
-	describe.only("Header", () => {
+	describe("Header", () => {
 		beforeEach(() => {
 			cy.get("[data-cy='list-container'] > :nth-child(1)").click();
 		});
@@ -171,7 +171,7 @@ describe("Home page", () => {
 			cy.get(`[data-cy="task-tags"] > :nth-child(1)`).should("have.text", inputTask.tags[0].name);
 		});
 
-		it.only("Catch title errors", () => {
+		it("Catch title errors", () => {
 			cy.get(`[data-cy='open-create-task']`).click();
 			cy.get(`[data-cy="submit-task"]`).click();
 			cy.get(".field-name > .error").should("have.text", "Sua tarefa precisa de um titulo.");
@@ -183,6 +183,13 @@ describe("Home page", () => {
 			cy.get(`[data-cy="input-title"]`).should("have.focus");
 		});
 
-		it("Catch create task response error");
+		it("Catch unknow response error", () => {
+			cy.intercept("POST", url, (req) => aliasMutation(req, "CreateTask", { errors: [{ message: "unknow" }] }));
+			cy.get(`[data-cy='open-create-task']`).click();
+			cy.get(`[data-cy="input-title"]`).type("Title");
+			cy.get(`[data-cy="submit-task"]`).click();
+			cy.wait("@CreateTask");
+			cy.get('[data-cy="notification"] > .title').should("have.text", "Erro");
+		});
 	});
 });
