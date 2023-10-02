@@ -175,7 +175,7 @@ describe("Home page", () => {
 
 			const ResponseCreateTask: ITask = {
 				...inputTask,
-				id: "1",
+				id: "03",
 				listID: lists[0].id,
 				createdAt: new Date(Date.now()),
 				tags: [{ id: "1", taskID: "1", ...inputTask.tags[0] }],
@@ -186,11 +186,11 @@ describe("Home page", () => {
 			cy.wait("@CreateTask");
 
 			cy.get('[data-cy="container-create-task"]').should("not.exist");
-			cy.get("[data-cy='task-title']").should("have.text", inputTask.title);
-			cy.get(`[data-cy="task-status"]`).should("have.text", "Concluídas");
-			cy.get(`[data-cy="task-description"]`).should("have.text", inputTask.description);
-			cy.get(`[data-cy="task-tags"]`).should("have.length", inputTask.tags.length);
-			cy.get(`[data-cy="task-tags"] > :nth-child(1)`).should("have.text", inputTask.tags[0].name);
+			cy.get(`[data-cy="task-03"] > .top > .title`).should("have.text", inputTask.title);
+			cy.get(`[data-cy="task-03-status"]`).should("have.text", "Concluídas");
+			cy.get(`[data-cy="task-03-description"]`).should("have.text", inputTask.description);
+			cy.get(`[data-cy="task-03-tags"]`).should("have.length", inputTask.tags.length);
+			cy.get(`[data-cy="task-03-tags"] > :nth-child(1)`).should("have.text", inputTask.tags[0].name);
 		});
 
 		it("Catch title errors", () => {

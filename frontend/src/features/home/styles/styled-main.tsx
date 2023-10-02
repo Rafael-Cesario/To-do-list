@@ -17,7 +17,6 @@ export const StyledMain = styled.main`
 	.task {
 		border-radius: ${Palette.borderRadius};
 		background-color: ${Palette.container};
-		margin: 1rem;
 		padding: 1rem;
 		max-width: 500px;
 		width: 100%;

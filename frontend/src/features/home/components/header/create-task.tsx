@@ -1,9 +1,6 @@
 import { Store } from "@/context/store";
 import { useRef, useState } from "react";
-import { StyledCreateTask } from "./styles/styled-create-task";
 import { ICreateTask, ITaskValues, RCreateTask, Status } from "@/services/interfaces/task";
-import { TaskStatus } from "./components/task-status";
-import { TaskTag } from "./components/task-tag";
 import { useMutation } from "@apollo/client";
 import { taskQueries } from "@/services/queries/task";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +8,7 @@ import { LoadingButton } from "@/features/authentication/components/loading-butt
 import { setNotification } from "@/context/notification-slice";
 import { messageErrors } from "@/services/interfaces/errors";
 import { setCreateTask } from "../../context/list-slice";
+import { TaskFields } from "../task-fields";
 
 const defaultTaskValues: ITaskValues = {
 	title: "",
@@ -67,43 +65,9 @@ export const CreateTask = () => {
 			</button>
 
 			{isOpen && (
-				<StyledCreateTask>
-					<div className="container" data-cy="container-create-task">
-						<button className="close" onClick={() => setIsOpen(false)}>
-							x
-						</button>
-
-						<h1 className="title">Nova Tarefa</h1>
-
-						<div className="field-name">
-							<label className="field-title" htmlFor="name">
-								Titulo
-							</label>
-							<input ref={titleRef} type="text" id="name" placeholder="Tarefa para fazer" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} data-cy="input-title" />
-							<span className="error">{error}</span>
-						</div>
-
-						<div className="field-description">
-							<label className="field-title" htmlFor="description">
-								Descrição ou anotações
-							</label>
-
-							<textarea
-								name="description"
-								id="description"
-								placeholder="Links, notas, descrição..."
-								value={task.description}
-								onChange={(e) => setTask({ ...task, description: e.target.value })}
-								data-cy="input-description"
-							/>
-						</div>
-
-						<TaskStatus props={{ task, setTask }} />
-						<TaskTag props={{ task, setTask }} />
-
-						<ButtonCreateTask loading={loading} submitTask={submitTask} />
-					</div>
-				</StyledCreateTask>
+				<TaskFields props={{ containerTitle: "Nova Lista", error, setIsOpen, setTask, task, titleRef }}>
+					<ButtonCreateTask loading={loading} submitTask={submitTask} />
+				</TaskFields>
 			)}
 		</>
 	);

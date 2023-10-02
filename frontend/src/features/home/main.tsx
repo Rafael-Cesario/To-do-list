@@ -6,7 +6,8 @@ import { tagColors } from "@/styles/palette";
 import { ITask } from "@/services/interfaces/task";
 
 export const Main = () => {
-	const { active, filter } = useSelector((state: Store) => ({ ...state.list, ...state.searchTask }));
+	const { active } = useSelector((state: Store) => state.list);
+	const { filter } = useSelector((state: Store) => state.searchTask);
 
 	const statusMap = {
 		NEXT: "Próximas",
@@ -38,29 +39,30 @@ export const Main = () => {
 		if (matchTag) return task;
 	};
 
-	if (!active) return null;
+	// todo > Component for empty tasks
+	if (!active?.tasks) return null;
 
 	return (
 		<StyledMain data-cy="task-container">
 			{active.tasks
 				.filter((task) => filterTask(task))
 				.map((task) => (
-					<div key={task.id} className="task">
+					<div key={task.id} className="task" data-cy={`task-${task.id}`}>
 						<div className="top">
-							<h1 data-cy="task-title" className="title">
+							<h1 data-cy={`task-${task.id}-title`} className="title">
 								{task.title}
 							</h1>
 							<span className="date">{formatDate(task.createdAt)}</span>
-							<span data-cy="task-status" className={`status ${task.status.toLowerCase()}`}>
+							<span data-cy={`task-${task.id}-status`} className={`status ${task.status.toLowerCase()}`}>
 								{statusMap[task.status]}
 							</span>
 						</div>
 
-						<p data-cy="task-description" className="description">
+						<p data-cy={`task-${task.id}-description`} className="description">
 							{task.description}
 						</p>
 
-						<div className="tags" data-cy="task-tags">
+						<div className="tags" data-cy={`task-${task.id}-tags`}>
 							{task.tags.map((tag) => (
 								<span className="tag" key={tag.id} style={{ backgroundColor: tagColors[tag.color] }}>
 									{tag.name}

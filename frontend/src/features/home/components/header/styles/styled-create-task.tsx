@@ -1,7 +1,7 @@
 import { Palette } from "@/styles/palette";
 import styled from "styled-components";
 
-export const StyledCreateTask = styled.div`
+export const StyledTaskFields = styled.div`
 	background-color: #00000050;
 	backdrop-filter: blur(2px);
 	position: absolute;
