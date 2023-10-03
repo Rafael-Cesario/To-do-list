@@ -10,7 +10,7 @@ import { messageErrors } from "@/services/interfaces/errors";
 import { setCreateTask } from "../../context/list-slice";
 import { TaskFields } from "../task-fields";
 
-const defaultTaskValues: ITaskValues = {
+export const defaultTaskValues: ITaskValues = {
 	title: "",
 	description: "",
 	status: Status.NEXT,
@@ -21,8 +21,8 @@ export const CreateTask = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [task, setTask] = useState(defaultTaskValues);
 	const [error, setError] = useState("");
-	const { active } = useSelector((state: Store) => state.list);
 	const titleRef = useRef<HTMLInputElement>(null);
+	const { active } = useSelector((state: Store) => state.list);
 
 	const [createTaskMutation, { loading }] = useMutation<RCreateTask, ICreateTask>(taskQueries.CREATE_TASK);
 	const dispatch = useDispatch();

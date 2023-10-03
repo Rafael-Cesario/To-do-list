@@ -15,7 +15,7 @@ export const taskSlice = createSlice({
 	name: "task",
 	initialState: defaultValues,
 	reducers: {
-		setActive(state, action: { payload: ITask }) {
+		setActive(state, action: { payload: ITask | null }) {
 			state.activeTask = action.payload;
 		},
 

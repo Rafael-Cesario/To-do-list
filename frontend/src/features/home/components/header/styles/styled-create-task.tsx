@@ -147,6 +147,22 @@ export const StyledTaskFields = styled.div`
 			font-size: 1rem;
 		}
 
+		.buttons {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			column-gap: 1rem;
+			margin-top: 8rem;
+
+			button {
+				width: 100%;
+				font-size: 1rem;
+			}
+
+			button:nth-child(2) {
+				background-color: ${Palette.error};
+			}
+		}
+
 		.close {
 			position: absolute;
 			top: 0;
