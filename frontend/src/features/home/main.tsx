@@ -1,13 +1,16 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledMain } from "./styles/styled-main";
 import { Store } from "@/context/store";
 import { tagColors } from "@/styles/palette";
 import { ITask } from "@/services/interfaces/task";
+import { setActive } from "./context/task-slice";
 
 export const Main = () => {
 	const { active } = useSelector((state: Store) => state.list);
-	const { filter } = useSelector((state: Store) => state.searchTask);
+	const { filter } = useSelector((state: Store) => state.task);
+
+	const dispatch = useDispatch();
 
 	const statusMap = {
 		NEXT: "Próximas",
@@ -47,7 +50,7 @@ export const Main = () => {
 			{active.tasks
 				.filter((task) => filterTask(task))
 				.map((task) => (
-					<div key={task.id} className="task" data-cy={`task-${task.id}`}>
+					<div onClick={() => dispatch(setActive(task))} key={task.id} className="task" data-cy={`task-${task.id}`}>
 						<div className="top">
 							<h1 data-cy={`task-${task.id}-title`} className="title">
 								{task.title}
