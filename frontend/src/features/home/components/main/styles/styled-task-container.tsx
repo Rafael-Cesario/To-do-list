@@ -50,8 +50,6 @@ export const StyledTaskContainer = styled.div`
 		border-radius: ${Palette.borderRadius};
 		margin: 4px;
 		font-size: 0.8rem;
-		color: #111;
-		font-weight: bold;
 	}
 
 	.status {

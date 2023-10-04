@@ -225,4 +225,34 @@ describe("Home page", () => {
 			cy.get(`[data-cy="task-container"] > .task`).should("have.length", 1);
 		});
 	});
+
+	describe("Main", () => {
+		beforeEach(() => {
+			cy.get("[data-cy='list-container'] > :nth-child(1)").click();
+		});
+
+		it("Update a task", () => {
+			const updateTaskResponse: ITask = {
+				...tasks[0],
+				title: "New task name",
+				tags: [{ color: "gray", name: "New tag", id: "01", taskID: tasks[0].id }],
+				status: Status.DONE,
+			};
+
+			cy.get('[data-cy="task-01"]').click();
+			cy.get('[data-cy="container-create-task"] > .title').should("have.text", tasks[0].title);
+			cy.get('[data-cy="input-title"]').clear().type(updateTaskResponse.title);
+			cy.get(".status > .done").click();
+			cy.get('[data-cy="input-tag"]').type(updateTaskResponse.tags[0].name);
+			cy.get('[data-cy="create-tag"]').click();
+
+			cy.intercept("POST", url, (req) => aliasMutation(req, "UpdateTask", { data: { updateTask: updateTaskResponse } }));
+			cy.get(".buttons > :nth-child(1)").click();
+			cy.wait("@UpdateTask");
+
+			cy.get('[data-cy="task-01-title"]').should("have.text", updateTaskResponse.title);
+			cy.get('[data-cy="task-01-status"]').should("have.text", "Concluídas");
+			cy.get('[data-cy="task-01-tags"]').should("have.length", updateTaskResponse.tags.length);
+		});
+	});
 });
