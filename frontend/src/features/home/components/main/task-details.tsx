@@ -8,6 +8,10 @@ import { IUpdateTask, RUpdateTask, TaskInput } from "@/services/interfaces/task"
 import { defaultTaskValues } from "../header/create-task";
 import { useMutation } from "@apollo/client";
 import { taskQueries } from "@/services/queries/task";
+import { setNotification } from "@/context/notification-slice";
+import { messageErrors } from "@/services/interfaces/errors";
+import { setUpdateTask } from "../../context/list-slice";
+import { LoadingButton } from "@/features/authentication/components/loading-button";
 
 export const TaskDetails = () => {
 	const { activeTask } = useSelector((state: Store) => state.task);
@@ -17,7 +21,7 @@ export const TaskDetails = () => {
 
 	const dispatch = useDispatch();
 	const setIsOpen = () => dispatch(setActive(null));
-	const [updateTaskMutation, { loading }] = useMutation<RUpdateTask, IUpdateTask>(taskQueries.UPDATE_TASK);
+	const [updateTaskMutation, { loading: loadingUpdateTask }] = useMutation<RUpdateTask, IUpdateTask>(taskQueries.UPDATE_TASK);
 
 	useEffect(() => {
 		if (activeTask) {
@@ -35,9 +39,8 @@ export const TaskDetails = () => {
 		setError(error);
 	};
 
+	// todo > tests
 	const saveChanges = async () => {
-		console.log(task, activeTask);
-
 		if (!task.title) return showError("Sua tarefa precisa de um titulo.");
 		if (task.title.length > 100) return showError("Seu titulo não deve exceder 100 caracteres");
 		setError("");
@@ -46,26 +49,27 @@ export const TaskDetails = () => {
 			const tags = task.tags.map(({ name, color }) => ({ name, color }));
 			const variables: IUpdateTask = { updateTaskData: { ...task, tags, taskID: activeTask.id } };
 			const { data } = await updateTaskMutation({ variables });
-			console.log({ data });
-		} catch (error: any) {
-			console.log({ error });
-		}
+			if (!data) throw new Error("Data is undefined");
 
-		// todo >
-		// mutation
-		// catch errors
-		// update state
-		// notification
-		// close active task
-		// tests
+			dispatch(setActive(null));
+			dispatch(setUpdateTask({ listID: activeTask.listID, newTask: data.updateTask }));
+			dispatch(setNotification({ newState: { isOpen: true, type: "success", title: "Tarefa salva", message: "Sua tarefa foi salva com sucesso" } }));
+		} catch (error: any) {
+			dispatch(setNotification({ newState: { isOpen: true, type: "error", title: "Erro", message: messageErrors.default } }));
+		}
 	};
 
 	return (
 		<TaskFields props={{ containerTitle: activeTask.title, error, setIsOpen, setTask, task, titleRef }}>
 			<div className="buttons">
-				<button onClick={() => saveChanges()}>Salvar Alterações</button>
+				<SaveChangesButton loading={loadingUpdateTask} saveChanges={saveChanges} />
 				<button>Excluir Tarefa</button>
 			</div>
 		</TaskFields>
 	);
+};
+
+const SaveChangesButton = ({ loading, saveChanges }: { loading: boolean; saveChanges: () => void }) => {
+	if (loading) return <LoadingButton className="" />;
+	return <button onClick={() => saveChanges()}>Salvar Alterações</button>;
 };

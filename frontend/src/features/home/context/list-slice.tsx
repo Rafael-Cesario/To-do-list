@@ -58,7 +58,15 @@ export const listSlice = createSlice({
 			state.lists[listIndex].tasks.push(newTask);
 			state.active?.tasks.push(newTask);
 		},
+
+		setUpdateTask(state, action: { payload: { listID: string; newTask: ITask } }) {
+			const { listID, newTask } = action.payload;
+			const listIndex = state.lists.findIndex((list) => list.id === listID);
+			const taskIndex = state.lists[listIndex].tasks.findIndex((task) => task.id === newTask.id);
+			state.lists[listIndex].tasks.splice(taskIndex, 1, newTask);
+			state.active = state.lists[listIndex];
+		},
 	},
 });
 
-export const { setLists, setAddList, setListFilter, setActiveList, setListMenu, setUpdateList, setDeleteList , setCreateTask} = listSlice.actions;
+export const { setLists, setAddList, setListFilter, setActiveList, setListMenu, setUpdateList, setDeleteList, setCreateTask, setUpdateTask } = listSlice.actions;
