@@ -4,12 +4,12 @@ import { TaskFields } from "../task-fields";
 import { Store } from "@/context/store";
 import { useRef, useState, useEffect } from "react";
 import { setActive } from "../../context/task-slice";
-import { ITaskValues } from "@/services/interfaces/task";
+import { TaskInput } from "@/services/interfaces/task";
 import { defaultTaskValues } from "../header/create-task";
 
 export const TaskDetails = () => {
 	const { activeTask } = useSelector((state: Store) => state.task);
-	const [task, setTask] = useState<ITaskValues>(defaultTaskValues);
+	const [task, setTask] = useState<TaskInput>(defaultTaskValues);
 	const [error, setError] = useState("");
 	const titleRef = useRef<HTMLInputElement>(null);
 

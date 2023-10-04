@@ -1,6 +1,6 @@
 import { Store } from "@/context/store";
 import { useRef, useState } from "react";
-import { ICreateTask, ITaskValues, RCreateTask, Status } from "@/services/interfaces/task";
+import { ICreateTask, TaskInput, RCreateTask, Status } from "@/services/interfaces/task";
 import { useMutation } from "@apollo/client";
 import { taskQueries } from "@/services/queries/task";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import { messageErrors } from "@/services/interfaces/errors";
 import { setCreateTask } from "../../context/list-slice";
 import { TaskFields } from "../task-fields";
 
-export const defaultTaskValues: ITaskValues = {
+export const defaultTaskValues: TaskInput = {
 	title: "",
 	description: "",
 	status: Status.NEXT,

@@ -1,4 +1,4 @@
-import { ITaskValues } from "@/services/interfaces/task";
+import { TaskInput } from "@/services/interfaces/task";
 import { TaskStatus } from "./header/components/task-status";
 import { TaskTag } from "./header/components/task-tag";
 import { StyledTaskFields } from "./header/styles/styled-create-task";
@@ -8,10 +8,10 @@ interface Props {
 	props: {
 		containerTitle: string;
 		titleRef: React.RefObject<HTMLInputElement>;
-		task: ITaskValues;
+		task: TaskInput;
 		error: string;
 		setIsOpen: (state: boolean) => void;
-		setTask: (state: ITaskValues) => void;
+		setTask: (state: TaskInput) => void;
 	};
 }
 

@@ -1,10 +1,10 @@
-import { ITaskValues, Status } from "@/services/interfaces/task";
+import { TaskInput, Status } from "@/services/interfaces/task";
 import { StyledTaskStatus } from "./styles/styled-task-status";
 
 interface Props {
 	props: {
-		task: ITaskValues;
-		setTask: (state: ITaskValues) => void;
+		task: TaskInput;
+		setTask: (state: TaskInput) => void;
 	};
 }
 

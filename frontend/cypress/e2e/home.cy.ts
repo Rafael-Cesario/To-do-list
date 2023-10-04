@@ -1,6 +1,6 @@
 import { UserCookies } from "@/services/interfaces/cookies";
 import { IList } from "@/services/interfaces/list";
-import { ITask, ITaskValues, Status } from "@/services/interfaces/task";
+import { ITask, TaskInput, Status } from "@/services/interfaces/task";
 import { CyHttpMessages } from "cypress/types/net-stubbing";
 
 const url = process.env.NEXT_PUBLIC_API_URL ?? "";
@@ -154,7 +154,7 @@ describe("Home page", () => {
 		});
 
 		it("Creates a new task", () => {
-			const inputTask: ITaskValues = {
+			const inputTask: TaskInput = {
 				title: "Title for my task",
 				description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet varius nibh. Etiam molestie, ipsum eget finibus ultricies, magna.",
 				status: Status.DONE,

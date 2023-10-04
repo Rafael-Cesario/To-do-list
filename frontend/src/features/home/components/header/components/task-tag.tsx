@@ -1,13 +1,13 @@
 "use client";
 import { useRef, useState } from "react";
 import { produce } from "immer";
-import { ITagColors, ITaskValues } from "@/services/interfaces/task";
+import { ITagColors, TaskInput } from "@/services/interfaces/task";
 import { tagColors } from "@/styles/palette";
 
 interface Props {
 	props: {
-		task: ITaskValues;
-		setTask: (state: ITaskValues) => void;
+		task: TaskInput;
+		setTask: (state: TaskInput) => void;
 	};
 }
 

@@ -19,6 +19,31 @@ class TaskQueries {
 			}
 		}
 	`;
+
+	readonly UPDATE_TASK = gql`
+		mutation UpdateTask($updateTaskData: UpdateTaskInput!) {
+			updateTask(updateTaskData: $updateTaskData) {
+				id
+				listID
+				title
+				description
+				createdAt
+				status
+				tags {
+					id
+					taskID
+					name
+					color
+				}
+			}
+		}
+	`;
+
+	readonly DELETE_TASK = gql`
+		mutation DeleteTask($deleteTaskData: DeleteTaskInput!) {
+			deleteTask(deleteTaskData: $deleteTaskData)
+		}
+	`;
 }
 
 export const taskQueries = new TaskQueries();

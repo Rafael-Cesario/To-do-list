@@ -15,6 +15,11 @@ export interface ITag {
 	color: keyof ITagColors;
 }
 
+export interface TagInput {
+	name: string;
+	color: keyof ITagColors;
+}
+
 export interface ITagColors {
 	gray: string;
 	red: string;
@@ -28,11 +33,11 @@ export interface ITagColors {
 	pink: string;
 }
 
-export interface ITaskValues {
+export interface TaskInput {
 	title: string;
 	description: string;
 	status: Status;
-	tags: { name: string; color: keyof ITagColors }[];
+	tags: TagInput[];
 }
 
 export enum Status {
@@ -56,4 +61,28 @@ export interface ICreateTask {
 
 export interface RCreateTask {
 	createTask: ITask;
+}
+
+export interface IUpdateTask {
+	updateTaskData: {
+		taskID: string;
+		title: string;
+		description: string;
+		status: Status;
+		tags: TagInput[];
+	};
+}
+
+export interface RUpdateTask {
+	updateTask: ITask;
+}
+
+export interface IDeleteTask {
+	deleteTaskData: {
+		taskID: string;
+	};
+}
+
+export interface RDeleteTask {
+	deleteTask: string;
 }
