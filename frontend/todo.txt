@@ -1,0 +1,59 @@
+===== Global =====
+
+- NextJS project
+- Styled Components
+- Apollo client
+- Redux
+
+
+===== Authentication page =====
+
+- Authentication Parallel Route
+- Next API Cookie route
+- Cookies with user credentials
+- Check if user have cookies x check if token is valid - send user to authentication or home page
+- Notification component + slice
+- Create account
+- Login
+- Change forms
+- Capture input values
+- Show and hide password
+- Validations
+- Check for errors on change and on submit
+- Mutations
+- Catch errors > Errors Interface
+x Loading button
+- Tests
+
+
+===== Home Page =====
+
+- Sidebar
+- Get user name from cookies
+- List slice
+- Query lists
+- Loading lists skeleton
+- Mutation create list
+- List search bar
+x Logout
+
+- Header
+- Active list
+- List Menu
+- Rename list
+- Delete List
+- Create new task
+- Create tags
+- update task slice
+- Search bar for task, tag and date
+
+- Main
+- Tasks Container
+- Task details
+- Update task
+- Delete task
+
+
+===== Next =====
+
+x Use ZOD
