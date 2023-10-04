@@ -254,5 +254,15 @@ describe("Home page", () => {
 			cy.get('[data-cy="task-01-status"]').should("have.text", "Concluídas");
 			cy.get('[data-cy="task-01-tags"]').should("have.length", updateTaskResponse.tags.length);
 		});
+
+		it("Delete a task", () => {
+			cy.intercept("POST", url, (req) => aliasMutation(req, "DeleteTask", { data: { deleteTask: "Task deleted" } }));
+			cy.get('[data-cy="task-01"]').click();
+			cy.get(`[data-cy="delete-task"]`).click();
+			cy.get(`[data-cy="confirm-delete-task"]`).click();
+			cy.wait("@DeleteTask");
+
+			cy.get(`[data-cy="task-container"] > .task`).should("have.length", tasks.length - 1);
+		});
 	});
 });

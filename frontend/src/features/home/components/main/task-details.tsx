@@ -40,7 +40,6 @@ export const TaskDetails = () => {
 		setError(error);
 	};
 
-	// todo > tests
 	const saveChanges = async () => {
 		if (!task.title) return showError("Sua tarefa precisa de um titulo.");
 		if (task.title.length > 100) return showError("Seu titulo não deve exceder 100 caracteres");

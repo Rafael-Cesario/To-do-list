@@ -31,13 +31,18 @@ export const DeleteTaskButton = ({ task }: { task: ITask }) => {
 
 	return (
 		<>
-			<button onClick={() => setShowDelete(true)}>Excluir Tarefa</button>
+			<button data-cy="delete-task" onClick={() => setShowDelete(true)}>
+				Excluir Tarefa
+			</button>
 
 			{showDelete && (
 				<StyledDeleteTask autoFocus={true} className="confirm-delete">
 					<p className="text">Quer mesmo excluir sua tarefa?</p>
 
-					<button onClick={() => deleteTask()}>Sim</button>
+					<button data-cy="confirm-delete-task" onClick={() => deleteTask()}>
+						Sim
+					</button>
+
 					<button onClick={() => setShowDelete(false)}>Não</button>
 				</StyledDeleteTask>
 			)}
