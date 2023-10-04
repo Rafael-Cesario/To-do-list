@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  name     String
+  password String
+  lists    List[]
+  tags     Tags[]
+
+  @@map("users")
+}
+
+model List {
+  listID         String    @id @default(uuid())
+  name           String
+  subjectsLength Int       @default(0)
+  subjects       Subject[]
+
+  user   User   @relation(fields: [userID], references: [id])
+  userID String
+
+  @@map("lists")
+}
+
+model Subject {
+  subjectID String   @id @default(uuid())
+  name      String
+  date      DateTime @default(now())
+  amount    Int      @default(1)
+  notes     String   @default("")
+  tags      String[] @default([])
+
+  list   List   @relation(fields: [listID], references: [listID])
+  listID String
+
+  @@map("subjects")
+}
+
+model Tags {
+  tagID String @id @default(uuid())
+  name  String 
+  color String
+
+  user   User   @relation(fields: [userID], references: [id])
+  userID String
+
+  @@map("tags")
+}

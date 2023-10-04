@@ -1,0 +1,43 @@
+import styled from "styled-components";
+import { Palette } from "@/styles/palette";
+
+export const StyledNotification = styled.div<{ type: string }>`
+	position: absolute;
+	right: 0;
+	min-width: 25rem;
+	max-width: 30rem;
+	width: 100%;
+	min-height: 5rem;
+	margin: 0.5rem;
+	z-index: 2;
+	background-color: ${Palette.container};
+	padding: 1rem 4rem 1rem 2rem;
+	border-radius: ${Palette.borderRadius};
+	box-shadow: 5px 10px 5px #00000090;
+	border-left: 10px solid ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
+
+	.title {
+		color: ${({ type }) => (type === "success" ? Palette.successText : Palette.errorText)};
+		font-size: 1.2rem;
+	}
+
+	.message {
+		margin: 4px 0;
+		font-size: 0.9rem;
+		color: #ddd;
+	}
+
+	.close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0;
+		background-color: transparent;
+		border: none;
+
+		&:hover {
+			background-color: ${Palette.errorText};
+			color: #ddd;
+		}
+	}
+`;
