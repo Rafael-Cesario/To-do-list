@@ -12,6 +12,7 @@ import { setNotification } from "@/context/notification-slice";
 import { messageErrors } from "@/services/interfaces/errors";
 import { setUpdateTask } from "../../context/list-slice";
 import { LoadingButton } from "@/features/authentication/components/loading-button";
+import { DeleteTaskButton } from "./components/delete-task";
 
 export const TaskDetails = () => {
 	const { activeTask } = useSelector((state: Store) => state.task);
@@ -63,12 +64,13 @@ export const TaskDetails = () => {
 		<TaskFields props={{ containerTitle: activeTask.title, error, setIsOpen, setTask, task, titleRef }}>
 			<div className="buttons">
 				<SaveChangesButton loading={loadingUpdateTask} saveChanges={saveChanges} />
-				<button>Excluir Tarefa</button>
+				<DeleteTaskButton task={activeTask} />
 			</div>
 		</TaskFields>
 	);
 };
 
+// todo > component
 const SaveChangesButton = ({ loading, saveChanges }: { loading: boolean; saveChanges: () => void }) => {
 	if (loading) return <LoadingButton className="" />;
 	return <button onClick={() => saveChanges()}>Salvar Alterações</button>;
