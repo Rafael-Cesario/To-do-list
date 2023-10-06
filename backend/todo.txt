@@ -1,0 +1,20 @@
+===== User =====
+
+- Create user
+- Login 
+
+
+===== List =====
+
+- GetLists 
+- Create list 
+- UpdateList 
+- DeleteList 
+
+===== Task =====
+
+- Create task
+- update task
+- Delete task
+
+
